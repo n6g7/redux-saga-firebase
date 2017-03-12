@@ -1,0 +1,17 @@
+{
+  "name": "redux-saga-firebase",
+  "version": "0.0.1",
+  "description": "A redux saga integration for firebase.",
+  "author": "Nathan Gaberel <nathan@gnab.fr>",
+  "homepage": "https://github.com/n6g7/redux-saga-firebase",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:n6g7/redux-saga-firebase.git",
+    "type": "git"
+  },
+  "peerDependencies": {
+    "firebase": "^3.7.1",
+    "redux-saga": "^0.14.3"
+  }
+}
