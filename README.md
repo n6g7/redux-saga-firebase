@@ -2,6 +2,8 @@
 
 A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [firebase](https://firebase.google.com/).
 
+Try out the [example app](https://redux-saga-firebase.firebaseapp.com/) and browse it's [code](https://github.com/n6g7/redux-saga-firebase/blob/master/example/).
+
 ## Quick start
 
 Install with:
@@ -10,79 +12,148 @@ Install with:
 yarn add redux-saga-firebase
 ```
 
-Configure RSF **before** running your root saga:
+Initialize a firebase app and instanciate redux-saga-firebase:
 
 ```js
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import { init } from 'redux-saga-firebase';
+import firebase from 'firebase';
+import ReduxSagaFirebase from 'redux-saga-firebase';
 
-firebase.initializeApp({ ... });
+const myFirebaseApp = firebase.initializeApp({
+  apiKey: "qosjdqsdkqpdqldkqdkfojqjpfk",
+  authDomain: "my-app.firebaseapp.com",
+  databaseURL: "https://my-app.firebaseio.com",
+});
 
-const provider = new firebase.auth.FacebookAuthProvider(); // or whatever you want
-
-// Initialize RSF
-init(firebase, provider);
+const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp)
 ```
 
-Attach the RSF saga to your root saga:
+You can now use `reduxSagaFirebase` methods in your sagas:
 
 ```js
-import { saga as rsfSaga } from 'redux-saga-firebase';
+const authProvider = new firebase.auth.GoogleAuthProvider();
+
+function* loginSaga() {
+  try {
+    const data = yield call(reduxSagaFirebase.login, authProvider);
+    yield put(loginSuccess(data));
+  }
+  catch(error) {
+    yield put(loginFailure(error));
+  }
+}
 
 export default function* rootSaga() {
   yield [
-    ...,
-    rsfSaga(),
+    takeEvery(types.LOGIN.REQUEST, loginSaga);
   ];
 }
 ```
 
-Use the `login` and `logout` action creators:
+## API
+
+### `new ReduxSagaFirebase(firebaseApp)`
+
+Instanciate `ReduxSagaFirebase`.
+
+#### Arguments
+
+- `firebaseApp`: a [firebase.app.App](https://firebase.google.com/docs/reference/js/firebase.app.App) object.
+
+#### Output
+
+A `ReduxSagaFirebase` instance.
+
+#### Example
 
 ```js
-import { login, logout } from 'redux-saga-firebase';
+const firebaseApp = firebase.initializeApp({
+  apiKey: "qdsqdqqsdmqldmqdsmlqùlm",
+  authDomain: "my-app.firebaseapp.com",
+  databaseURL: "https://my-app.firebaseio.com",
+});
 
-const component = props => (
-  <div>
-    <button onClick={login}>Login</buton>
-    <button onClick={logout}>Logout</buton>
-  </div>
-)
+const rsf = new ReduxSagaFirebase(firebaseApp);
 ```
 
-Listen for the following types in your reducers:
+### `*reduxSagaFirebase.login(authProvider)`
 
-| Type            | Action keys | Explanation             |
-|-----------------|-------------|-------------------------|
-| `LOGIN.REQUEST` | *empty* | The login process has started. |
-| `LOGIN.SUCCESS` | `user`: a firebase [User](https://firebase.google.com/docs/reference/js/firebase.User) object. | Authentication was successful. |
-| `LOGIN.FAILURE` | `error`: an Error object | Authentication failed. |
-| `LOGOUT.REQUEST` | *empty* | The logout process has started. |
-| `LOGOUT.SUCCESS` | *empty* | Logout was successful. |
-| `LOGOUT.FAILURE` | `error`: an Error object | Logout failed. |
-| `SET_CREDENTIAL` | `credential`: an [AuthCredential](https://firebase.google.com/docs/reference/js/firebase.auth.AuthCredential) object | Credential object provided by the auth provider during authentication. |
+Starts the login process using the specified AuthProvider. *(generator)*
 
-Those types are defined in:
+#### Arguments
+
+- `authProvider`: a [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
+
+#### Output
+
+A [firebase.auth.AuthCredential](https://firebase.google.com/docs/reference/js/firebase.auth.AuthCredential) instance.
+
+#### Example
 
 ```js
-import { types } from 'redux-saga-firebase';
+const authProvider = new firebase.auth.GoogleAuthProvider();
 
-console.log(types);
-/* {
- *   LOGIN: {
- *     REQUEST: '...',
- *     SUCCESS: '...',
- *     FAILURE: '...',
- *   },
- *   LOGOUT: {
- *     REQUEST: '...',
- *     SUCCESS: '...',
- *     FAILURE: '...',
- *   },
- *   SET_CREDENTIAL: '...'
- * }
- */
+function* loginSaga() {
+  try {
+    const data = yield call(rsf.login, authProvider);
+    yield put(loginSuccess(data));
+  }
+  catch(error) {
+    yield put(loginFailure(error));
+  }
+}
+```
+
+### `*reduxSagaFirebase.logout()`
+
+Logs the user out. *(generator)*
+
+#### Arguments
+
+*none*
+
+#### Output
+
+*none*
+
+#### Example
+
+```js
+function* logoutSaga() {
+  try {
+    const data = yield call(rsf.logout);
+    yield put(logoutSuccess(data));
+  }
+  catch(error) {
+    yield put(logoutFailure(error));
+  }
+}
+```
+
+### `reduxSagaFirebase.authChannel()`
+
+Gets a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every user change.
+
+#### Arguments
+
+*none*
+
+#### Output
+
+A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits for every user change.
+
+#### Example
+
+```js
+function* syncUserSaga() {
+  const channel = yield call(rsf.authChannel);
+
+  while(true) {
+    const { error, user } = yield take(channel);
+
+    if (user) yield put(syncUser(user));
+    else yield put(syncError(error));
+  }
+}
 ```
 
 ## Todo
