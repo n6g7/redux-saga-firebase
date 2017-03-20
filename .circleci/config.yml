@@ -16,7 +16,15 @@ jobs:
 
       - run:
           name: Run tests
-          command: yarn test
+          command: yarn test -- --coverage
+
+      - run:
+          name: Install coveralls
+          command: yarn global add coveralls
+
+      - run:
+          name: Send coverage to coveralls.io
+          command: cat coverage/lcov.info | coveralls
 
       - save_cache:
           key: yarn
