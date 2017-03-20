@@ -7,32 +7,24 @@
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
-    "pretest": "eslint src/"
+    "pretest": "eslint src/",
+    "test": "jest"
   },
   "repository": {
     "url": "git@github.com:n6g7/redux-saga-firebase.git",
     "type": "git"
   },
+  "dependencies": {
+    "redux-saga": "^0.14.3"
+  },
   "peerDependencies": {
-    "firebase": "^3.0.0",
-    "redux-saga": "^0.14.0"
+    "firebase": "^3.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.18.0"
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true
-    },
-    "extends": [
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "ecmaFeatures": {
-        "experimentalObjectRestSpread": true
-      },
-      "ecmaVersion": 6,
-      "sourceType": "module"
-    }
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-3": "^6.22.0",
+    "eslint": "^3.18.0",
+    "jest": "^19.0.2"
   }
 }
