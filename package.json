@@ -6,6 +6,9 @@
   "homepage": "https://github.com/n6g7/redux-saga-firebase",
   "license": "MIT",
   "main": "src/index.js",
+  "scripts": {
+    "pretest": "eslint src/"
+  },
   "repository": {
     "url": "git@github.com:n6g7/redux-saga-firebase.git",
     "type": "git"
@@ -13,5 +16,23 @@
   "peerDependencies": {
     "firebase": "^3.0.0",
     "redux-saga": "^0.14.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.18.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      },
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    }
   }
 }

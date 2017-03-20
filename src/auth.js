@@ -8,7 +8,7 @@ function* login(authProvider) {
   return credential;
 }
 
-function* logout(authProvider) {
+function* logout() {
   const auth = this.app.auth();
   yield call([auth, auth.signOut]);
 }
