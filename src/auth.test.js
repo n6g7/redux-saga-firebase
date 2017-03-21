@@ -1,6 +1,6 @@
 import { call } from 'redux-saga/effects';
 
-import appp from './auth';
+import authModule from './auth';
 
 describe('auth', () => {
   const unsubscribe = jest.fn();
@@ -21,7 +21,7 @@ describe('auth', () => {
     it('returns credentials', () => {
       const authProvider = 'skqdk';
       const credential = 'qosdqkds';
-      const iterator = appp.login.call(context, authProvider);
+      const iterator = authModule.login.call(context, authProvider);
 
       expect(iterator.next().value)
       .toEqual(call([auth, auth.signInWithPopup], authProvider));
@@ -35,7 +35,7 @@ describe('auth', () => {
 
   describe('logout()', () => {
     it('works', () => {
-      const iterator = appp.logout.call(context);
+      const iterator = authModule.logout.call(context);
 
       expect(iterator.next().value)
       .toEqual(call([auth, auth.signOut]));
@@ -49,7 +49,7 @@ describe('auth', () => {
 
   describe('authChannel()', () => {
     it('works', () => {
-      const result = appp.authChannel.call(context);
+      const result = authModule.authChannel.call(context);
 
       expect(auth.onAuthStateChanged.mock.calls.length).toBe(1);
       expect(context._authChannel).toBe(result);
@@ -57,13 +57,20 @@ describe('auth', () => {
 
     it('returns the cached authChannel if there is one', () => {
       const cachedAuthChannel = 'smldklqd';
-      const result = appp.authChannel.call({
+      const result = authModule.authChannel.call({
         ...context,
         _authChannel: cachedAuthChannel
       });
 
       expect(auth.onAuthStateChanged.mock.calls.length).toBe(1);
       expect(result).toBe(cachedAuthChannel);
+    });
+
+    it('returns a close-able channel', () => {
+      const channel = authModule.authChannel.call(context);
+
+      channel.close();
+      expect(unsubscribe.mock.calls.length).toBe(1);
     });
   });
 });

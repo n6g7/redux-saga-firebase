@@ -17,10 +17,14 @@ function authChannel() {
   if (this._authChannel) return this._authChannel;
 
   const auth = this.app.auth();
-  const channel = eventChannel(emit => auth.onAuthStateChanged(
-    user => emit({ user }),
-    error => emit({ error })
-  ));
+  const channel = eventChannel(emit => {
+    const unsubscribe = auth.onAuthStateChanged(
+      user => emit({ user }),
+      error => emit({ error })
+    );
+
+    return unsubscribe;
+  });
 
   this._authChannel = channel;
   return channel;
