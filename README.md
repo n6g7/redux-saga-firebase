@@ -3,7 +3,7 @@
 
 A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [firebase](https://firebase.google.com/).
 
-Try out the [example app](https://redux-saga-firebase.firebaseapp.com/) and browse it's [code](https://github.com/n6g7/redux-saga-firebase/blob/master/example/).
+Try out the [example app](https://redux-saga-firebase.firebaseapp.com/) and browse its [code](https://github.com/n6g7/redux-saga-firebase/blob/master/example/).
 
 ## Quick start
 
@@ -160,4 +160,6 @@ function* syncUserSaga() {
 ## Todo
 
 - [X] Authentication integration
-- [ ] Real-time database integration
+- [X] Real-time database integration
+- [ ] Storage integration
+- [ ] Functions integration
