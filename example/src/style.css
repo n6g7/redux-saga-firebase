@@ -1,0 +1,9 @@
+li {
+  cursor: pointer;
+  transition: .5s;
+}
+
+li.done {
+  color: #999999;
+  text-decoration: line-through;
+}
