@@ -157,6 +157,146 @@ function* syncUserSaga() {
 }
 ```
 
+### `reduxSagaFirebase.get(path)`
+
+Returns the data at this path in firebase's database.
+
+#### Arguments
+
+- `path`: a string
+
+#### Output
+
+Whatever value is store at this path in the database (number, string, object, etc).
+
+#### Example
+
+```js
+function* getTodo() {
+  const firstTodo = yield call(rsf.get, 'todos/1');
+  yield put(gotTodo(firstTodo));
+}
+```
+
+### `reduxSagaFirebase.create(path, data)`
+
+Create a new path in the database and stores the data there.
+
+#### Arguments
+
+- `path`: a string
+- `data`: any value (number, string, object, etc)
+
+#### Output
+
+The key newly created (a string).
+
+#### Example
+
+```js
+function* addTodo() {
+  const key = yield call(rsf.create, 'todos', {
+    done: false,
+    label: 'Do this',
+  });
+  // `key` is something like "-Kfn7EyLEoHax0YGoQr0"
+}
+```
+
+### `reduxSagaFirebase.update(path, data)`
+
+Replace the value store at `path` in the database with `data`.
+
+#### Arguments
+
+- `path`: a string
+- `data`: any value (number, string, object, etc)
+
+#### Output
+
+*none*
+
+#### Example
+
+```js
+function* updateTodo() {
+  yield call(rsf.update, 'todos/-Kfn7EyLEoHax0YGoQr0', {
+    done: true, // yay, it's done now!
+    label: 'Do this',
+  });
+}
+```
+
+### `reduxSagaFirebase.patch(path, data)`
+
+Patches the value store at `path` in the database with `data`. Like `reduxSagaFirebase.update` but doesn't remove unmentionned keys.
+
+#### Arguments
+
+- `path`: a string
+- `data`: any value (number, string, object, etc)
+
+#### Output
+
+*none*
+
+#### Example
+
+```js
+function* updateTodo() {
+  // With this call, no need to re-send the todo label.
+  yield call(rsf.patch, 'todos/-Kfn7EyLEoHax0YGoQr0', {
+    done: true,
+  });
+}
+```
+
+### `reduxSagaFirebase.delete(path)`
+
+Removes the value at the specified `path` in the database.
+
+#### Arguments
+
+- `path`: a string
+
+#### Output
+
+*none*
+
+#### Example
+
+```js
+function* deleteTodo() {
+  yield call(rsf.delete, 'todos/-Kfn7EyLEoHax0YGoQr0');
+}
+```
+
+### `reduxSagaFirebase.channel(path, event)`
+
+Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database.
+
+#### Arguments
+
+- `path`: a string
+- `event` (default: `value`): a string describing the type of event to listen for. Options includes: `value`, `child_added`, `child_removed`, `child_changed` and `child_moved`. See [Reference.on](https://firebase.google.com/docs/reference/js/firebase.database.Reference#on) documentation for more information.
+
+#### Output
+
+A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database.
+
+#### Example
+
+```js
+function* syncTodosSaga() {
+  const channel = yield call(rsf.channel, 'todos');
+
+  while(true) {
+    const todos = yield take(channel);
+    yield put(syncTodos(todos));
+  }
+}
+```
+
 ## Todo
 
 - [X] Authentication integration
