@@ -12,28 +12,22 @@ function* create(path, data) {
   const ref = this.app.database().ref(path);
   const result = yield call([ref, ref.push], data);
 
-  return result;
+  return result.key;
 }
 
 function* update(path, data) {
   const ref = this.app.database().ref(path);
-  const result = yield call([ref, ref.set], data);
-
-  return result;
+  yield call([ref, ref.set], data);
 }
 
 function* patch(path, data) {
   const ref = this.app.database().ref(path);
-  const result = yield call([ref, ref.update], data);
-
-  return result;
+  yield call([ref, ref.update], data);
 }
 
 function* _delete(path) {
   const ref = this.app.database().ref(path);
-  const result = yield call([ref, ref.remove]);
-
-  return result;
+  yield call([ref, ref.remove]);
 }
 
 function channel(path, event='value') {

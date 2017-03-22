@@ -56,7 +56,9 @@ describe('database', () => {
     it('works', () => {
       const path = 'skddksl';
       const data = 'okqdkj';
-      const result = 'jqkdsqls';
+      const result = {
+        key: 'qsdklq',
+      };
       const iterator = dbModule.create.call(context, path, data);
 
       expect(iterator.next().value)
@@ -70,7 +72,7 @@ describe('database', () => {
 
       expect(iterator.next(result)).toEqual({
         done: true,
-        value: result
+        value: result.key,
       });
     });
   });
@@ -79,7 +81,6 @@ describe('database', () => {
     it('works', () => {
       const path = 'skddksl';
       const data = 'okqdkj';
-      const result = 'jqkdsqls';
       const iterator = dbModule.update.call(context, path, data);
 
       expect(iterator.next().value)
@@ -91,9 +92,9 @@ describe('database', () => {
       expect(database.ref.mock.calls.length).toBe(1);
       expect(database.ref.mock.calls[0]).toEqual([path]);
 
-      expect(iterator.next(result)).toEqual({
+      expect(iterator.next()).toEqual({
         done: true,
-        value: result
+        value: undefined,
       });
     });
   });
@@ -102,7 +103,6 @@ describe('database', () => {
     it('works', () => {
       const path = 'skddksl';
       const data = 'okqdkj';
-      const result = 'jqkdsqls';
       const iterator = dbModule.patch.call(context, path, data);
 
       expect(iterator.next().value)
@@ -114,9 +114,9 @@ describe('database', () => {
       expect(database.ref.mock.calls.length).toBe(1);
       expect(database.ref.mock.calls[0]).toEqual([path]);
 
-      expect(iterator.next(result)).toEqual({
+      expect(iterator.next()).toEqual({
         done: true,
-        value: result
+        value: undefined,
       });
     });
   });
@@ -124,7 +124,6 @@ describe('database', () => {
   describe('delete(path)', () => {
     it('works', () => {
       const path = 'skddksl';
-      const result = 'jqkdsqls';
       const iterator = dbModule.delete.call(context, path);
 
       expect(iterator.next().value)
@@ -136,9 +135,9 @@ describe('database', () => {
       expect(database.ref.mock.calls.length).toBe(1);
       expect(database.ref.mock.calls[0]).toEqual([path]);
 
-      expect(iterator.next(result)).toEqual({
+      expect(iterator.next()).toEqual({
         done: true,
-        value: result
+        value: undefined,
       });
     });
   });
