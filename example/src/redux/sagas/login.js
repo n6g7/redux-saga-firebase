@@ -8,17 +8,11 @@ import {
   logoutSuccess,
   logoutFailure,
   syncUser,
-} from './actions';
-import ReduxSagaFirebase from '../../../src/index';
+} from '../reducer/login.actions';
 
-const firebaseApp = firebase.initializeApp({
-  apiKey: "AIzaSyCSTkbHZIcJluamfb69ShSHXn8351H9Vm0",
-  authDomain: "redux-saga-firebase.firebaseapp.com",
-  databaseURL: "https://redux-saga-firebase.firebaseio.com",
-});
+import rsf from '../rsf';
+
 const authProvider = new firebase.auth.GoogleAuthProvider();
-
-const rsf = new ReduxSagaFirebase(firebaseApp);
 
 function* loginSaga() {
   try {
@@ -46,12 +40,12 @@ function* syncUserSaga() {
   while(true) {
     const { error, user } = yield take(channel);
 
-    if (user) yield put(syncUser(user.displayName));
-    else yield put(syncUser('none'));
+    if (user) yield put(syncUser(user));
+    else yield put(syncUser(null));
   }
 }
 
-export default function* rootSaga() {
+export default function* loginRootSaga() {
   yield fork(syncUserSaga);
   yield [
     takeEvery(types.LOGIN.REQUEST, loginSaga),

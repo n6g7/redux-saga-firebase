@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { login, logout } from './redux/actions';
+import {
+  login,
+  logout,
+} from './redux/reducer/login.actions';
 
 class Component extends PureComponent {
   renderButton(label, onClick, disabled) {
@@ -18,24 +21,19 @@ class Component extends PureComponent {
       { this.renderButton('Login', this.props.login, this.props.loggedIn)}
       { this.renderButton('Logout', this.props.logout, !this.props.loggedIn)}
 
-      <h2>Synced users</h2>
-      <ul>
-        { this.props.users.map((user, index) =>
-          <li key={index}>{ user }</li>
-        )}
-      </ul>
+      <p>User: {this.props.user ? this.props.user.displayName : 'none'}</p>
     </div>;
   }
 }
 
 Component.propTypes = {
   login: React.PropTypes.func.isRequired,
-  users: React.PropTypes.array.isRequired,
+  user: React.PropTypes.object,
 }
 
 const mapStateToProps = state => ({
   loggedIn: state.login.loggedIn,
-  users: state.syncUser,
+  user: state.login.user,
 });
 const mapDispatchToProps = {
   login,
