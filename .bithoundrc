@@ -1,0 +1,8 @@
+{
+  "ignore": [
+    "example/**"
+  ],
+  "test": [
+    "**/*.test.js"
+  ]
+}
