@@ -1,19 +1,31 @@
 import ReduxSagaFirebase from './index'
 
 describe('ReduxSagaFirebase', () => {
-  it('takes a firebase app as argument', () => {
+  describe('constructor(firebaseApp)', () => {
     const app = 'kqdlqkd'
-    const rsf = new ReduxSagaFirebase(app)
+    let rsf
 
-    expect(rsf.app).toBe(app)
-  })
+    beforeEach(() => {
+      rsf = new ReduxSagaFirebase(app)
+    })
 
-  it('defines authentication methods', () => {
-    const app = 'kqdlqkd'
-    const rsf = new ReduxSagaFirebase(app)
+    it('takes a firebase app as argument', () => {
+      expect(rsf.app).toBe(app)
+    })
 
-    expect(rsf.login).toBeInstanceOf(Function)
-    expect(rsf.logout).toBeInstanceOf(Function)
-    expect(rsf.authChannel).toBeInstanceOf(Function)
+    it('defines authentication methods', () => {
+      expect(rsf.login).toBeInstanceOf(Function)
+      expect(rsf.logout).toBeInstanceOf(Function)
+      expect(rsf.authChannel).toBeInstanceOf(Function)
+    })
+
+    it('defines database methods', () => {
+      expect(rsf.get).toBeInstanceOf(Function)
+      expect(rsf.create).toBeInstanceOf(Function)
+      expect(rsf.update).toBeInstanceOf(Function)
+      expect(rsf.patch).toBeInstanceOf(Function)
+      expect(rsf.delete).toBeInstanceOf(Function)
+      expect(rsf.channel).toBeInstanceOf(Function)
+    })
   })
 })
