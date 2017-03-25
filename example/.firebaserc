@@ -1,5 +1,5 @@
 {
   "projects": {
-    "redux-saga-firebase": "redux-saga-firebase"
+    "default": "redux-saga-firebase"
   }
 }
