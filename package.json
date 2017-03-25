@@ -15,7 +15,8 @@
     "type": "git"
   },
   "dependencies": {
-    "redux-saga": "^0.14.3"
+    "redux-saga": "^0.14.3",
+    "whatwg-fetch": "^2.0.3"
   },
   "peerDependencies": {
     "firebase": "^3.0.0"
@@ -32,6 +33,7 @@
       "beforeEach",
       "describe",
       "expect",
+      "fetch",
       "it",
       "jest"
     ]

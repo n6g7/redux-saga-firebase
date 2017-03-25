@@ -27,5 +27,46 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.delete).toBeInstanceOf(Function)
       expect(rsf.channel).toBeInstanceOf(Function)
     })
+
+    it('defines functions methods', () => {
+      expect(rsf.call).toBeInstanceOf(Function)
+    })
+  })
+
+  describe('projectId()', () => {
+    it('infers a project id from the firebase app (simple)', () => {
+      const projectId = 'jskdqdlqd'
+      const app = {
+        options: {
+          authDomain: `${projectId}.firebaseapp.com`
+        }
+      }
+      const rsf = new ReduxSagaFirebase(app)
+
+      expect(rsf.projectId()).toBe(projectId)
+      expect(rsf._projectId).toBe(projectId)
+    })
+
+    it('infers a project id from the firebase app (complex)', () => {
+      const projectId = 'jskdqdlqd'
+      const app = {
+        options: {
+          authDomain: `${projectId}-a1b2c.firebaseapp.com`
+        }
+      }
+      const rsf = new ReduxSagaFirebase(app)
+
+      expect(rsf.projectId()).toBe(projectId)
+      expect(rsf._projectId).toBe(projectId)
+    })
+
+    it('returns the cached project ID if it exists', () => {
+      const projectId = 'isdjqijd'
+      const app = {}
+      const rsf = new ReduxSagaFirebase(app)
+      rsf._projectId = projectId
+
+      expect(rsf.projectId()).toBe(projectId)
+    })
   })
 })

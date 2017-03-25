@@ -1,9 +1,11 @@
 import auth from './auth'
 import database from './database'
+import functions from './functions'
 
 class ReduxSagaFirebase {
   constructor (firebaseApp) {
     this.app = firebaseApp
+    this.region = 'us-central1'
 
     // Authentication methods
     this.login = auth.login.bind(this)
@@ -17,6 +19,20 @@ class ReduxSagaFirebase {
     this.patch = database.patch.bind(this)
     this.delete = database.delete.bind(this)
     this.channel = database.channel.bind(this)
+
+    // Functions methods
+    this.call = functions.call.bind(this)
+  }
+
+  projectId () {
+    if (this._projectId) return this._projectId
+
+    const regex = /^([a-z0-9-]+?)(?:-[a-z0-9]{5})?\.firebaseapp\.com$/
+    const projectId = this.app.options.authDomain.match(regex)[1]
+
+    this._projectId = projectId
+
+    return projectId
   }
 }
 
