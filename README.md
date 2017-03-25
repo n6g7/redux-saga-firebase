@@ -340,4 +340,5 @@ function* callFunction() {
 - [X] Authentication integration
 - [X] Real-time database integration
 - [X] Functions integration
+- [ ] Messaging integration
 - [ ] Storage integration
