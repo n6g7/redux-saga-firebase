@@ -302,6 +302,9 @@ function* syncTodosSaga() {
 Calls a [cloud function](https://firebase.google.com/docs/functions/) with the given parameters.
 The function has to be triggered by HTTP request.
 
+⚠️ You will need to **enable CORS** in order for this to work.
+The easiest way to do so is to use the [cors](https://www.npmjs.com/package/cors) middleware for express.
+
 This assumes that your functions are hosted in the `us-central1` region.
 If this is not the case you can change the region used by setting `rsf.region`:
 
