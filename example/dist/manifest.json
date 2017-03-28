@@ -1,0 +1,6 @@
+{
+  "short_name": "RSF Example",
+  "name": "redux-saga-firebase example",
+  "gcm_sender_id": "103953800507",
+  "start_url": "/"
+}

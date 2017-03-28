@@ -5,8 +5,10 @@ import rsf from '../rsf';
 
 function* ping(action) {
   const newTodo = yield select(state => state.todos.new);
+  const registrationToken = yield select(state => state.messaging.token);
   const { pong } = yield call(rsf.call, 'ping', {
-    ping: newTodo
+    ping: newTodo,
+    token: registrationToken
   });
 
   console.log('pong:', pong)
