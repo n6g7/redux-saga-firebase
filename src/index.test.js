@@ -31,6 +31,11 @@ describe('ReduxSagaFirebase', () => {
     it('defines functions methods', () => {
       expect(rsf.call).toBeInstanceOf(Function)
     })
+
+    it('defines messaging methods', () => {
+      expect(rsf.messageChannel).toBeInstanceOf(Function)
+      expect(rsf.tokenRefreshChannel).toBeInstanceOf(Function)
+    })
   })
 
   describe('projectId()', () => {

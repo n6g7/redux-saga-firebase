@@ -1,6 +1,7 @@
 import auth from './auth'
 import database from './database'
 import functions from './functions'
+import messaging from './messaging'
 
 class ReduxSagaFirebase {
   constructor (firebaseApp) {
@@ -22,6 +23,10 @@ class ReduxSagaFirebase {
 
     // Functions methods
     this.call = functions.call.bind(this)
+
+    // Messaging methods
+    this.messageChannel = messaging.messageChannel.bind(this)
+    this.tokenRefreshChannel = messaging.tokenRefreshChannel.bind(this)
   }
 
   projectId () {
