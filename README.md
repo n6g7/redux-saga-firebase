@@ -52,6 +52,20 @@ export default function* rootSaga() {
 
 ## API
 
+- [`new ReduxSagaFirebase(firebaseApp)`](#new-reduxsagafirebasefirebaseapp)
+- [`*reduxSagaFirebase.login(authProvider)`](#reduxsagafirebaseloginauthprovider)
+- [`*reduxSagaFirebase.logout()`](#reduxsagafirebaselogout)
+- [`reduxSagaFirebase.authChannel()`](#reduxsagafirebaseauthchannel)
+- [`*reduxSagaFirebase.get(path)`](#reduxsagafirebasegetpath)
+- [`*reduxSagaFirebase.create(path, data)`](#reduxsagafirebasecreatepath-data)
+- [`*reduxSagaFirebase.update(path, data)`](#reduxsagafirebaseupdatepath-data)
+- [`*reduxSagaFirebase.patch(path, data)`](#reduxsagafirebasepatchpath-data)
+- [`*reduxSagaFirebase.delete(path)`](#reduxsagafirebasedeletepath)
+- [`reduxSagaFirebase.channel(path, event)`](#reduxsagafirebasechannelpath-event)
+- [`*reduxSagaFirebase.call(functionName, parameters={})`](#reduxsagafirebasecallfunctionname-parameters)
+- [`reduxSagaFirebase.messageChannel()`](#reduxsagafirebasemessagechannel)
+- [`reduxSagaFirebase.tokenRefreshChannel()`](#reduxsagafirebasetokenrefreshchannel)
+
 ### `new ReduxSagaFirebase(firebaseApp)`
 
 Instanciate `ReduxSagaFirebase`.
@@ -157,7 +171,7 @@ function* syncUserSaga() {
 }
 ```
 
-### `reduxSagaFirebase.get(path)`
+### `*reduxSagaFirebase.get(path)`
 
 Returns the data at this path in firebase's database.
 
@@ -178,7 +192,7 @@ function* getTodo() {
 }
 ```
 
-### `reduxSagaFirebase.create(path, data)`
+### `*reduxSagaFirebase.create(path, data)`
 
 Create a new path in the database and stores the data there.
 
@@ -203,7 +217,7 @@ function* addTodo() {
 }
 ```
 
-### `reduxSagaFirebase.update(path, data)`
+### `*reduxSagaFirebase.update(path, data)`
 
 Replace the value store at `path` in the database with `data`.
 
@@ -227,7 +241,7 @@ function* updateTodo() {
 }
 ```
 
-### `reduxSagaFirebase.patch(path, data)`
+### `*reduxSagaFirebase.patch(path, data)`
 
 Patches the value store at `path` in the database with `data`. Like `reduxSagaFirebase.update` but doesn't remove unmentionned keys.
 
@@ -251,7 +265,7 @@ function* updateTodo() {
 }
 ```
 
-### `reduxSagaFirebase.delete(path)`
+### `*reduxSagaFirebase.delete(path)`
 
 Removes the value at the specified `path` in the database.
 
@@ -297,7 +311,7 @@ function* syncTodosSaga() {
 }
 ```
 
-### `reduxSagaFirebase.call(functionName, parameters={})`
+### `*reduxSagaFirebase.call(functionName, parameters={})`
 
 Calls a [cloud function](https://firebase.google.com/docs/functions/) with the given parameters.
 The function has to be triggered by HTTP request.
