@@ -335,6 +335,56 @@ function* callFunction() {
 }
 ```
 
+### `reduxSagaFirebase.messageChannel()`
+
+Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits for every message received.
+
+#### Arguments
+
+*none*
+
+#### Output
+
+A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits for every message received.
+
+#### Example
+
+```js
+function* readMessages() {
+  const channel = rsf.messageChannel();
+
+  while(true) {
+    const message = yield take(channel);
+    yield put(showMessage(message));
+  }
+}
+```
+
+### `reduxSagaFirebase.tokenRefreshChannel()`
+
+Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every time the registration token is refreshed.
+
+#### Arguments
+
+*none*
+
+#### Output
+
+A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every time the registration token is refreshed.
+
+#### Example
+
+```js
+function* refreshToken() {
+  const channel = rsf.tokenRefreshChannel();
+
+  while(true) {
+    const token = yield take(channel);
+    yield put(setToken(token));
+  }
+}
+```
+
 ## Todo
 
 - [X] Authentication integration
