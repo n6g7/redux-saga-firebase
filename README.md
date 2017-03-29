@@ -65,6 +65,12 @@ export default function* rootSaga() {
 - [`*reduxSagaFirebase.call(functionName, parameters={})`](#reduxsagafirebasecallfunctionname-parameters)
 - [`reduxSagaFirebase.messageChannel()`](#reduxsagafirebasemessagechannel)
 - [`reduxSagaFirebase.tokenRefreshChannel()`](#reduxsagafirebasetokenrefreshchannel)
+- [`*reduxSagaFirebase.upload(path, file, metadata)`](#reduxsagafirebaseuploadpath-file-metadata)
+- [`*reduxSagaFirebase.uploadString(path, string, format, metadata)`](#reduxsagafirebaseuploadstringpath-string-format-metadata)
+- [`*reduxSagaFirebase.getDownloadURL(path)`](#reduxsagafirebasegetdownloadurlpath)
+- [`*reduxSagaFirebase.getFileMetadata(path)`](#reduxsagafirebasegetfilemetadatapath)
+- [`*reduxSagaFirebase.updateFileMetadata(path, newMetadata)`](#reduxsagafirebaseupdatefilemetadatapath-newmetadata)
+- [`*reduxSagaFirebase.deleteFile(path)`](#reduxsagafirebasedeletefilepath)
 
 ### `new ReduxSagaFirebase(firebaseApp)`
 
@@ -399,10 +405,148 @@ function* refreshToken() {
 }
 ```
 
+### `*reduxSagaFirebase.upload(path, file, metadata)`
+
+Uploads a file to cloud storage.
+
+#### Arguments
+
+- `path`: a string representing the path of the file in the bucket.
+- `file`: a [`Blob`](https://developer.mozilla.org/en/docs/Web/API/Blob), a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) or an [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) to upload at the specified `path`.
+- `metadata` (optional): an [UploadMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.UploadMetadata) object.
+
+#### Output
+
+An [UploadTask](https://firebase.google.com/docs/reference/js/firebase.storage.UploadTask) object.
+
+#### Example
+
+```js
+function* uploadFile(action) {
+  const task = yield call(rsf.upload, action.path, action.file);
+
+  const channel = eventChannel(emit => task.on('state_changed', emit));
+
+  yield takeEvery(channel, ...);
+}
+```
+
+### `*reduxSagaFirebase.uploadString(path, string, format, metadata)`
+
+Use this to upload a raw, `base64`, `base64url`, or `data_url` encoded string to Cloud Storage.
+
+#### Arguments
+
+- `path`: a string representing the path of the file in the bucket.
+- `string`: a string to upload.
+- `format` (optional): a string. Available options are: `base64`, `base64url`, or `data_url`.
+- `metadata` (optional): an [UploadMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.UploadMetadata) object.
+
+#### Output
+
+An [UploadTask](https://firebase.google.com/docs/reference/js/firebase.storage.UploadTask) object.
+
+#### Example
+
+```js
+function* uploadString(action) {
+  const task = yield call(rsf.uploadString, action.path, action.fileData, 'base64');
+
+  const channel = eventChannel(emit => task.on('state_changed', emit));
+
+  yield takeEvery(channel, ...);
+}
+```
+
+### `*reduxSagaFirebase.getDownloadURL(path)`
+
+Returns a download url for the file at the specified path.
+
+#### Arguments
+
+- `path`: a string representing the path of the file in the bucket.
+
+#### Output
+
+A url as a string.
+
+#### Example
+
+```js
+function* downloadFile(action) {
+  const url = yield call(rsf.getDownloadURL, action.path);
+
+  yield call(fetch, url, ...);
+}
+```
+
+### `*reduxSagaFirebase.getFileMetadata(path)`
+
+#### Arguments
+
+- `path`: a string representing the path of the file in the bucket.
+
+#### Output
+
+A [FullMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.FullMetadata) object.
+
+#### Example
+
+```js
+function* metadata(action) {
+  const metadata = yield call(rsf.getFileMetadata, action.path);
+  return metadata;
+}
+```
+
+### `*reduxSagaFirebase.updateFileMetadata(path, newMetadata)`
+
+Updates the metadata for a file.
+
+#### Arguments
+
+- `path`: a string representing the path of the file in the bucket.
+- `newMetadata`: an object with keys from the [SettableMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.SettableMetadata) interface.
+
+#### Output
+
+A [FullMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.FullMetadata) object.
+
+#### Example
+
+```js
+function* setToPng(action) {
+  const metadata = yield call(rsf.updateFileMetadata, action.path, {
+    contentType: 'image/png'
+  });
+  return metadata;
+}
+```
+
+### `*reduxSagaFirebase.deleteFile(path)`
+
+Deletes a file.
+
+#### Arguments
+
+- `path`: a string representing the path of the file in the bucket.
+
+#### Output
+
+*none*
+
+#### Example
+
+```js
+function* deleteFile(action) {
+  yield call(rsf.deleteFile, action.path);
+}
+```
+
 ## Todo
 
 - [X] Authentication integration
 - [X] Real-time database integration
 - [X] Functions integration
 - [X] Messaging integration
-- [ ] Storage integration
+- [X] Storage integration
