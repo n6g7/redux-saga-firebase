@@ -6,6 +6,10 @@ import {
   logout,
 } from './redux/reducer/login.actions';
 import {
+  sendFile,
+  setFile,
+} from './redux/reducer/storage.actions';
+import {
   changeNewTodo,
   saveNewTodo,
   setTodoStatus,
@@ -55,6 +59,16 @@ class Component extends PureComponent {
           Save
         </button>
       </p>
+
+      <h2>Storage</h2>
+      <p>
+        <input
+          type="file"
+          onChange={e => this.props.setFile(e.target.files[0])}
+        />
+        <button onClick={this.props.sendFile}>Send file</button>
+        <img src={this.props.fileURL} width="300" />
+      </p>
     </div>;
   }
 }
@@ -70,6 +84,8 @@ Component.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  file: state.storage.file,
+  fileURL: state.storage.url,
   loggedIn: state.login.loggedIn,
   newTodo: state.todos.new,
   todos: state.todos.list,
@@ -80,6 +96,8 @@ const mapDispatchToProps = {
   login,
   logout,
   saveNewTodo,
+  sendFile,
+  setFile,
   setTodoStatus,
 };
 
