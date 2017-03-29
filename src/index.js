@@ -2,6 +2,7 @@ import auth from './auth'
 import database from './database'
 import functions from './functions'
 import messaging from './messaging'
+import storage from './storage'
 
 class ReduxSagaFirebase {
   constructor (firebaseApp) {
@@ -27,6 +28,14 @@ class ReduxSagaFirebase {
     // Messaging methods
     this.messageChannel = messaging.messageChannel.bind(this)
     this.tokenRefreshChannel = messaging.tokenRefreshChannel.bind(this)
+
+    // Storage methods
+    this.upload = storage.upload.bind(this)
+    this.uploadString = storage.uploadString.bind(this)
+    this.getDownloadURL = storage.getDownloadURL.bind(this)
+    this.getFileMetadata = storage.getFileMetadata.bind(this)
+    this.updateFileMetadata = storage.updateFileMetadata.bind(this)
+    this.deleteFile = storage.deleteFile.bind(this)
   }
 
   projectId () {

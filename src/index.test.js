@@ -36,6 +36,15 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.messageChannel).toBeInstanceOf(Function)
       expect(rsf.tokenRefreshChannel).toBeInstanceOf(Function)
     })
+
+    it('defines storage methods', () => {
+      expect(rsf.upload).toBeInstanceOf(Function)
+      expect(rsf.uploadString).toBeInstanceOf(Function)
+      expect(rsf.getDownloadURL).toBeInstanceOf(Function)
+      expect(rsf.getFileMetadata).toBeInstanceOf(Function)
+      expect(rsf.updateFileMetadata).toBeInstanceOf(Function)
+      expect(rsf.deleteFile).toBeInstanceOf(Function)
+    })
   })
 
   describe('projectId()', () => {
