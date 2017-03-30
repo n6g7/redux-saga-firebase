@@ -1,6 +1,6 @@
 {
   "name": "redux-saga-firebase",
-  "version": "0.0.6",
+  "version": "0.0.7-a",
   "description": "A redux saga integration for firebase.",
   "author": "Nathan Gaberel <nathan@gnab.fr>",
   "homepage": "https://github.com/n6g7/redux-saga-firebase",
