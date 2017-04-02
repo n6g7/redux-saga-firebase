@@ -7,9 +7,13 @@ import rsf from '../rsf';
 const filePath = 'test.png'
 
 function* syncFileUrl() {
-  const url = yield call(rsf.getDownloadURL, filePath);
-  yield put(setFileURL(url));
-
+  try {
+    const url = yield call(rsf.getDownloadURL, filePath);
+    yield put(setFileURL(url));
+  }
+  catch(error) {
+    console.error(error);
+  }
 }
 
 function* sendFileSaga(action) {
