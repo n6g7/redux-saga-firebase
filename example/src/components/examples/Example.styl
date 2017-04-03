@@ -1,0 +1,31 @@
+@import '../vars.styl'
+
+oddColour = #21252B
+evenColour = #31252B
+
+article
+  background: oddColour
+  color: white
+  padding: 4*spacing 0 0
+
+  h2
+    font-size: 20px
+    font-weight: normal
+    margin: 0 0 3*spacing
+
+  aside
+    align-items: stretch
+    display: flex
+    flex-flow: row wrap
+    margin: 4*spacing 0 0
+
+    pre
+      border: 1px solid #18191E
+      border-width: 2px 1px 2px
+      flex-grow: 1
+      margin: 0
+      text-align: left
+      width: 30%
+
+      code
+        font-family: 'Source Code Pro', monospace

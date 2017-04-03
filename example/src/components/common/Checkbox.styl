@@ -1,0 +1,31 @@
+@import '../vars.styl'
+
+p.checkbox
+  display: inline-block
+  margin: 0
+  line-height: 3*spacing
+  height: 3*spacing
+  position: relative
+
+  input[type="checkbox"]
+    left: -9999px
+    position: absolute
+
+    & + label
+      cursor: pointer
+      padding-left: 4*spacing
+
+      &::before
+        border: 2px solid primaryColour
+        border-radius: 2px
+        box-sizing: border-box
+        content: ''
+        height: 3*spacing
+        left: 0
+        position: absolute
+        top: 0
+        width: 3*spacing
+
+    &:checked + label
+      &::before
+        background: url('../../images/check.svg') no-repeat 50% 50% primaryColour

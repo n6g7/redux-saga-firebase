@@ -14,13 +14,22 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
+        test: /\.styl$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
-          'css-loader'
+          'css-loader',
+          'stylus-loader',
         ]
-      }
+      },
+      {
+        test: /\.svg$/,
+        exclude: /node_modules/,
+        use: [
+          'url-loader',
+          'img-loader'
+        ]
+      },
     ]
   },
   output: {
