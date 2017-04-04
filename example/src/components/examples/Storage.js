@@ -30,7 +30,7 @@ class Storage extends PureComponent {
 
   render() {
     return <Example title="Storage" className="storage" snippets={[functionSaga, 'var a = b\nlet e = f']}>
-      <FileButton onChange={this.onChange}>
+      <FileButton onChange={this.onChange} loading={this.props.loading}>
         <img src={upload} />
         Send file
       </FileButton>
@@ -39,10 +39,15 @@ class Storage extends PureComponent {
   }
 }
 
-Storage.propTypes = {};
+Storage.propTypes = {
+  file: React.PropTypes.instanceOf(File),
+  loading: React.PropTypes.bool.isRequired,
+  fileURL: React.PropTypes.string,
+};
 
 const mapStateToProps = state => ({
   file: state.storage.file,
+  loading: state.storage.loading,
   fileURL: state.storage.url,
 });
 const mapDispatchToProps = {
