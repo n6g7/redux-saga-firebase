@@ -13,7 +13,10 @@ import upload from '../../images/upload.svg';
 
 import './Storage.styl';
 
-const functionSaga = require("!raw-loader!../../redux/sagas/functions.js");
+import extractLines from '../../extract';
+import storageSaga from '!raw-loader!../../redux/sagas/storage.js';
+
+const doc = extractLines(storageSaga);
 
 class Storage extends PureComponent {
   constructor(props) {
@@ -29,7 +32,14 @@ class Storage extends PureComponent {
   }
 
   render() {
-    return <Example title="Storage" className="storage" snippets={[functionSaga, 'var a = b\nlet e = f']}>
+    return <Example
+      title="Storage"
+      className="storage"
+      snippets={[
+        doc(19, 24),
+        doc(9, 17),
+      ]}
+    >
       <FileButton onChange={this.onChange} loading={this.props.loading}>
         <img src={upload} />
         Send file

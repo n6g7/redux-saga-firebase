@@ -11,13 +11,19 @@ import Button from '../common/Button';
 
 import './Authentication.styl';
 
-const functionSaga = require("!raw-loader!../../redux/sagas/functions.js");
+import extractLines from '../../extract';
+import authSaga from '!raw-loader!../../redux/sagas/login.js';
+
+const doc = extractLines(authSaga);
 
 class Authentication extends PureComponent {
   render() {
     return <Example
       title="Authentication"
-      snippets={[functionSaga, 'var a = b\nlet e = f']}
+      snippets={[
+        doc(17, 25),
+        doc(37, 46),
+      ]}
       className="authentication"
     >
       <Button

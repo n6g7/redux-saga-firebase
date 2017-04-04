@@ -12,11 +12,22 @@ import { Checkbox, InputGroup } from '../common';
 
 import './TodoList.styl';
 
-const functionSaga = require("!raw-loader!../../redux/sagas/functions.js");
+import extractLines from '../../extract';
+import todosSaga from '!raw-loader!../../redux/sagas/todos.js';
+
+const doc = extractLines(todosSaga);
 
 class TodoList extends PureComponent {
   render() {
-    return <Example title="Todo list" className="todo-list" snippets={[functionSaga, 'var a = b\nlet e = f']}>
+    return <Example
+      title="Todo list"
+      className="todo-list"
+      snippets={[
+        doc(10, 22),
+        doc(24, 33),
+        doc(35, 39),
+      ]}
+    >
       <InputGroup
         value={this.props.newTodo}
         onChange={e => this.props.changeNewTodo(e.target.value)}
