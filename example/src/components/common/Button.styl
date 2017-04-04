@@ -1,0 +1,55 @@
+@import '../vars.styl';
+
+button, a.btn
+  align-items: center
+  background: primaryColour
+  border: none
+  border-radius: 2px
+  color: white
+  cursor: pointer
+  display: inline-flex
+  flex-flow: row nowrap
+  font-size: inherit
+  font-weight: bold
+  height: 5*spacing
+  justify-content: center
+  line-height: 5*spacing
+  min-width: 15*spacing
+  outline: none
+  padding: 0 2*spacing
+  position: relative
+  transition: .2s
+
+  &[disabled]
+    background: disabledColour
+    cursor: default
+
+  &.call-to-action
+    font-size: 20px
+    height: 8*spacing
+    line-height: 8*spacing
+    min-width: 30*spacing
+
+    img
+      height: 5*spacing
+      margin-right: 2*spacing
+
+  img
+    height: 3*spacing
+    margin-right: spacing
+
+  &:active
+    transform: translateY(spacing/2)
+
+  &.loading
+    padding-right: 6*spacing
+
+    &::after
+      background: url('../../images/loader.svg') 50% 50%
+      background-size: 90%
+      bottom: 0
+      content: ''
+      position: absolute
+      right: 0
+      top: 0
+      width: 5*spacing
