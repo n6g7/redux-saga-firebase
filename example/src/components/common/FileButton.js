@@ -19,6 +19,7 @@ class FileButton extends PureComponent {
     const {
       children,
       onChange,
+      ...props,
     } = this.props;
 
     return <div className="file-button">
@@ -27,7 +28,7 @@ class FileButton extends PureComponent {
         onChange={onChange}
         ref={ref => this.input = ref}
       />
-      <Button onClick={this.onClick}>
+      <Button onClick={this.onClick} {...props}>
         { children }
       </Button>
     </div>;

@@ -9,12 +9,14 @@ class Button extends PureComponent {
       callToAction,
       children,
       link,
+      loading,
       ...props,
     } = this.props;
 
     const classes = props.className.split(' ');
 
-    if (callToAction) props.className = classes.push('call-to-action');
+    if (loading) classes.push('loading');
+    if (callToAction) classes.push('call-to-action');
     if (link) {
       classes.push('btn');
       props.href = link;
@@ -33,11 +35,13 @@ Button.propTypes = {
   callToAction: React.PropTypes.bool.isRequired,
   children: React.PropTypes.any.isRequired,
   link: React.PropTypes.string,
+  loading: React.PropTypes.bool.isRequired,
 };
 
 Button.defaultProps = {
   callToAction: false,
   className: '',
+  loading: false,
 };
 
 export default Button;
