@@ -1,5 +1,4 @@
 import { call } from 'redux-saga/effects'
-import 'whatwg-fetch'
 
 export function getFunctionURL (functionName, parameters = {}) {
   const baseUrl = `https://${this.region}-${this.projectId()}.cloudfunctions.net/${functionName}`

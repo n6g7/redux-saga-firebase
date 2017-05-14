@@ -1,4 +1,5 @@
 import { call } from 'redux-saga/effects'
+import 'whatwg-fetch'
 
 import functionsModule, { getFunctionURL } from './functions'
 
