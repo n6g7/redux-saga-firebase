@@ -1,4 +1,8 @@
+.babelrc
+.bithoundrc
 .git
+circle.yml
+coverage
 example
 node_modules
 *.test.js
