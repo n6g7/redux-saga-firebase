@@ -17,11 +17,11 @@ describe('auth', () => {
     }
   }
 
-  describe('login(authProvider)', () => {
+  describe('signInWithPopup(authProvider)', () => {
     it('returns credentials', () => {
       const authProvider = 'skqdk'
       const credential = 'qosdqkds'
-      const iterator = authModule.login.call(context, authProvider)
+      const iterator = authModule.signInWithPopup.call(context, authProvider)
 
       expect(iterator.next().value)
       .toEqual(call([auth, auth.signInWithPopup], authProvider))

@@ -16,7 +16,7 @@ const authProvider = new firebase.auth.GoogleAuthProvider();
 
 function* loginSaga() {
   try {
-    const data = yield call(rsf.login, authProvider);
+    const data = yield call(rsf.signInWithPopup, authProvider);
     yield put(loginSuccess(data));
   }
   catch(error) {

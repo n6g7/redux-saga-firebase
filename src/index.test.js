@@ -14,7 +14,7 @@ describe('ReduxSagaFirebase', () => {
     })
 
     it('defines authentication methods', () => {
-      expect(rsf.login).toBeInstanceOf(Function)
+      expect(rsf.signInWithPopup).toBeInstanceOf(Function)
       expect(rsf.logout).toBeInstanceOf(Function)
       expect(rsf.authChannel).toBeInstanceOf(Function)
     })
