@@ -55,6 +55,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 ## API
 
 - [`new ReduxSagaFirebase(firebaseApp)`](#new-reduxsagafirebasefirebaseapp)
+- [`*reduxSagaFirebase.signInAnonymously()`](#reduxsagafirebasesigninanonymously)
 - [`*reduxSagaFirebase.signInWithPopup(authProvider)`](#reduxsagafirebasesigninwithpopupauthprovider)
 - [`*reduxSagaFirebase.logout()`](#reduxsagafirebaselogout)
 - [`reduxSagaFirebase.authChannel()`](#reduxsagafirebaseauthchannel)
@@ -96,6 +97,32 @@ const firebaseApp = firebase.initializeApp({
 });
 
 const rsf = new ReduxSagaFirebase(firebaseApp);
+```
+
+### `*reduxSagaFirebase.signInAnonymously()`
+
+Starts the login process as an anonymous user. *(generator)*
+
+#### Arguments
+
+*none*
+
+#### Output
+
+A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.html) instance.
+
+#### Example
+
+```js
+function* loginSaga() {
+  try {
+    const data = yield call(rsf.signInAnonymously, authProvider);
+    yield put(loginSuccess(data));
+  }
+  catch(error) {
+    yield put(loginFailure(error));
+  }
+}
 ```
 
 ### `*reduxSagaFirebase.signInWithPopup(authProvider)`

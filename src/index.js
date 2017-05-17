@@ -10,6 +10,7 @@ class ReduxSagaFirebase {
     this.region = 'us-central1'
 
     // Authentication methods
+    this.signInAnonymously = auth.signInAnonymously.bind(this)
     this.signInWithPopup = auth.signInWithPopup.bind(this)
     this.logout = auth.logout.bind(this)
     this.authChannel = auth.authChannel.bind(this)

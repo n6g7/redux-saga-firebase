@@ -7,6 +7,7 @@ describe('auth', () => {
 
   const auth = {
     onAuthStateChanged: jest.fn(() => unsubscribe),
+    signInAnonymously: jest.fn(),
     signInWithPopup: jest.fn(),
     signOut: jest.fn()
   }
@@ -16,6 +17,21 @@ describe('auth', () => {
       auth: jest.fn(() => auth)
     }
   }
+
+  describe('signInAnonymously()', () => {
+    it('returns a user', () => {
+      const user = 'qosdqkds'
+      const iterator = authModule.signInAnonymously.call(context)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth, auth.signInAnonymously]))
+
+      expect(iterator.next(user)).toEqual({
+        done: true,
+        value: user
+      })
+    })
+  })
 
   describe('signInWithPopup(authProvider)', () => {
     it('returns credentials', () => {
