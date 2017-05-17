@@ -35,7 +35,7 @@ const authProvider = new firebase.auth.GoogleAuthProvider();
 
 function* loginSaga() {
   try {
-    const data = yield call(reduxSagaFirebase.login, authProvider);
+    const data = yield call(reduxSagaFirebase.signInWithPopup, authProvider);
     yield put(loginSuccess(data));
   }
   catch(error) {
@@ -55,7 +55,8 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 ## API
 
 - [`new ReduxSagaFirebase(firebaseApp)`](#new-reduxsagafirebasefirebaseapp)
-- [`*reduxSagaFirebase.login(authProvider)`](#reduxsagafirebaseloginauthprovider)
+- [`*reduxSagaFirebase.signInAnonymously()`](#reduxsagafirebasesigninanonymously)
+- [`*reduxSagaFirebase.signInWithPopup(authProvider)`](#reduxsagafirebasesigninwithpopupauthprovider)
 - [`*reduxSagaFirebase.logout()`](#reduxsagafirebaselogout)
 - [`reduxSagaFirebase.authChannel()`](#reduxsagafirebaseauthchannel)
 - [`*reduxSagaFirebase.get(path)`](#reduxsagafirebasegetpath)
@@ -98,7 +99,33 @@ const firebaseApp = firebase.initializeApp({
 const rsf = new ReduxSagaFirebase(firebaseApp);
 ```
 
-### `*reduxSagaFirebase.login(authProvider)`
+### `*reduxSagaFirebase.signInAnonymously()`
+
+Starts the login process as an anonymous user. *(generator)*
+
+#### Arguments
+
+*none*
+
+#### Output
+
+A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.html) instance.
+
+#### Example
+
+```js
+function* loginSaga() {
+  try {
+    const data = yield call(rsf.signInAnonymously, authProvider);
+    yield put(loginSuccess(data));
+  }
+  catch(error) {
+    yield put(loginFailure(error));
+  }
+}
+```
+
+### `*reduxSagaFirebase.signInWithPopup(authProvider)`
 
 Starts the login process using the specified AuthProvider. *(generator)*
 
@@ -117,7 +144,7 @@ const authProvider = new firebase.auth.GoogleAuthProvider();
 
 function* loginSaga() {
   try {
-    const data = yield call(rsf.login, authProvider);
+    const data = yield call(rsf.signInWithPopup, authProvider);
     yield put(loginSuccess(data));
   }
   catch(error) {
