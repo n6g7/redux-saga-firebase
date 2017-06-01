@@ -1,12 +1,13 @@
 {
   "name": "redux-saga-firebase",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "A redux saga integration for firebase.",
   "author": "Nathan Gaberel <nathan@gnab.fr>",
   "homepage": "https://github.com/n6g7/redux-saga-firebase",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "babel src --out-dir dist",
     "pretest": "standard 'src/**/*.js'",
     "test": "jest"
   },
