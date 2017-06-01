@@ -2,5 +2,8 @@
   "presets": [
     "es2015",
     "stage-3"
+  ],
+  "ignore": [
+    "**/*.test.js"
   ]
 }
