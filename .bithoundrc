@@ -3,6 +3,6 @@
     "example/**"
   ],
   "test": [
-    "**/*.test.js"
+    "src/*.test.js"
   ]
 }
