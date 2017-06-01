@@ -3,17 +3,28 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 exports.getFunctionURL = getFunctionURL;
 
 var _effects = require('redux-saga/effects');
 
-var _marked = [_call].map(regeneratorRuntime.mark);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _marked = [_call].map(_regenerator2.default.mark);
 
 function getFunctionURL(functionName) {
   var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   var baseUrl = 'https://' + this.region + '-' + this.projectId() + '.cloudfunctions.net/' + functionName;
-  var query = Object.keys(parameters).map(function (key) {
+  var query = (0, _keys2.default)(parameters).map(function (key) {
     return key + '=' + parameters[key];
   }).join('&');
 
@@ -23,7 +34,7 @@ function getFunctionURL(functionName) {
 function _call(functionName) {
   var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var url, response, contentType, parser, data;
-  return regeneratorRuntime.wrap(function _call$(_context) {
+  return _regenerator2.default.wrap(function _call$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:

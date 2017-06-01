@@ -4,15 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
 var _reduxSaga = require('redux-saga');
 
 var _effects = require('redux-saga/effects');
 
-var _marked = [get, create, update, patch, _delete].map(regeneratorRuntime.mark);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _marked = [get, create, update, patch, _delete].map(_regenerator2.default.mark);
 
 function get(path) {
   var ref, result;
-  return regeneratorRuntime.wrap(function get$(_context) {
+  return _regenerator2.default.wrap(function get$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -34,7 +40,7 @@ function get(path) {
 
 function create(path, data) {
   var ref, result;
-  return regeneratorRuntime.wrap(function create$(_context2) {
+  return _regenerator2.default.wrap(function create$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
@@ -56,7 +62,7 @@ function create(path, data) {
 
 function update(path, data) {
   var ref;
-  return regeneratorRuntime.wrap(function update$(_context3) {
+  return _regenerator2.default.wrap(function update$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
@@ -74,7 +80,7 @@ function update(path, data) {
 
 function patch(path, data) {
   var ref;
-  return regeneratorRuntime.wrap(function patch$(_context4) {
+  return _regenerator2.default.wrap(function patch$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
@@ -92,7 +98,7 @@ function patch(path, data) {
 
 function _delete(path) {
   var ref;
-  return regeneratorRuntime.wrap(function _delete$(_context5) {
+  return _regenerator2.default.wrap(function _delete$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:

@@ -4,15 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
 var _reduxSaga = require('redux-saga');
 
 var _effects = require('redux-saga/effects');
 
-var _marked = [signInAnonymously, signInWithPopup, logout].map(regeneratorRuntime.mark);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _marked = [signInAnonymously, signInWithPopup, logout].map(_regenerator2.default.mark);
 
 function signInAnonymously() {
   var auth;
-  return regeneratorRuntime.wrap(function signInAnonymously$(_context) {
+  return _regenerator2.default.wrap(function signInAnonymously$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -34,7 +40,7 @@ function signInAnonymously() {
 function signInWithPopup(authProvider) {
   var auth, _ref, credential;
 
-  return regeneratorRuntime.wrap(function signInWithPopup$(_context2) {
+  return _regenerator2.default.wrap(function signInWithPopup$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
@@ -57,7 +63,7 @@ function signInWithPopup(authProvider) {
 
 function logout() {
   var auth;
-  return regeneratorRuntime.wrap(function logout$(_context3) {
+  return _regenerator2.default.wrap(function logout$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:

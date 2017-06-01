@@ -4,13 +4,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
 var _effects = require('redux-saga/effects');
 
-var _marked = [upload, uploadString, getDownloadURL, getFileMetadata, updateFileMetadata, deleteFile].map(regeneratorRuntime.mark);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _marked = [upload, uploadString, getDownloadURL, getFileMetadata, updateFileMetadata, deleteFile].map(_regenerator2.default.mark);
 
 function upload(path, file, metadata) {
   var ref, task;
-  return regeneratorRuntime.wrap(function upload$(_context) {
+  return _regenerator2.default.wrap(function upload$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -32,7 +38,7 @@ function upload(path, file, metadata) {
 
 function uploadString(path, string, format, metadata) {
   var ref, task;
-  return regeneratorRuntime.wrap(function uploadString$(_context2) {
+  return _regenerator2.default.wrap(function uploadString$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
@@ -54,7 +60,7 @@ function uploadString(path, string, format, metadata) {
 
 function getDownloadURL(path) {
   var ref, url;
-  return regeneratorRuntime.wrap(function getDownloadURL$(_context3) {
+  return _regenerator2.default.wrap(function getDownloadURL$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
@@ -76,7 +82,7 @@ function getDownloadURL(path) {
 
 function getFileMetadata(path) {
   var ref, metadata;
-  return regeneratorRuntime.wrap(function getFileMetadata$(_context4) {
+  return _regenerator2.default.wrap(function getFileMetadata$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
@@ -98,7 +104,7 @@ function getFileMetadata(path) {
 
 function updateFileMetadata(path, newMetadata) {
   var ref, metadata;
-  return regeneratorRuntime.wrap(function updateFileMetadata$(_context5) {
+  return _regenerator2.default.wrap(function updateFileMetadata$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
@@ -120,7 +126,7 @@ function updateFileMetadata(path, newMetadata) {
 
 function deleteFile(path) {
   var ref;
-  return regeneratorRuntime.wrap(function deleteFile$(_context6) {
+  return _regenerator2.default.wrap(function deleteFile$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
