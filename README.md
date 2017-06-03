@@ -68,8 +68,8 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*reduxSagaFirebase.call(functionName, parameters={})`](#reduxsagafirebasecallfunctionname-parameters)
 - [`reduxSagaFirebase.messageChannel()`](#reduxsagafirebasemessagechannel)
 - [`reduxSagaFirebase.tokenRefreshChannel()`](#reduxsagafirebasetokenrefreshchannel)
-- [`*reduxSagaFirebase.upload(path, file, metadata)`](#reduxsagafirebaseuploadpath-file-metadata)
-- [`*reduxSagaFirebase.uploadString(path, string, format, metadata)`](#reduxsagafirebaseuploadstringpath-string-format-metadata)
+- [`reduxSagaFirebase.upload(path, file, metadata)`](#reduxsagafirebaseuploadpath-file-metadata)
+- [`reduxSagaFirebase.uploadString(path, string, format, metadata)`](#reduxsagafirebaseuploadstringpath-string-format-metadata)
 - [`*reduxSagaFirebase.getDownloadURL(path)`](#reduxsagafirebasegetdownloadurlpath)
 - [`*reduxSagaFirebase.getFileMetadata(path)`](#reduxsagafirebasegetfilemetadatapath)
 - [`*reduxSagaFirebase.updateFileMetadata(path, newMetadata)`](#reduxsagafirebaseupdatefilemetadatapath-newmetadata)
@@ -434,7 +434,7 @@ function* refreshToken() {
 }
 ```
 
-### `*reduxSagaFirebase.upload(path, file, metadata)`
+### `reduxSagaFirebase.upload(path, file, metadata)`
 
 Uploads a file to cloud storage.
 
@@ -457,10 +457,15 @@ function* uploadFile(action) {
   const channel = eventChannel(emit => task.on('state_changed', emit));
 
   yield takeEvery(channel, ...);
+
+  // Wait for upload to complete
+  yield task
+
+  // Do something on complete
 }
 ```
 
-### `*reduxSagaFirebase.uploadString(path, string, format, metadata)`
+### `reduxSagaFirebase.uploadString(path, string, format, metadata)`
 
 Use this to upload a raw, `base64`, `base64url`, or `data_url` encoded string to Cloud Storage.
 
@@ -484,6 +489,11 @@ function* uploadString(action) {
   const channel = eventChannel(emit => task.on('state_changed', emit));
 
   yield takeEvery(channel, ...);
+
+  // Wait for upload to complete
+  yield task
+
+  // Do something on complete
 }
 ```
 
