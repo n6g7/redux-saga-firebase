@@ -8,7 +8,7 @@ import {
 import rsf from '../rsf';
 
 function* syncTodosSaga() {
-  const channel = yield call(rsf.channel, 'todos');
+  const channel = yield call(rsf.database.channel, 'todos');
 
   while(true) {
     const todos = yield take(channel);
@@ -25,7 +25,7 @@ function* saveNewTodo() {
   const user = yield select(state => state.login.user);
   const newTodo = yield select(state => state.todos.new);
 
-  yield call(rsf.create, 'todos', {
+  yield call(rsf.database.create, 'todos', {
     creator: user ? user.uid : null,
     done: false,
     label: newTodo,
@@ -33,7 +33,7 @@ function* saveNewTodo() {
 }
 
 function* setTodoStatus(action) {
-  yield call(rsf.patch, `todos/${action.todoId}`, {
+  yield call(rsf.database.patch, `todos/${action.todoId}`, {
     done: action.done,
   });
 }
