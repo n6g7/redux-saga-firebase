@@ -10,34 +10,44 @@ class ReduxSagaFirebase {
     this.region = 'us-central1'
 
     // Authentication methods
-    this.signInAnonymously = auth.signInAnonymously.bind(this)
-    this.signInWithPopup = auth.signInWithPopup.bind(this)
-    this.signInWithEmailAndPassword = auth.signInWithEmailAndPassword.bind(this)
-    this.logout = auth.logout.bind(this)
-    this.authChannel = auth.authChannel.bind(this)
+    this.auth = {
+      signInAnonymously: auth.signInAnonymously.bind(this),
+      signInWithPopup: auth.signInWithPopup.bind(this),
+      signInWithEmailAndPassword: auth.signInWithEmailAndPassword.bind(this),
+      signOut: auth.signOut.bind(this),
+      channel: auth.channel.bind(this)
+    }
 
     // Database methods
-    this.get = database.get.bind(this)
-    this.create = database.create.bind(this)
-    this.update = database.update.bind(this)
-    this.patch = database.patch.bind(this)
-    this.delete = database.delete.bind(this)
-    this.channel = database.channel.bind(this)
+    this.database = {
+      read: database.read.bind(this),
+      create: database.create.bind(this),
+      update: database.update.bind(this),
+      patch: database.patch.bind(this),
+      delete: database.delete.bind(this),
+      channel: database.channel.bind(this)
+    }
 
     // Functions methods
-    this.call = functions.call.bind(this)
+    this.functions = {
+      call: functions.call.bind(this)
+    }
 
     // Messaging methods
-    this.messageChannel = messaging.messageChannel.bind(this)
-    this.tokenRefreshChannel = messaging.tokenRefreshChannel.bind(this)
+    this.messaging = {
+      channel: messaging.channel.bind(this),
+      tokenRefreshChannel: messaging.tokenRefreshChannel.bind(this)
+    }
 
     // Storage methods
-    this.upload = storage.upload.bind(this)
-    this.uploadString = storage.uploadString.bind(this)
-    this.getDownloadURL = storage.getDownloadURL.bind(this)
-    this.getFileMetadata = storage.getFileMetadata.bind(this)
-    this.updateFileMetadata = storage.updateFileMetadata.bind(this)
-    this.deleteFile = storage.deleteFile.bind(this)
+    this.storage = {
+      uploadFile: storage.uploadFile.bind(this),
+      uploadString: storage.uploadString.bind(this),
+      getDownloadURL: storage.getDownloadURL.bind(this),
+      getFileMetadata: storage.getFileMetadata.bind(this),
+      updateFileMetadata: storage.updateFileMetadata.bind(this),
+      deleteFile: storage.deleteFile.bind(this)
+    }
   }
 
   projectId () {

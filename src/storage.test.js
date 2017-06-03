@@ -26,13 +26,13 @@ describe('storage', () => {
     }
   })
 
-  describe('upload(path, file, metadata)', () => {
+  describe('uploadFile(path, file, metadata)', () => {
     it('works', () => {
       const path = 'skddksl'
       const file = 'qdmlqssdklq'
       const metadata = 'qpsdksql'
 
-      const result = storageModule.upload.call(context, path, file, metadata)
+      const result = storageModule.uploadFile.call(context, path, file, metadata)
 
       expect(context.app.storage.mock.calls.length).toBe(1)
       expect(context.app.storage.mock.calls[0]).toEqual([])
