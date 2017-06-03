@@ -20,6 +20,14 @@ function* sendFileSaga(action) {
   const file = yield select(state => state.storage.file);
   const task = yield call(rsf.upload, filePath, file);
 
+  task.on('state_changed', snapshot => {
+    const pct = snapshot.bytesTransferred * 100 / snapshot.totalBytes
+    console.log(`${pct}%`);
+  })
+
+  // Wait for upload to complete
+  yield task
+
   yield syncFileUrl();
 }
 
