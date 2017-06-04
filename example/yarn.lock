@@ -1359,6 +1359,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.2:
     create-hash "^1.1.0"
     inherits "^2.0.1"
 
+create-react-class@^15.5.2:
+  version "15.5.3"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.5.3.tgz#fb0f7cae79339e9a179e194ef466efa3923820fe"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 cross-spawn@^4.0.0:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-4.0.2.tgz#7b9247621c23adfdd3856004a823cbe397424d41"
@@ -1623,7 +1631,7 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-dom-storage@2.0.2:
+dom-storage@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/dom-storage/-/dom-storage-2.0.2.tgz#ed17cbf68abd10e0aef8182713e297c5e4b500b0"
 
@@ -1967,7 +1975,7 @@ faye-websocket@~0.11.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fbjs@^0.8.1, fbjs@^0.8.4:
+fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.9:
   version "0.8.9"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.9.tgz#180247fbd347dcc9004517b904f865400a0c8f14"
   dependencies:
@@ -2062,15 +2070,15 @@ find-versions@^1.0.0:
     meow "^3.5.0"
     semver-regex "^1.0.0"
 
-firebase@^3.7.2:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/firebase/-/firebase-3.7.2.tgz#fab14f7e31de007dd373f9295a81f6fba04d3c98"
+firebase@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/firebase/-/firebase-4.1.1.tgz#2c6a07c550e13b9404e38666b646395b1af6d792"
   dependencies:
-    dom-storage "2.0.2"
+    dom-storage "^2.0.2"
     faye-websocket "0.9.3"
-    jsonwebtoken "7.1.9"
-    rsvp "3.2.1"
-    xmlhttprequest "1.8.0"
+    jsonwebtoken "^7.3.0"
+    promise-polyfill "^6.0.2"
+    xmlhttprequest "^1.8.0"
 
 first-chunk-stream@^1.0.0:
   version "1.0.0"
@@ -2914,14 +2922,14 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
 
-jsonwebtoken@7.1.9:
-  version "7.1.9"
-  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.1.9.tgz#847804e5258bec5a9499a8dc4a5e7a3bae08d58a"
+jsonwebtoken@^7.3.0:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.4.1.tgz#7ca324f5215f8be039cd35a6c45bb8cb74a448fb"
   dependencies:
     joi "^6.10.1"
-    jws "^3.1.3"
+    jws "^3.1.4"
     lodash.once "^4.0.0"
-    ms "^0.7.1"
+    ms "^2.0.0"
     xtend "^4.0.1"
 
 jsprim@^1.2.2:
@@ -2942,7 +2950,7 @@ jwa@^1.1.4:
     ecdsa-sig-formatter "1.0.9"
     safe-buffer "^5.0.1"
 
-jws@^3.1.3:
+jws@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/jws/-/jws-3.1.4.tgz#f9e8b9338e8a847277d6444b1464f61880e050a2"
   dependencies:
@@ -3133,7 +3141,7 @@ longest@^1.0.0, longest@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
   dependencies:
@@ -3315,9 +3323,9 @@ ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
-ms@^0.7.1:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
+ms@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
 multipipe@^0.1.2:
   version "0.1.2"
@@ -3457,7 +3465,7 @@ object-assign@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
 
-object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0:
+object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -3953,6 +3961,10 @@ process@^0.11.0:
   version "0.11.9"
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.9.tgz#7bd5ad21aa6253e7da8682264f1e11d11c0318c1"
 
+promise-polyfill@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-6.0.2.tgz#d9c86d3dc4dc2df9016e88946defd69b49b41162"
+
 promise.pipe@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/promise.pipe/-/promise.pipe-3.0.0.tgz#b8f729867f54353996e6d8e86f3bbd56882e32a6"
@@ -3962,6 +3974,13 @@ promise@^7.1.1:
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
   dependencies:
     asap "~2.0.3"
+
+prop-types@^15.5.6:
+  version "15.5.10"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
 
 proxy-addr@~1.1.3:
   version "1.1.3"
@@ -4058,6 +4077,14 @@ react-dom@^15.4.2:
     fbjs "^0.8.1"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+
+react-ga@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.2.0.tgz#45235de1356e4d988d9b82214d615a08489c9291"
+  dependencies:
+    create-react-class "^15.5.2"
+    object-assign "^4.0.1"
+    prop-types "^15.5.6"
 
 react-redux@^5.0.3:
   version "5.0.3"
@@ -4313,10 +4340,6 @@ rimraf@2, rimraf@^2.2.6, rimraf@^2.5.4, rimraf@~2.5.1, rimraf@~2.5.4:
 ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
-
-rsvp@3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.2.1.tgz#07cb4a5df25add9e826ebc67dcc9fd89db27d84a"
 
 safe-buffer@^5.0.1:
   version "5.0.1"
@@ -5272,7 +5295,7 @@ xmlhttprequest-ssl@1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.3.tgz#185a888c04eca46c3e4070d99f7b49de3528992d"
 
-xmlhttprequest@1.8.0:
+xmlhttprequest@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/xmlhttprequest/-/xmlhttprequest-1.8.0.tgz#67fe075c5c24fef39f9d65f5f7b7fe75171968fc"
 

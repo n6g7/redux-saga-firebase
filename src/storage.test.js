@@ -3,15 +3,17 @@ import { call } from 'redux-saga/effects'
 import storageModule from './storage'
 
 describe('storage', () => {
-  let ref, storage, context
+  let ref, storage, task, context
+
+  task = 'qlsdmlqmd'
 
   beforeEach(() => {
     ref = {
       delete: jest.fn(),
       getDownloadURL: jest.fn(),
       getMetadata: jest.fn(),
-      put: jest.fn(),
-      putString: jest.fn(),
+      put: jest.fn(() => task),
+      putString: jest.fn(() => task),
       updateMetadata: jest.fn()
     }
     storage = {
@@ -29,11 +31,8 @@ describe('storage', () => {
       const path = 'skddksl'
       const file = 'qdmlqssdklq'
       const metadata = 'qpsdksql'
-      const task = 'jqldlksq'
-      const iterator = storageModule.upload.call(context, path, file, metadata)
 
-      expect(iterator.next().value)
-      .toEqual(call([ref, ref.put], file, metadata))
+      const result = storageModule.upload.call(context, path, file, metadata)
 
       expect(context.app.storage.mock.calls.length).toBe(1)
       expect(context.app.storage.mock.calls[0]).toEqual([])
@@ -41,10 +40,10 @@ describe('storage', () => {
       expect(storage.ref.mock.calls.length).toBe(1)
       expect(storage.ref.mock.calls[0]).toEqual([path])
 
-      expect(iterator.next(task)).toEqual({
-        done: true,
-        value: task
-      })
+      expect(ref.put.mock.calls.length).toBe(1)
+      expect(ref.put.mock.calls[0]).toEqual([file, metadata])
+
+      expect(result).toEqual(task)
     })
   })
 
@@ -54,11 +53,8 @@ describe('storage', () => {
       const string = 'qdmlqssdklq'
       const format = 'qp^zpq'
       const metadata = 'qpsdksql'
-      const task = 'jqldlksq'
-      const iterator = storageModule.uploadString.call(context, path, string, format, metadata)
 
-      expect(iterator.next().value)
-      .toEqual(call([ref, ref.putString], string, format, metadata))
+      const result = storageModule.uploadString.call(context, path, string, format, metadata)
 
       expect(context.app.storage.mock.calls.length).toBe(1)
       expect(context.app.storage.mock.calls[0]).toEqual([])
@@ -66,10 +62,10 @@ describe('storage', () => {
       expect(storage.ref.mock.calls.length).toBe(1)
       expect(storage.ref.mock.calls[0]).toEqual([path])
 
-      expect(iterator.next(task)).toEqual({
-        done: true,
-        value: task
-      })
+      expect(ref.putString.mock.calls.length).toBe(1)
+      expect(ref.putString.mock.calls[0]).toEqual([string, format, metadata])
+
+      expect(result).toEqual(task)
     })
   })
 
