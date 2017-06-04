@@ -1,15 +1,15 @@
 import { call } from 'redux-saga/effects'
 
-function * upload (path, file, metadata) {
+function upload (path, file, metadata) {
   const ref = this.app.storage().ref(path)
-  const task = yield call([ref, ref.put], file, metadata)
+  const task = ref.put(file, metadata)
 
   return task
 }
 
-function * uploadString (path, string, format, metadata) {
+function uploadString (path, string, format, metadata) {
   const ref = this.app.storage().ref(path)
-  const task = yield call([ref, ref.putString], string, format, metadata)
+  const task = ref.putString(string, format, metadata)
 
   return task
 }

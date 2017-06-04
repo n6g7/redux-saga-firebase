@@ -28,6 +28,10 @@ class TodoList extends PureComponent {
         doc(35, 39),
       ]}
     >
+      <p>
+        Open this page in <a href="#" target="blank">another tab or window</a> to see the realtime database in action!
+      </p>
+
       <InputGroup
         value={this.props.newTodo}
         onChange={e => this.props.changeNewTodo(e.target.value)}

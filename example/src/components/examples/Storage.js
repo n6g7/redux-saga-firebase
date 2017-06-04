@@ -36,7 +36,7 @@ class Storage extends PureComponent {
       title="Storage"
       className="storage"
       snippets={[
-        doc(19, 24),
+        doc(19, 32),
         doc(9, 17),
       ]}
     >

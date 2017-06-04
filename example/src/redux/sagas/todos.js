@@ -22,11 +22,11 @@ function* syncTodosSaga() {
 }
 
 function* saveNewTodo() {
-  const uid = yield select(state => state.login.user.uid);
+  const user = yield select(state => state.login.user);
   const newTodo = yield select(state => state.todos.new);
 
   yield call(rsf.create, 'todos', {
-    creator: uid,
+    creator: user ? user.uid : null,
     done: false,
     label: newTodo,
   });
