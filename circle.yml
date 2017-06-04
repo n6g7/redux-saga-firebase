@@ -10,6 +10,13 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - rsf-{{ .Branch }}-{{ checksum "package.json" }}
+            - rsf-{{ .Branch }}
+            - rsf-master-{{ checksum "package.json" }}
+            - rsf-master
+
       - run:
           name: Install dependencies
           command: yarn
@@ -31,6 +38,7 @@ jobs:
           command: cat coverage/lcov.info | coveralls
 
       - save_cache:
-          key: yarn
+          key: rsf-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ~/.yarn
+            - ~/redux-saga-firebase/node_modules
