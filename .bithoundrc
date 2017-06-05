@@ -4,6 +4,6 @@
     "dist/**"
   ],
   "test": [
-    "src/*.test.js"
+    "dist/*.test.js"
   ]
 }
