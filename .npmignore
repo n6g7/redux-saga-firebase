@@ -6,3 +6,4 @@ coverage
 example
 node_modules
 *.test.js
+src
