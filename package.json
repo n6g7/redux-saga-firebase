@@ -8,9 +8,9 @@
   "main": "dist/index.js",
   "scripts": {
     "del": "./node_modules/rimraf/bin.js dist",
-    "build": "yarn del && babel src --out-dir dist",
+    "build": "yarn del && NODE_ENV=production babel src --out-dir dist",
     "pretest": "standard 'src/**/*.js'",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "repository": {
     "url": "git@github.com:n6g7/redux-saga-firebase.git",

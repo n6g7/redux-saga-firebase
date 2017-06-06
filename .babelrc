@@ -6,7 +6,11 @@
   "plugins": [
     "transform-runtime"
   ],
-  "ignore": [
-    "**/*.test.js"
-  ]
+  "env": {
+    "production": {
+      "ignore": [
+        "src/*.test.js"
+      ]
+    }
+  }
 }
