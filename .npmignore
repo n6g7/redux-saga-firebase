@@ -1,6 +1,7 @@
 .babelrc
 .bithoundrc
 .git
+.gitattributes
 circle.yml
 coverage
 example
