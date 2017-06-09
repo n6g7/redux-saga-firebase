@@ -5,13 +5,14 @@ import messaging from './messaging'
 import storage from './storage'
 
 class ReduxSagaFirebase {
-  constructor (firebaseApp) {
+  constructor(firebaseApp) {
     this.app = firebaseApp
     this.region = 'us-central1'
 
     // Authentication methods
     this.signInAnonymously = auth.signInAnonymously.bind(this)
     this.signInWithPopup = auth.signInWithPopup.bind(this)
+    this.signInWithEmail = auth.signInWithEmail.bind(this)
     this.logout = auth.logout.bind(this)
     this.authChannel = auth.authChannel.bind(this)
 
@@ -39,7 +40,7 @@ class ReduxSagaFirebase {
     this.deleteFile = storage.deleteFile.bind(this)
   }
 
-  projectId () {
+  projectId() {
     if (this._projectId) return this._projectId
 
     const regex = /^([a-z0-9-]+?)(?:-[a-z0-9]{5})?\.firebaseapp\.com$/
