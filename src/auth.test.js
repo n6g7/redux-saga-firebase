@@ -49,6 +49,21 @@ describe('auth', () => {
     })
   })
 
+  describe('signInWithEmail(email, password)', () => {
+    it('returns credentials', () => {
+      const email = 'skqdk'
+      const password = 'skqdk'
+      const iterator = authModule.signInWithEmail.call(context, email, password)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth, auth.signInWithEmail], email, password))
+
+      expect(iterator.next()).toEqual({
+        done: true
+      })
+    })
+  })
+
   describe('logout()', () => {
     it('works', () => {
       const iterator = authModule.logout.call(context)
