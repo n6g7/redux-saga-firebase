@@ -9,6 +9,7 @@ describe('auth', () => {
     onAuthStateChanged: jest.fn(() => unsubscribe),
     signInAnonymously: jest.fn(),
     signInWithPopup: jest.fn(),
+    signInWithEmailAndPassword: jest.fn(),
     signOut: jest.fn()
   }
 
@@ -49,17 +50,19 @@ describe('auth', () => {
     })
   })
 
-  describe('signInWithEmail(email, password)', () => {
-    it('returns credentials', () => {
+  describe('signInWithEmailAndPassword(email, password)', () => {
+    it('returns a user', () => {
       const email = 'skqdk'
       const password = 'skqdk'
-      const iterator = authModule.signInWithEmail.call(context, email, password)
+      const user = 'qosdqkds'
+      const iterator = authModule.signInWithEmailAndPassword.call(context, email, password)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithEmail], email, password))
+      .toEqual(call([auth, auth.signInWithEmailAndPassword], email, password))
 
-      expect(iterator.next()).toEqual({
-        done: true
+      expect(iterator.next(user)).toEqual({
+        done: true,
+        value: user
       })
     })
   })
