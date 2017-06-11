@@ -13,6 +13,11 @@ function * signInWithPopup (authProvider) {
   return credential
 }
 
+function * signInWithEmailAndPassword (email, password) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.signInWithEmailAndPassword], email, password)
+}
+
 function * logout () {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
@@ -39,5 +44,6 @@ export default {
   authChannel,
   signInAnonymously,
   signInWithPopup,
+  signInWithEmailAndPassword,
   logout
 }
