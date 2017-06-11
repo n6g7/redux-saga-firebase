@@ -55,26 +55,26 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 ## API
 
 - [`new ReduxSagaFirebase(firebaseApp)`](#new-reduxsagafirebasefirebaseapp)
-- [`*reduxSagaFirebase.signInAnonymously()`](#reduxsagafirebasesigninanonymously)
-- [`*reduxSagaFirebase.signInWithEmailAndPassword(email, password)`](#reduxsagafirebasesigninwithemailandpasswordemail-password)
-- [`*reduxSagaFirebase.signInWithPopup(authProvider)`](#reduxsagafirebasesigninwithpopupauthprovider)
-- [`*reduxSagaFirebase.logout()`](#reduxsagafirebaselogout)
-- [`reduxSagaFirebase.authChannel()`](#reduxsagafirebaseauthchannel)
-- [`*reduxSagaFirebase.get(path)`](#reduxsagafirebasegetpath)
-- [`*reduxSagaFirebase.create(path, data)`](#reduxsagafirebasecreatepath-data)
-- [`*reduxSagaFirebase.update(path, data)`](#reduxsagafirebaseupdatepath-data)
-- [`*reduxSagaFirebase.patch(path, data)`](#reduxsagafirebasepatchpath-data)
-- [`*reduxSagaFirebase.delete(path)`](#reduxsagafirebasedeletepath)
-- [`reduxSagaFirebase.channel(path, event)`](#reduxsagafirebasechannelpath-event)
-- [`*reduxSagaFirebase.call(functionName, parameters={})`](#reduxsagafirebasecallfunctionname-parameters)
-- [`reduxSagaFirebase.messageChannel()`](#reduxsagafirebasemessagechannel)
-- [`reduxSagaFirebase.tokenRefreshChannel()`](#reduxsagafirebasetokenrefreshchannel)
-- [`reduxSagaFirebase.upload(path, file, metadata)`](#reduxsagafirebaseuploadpath-file-metadata)
-- [`reduxSagaFirebase.uploadString(path, string, format, metadata)`](#reduxsagafirebaseuploadstringpath-string-format-metadata)
-- [`*reduxSagaFirebase.getDownloadURL(path)`](#reduxsagafirebasegetdownloadurlpath)
-- [`*reduxSagaFirebase.getFileMetadata(path)`](#reduxsagafirebasegetfilemetadatapath)
-- [`*reduxSagaFirebase.updateFileMetadata(path, newMetadata)`](#reduxsagafirebaseupdatefilemetadatapath-newmetadata)
-- [`*reduxSagaFirebase.deleteFile(path)`](#reduxsagafirebasedeletefilepath)
+- [`*reduxSagaFirebase.auth.signInAnonymously()`](#authsigninanonymously)
+- [`*reduxSagaFirebase.auth.signInWithEmailAndPassword(email, password)`](#authsigninwithemailandpasswordemail-password)
+- [`*reduxSagaFirebase.auth.signInWithPopup(authProvider)`](#authsigninwithpopupauthprovider)
+- [`*reduxSagaFirebase.auth.signOut()`](#authsignout)
+- [`reduxSagaFirebase.auth.channel()`](#authchannel)
+- [`*reduxSagaFirebase.database.read(path)`](#databasereadpath)
+- [`*reduxSagaFirebase.database.create(path, data)`](#databasecreatepath-data)
+- [`*reduxSagaFirebase.database.update(path, data)`](#databaseupdatepath-data)
+- [`*reduxSagaFirebase.database.patch(path, data)`](#databasepatchpath-data)
+- [`*reduxSagaFirebase.database.delete(path)`](#databasedeletepath)
+- [`reduxSagaFirebase.database.channel(path, event)`](#databasechannelpath-event)
+- [`*reduxSagaFirebase.functions.call(functionName, parameters={})`](#functionscallfunctionname-parameters)
+- [`reduxSagaFirebase.messaging.channel()`](#messagingchannel)
+- [`reduxSagaFirebase.messaging.tokenRefreshChannel()`](#messagingtokenrefreshchannel)
+- [`reduxSagaFirebase.storage.uploadFile(path, file, metadata)`](#storageuploadfilepath-file-metadata)
+- [`reduxSagaFirebase.storage.uploadString(path, string, format, metadata)`](#storageuploadstringpath-string-format-metadata)
+- [`*reduxSagaFirebase.storage.getDownloadURL(path)`](#storagegetdownloadurlpath)
+- [`*reduxSagaFirebase.storage.getFileMetadata(path)`](#storagegetfilemetadatapath)
+- [`*reduxSagaFirebase.storage.updateFileMetadata(path, newMetadata)`](#storageupdatefilemetadatapath-newmetadata)
+- [`*reduxSagaFirebase.storage.deleteFile(path)`](#storagedeletefilepath)
 
 ### `new ReduxSagaFirebase(firebaseApp)`
 
@@ -100,7 +100,7 @@ const firebaseApp = firebase.initializeApp({
 const rsf = new ReduxSagaFirebase(firebaseApp);
 ```
 
-### `*reduxSagaFirebase.signInAnonymously()`
+### `*auth.signInAnonymously()`
 
 Starts the login process as an anonymous user. *(generator)*
 
@@ -117,7 +117,7 @@ A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.ht
 ```js
 function* loginSaga() {
   try {
-    const data = yield call(rsf.signInAnonymously, authProvider);
+    const data = yield call(rsf.auth.signInAnonymously, authProvider);
     yield put(loginSuccess(data));
   }
   catch(error) {
@@ -126,7 +126,7 @@ function* loginSaga() {
 }
 ```
 
-### `*reduxSagaFirebase.signInWithEmailAndPassword(email, password)`
+### `*auth.signInWithEmailAndPassword(email, password)`
 
 Starts the login process using an email address and password. *(generator)*
 
@@ -145,7 +145,7 @@ A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User) i
 
 function* loginSaga(email, password) {
   try {
-    const data = yield call(rsf.signInWithEmailAndPassword, email, password);
+    const data = yield call(rsf.auth.signInWithEmailAndPassword, email, password);
     yield put(loginSuccess(data));
   }
   catch(error) {
@@ -154,7 +154,7 @@ function* loginSaga(email, password) {
 }
 ```
 
-### `*reduxSagaFirebase.signInWithPopup(authProvider)`
+### `*auth.signInWithPopup(authProvider)`
 
 Starts the login process using the specified AuthProvider. *(generator)*
 
@@ -173,7 +173,7 @@ const authProvider = new firebase.auth.GoogleAuthProvider();
 
 function* loginSaga() {
   try {
-    const data = yield call(rsf.signInWithPopup, authProvider);
+    const data = yield call(rsf.auth.signInWithPopup, authProvider);
     yield put(loginSuccess(data));
   }
   catch(error) {
@@ -182,7 +182,7 @@ function* loginSaga() {
 }
 ```
 
-### `*reduxSagaFirebase.logout()`
+### `*auth.signOut()`
 
 Logs the user out. *(generator)*
 
@@ -197,18 +197,18 @@ Logs the user out. *(generator)*
 #### Example
 
 ```js
-function* logoutSaga() {
+function* signOutSaga() {
   try {
-    const data = yield call(rsf.logout);
-    yield put(logoutSuccess(data));
+    const data = yield call(rsf.auth.signOut);
+    yield put(signOutSuccess(data));
   }
   catch(error) {
-    yield put(logoutFailure(error));
+    yield put(signOutFailure(error));
   }
 }
 ```
 
-### `reduxSagaFirebase.authChannel()`
+### `auth.channel()`
 
 Gets a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every user change.
 
@@ -224,7 +224,7 @@ A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Cha
 
 ```js
 function* syncUserSaga() {
-  const channel = yield call(rsf.authChannel);
+  const channel = yield call(rsf.auth.channel);
 
   while(true) {
     const { error, user } = yield take(channel);
@@ -235,7 +235,7 @@ function* syncUserSaga() {
 }
 ```
 
-### `*reduxSagaFirebase.get(path)`
+### `*database.read(path)`
 
 Returns the data at this path in firebase's database.
 
@@ -251,12 +251,12 @@ Whatever value is store at this path in the database (number, string, object, et
 
 ```js
 function* getTodo() {
-  const firstTodo = yield call(rsf.get, 'todos/1');
+  const firstTodo = yield call(rsf.database.read, 'todos/1');
   yield put(gotTodo(firstTodo));
 }
 ```
 
-### `*reduxSagaFirebase.create(path, data)`
+### `*database.create(path, data)`
 
 Create a new path in the database and stores the data there.
 
@@ -273,7 +273,7 @@ The key newly created (a string).
 
 ```js
 function* addTodo() {
-  const key = yield call(rsf.create, 'todos', {
+  const key = yield call(rsf.database.create, 'todos', {
     done: false,
     label: 'Do this',
   });
@@ -281,7 +281,7 @@ function* addTodo() {
 }
 ```
 
-### `*reduxSagaFirebase.update(path, data)`
+### `*database.update(path, data)`
 
 Replace the value store at `path` in the database with `data`.
 
@@ -298,16 +298,16 @@ Replace the value store at `path` in the database with `data`.
 
 ```js
 function* updateTodo() {
-  yield call(rsf.update, 'todos/-Kfn7EyLEoHax0YGoQr0', {
+  yield call(rsf.database.update, 'todos/-Kfn7EyLEoHax0YGoQr0', {
     done: true, // yay, it's done now!
     label: 'Do this',
   });
 }
 ```
 
-### `*reduxSagaFirebase.patch(path, data)`
+### `*database.patch(path, data)`
 
-Patches the value store at `path` in the database with `data`. Like `reduxSagaFirebase.update` but doesn't remove unmentionned keys.
+Patches the value store at `path` in the database with `data`. Like `database.update` but doesn't remove unmentionned keys.
 
 #### Arguments
 
@@ -323,13 +323,13 @@ Patches the value store at `path` in the database with `data`. Like `reduxSagaFi
 ```js
 function* updateTodo() {
   // With this call, no need to re-send the todo label.
-  yield call(rsf.patch, 'todos/-Kfn7EyLEoHax0YGoQr0', {
+  yield call(rsf.database.patch, 'todos/-Kfn7EyLEoHax0YGoQr0', {
     done: true,
   });
 }
 ```
 
-### `*reduxSagaFirebase.delete(path)`
+### `*database.delete(path)`
 
 Removes the value at the specified `path` in the database.
 
@@ -345,11 +345,11 @@ Removes the value at the specified `path` in the database.
 
 ```js
 function* deleteTodo() {
-  yield call(rsf.delete, 'todos/-Kfn7EyLEoHax0YGoQr0');
+  yield call(rsf.database.delete, 'todos/-Kfn7EyLEoHax0YGoQr0');
 }
 ```
 
-### `reduxSagaFirebase.channel(path, event)`
+### `database.channel(path, event)`
 
 Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database.
 
@@ -366,7 +366,7 @@ A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Cha
 
 ```js
 function* syncTodosSaga() {
-  const channel = yield call(rsf.channel, 'todos');
+  const channel = yield call(rsf.database.channel, 'todos');
 
   while(true) {
     const todos = yield take(channel);
@@ -375,7 +375,7 @@ function* syncTodosSaga() {
 }
 ```
 
-### `*reduxSagaFirebase.call(functionName, parameters={})`
+### `*functions.call(functionName, parameters={})`
 
 Calls a [cloud function](https://firebase.google.com/docs/functions/) with the given parameters.
 The function has to be triggered by HTTP request.
@@ -405,7 +405,7 @@ A javascript object (`application/json`) or a string (anything else) depending o
 ```js
 function* callFunction() {
   // Will call: https://us-central1-project-id.firebaseapp.com/sayHello?name=Alfred
-  const result = yield call(rsf.call, 'sayHello', {
+  const result = yield call(rsf.functions.call, 'sayHello', {
     name: 'Alfred'
   });
 
@@ -413,7 +413,7 @@ function* callFunction() {
 }
 ```
 
-### `reduxSagaFirebase.messageChannel()`
+### `messaging.channel()`
 
 Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits for every message received.
 
@@ -429,7 +429,7 @@ A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Cha
 
 ```js
 function* readMessages() {
-  const channel = rsf.messageChannel();
+  const channel = rsf.messaging.channel();
 
   while(true) {
     const message = yield take(channel);
@@ -438,7 +438,7 @@ function* readMessages() {
 }
 ```
 
-### `reduxSagaFirebase.tokenRefreshChannel()`
+### `messaging.tokenRefreshChannel()`
 
 Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every time the registration token is refreshed.
 
@@ -454,7 +454,7 @@ A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Cha
 
 ```js
 function* refreshToken() {
-  const channel = rsf.tokenRefreshChannel();
+  const channel = rsf.messaging.tokenRefreshChannel();
 
   while(true) {
     const token = yield take(channel);
@@ -463,7 +463,7 @@ function* refreshToken() {
 }
 ```
 
-### `reduxSagaFirebase.upload(path, file, metadata)`
+### `storage.uploadFile(path, file, metadata)`
 
 Uploads a file to cloud storage.
 
@@ -481,7 +481,7 @@ An [UploadTask](https://firebase.google.com/docs/reference/js/firebase.storage.U
 
 ```js
 function* uploadFile(action) {
-  const task = yield call(rsf.upload, action.path, action.file);
+  const task = yield call(rsf.storage.uploadFile, action.path, action.file);
 
   const channel = eventChannel(emit => task.on('state_changed', emit));
 
@@ -494,7 +494,7 @@ function* uploadFile(action) {
 }
 ```
 
-### `reduxSagaFirebase.uploadString(path, string, format, metadata)`
+### `storage.uploadString(path, string, format, metadata)`
 
 Use this to upload a raw, `base64`, `base64url`, or `data_url` encoded string to Cloud Storage.
 
@@ -513,7 +513,7 @@ An [UploadTask](https://firebase.google.com/docs/reference/js/firebase.storage.U
 
 ```js
 function* uploadString(action) {
-  const task = yield call(rsf.uploadString, action.path, action.fileData, 'base64');
+  const task = yield call(rsf.storage.uploadString, action.path, action.fileData, 'base64');
 
   const channel = eventChannel(emit => task.on('state_changed', emit));
 
@@ -526,7 +526,7 @@ function* uploadString(action) {
 }
 ```
 
-### `*reduxSagaFirebase.getDownloadURL(path)`
+### `*storage.getDownloadURL(path)`
 
 Returns a download url for the file at the specified path.
 
@@ -542,13 +542,13 @@ A url as a string.
 
 ```js
 function* downloadFile(action) {
-  const url = yield call(rsf.getDownloadURL, action.path);
+  const url = yield call(rsf.storage.getDownloadURL, action.path);
 
   yield call(fetch, url, ...);
 }
 ```
 
-### `*reduxSagaFirebase.getFileMetadata(path)`
+### `*storage.getFileMetadata(path)`
 
 #### Arguments
 
@@ -562,12 +562,12 @@ A [FullMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.
 
 ```js
 function* metadata(action) {
-  const metadata = yield call(rsf.getFileMetadata, action.path);
+  const metadata = yield call(rsf.storage.getFileMetadata, action.path);
   return metadata;
 }
 ```
 
-### `*reduxSagaFirebase.updateFileMetadata(path, newMetadata)`
+### `*storage.updateFileMetadata(path, newMetadata)`
 
 Updates the metadata for a file.
 
@@ -584,14 +584,14 @@ A [FullMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.
 
 ```js
 function* setToPng(action) {
-  const metadata = yield call(rsf.updateFileMetadata, action.path, {
+  const metadata = yield call(rsf.storage.updateFileMetadata, action.path, {
     contentType: 'image/png'
   });
   return metadata;
 }
 ```
 
-### `*reduxSagaFirebase.deleteFile(path)`
+### `*storage.deleteFile(path)`
 
 Deletes a file.
 
@@ -607,7 +607,7 @@ Deletes a file.
 
 ```js
 function* deleteFile(action) {
-  yield call(rsf.deleteFile, action.path);
+  yield call(rsf.storage.deleteFile, action.path);
 }
 ```
 
