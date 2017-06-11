@@ -35,7 +35,11 @@ jobs:
 
       - run:
           name: Send coverage to coveralls.io
-          command: cat coverage/lcov.info | coveralls
+          command: |
+            if [ -z "$CIRCLE_PR_REPONAME" ];
+            then
+              cat coverage/lcov.info | coveralls;
+            fi
 
       - save_cache:
           key: rsf-{{ .Branch }}-{{ checksum "package.json" }}
