@@ -6,7 +6,7 @@ import rsf from '../rsf';
 function* ping(action) {
   const newTodo = yield select(state => state.todos.new);
   const registrationToken = yield select(state => state.messaging.token);
-  const { pong } = yield call(rsf.call, 'ping', {
+  const { pong } = yield call(rsf.functions.call, 'ping', {
     ping: newTodo,
     token: registrationToken
   });

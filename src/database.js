@@ -1,7 +1,7 @@
 import { eventChannel } from 'redux-saga'
 import { call } from 'redux-saga/effects'
 
-function * get (path) {
+function * read (path) {
   const ref = this.app.database().ref(path)
   const result = yield call([ref, ref.once], 'value')
 
@@ -47,7 +47,7 @@ function channel (path, event = 'value') {
 }
 
 export default {
-  get,
+  read,
   create,
   update,
   patch,

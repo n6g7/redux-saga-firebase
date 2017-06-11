@@ -1,6 +1,6 @@
 import { call } from 'redux-saga/effects'
 
-function upload (path, file, metadata) {
+function uploadFile (path, file, metadata) {
   const ref = this.app.storage().ref(path)
   const task = ref.put(file, metadata)
 
@@ -41,7 +41,7 @@ function * deleteFile (path) {
 }
 
 export default {
-  upload,
+  uploadFile,
   uploadString,
   getDownloadURL,
   getFileMetadata,

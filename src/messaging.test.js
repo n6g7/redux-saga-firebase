@@ -18,9 +18,9 @@ describe('messaging', () => {
     }
   })
 
-  describe('messageChannel()', () => {
+  describe('channel()', () => {
     it('works', () => {
-      const result = messagingModule.messageChannel.call(context)
+      const result = messagingModule.channel.call(context)
 
       expect(context.app.messaging.mock.calls.length).toBe(1)
       expect(context.app.messaging.mock.calls[0]).toEqual([])
@@ -32,7 +32,7 @@ describe('messaging', () => {
 
     it('returns a cached version is available', () => {
       context._messageChannel = 'jlkqjdklqs'
-      const result = messagingModule.messageChannel.call(context)
+      const result = messagingModule.channel.call(context)
 
       expect(context.app.messaging.mock.calls.length).toBe(0)
       expect(messaging.onMessage.mock.calls.length).toBe(0)

@@ -8,7 +8,7 @@ const filePath = 'test.png'
 
 function* syncFileUrl() {
   try {
-    const url = yield call(rsf.getDownloadURL, filePath);
+    const url = yield call(rsf.storage.getDownloadURL, filePath);
     yield put(setFileURL(url));
   }
   catch(error) {
@@ -18,7 +18,7 @@ function* syncFileUrl() {
 
 function* sendFileSaga(action) {
   const file = yield select(state => state.storage.file);
-  const task = yield call(rsf.upload, filePath, file);
+  const task = rsf.storage.uploadFile(filePath, file);
 
   task.on('state_changed', snapshot => {
     const pct = snapshot.bytesTransferred * 100 / snapshot.totalBytes

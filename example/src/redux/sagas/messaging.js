@@ -13,12 +13,12 @@ export default function*() {
 
   yield put(setRegistrationToken(token));
 
-  const messageChannel = rsf.messageChannel();
+  const messageChannel = rsf.messaging.channel();
   yield takeEvery(messageChannel, function*(message) {
     console.log('You\'ve got mail!', message);
   });
 
-  const tokenRefreshChannel = rsf.tokenRefreshChannel();
+  const tokenRefreshChannel = rsf.messaging.tokenRefreshChannel();
   yield takeEvery(tokenRefreshChannel, function*(token) {
     yield put(setRegistrationToken(token));
   });

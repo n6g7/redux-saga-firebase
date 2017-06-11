@@ -1,6 +1,6 @@
 import { eventChannel } from 'redux-saga'
 
-function messageChannel () {
+function channel () {
   if (this._messageChannel) return this._messageChannel
 
   const messaging = this.app.messaging()
@@ -32,6 +32,6 @@ function tokenRefreshChannel () {
 }
 
 export default {
-  messageChannel,
+  channel,
   tokenRefreshChannel
 }

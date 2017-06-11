@@ -24,14 +24,14 @@ describe('database', () => {
     }
   })
 
-  describe('get(path)', () => {
+  describe('read(path)', () => {
     it('works', () => {
       const path = 'skddksl'
       const val = 'jqdqkld'
       const result = {
         val: jest.fn(() => val)
       }
-      const iterator = dbModule.get.call(context, path)
+      const iterator = dbModule.read.call(context, path)
 
       expect(iterator.next().value)
       .toEqual(call([ref, ref.once], 'value'))

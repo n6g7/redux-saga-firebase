@@ -18,12 +18,12 @@ function * signInWithEmailAndPassword (email, password) {
   return yield call([auth, auth.signInWithEmailAndPassword], email, password)
 }
 
-function * logout () {
+function * signOut () {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
 }
 
-function authChannel () {
+function channel () {
   if (this._authChannel) return this._authChannel
 
   const auth = this.app.auth()
@@ -41,9 +41,9 @@ function authChannel () {
 }
 
 export default {
-  authChannel,
+  channel,
   signInAnonymously,
   signInWithPopup,
   signInWithEmailAndPassword,
-  logout
+  signOut
 }

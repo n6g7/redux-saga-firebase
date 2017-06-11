@@ -14,38 +14,38 @@ describe('ReduxSagaFirebase', () => {
     })
 
     it('defines authentication methods', () => {
-      expect(rsf.signInAnonymously).toBeInstanceOf(Function)
-      expect(rsf.signInWithPopup).toBeInstanceOf(Function)
-      expect(rsf.signInWithEmailAndPassword).toBeInstanceOf(Function)
-      expect(rsf.logout).toBeInstanceOf(Function)
-      expect(rsf.authChannel).toBeInstanceOf(Function)
+      expect(rsf.auth.signInAnonymously).toBeInstanceOf(Function)
+      expect(rsf.auth.signInWithPopup).toBeInstanceOf(Function)
+      expect(rsf.auth.signInWithEmailAndPassword).toBeInstanceOf(Function)
+      expect(rsf.auth.signOut).toBeInstanceOf(Function)
+      expect(rsf.auth.channel).toBeInstanceOf(Function)
     })
 
     it('defines database methods', () => {
-      expect(rsf.get).toBeInstanceOf(Function)
-      expect(rsf.create).toBeInstanceOf(Function)
-      expect(rsf.update).toBeInstanceOf(Function)
-      expect(rsf.patch).toBeInstanceOf(Function)
-      expect(rsf.delete).toBeInstanceOf(Function)
-      expect(rsf.channel).toBeInstanceOf(Function)
+      expect(rsf.database.read).toBeInstanceOf(Function)
+      expect(rsf.database.create).toBeInstanceOf(Function)
+      expect(rsf.database.update).toBeInstanceOf(Function)
+      expect(rsf.database.patch).toBeInstanceOf(Function)
+      expect(rsf.database.delete).toBeInstanceOf(Function)
+      expect(rsf.database.channel).toBeInstanceOf(Function)
     })
 
     it('defines functions methods', () => {
-      expect(rsf.call).toBeInstanceOf(Function)
+      expect(rsf.functions.call).toBeInstanceOf(Function)
     })
 
     it('defines messaging methods', () => {
-      expect(rsf.messageChannel).toBeInstanceOf(Function)
-      expect(rsf.tokenRefreshChannel).toBeInstanceOf(Function)
+      expect(rsf.messaging.channel).toBeInstanceOf(Function)
+      expect(rsf.messaging.tokenRefreshChannel).toBeInstanceOf(Function)
     })
 
     it('defines storage methods', () => {
-      expect(rsf.upload).toBeInstanceOf(Function)
-      expect(rsf.uploadString).toBeInstanceOf(Function)
-      expect(rsf.getDownloadURL).toBeInstanceOf(Function)
-      expect(rsf.getFileMetadata).toBeInstanceOf(Function)
-      expect(rsf.updateFileMetadata).toBeInstanceOf(Function)
-      expect(rsf.deleteFile).toBeInstanceOf(Function)
+      expect(rsf.storage.uploadFile).toBeInstanceOf(Function)
+      expect(rsf.storage.uploadString).toBeInstanceOf(Function)
+      expect(rsf.storage.getDownloadURL).toBeInstanceOf(Function)
+      expect(rsf.storage.getFileMetadata).toBeInstanceOf(Function)
+      expect(rsf.storage.updateFileMetadata).toBeInstanceOf(Function)
+      expect(rsf.storage.deleteFile).toBeInstanceOf(Function)
     })
   })
 
