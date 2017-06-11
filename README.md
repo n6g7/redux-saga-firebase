@@ -56,7 +56,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 
 - [`new ReduxSagaFirebase(firebaseApp)`](#new-reduxsagafirebasefirebaseapp)
 - [`*reduxSagaFirebase.signInAnonymously()`](#reduxsagafirebasesigninanonymously)
-- [`*reduxSagaFirebase.signInWithEmailAndPassword(email, password)`](#reduxsagafirebasesigninwithEmailAndPassword)
+- [`*reduxSagaFirebase.signInWithEmailAndPassword(email, password)`](#reduxsagafirebasesigninwithemailandpasswordemail-password)
 - [`*reduxSagaFirebase.signInWithPopup(authProvider)`](#reduxsagafirebasesigninwithpopupauthprovider)
 - [`*reduxSagaFirebase.logout()`](#reduxsagafirebaselogout)
 - [`reduxSagaFirebase.authChannel()`](#reduxsagafirebaseauthchannel)
