@@ -56,6 +56,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 
 - [`new ReduxSagaFirebase(firebaseApp)`](#new-reduxsagafirebasefirebaseapp)
 - [`*reduxSagaFirebase.signInAnonymously()`](#reduxsagafirebasesigninanonymously)
+- [`*reduxSagaFirebase.signInWithEmailAndPassword(email, password)`](#reduxsagafirebasesigninwithEmailAndPassword)
 - [`*reduxSagaFirebase.signInWithPopup(authProvider)`](#reduxsagafirebasesigninwithpopupauthprovider)
 - [`*reduxSagaFirebase.logout()`](#reduxsagafirebaselogout)
 - [`reduxSagaFirebase.authChannel()`](#reduxsagafirebaseauthchannel)
@@ -117,6 +118,34 @@ A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.ht
 function* loginSaga() {
   try {
     const data = yield call(rsf.signInAnonymously, authProvider);
+    yield put(loginSuccess(data));
+  }
+  catch(error) {
+    yield put(loginFailure(error));
+  }
+}
+```
+
+### `*reduxSagaFirebase.signInWithEmailAndPassword(email, password)`
+
+Starts the login process using an email address and password. *(generator)*
+
+#### Arguments
+
+- `email`: a string
+- `password`: a string
+
+#### Output
+
+A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User) instance.
+
+#### Example
+
+```js
+
+function* loginSaga(email, password) {
+  try {
+    const data = yield call(rsf.signInWithEmailAndPassword, email, password);
     yield put(loginSuccess(data));
   }
   catch(error) {
