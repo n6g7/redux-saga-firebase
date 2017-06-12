@@ -198,7 +198,10 @@ describe('database', () => {
       const channel = dbModule.channel.call(context, path, event)
 
       const spy = (data) => {
-        expect(data).toEqual(dataMock)
+        expect(data).toEqual({
+          snapshot: snapshot,
+          value: dataMock
+        })
       }
 
       channel.take(spy)
