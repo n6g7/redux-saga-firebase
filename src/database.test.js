@@ -3,12 +3,15 @@ import { call } from 'redux-saga/effects'
 import dbModule from './database'
 
 describe('database', () => {
-  let ref, database, context
+  let ref, database, context, subs
 
   beforeEach(() => {
+    subs = []
     ref = {
       off: jest.fn(),
-      on: jest.fn(),
+      on: jest.fn((eventType, callback) => {
+        subs.push({ eventType, callback })
+      }),
       once: jest.fn(),
       push: jest.fn(),
       remove: jest.fn(),
@@ -175,6 +178,27 @@ describe('database', () => {
 
       expect(ref.off.mock.calls.length).toBe(1)
       expect(ref.off.mock.calls[0][0]).toBe(event)
+    })
+
+    it('emits snapshot data', () => {
+      const dataMock = 'snapshot data'
+      const val = jest.fn(() => dataMock)
+      const snapshot = { val }
+      const emit = (snapshot) => {
+        subs.forEach(({ callback }) => {
+          callback(snapshot)
+        })
+      }
+      const path = 'path'
+      const event = 'event'
+      const channel = dbModule.channel.call(context, path, event)
+
+      const spy = (data) => {
+        expect(data).toEqual(dataMock)
+      }
+
+      channel.take(spy)
+      emit(snapshot)
     })
   })
 })
