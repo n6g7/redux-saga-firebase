@@ -4,12 +4,18 @@ describe('messaging', () => {
   let context
   let messaging
   let unsubscribe
+  let subs
 
   beforeEach(() => {
+    subs = []
     unsubscribe = jest.fn()
     messaging = {
+      getToken: jest.fn(() => Promise.resolve(token => token)),
       onMessage: jest.fn(() => unsubscribe),
-      onTokenRefresh: jest.fn(() => unsubscribe)
+      onTokenRefresh: jest.fn((nextOrObserver) => {
+        subs.push(nextOrObserver)
+        return unsubscribe
+      })
     }
     context = {
       app: {
@@ -61,6 +67,23 @@ describe('messaging', () => {
       expect(messaging.onTokenRefresh.mock.calls.length).toBe(0)
 
       expect(context._tokenRefreshChannel).toBe(result)
+    })
+
+    it('emits a token', () => {
+      const tokenMock = 'token'
+      const emit = () => {
+        subs.forEach((nextOrObserver) => {
+          nextOrObserver()
+        })
+      }
+      const channel = messagingModule.tokenRefreshChannel.call(context)
+
+      const spy = (emitter) => {
+        expect(emitter(tokenMock)).toEqual(tokenMock)
+      }
+
+      channel.take(spy)
+      emit()
     })
   })
 })

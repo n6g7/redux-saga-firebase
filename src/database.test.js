@@ -7,6 +7,7 @@ describe('database', () => {
 
   beforeEach(() => {
     ref = {
+      off: jest.fn(),
       on: jest.fn(),
       once: jest.fn(),
       push: jest.fn(),
@@ -156,6 +157,24 @@ describe('database', () => {
 
       expect(ref.on.mock.calls.length).toBe(1)
       expect(ref.on.mock.calls[0][0]).toBe(event)
+    })
+
+    it('uses "value" for default event type', () => {
+      const path = 'path'
+      dbModule.channel.call(context, path)
+
+      expect(ref.on.mock.calls.length).toBe(1)
+      expect(ref.on.mock.calls[0][0]).toBe('value')
+    })
+
+    it('unsubscribes when the channel is closed', () => {
+      const path = 'path'
+      const event = 'event'
+      const channel = dbModule.channel.call(context, path, event)
+      channel.close()
+
+      expect(ref.off.mock.calls.length).toBe(1)
+      expect(ref.off.mock.calls[0][0]).toBe(event)
     })
   })
 })
