@@ -7,10 +7,14 @@
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
-    "del": "./node_modules/rimraf/bin.js dist",
+    "del": "rimraf dist",
     "build": "yarn del && NODE_ENV=production babel src --out-dir dist",
+    "build:win": "yarn del&&set NODE_ENV=production&&babel src --out-dir dist",
     "pretest": "standard 'src/**/*.js'",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "test:coverage": "yarn test -- --coverage",
+    "test:coverage:win": "yarn test:win -- --coverage",
+    "test:win": "set NODE_ENV=test&&jest"
   },
   "repository": {
     "url": "git@github.com:n6g7/redux-saga-firebase.git",
