@@ -5,8 +5,13 @@ import authModule from './auth'
 describe('auth', () => {
   const unsubscribe = jest.fn()
 
+  const subs = []
+
   const auth = {
-    onAuthStateChanged: jest.fn(() => unsubscribe),
+    onAuthStateChanged: jest.fn((nextOrObserver, error) => {
+      subs.push({ nextOrObserver, error })
+      return unsubscribe
+    }),
     signInAnonymously: jest.fn(),
     signInWithPopup: jest.fn(),
     signInWithEmailAndPassword: jest.fn(),
@@ -105,6 +110,38 @@ describe('auth', () => {
 
       channel.close()
       expect(unsubscribe.mock.calls.length).toBe(1)
+    })
+
+    it('emits user or error', () => {
+      const userMock = {uid: 'uid'}
+      const errorMock = {code: 'auth/error-code'}
+      const emit = (user, authError) => {
+        subs.forEach(({ nextOrObserver, error }) => {
+          if (user) {
+            nextOrObserver(user)
+          }
+          if (authError) {
+            error(authError)
+          }
+        })
+      }
+      const channel = authModule.channel.call({
+        ...context,
+        // reset memoized channel
+        _authChannel: null
+      })
+
+      const userSpy = ({ user }) => {
+        expect(user).toEqual(userMock)
+      }
+      channel.take(userSpy)
+      emit(userMock, null)
+
+      const errorSpy = ({ error }) => {
+        expect(error).toEqual(errorMock)
+      }
+      channel.take(errorSpy)
+      emit(null, errorMock)
     })
   })
 })
