@@ -207,5 +207,51 @@ describe('database', () => {
       channel.take(spy)
       emit(snapshot)
     })
+
+    it('can emit null values', () => {
+      const val = jest.fn(() => null)
+      const snapshot = { val }
+      const emit = (snapshot) => {
+        subs.forEach(({ callback }) => {
+          callback(snapshot)
+        })
+      }
+      const path = 'path'
+      const event = 'event'
+      const channel = dbModule.channel.call(context, path, event)
+
+      const spy = (data) => {
+        expect(data).toEqual({
+          snapshot: snapshot,
+          value: null
+        })
+      }
+
+      channel.take(spy)
+      emit(snapshot)
+    })
+
+    it('can emit undefined values', () => {
+      const val = jest.fn(() => undefined)
+      const snapshot = { val }
+      const emit = (snapshot) => {
+        subs.forEach(({ callback }) => {
+          callback(snapshot)
+        })
+      }
+      const path = 'path'
+      const event = 'event'
+      const channel = dbModule.channel.call(context, path, event)
+
+      const spy = (data) => {
+        expect(data).toEqual({
+          snapshot: snapshot,
+          value: undefined
+        })
+      }
+
+      channel.take(spy)
+      emit(snapshot)
+    })
   })
 })
