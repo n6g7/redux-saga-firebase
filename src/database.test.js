@@ -28,6 +28,10 @@ describe('database', () => {
     }
   })
 
+  afterEach(() => {
+    expect.hasAssertions()
+  })
+
   describe('read(path)', () => {
     it('works', () => {
       const path = 'skddksl'

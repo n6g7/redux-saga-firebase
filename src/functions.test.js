@@ -15,6 +15,10 @@ describe('functions', () => {
     }
   })
 
+  afterEach(() => {
+    expect.hasAssertions()
+  })
+
   describe('call(functionName, parameters={})', () => {
     it('works with text', () => {
       const functionName = 'qsdsqldlq'

@@ -24,6 +24,10 @@ describe('auth', () => {
     }
   }
 
+  afterEach(() => {
+    expect.hasAssertions()
+  })
+
   describe('signInAnonymously()', () => {
     it('returns a user', () => {
       const user = 'qosdqkds'

@@ -26,6 +26,10 @@ describe('storage', () => {
     }
   })
 
+  afterEach(() => {
+    expect.hasAssertions()
+  })
+
   describe('uploadFile(path, file, metadata)', () => {
     it('works', () => {
       const path = 'skddksl'

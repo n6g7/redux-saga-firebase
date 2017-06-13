@@ -1,6 +1,10 @@
 import ReduxSagaFirebase from './index'
 
 describe('ReduxSagaFirebase', () => {
+  afterEach(() => {
+    expect.hasAssertions()
+  })
+
   describe('constructor(firebaseApp)', () => {
     const app = 'kqdlqkd'
     let rsf

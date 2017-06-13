@@ -24,6 +24,10 @@ describe('messaging', () => {
     }
   })
 
+  afterEach(() => {
+    expect.hasAssertions()
+  })
+
   describe('channel()', () => {
     it('works', () => {
       const result = messagingModule.channel.call(context)
