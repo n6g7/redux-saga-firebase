@@ -36,7 +36,10 @@ function channel (path, event = 'value') {
   const channel = eventChannel(emit => {
     const callback = ref.on(
       event,
-      dataSnapshot => emit(dataSnapshot.val())
+      dataSnapshot => emit({
+        snapshot: dataSnapshot,
+        value: dataSnapshot.val()
+      })
     )
 
     // Returns unsubscribe function

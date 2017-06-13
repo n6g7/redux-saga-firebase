@@ -385,7 +385,9 @@ Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/adva
 
 ##### Output
 
-A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database.
+A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database. The emitted value is an object with two keys:
+- `snapshot`: a [firebase.database.DataSnapshot](https://firebase.google.com/docs/reference/js/firebase.database.DataSnapshot) ;
+- `value`: the result of `snapshot.val()`, which is the actual value stored in the database (any type).
 
 ##### Example
 
@@ -394,7 +396,7 @@ function* syncTodosSaga() {
   const channel = yield call(rsf.database.channel, 'todos');
 
   while(true) {
-    const todos = yield take(channel);
+    const { value: todos } = yield take(channel);
     yield put(syncTodos(todos));
   }
 }
@@ -641,11 +643,3 @@ function* deleteFile(action) {
   yield call(rsf.storage.deleteFile, action.path);
 }
 ```
-
-## Todo
-
-- [X] Authentication integration
-- [X] Real-time database integration
-- [X] Functions integration
-- [X] Messaging integration
-- [X] Storage integration

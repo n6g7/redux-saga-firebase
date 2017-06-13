@@ -11,7 +11,7 @@ function* syncTodosSaga() {
   const channel = yield call(rsf.database.channel, 'todos');
 
   while(true) {
-    const todos = yield take(channel);
+    const { value: todos } = yield take(channel);
     yield put(syncTodos(
       Object.keys(todos).map(key => ({
         ...todos[key],
