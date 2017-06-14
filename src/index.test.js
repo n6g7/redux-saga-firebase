@@ -89,4 +89,72 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.projectId()).toBe(projectId)
     })
   })
+
+  describe('_getRef(pathOrRef, service)', () => {
+    let databaseRef, storageRef, database, storage, app, rsf
+
+    beforeEach(() => {
+      databaseRef = {
+        key: 'key'
+      }
+      storageRef = {
+        bucket: 'bucket'
+      }
+      database = {
+        ref: jest.fn(() => databaseRef)
+      }
+      storage = {
+        ref: jest.fn(() => storageRef)
+      }
+      app = {
+        database: jest.fn(() => database),
+        storage: jest.fn(() => storage)
+      }
+      rsf = new ReduxSagaFirebase(app)
+    })
+
+    it('returns a database ref from path string', () => {
+      const path = 'path'
+      const ref = rsf._getRef(path, 'database')
+
+      expect(app.database.mock.calls.length).toBe(1)
+      expect(app.database.mock.calls[0]).toEqual([])
+
+      expect(database.ref.mock.calls.length).toBe(1)
+      expect(database.ref.mock.calls[0]).toEqual([path])
+
+      expect(ref).toEqual(databaseRef)
+    })
+
+    it('returns the database ref that was passed to it', () => {
+      const ref = rsf._getRef(databaseRef)
+
+      expect(app.database.mock.calls.length).toBe(0)
+      expect(database.ref.mock.calls.length).toBe(0)
+
+      expect(ref).toEqual(databaseRef)
+    })
+
+    it('returns a storage ref from path string', () => {
+      const path = 'path'
+      const ref = rsf._getRef(path, 'storage')
+
+      expect(app.storage.mock.calls.length).toBe(1)
+      expect(app.storage.mock.calls[0]).toEqual([])
+
+      expect(storage.ref.mock.calls.length).toBe(1)
+      expect(storage.ref.mock.calls[0]).toEqual([path])
+
+      expect(ref).toEqual(storageRef)
+    })
+
+    it('returns the storage ref that was passed to it', () => {
+      const ref = rsf._getRef(storageRef)
+
+      expect(app.storage.mock.calls.length).toBe(0)
+      expect(storage.ref.mock.calls.length).toBe(0)
+
+      expect(ref).toEqual(storageRef)
+    })
+  })
 })
