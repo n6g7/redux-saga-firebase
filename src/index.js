@@ -20,12 +20,12 @@ class ReduxSagaFirebase {
 
     // Database methods
     this.database = {
-      read: database.read.bind(this),
-      create: database.create.bind(this),
-      update: database.update.bind(this),
-      patch: database.patch.bind(this),
-      delete: database.delete.bind(this),
-      channel: database.channel.bind(this)
+      read: database.read,
+      create: database.create,
+      update: database.update,
+      patch: database.patch,
+      delete: database.delete,
+      channel: database.channel
     }
 
     // Functions methods
@@ -41,12 +41,12 @@ class ReduxSagaFirebase {
 
     // Storage methods
     this.storage = {
-      uploadFile: storage.uploadFile.bind(this),
-      uploadString: storage.uploadString.bind(this),
-      getDownloadURL: storage.getDownloadURL.bind(this),
-      getFileMetadata: storage.getFileMetadata.bind(this),
-      updateFileMetadata: storage.updateFileMetadata.bind(this),
-      deleteFile: storage.deleteFile.bind(this)
+      uploadFile: storage.uploadFile,
+      uploadString: storage.uploadString,
+      getDownloadURL: storage.getDownloadURL,
+      getFileMetadata: storage.getFileMetadata,
+      updateFileMetadata: storage.updateFileMetadata,
+      deleteFile: storage.deleteFile
     }
   }
 
