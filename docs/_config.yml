@@ -1,6 +1,6 @@
 title: Redux Saga Firebase
 email: nathan@gnab.fr
-description: A redux-saga integration for firebase.
+description: A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [firebase](https://firebase.google.com/).
 baseurl: "/redux-saga-firebase"
 url: "https://n6g7.github.io"
 github:
