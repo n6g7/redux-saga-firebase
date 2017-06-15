@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>{{ site.title }} - {{ page.title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" href="{{ "/assets/layout.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ "/assets/pygment.css" | relative_url }}">
+  </head>
+  <body>
+    <div class="ui stackable grid container">
+      {% include sidebar.html %}
+
+      <div class="twelve wide column" id="main">
+        {{ content }}
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="{{ "/assets/smoothscroll.js" | relative_url }}"></script>
+    <script src="{{ "/assets/layout.js" | relative_url }}"></script>
+  </body>
+</html>
