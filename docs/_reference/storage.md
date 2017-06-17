@@ -3,14 +3,14 @@ title: Storage
 layout: docs
 methods:
 
-  - signature: storage.uploadFile(path, file, metadata)
+  - signature: storage.uploadFile(pathOrRef, file, metadata)
     id: uploadFile
     generator: false
     description: Uploads a file to cloud storage.
     arguments:
-      - name: path
-        type: String
-        description: The path of the file in the bucket.
+      - name: pathOrRef
+        type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
+        description: The path or reference of the file in the bucket.
       - name: file
         type: '[Blob](https://developer.mozilla.org/en/docs/Web/API/Blob), [File](https://developer.mozilla.org/en-US/docs/Web/API/File) or [Uint8Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)'
         description: The file to upload at the specified path.
@@ -34,14 +34,14 @@ methods:
       }
       ```
 
-  - signature: storage.uploadString(path, string, format, metadata)
+  - signature: storage.uploadString(pathOrRef, string, format, metadata)
     id: uploadString
     generator: false
     description: Use this to upload a raw, `base64`, `base64url`, or `data_url` encoded string to Cloud Storage.
     arguments:
-      - name: path
-        type: String
-        description: The path of the file in the bucket.
+      - name: pathOrRef
+        type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
+        description: The path or reference of the file in the bucket.
       - name: string
         type: String
         description: The content to upload.
@@ -68,14 +68,14 @@ methods:
       }
       ```
 
-  - signature: storage.getDownloadURL(path)
+  - signature: storage.getDownloadURL(pathOrRef)
     id: getDownloadURL
     generator: true
     description: Returns a download url for the file at the specified path.
     arguments:
-      - name: path
-        type: String
-        description: The path of the file in the bucket.
+      - name: pathOrRef
+        type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
+        description: The path or reference of the file in the bucket.
     output: An URL as a string.
     example: |
       ```js
@@ -86,14 +86,14 @@ methods:
       }
       ```
 
-  - signature: storage.getFileMetadata(path)
+  - signature: storage.getFileMetadata(pathOrRef)
     id: getFileMetadata
     generator: true
     description: Returns the metadata attached to a file.
     arguments:
-      - name: path
-        type: String
-        description: The path of the file in the bucket.
+      - name: pathOrRef
+        type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
+        description: The path or reference of the file in the bucket.
     output: A [FullMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.FullMetadata) object.
     example: |
       ```js
@@ -103,14 +103,14 @@ methods:
       }
       ```
 
-  - signature: storage.updateFileMetadata(path, newMetadata)
+  - signature: storage.updateFileMetadata(pathOrRef, newMetadata)
     id: updateFileMetadata
     generator: true
     description: Updates the metadata for a file.
     arguments:
-      - name: path
-        type: String
-        description: The path of the file in the bucket.
+      - name: pathOrRef
+        type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
+        description: The path or reference of the file in the bucket.
       - name: newMetadata
         type: A [SettableMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.SettableMetadata) object
         description: The metadata to attach to the file.
@@ -125,14 +125,14 @@ methods:
       }
       ```
 
-  - signature: storage.deleteFile(path)
+  - signature: storage.deleteFile(pathOrRef)
     id: deleteFile
     generator: true
     description: Deletes a file.
     arguments:
-      - name: path
-        type: String
-        description: The path of the file in the bucket.
+      - name: pathOrRef
+        type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
+        description: The path or reference of the file in the bucket.
     output:
     example: |
       ```js

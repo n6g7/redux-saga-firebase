@@ -3,14 +3,14 @@ title: Database
 layout: docs
 methods:
 
-  - signature: database.read(path)
+  - signature: database.read(pathOrRef)
     id: read
     generator: true
     description: Returns the data at this path in firebase's database.
     arguments:
-      - name: path
-        type: String
-        description: The path to the value to read.
+      - name: pathOrRef
+        type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
+        description: The path or reference to the value to read.
     output: Whatever value is store at this path in the database (number, string, object, etc).
     example: |
       ```js
@@ -20,14 +20,14 @@ methods:
       }
       ```
 
-  - signature: database.create(path, data)
+  - signature: database.create(pathOrRef, data)
     id: create
     generator: true
     description: Create a new path in the database and stores the data there.
     arguments:
-      - name: path
-        type: String
-        description: The path to the value to read.
+      - name: pathOrRef
+        type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
+        description: The path or reference to the destination.
       - name: data
         type: Any value
         description: The value to store.
@@ -43,14 +43,14 @@ methods:
       }
       ```
 
-  - signature: database.update(path, data)
+  - signature: database.update(pathOrRef, data)
     id: update
     generator: true
     description: Replace the value store at `path` in the database with `data`.
     arguments:
-      - name: path
-        type: String
-        description: The path to the value to read.
+      - name: pathOrRef
+        type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
+        description: The path or reference to the value to update.
       - name: data
         type: Any value
         description: The value to store.
@@ -65,14 +65,14 @@ methods:
       }
       ```
 
-  - signature: database.patch(path, data)
+  - signature: database.patch(pathOrRef, data)
     id: patch
     generator: true
     description: Patches the value store at `path` in the database with `data`. Like `database.update` but doesn't remove unmentionned keys.
     arguments:
-      - name: path
-        type: String
-        description: The path to the value to read.
+      - name: pathOrRef
+        type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
+        description: The path or reference to the value to update.
       - name: data
         type: Any value
         description: The value to store.
@@ -87,14 +87,14 @@ methods:
       }
       ```
 
-  - signature: database.delete(path)
+  - signature: database.delete(pathOrRef)
     id: delete
     generator: true
     description: Removes the value at the specified `path` in the database.
     arguments:
-      - name: path
-        type: String
-        description: The path to the value to delete.
+      - name: pathOrRef
+        type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
+        description: The path or reference to the value to delete.
     output:
     example: |
       ```js
@@ -103,14 +103,14 @@ methods:
       }
       ```
 
-  - signature: database.channel(path, event)
+  - signature: database.channel(pathOrRef, event)
     id: channel
     generator: false
     description: Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database.
     arguments:
-      - name: path
-        type: String
-        description: The path to the value to delete.
+      - name: pathOrRef
+        type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
+        description: The path or reference to the value to read.
       - name: event
         type: String
         description: Defaults to `value`. A string describing the type of event to listen for. Options includes `value`, `child_added`, `child_removed`, `child_changed` and `child_moved`. See [Reference.on](https://firebase.google.com/docs/reference/js/firebase.database.Reference#on) documentation for more information.
