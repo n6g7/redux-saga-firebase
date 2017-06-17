@@ -22,6 +22,7 @@ class Header extends PureComponent {
 
       <nav>
         <Button.GitHub />
+        <Button.Docs />
       </nav>
     </header>;
   }

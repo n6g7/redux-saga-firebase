@@ -7,7 +7,10 @@ class Footer extends PureComponent {
     return <footer>
       <h2>Use it now</h2>
 
-      <Button.GitHub />
+      <nav>
+        <Button.GitHub />
+        <Button.Docs />
+      </nav>
     </footer>;
   }
 }
