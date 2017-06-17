@@ -4,7 +4,7 @@ body {
 
 #sidebar-content,
 #main {
-  margin-top: 1.5rem  !important;
+  margin-top: 1.5rem !important;
 }
 
 .ui.divider {
@@ -17,4 +17,9 @@ body {
 
 #sidebar-content .list .item .image {
   height: 16px;
+}
+
+footer {
+  margin: 3rem 0;
+  text-align: center;
 }
