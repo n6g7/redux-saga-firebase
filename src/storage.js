@@ -1,42 +1,42 @@
 import { call } from 'redux-saga/effects'
 
-function uploadFile (path, file, metadata) {
-  const ref = this.app.storage().ref(path)
+function uploadFile (pathOrRef, file, metadata) {
+  const ref = this._getRef(pathOrRef, 'storage')
   const task = ref.put(file, metadata)
 
   return task
 }
 
-function uploadString (path, string, format, metadata) {
-  const ref = this.app.storage().ref(path)
+function uploadString (pathOrRef, string, format, metadata) {
+  const ref = this._getRef(pathOrRef, 'storage')
   const task = ref.putString(string, format, metadata)
 
   return task
 }
 
-function * getDownloadURL (path) {
-  const ref = this.app.storage().ref(path)
+function * getDownloadURL (pathOrRef) {
+  const ref = this._getRef(pathOrRef, 'storage')
   const url = yield call([ref, ref.getDownloadURL])
 
   return url
 }
 
-function * getFileMetadata (path) {
-  const ref = this.app.storage().ref(path)
+function * getFileMetadata (pathOrRef) {
+  const ref = this._getRef(pathOrRef, 'storage')
   const metadata = yield call([ref, ref.getMetadata])
 
   return metadata
 }
 
-function * updateFileMetadata (path, newMetadata) {
-  const ref = this.app.storage().ref(path)
+function * updateFileMetadata (pathOrRef, newMetadata) {
+  const ref = this._getRef(pathOrRef, 'storage')
   const metadata = yield call([ref, ref.updateMetadata], newMetadata)
 
   return metadata
 }
 
-function * deleteFile (path) {
-  const ref = this.app.storage().ref(path)
+function * deleteFile (pathOrRef) {
+  const ref = this._getRef(pathOrRef, 'storage')
   yield call([ref, ref.delete])
 }
 

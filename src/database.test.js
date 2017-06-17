@@ -3,7 +3,7 @@ import { call } from 'redux-saga/effects'
 import dbModule from './database'
 
 describe('database', () => {
-  let ref, database, context, subs
+  let ref, context, subs
 
   beforeEach(() => {
     subs = []
@@ -18,13 +18,8 @@ describe('database', () => {
       set: jest.fn(),
       update: jest.fn()
     }
-    database = {
-      ref: jest.fn(() => ref)
-    }
     context = {
-      app: {
-        database: jest.fn(() => database)
-      }
+      _getRef: jest.fn(() => ref)
     }
   })
 
@@ -42,13 +37,10 @@ describe('database', () => {
       const iterator = dbModule.read.call(context, path)
 
       expect(iterator.next().value)
-      .toEqual(call([ref, ref.once], 'value'))
+        .toEqual(call([ref, ref.once], 'value'))
 
-      expect(context.app.database.mock.calls.length).toBe(1)
-      expect(context.app.database.mock.calls[0]).toEqual([])
-
-      expect(database.ref.mock.calls.length).toBe(1)
-      expect(database.ref.mock.calls[0]).toEqual([path])
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
 
       expect(iterator.next(result)).toEqual({
         done: true,
@@ -70,13 +62,10 @@ describe('database', () => {
       const iterator = dbModule.create.call(context, path, data)
 
       expect(iterator.next().value)
-      .toEqual(call([ref, ref.push], data))
+        .toEqual(call([ref, ref.push], data))
 
-      expect(context.app.database.mock.calls.length).toBe(1)
-      expect(context.app.database.mock.calls[0]).toEqual([])
-
-      expect(database.ref.mock.calls.length).toBe(1)
-      expect(database.ref.mock.calls[0]).toEqual([path])
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
 
       expect(iterator.next(result)).toEqual({
         done: true,
@@ -92,13 +81,10 @@ describe('database', () => {
       const iterator = dbModule.update.call(context, path, data)
 
       expect(iterator.next().value)
-      .toEqual(call([ref, ref.set], data))
+        .toEqual(call([ref, ref.set], data))
 
-      expect(context.app.database.mock.calls.length).toBe(1)
-      expect(context.app.database.mock.calls[0]).toEqual([])
-
-      expect(database.ref.mock.calls.length).toBe(1)
-      expect(database.ref.mock.calls[0]).toEqual([path])
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -114,13 +100,10 @@ describe('database', () => {
       const iterator = dbModule.patch.call(context, path, data)
 
       expect(iterator.next().value)
-      .toEqual(call([ref, ref.update], data))
+        .toEqual(call([ref, ref.update], data))
 
-      expect(context.app.database.mock.calls.length).toBe(1)
-      expect(context.app.database.mock.calls[0]).toEqual([])
-
-      expect(database.ref.mock.calls.length).toBe(1)
-      expect(database.ref.mock.calls[0]).toEqual([path])
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -135,13 +118,10 @@ describe('database', () => {
       const iterator = dbModule.delete.call(context, path)
 
       expect(iterator.next().value)
-      .toEqual(call([ref, ref.remove]))
+        .toEqual(call([ref, ref.remove]))
 
-      expect(context.app.database.mock.calls.length).toBe(1)
-      expect(context.app.database.mock.calls[0]).toEqual([])
-
-      expect(database.ref.mock.calls.length).toBe(1)
-      expect(database.ref.mock.calls[0]).toEqual([path])
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -156,11 +136,8 @@ describe('database', () => {
       const event = 'okqdkj'
       dbModule.channel.call(context, path, event)
 
-      expect(context.app.database.mock.calls.length).toBe(1)
-      expect(context.app.database.mock.calls[0]).toEqual([])
-
-      expect(database.ref.mock.calls.length).toBe(1)
-      expect(database.ref.mock.calls[0]).toEqual([path])
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
 
       expect(ref.on.mock.calls.length).toBe(1)
       expect(ref.on.mock.calls[0][0]).toBe(event)

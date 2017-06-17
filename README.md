@@ -260,13 +260,13 @@ function* syncUserSaga() {
 
 ### Database
 
-#### `*database.read(path)`
+#### `*database.read(pathOrRef)`
 
-Returns the data at this path in firebase's database.
+Returns the data at this path or reference in firebase's database.
 
 ##### Arguments
 
-- `path`: a string
+- `pathOrRef`: a string or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
 
 ##### Output
 
@@ -281,13 +281,13 @@ function* getTodo() {
 }
 ```
 
-#### `*database.create(path, data)`
+#### `*database.create(pathOrRef, data)`
 
 Create a new path in the database and stores the data there.
 
 ##### Arguments
 
-- `path`: a string
+- `pathOrRef`: a string or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
 - `data`: any value (number, string, object, etc)
 
 ##### Output
@@ -306,13 +306,13 @@ function* addTodo() {
 }
 ```
 
-#### `*database.update(path, data)`
+#### `*database.update(pathOrRef, data)`
 
-Replace the value store at `path` in the database with `data`.
+Replace the value store at `path` or reference in the database with `data`.
 
 ##### Arguments
 
-- `path`: a string
+- `pathOrRef`: a string or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
 - `data`: any value (number, string, object, etc)
 
 ##### Output
@@ -330,13 +330,13 @@ function* updateTodo() {
 }
 ```
 
-#### `*database.patch(path, data)`
+#### `*database.patch(pathOrRef, data)`
 
-Patches the value store at `path` in the database with `data`. Like `database.update` but doesn't remove unmentionned keys.
+Patches the value store at `path` or reference in the database with `data`. Like `database.update` but doesn't remove unmentionned keys.
 
 ##### Arguments
 
-- `path`: a string
+- `pathOrRef`: a string or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
 - `data`: any value (number, string, object, etc)
 
 ##### Output
@@ -354,13 +354,13 @@ function* updateTodo() {
 }
 ```
 
-#### `*database.delete(path)`
+#### `*database.delete(pathOrRef)`
 
-Removes the value at the specified `path` in the database.
+Removes the value at the specified `path` or reference in the database.
 
 ##### Arguments
 
-- `path`: a string
+- `pathOrRef`: a string or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
 
 ##### Output
 
@@ -374,13 +374,13 @@ function* deleteTodo() {
 }
 ```
 
-#### `database.channel(path, event)`
+#### `database.channel(pathOrRef, event)`
 
-Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database.
+Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path or reference in the database.
 
 ##### Arguments
 
-- `path`: a string
+- `pathOrRef`: a string or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
 - `event` (default: `value`): a string describing the type of event to listen for. Options includes: `value`, `child_added`, `child_removed`, `child_changed` and `child_moved`. See [Reference.on](https://firebase.google.com/docs/reference/js/firebase.database.Reference#on) documentation for more information.
 
 ##### Output
@@ -496,13 +496,13 @@ function* refreshToken() {
 
 ### Storage
 
-#### `storage.uploadFile(path, file, metadata)`
+#### `storage.uploadFile(pathOrRef, file, metadata)`
 
 Uploads a file to cloud storage.
 
 ##### Arguments
 
-- `path`: a string representing the path of the file in the bucket.
+- `pathOrRef`: a string or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference) representing the path of the file in the bucket.
 - `file`: a [`Blob`](https://developer.mozilla.org/en/docs/Web/API/Blob), a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) or an [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) to upload at the specified `path`.
 - `metadata` (optional): an [UploadMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.UploadMetadata) object.
 
@@ -527,13 +527,13 @@ function* uploadFile(action) {
 }
 ```
 
-#### `storage.uploadString(path, string, format, metadata)`
+#### `storage.uploadString(pathOrRef, string, format, metadata)`
 
 Use this to upload a raw, `base64`, `base64url`, or `data_url` encoded string to Cloud Storage.
 
 ##### Arguments
 
-- `path`: a string representing the path of the file in the bucket.
+- `pathOrRef`: a string or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference) representing the path of the file in the bucket.
 - `string`: a string to upload.
 - `format` (optional): a string. Available options are: `base64`, `base64url`, or `data_url`.
 - `metadata` (optional): an [UploadMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.UploadMetadata) object.
@@ -559,13 +559,13 @@ function* uploadString(action) {
 }
 ```
 
-#### `*storage.getDownloadURL(path)`
+#### `*storage.getDownloadURL(pathOrRef)`
 
 Returns a download url for the file at the specified path.
 
 ##### Arguments
 
-- `path`: a string representing the path of the file in the bucket.
+- `pathOrRef`: a string or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference) representing the path of the file in the bucket.
 
 ##### Output
 
@@ -581,11 +581,11 @@ function* downloadFile(action) {
 }
 ```
 
-#### `*storage.getFileMetadata(path)`
+#### `*storage.getFileMetadata(pathOrRef)`
 
 ##### Arguments
 
-- `path`: a string representing the path of the file in the bucket.
+- `pathOrRef`: a string or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference) representing the path of the file in the bucket.
 
 ##### Output
 
@@ -600,13 +600,13 @@ function* metadata(action) {
 }
 ```
 
-#### `*storage.updateFileMetadata(path, newMetadata)`
+#### `*storage.updateFileMetadata(pathOrRef, newMetadata)`
 
 Updates the metadata for a file.
 
 ##### Arguments
 
-- `path`: a string representing the path of the file in the bucket.
+- `pathOrRef`: a string or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference) representing the path of the file in the bucket.
 - `newMetadata`: an object with keys from the [SettableMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.SettableMetadata) interface.
 
 ##### Output
@@ -624,13 +624,13 @@ function* setToPng(action) {
 }
 ```
 
-#### `*storage.deleteFile(path)`
+#### `*storage.deleteFile(pathOrRef)`
 
 Deletes a file.
 
 ##### Arguments
 
-- `path`: a string representing the path of the file in the bucket.
+- `pathOrRef`: a string or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference) representing the path of the file in the bucket.
 
 ##### Output
 
