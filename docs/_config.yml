@@ -1,0 +1,23 @@
+title: Redux Saga Firebase
+email: nathan@gnab.fr
+description: A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [firebase](https://firebase.google.com/).
+baseurl: "/redux-saga-firebase"
+url: "https://n6g7.github.io"
+github:
+  package: n6g7 / redux-saga-firebase
+  url: https://github.com/n6g7/redux-saga-firebase
+npm:
+  package: redux-saga-firebase
+  url: https://www.npmjs.com/package/redux-saga-firebase
+
+collections:
+  reference:
+    output: true
+
+markdown: kramdown
+highlighter: rouge
+
+# Build settings
+exclude:
+  - Gemfile
+  - Gemfile.lock

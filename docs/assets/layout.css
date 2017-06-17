@@ -1,0 +1,20 @@
+body {
+  padding: 0;
+}
+
+#sidebar-content,
+#main {
+  margin-top: 1.5rem  !important;
+}
+
+.ui.divider {
+  margin: 2rem 0;
+}
+
+#sidebar-content .list {
+  margin: 3rem 0;
+}
+
+#sidebar-content .list .item .image {
+  height: 16px;
+}

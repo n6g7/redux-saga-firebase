@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 
+import docs from '../../images/docs.svg';
 import gh from '../../images/github.svg';
 import './Button.styl';
 
@@ -50,9 +51,19 @@ class GitHubButton extends PureComponent {
   render() {
     return <Button link="https://github.com/n6g7/redux-saga-firebase" callToAction>
       <img src={gh}/>
-      Read the docs
+      Source on GitHub
     </Button>;
   }
 }
 
+class DocsButton extends PureComponent {
+  render() {
+    return <Button link="https://n6g7.github.io/redux-saga-firebase/" callToAction>
+      <img src={docs}/>
+      Docs
+    </Button>;
+  }
+}
+
+Button.Docs = DocsButton;
 Button.GitHub = GitHubButton;

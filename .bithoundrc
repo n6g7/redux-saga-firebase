@@ -1,7 +1,8 @@
 {
   "ignore": [
     "example/**",
-    "dist/**"
+    "dist/**",
+    "docs/**"
   ],
   "test": [
     "src/*.test.js"
