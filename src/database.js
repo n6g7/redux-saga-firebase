@@ -1,4 +1,4 @@
-import { eventChannel } from 'redux-saga'
+import { buffers, eventChannel } from 'redux-saga'
 import { call, fork } from 'redux-saga/effects'
 
 import { syncChannel } from './utils'
@@ -38,7 +38,7 @@ function * _delete (pathOrRef) {
   yield call([ref, ref.remove])
 }
 
-function channel (pathOrRef, event = 'value') {
+function channel (pathOrRef, event = 'value', buffer = buffers.none()) {
   const ref = getRef(this, pathOrRef)
 
   const channel = eventChannel(emit => {
@@ -52,7 +52,7 @@ function channel (pathOrRef, event = 'value') {
 
     // Returns unsubscribe function
     return () => ref.off(event, callback)
-  })
+  }, buffer)
 
   return channel
 }
