@@ -22,9 +22,11 @@ methods:
       ```
     arguments:
       - name: functionName
+        required: true
         type: String
         description: A string representing the function name. This will be used as a pathname in the https request.
       - name: parameters
+        required: false
         type: Object
         description: Defaults to `{}`. A javascript object describing the query parameters to use in the http request.
     output: A javascript object (`application/json`) or a string (anything else) depending on the Content-Type of the response.

@@ -28,9 +28,11 @@ methods:
     description: Starts the login process using an email address and password.
     arguments:
       - name: email
+        required: true
         type: String
         description: The user's email address.
       - name: password
+        required: true
         type: String
         description: The user's password.
     output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.html) instance.
@@ -53,6 +55,7 @@ methods:
     description: Starts the login process using the specified AuthProvider.
     arguments:
       - name: authProvider
+        required: true
         type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
         description: The authentication provider to use for the request.
     output: A [firebase.auth.AuthCredential](https://firebase.google.com/docs/reference/js/firebase.auth.AuthCredential) instance.

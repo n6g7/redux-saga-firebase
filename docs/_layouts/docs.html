@@ -43,7 +43,12 @@ layout: default
       <tbody>
         {% for arg in method.arguments %}
           <tr class="">
-            <td><code>{{ arg.name }}</code></td>
+            <td>
+              <code>{{ arg.name }}</code>
+              {% unless arg.required %}
+                <span class="ui tiny grey basic label">Optional</span>
+              {% endunless %}
+            </td>
             <td>{{ arg.type | markdownify }}</td>
             <td>{{ arg.description | markdownify }}</td>
           </tr>

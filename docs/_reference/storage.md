@@ -9,14 +9,17 @@ methods:
     description: Uploads a file to cloud storage.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
         description: The path or reference of the file in the bucket.
       - name: file
+        required: true
         type: '[Blob](https://developer.mozilla.org/en/docs/Web/API/Blob), [File](https://developer.mozilla.org/en-US/docs/Web/API/File) or [Uint8Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)'
         description: The file to upload at the specified path.
       - name: metadata
+        required: false
         type: '[UploadMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.UploadMetadata)'
-        description: Optional metadata to attach to the file.
+        description: Metadata to attach to the file.
     output: An [UploadTask](https://firebase.google.com/docs/reference/js/firebase.storage.UploadTask) object.
     example: |
       ```js
@@ -40,17 +43,21 @@ methods:
     description: Use this to upload a raw, `base64`, `base64url`, or `data_url` encoded string to Cloud Storage.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
         description: The path or reference of the file in the bucket.
       - name: string
+        required: true
         type: String
         description: The content to upload.
       - name: format
+        required: false
         type: String
-        description: 'Optional. Available options are: `base64`, `base64url`, or `data_url`.'
+        description: 'Available options are: `base64`, `base64url`, or `data_url`.'
       - name: metadata
+        required: false
         type: '[UploadMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.UploadMetadata)'
-        description: Optional metadata to attach to the file.
+        description: Metadata to attach to the file.
     output: An [UploadTask](https://firebase.google.com/docs/reference/js/firebase.storage.UploadTask) object.
     example: |
       ```js
@@ -74,6 +81,7 @@ methods:
     description: Returns a download url for the file at the specified path.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
         description: The path or reference of the file in the bucket.
     output: An URL as a string.
@@ -92,6 +100,7 @@ methods:
     description: Returns the metadata attached to a file.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
         description: The path or reference of the file in the bucket.
     output: A [FullMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.FullMetadata) object.
@@ -109,9 +118,11 @@ methods:
     description: Updates the metadata for a file.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
         description: The path or reference of the file in the bucket.
       - name: newMetadata
+        required: true
         type: A [SettableMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.SettableMetadata) object
         description: The metadata to attach to the file.
     output: A [FullMetadata](https://firebase.google.com/docs/reference/js/firebase.storage.FullMetadata) object.
@@ -131,6 +142,7 @@ methods:
     description: Deletes a file.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Storage Reference](https://firebase.google.com/docs/reference/js/firebase.storage.Reference)
         description: The path or reference of the file in the bucket.
     output:

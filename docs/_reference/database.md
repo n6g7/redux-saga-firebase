@@ -9,6 +9,7 @@ methods:
     description: Returns the data at this path in firebase's database.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
         description: The path or reference to the value to read.
     output: Whatever value is store at this path in the database (number, string, object, etc).
@@ -26,9 +27,11 @@ methods:
     description: Create a new path in the database and stores the data there.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
         description: The path or reference to the destination.
       - name: data
+        required: true
         type: Any value
         description: The value to store.
     output: The key newly created (a string).
@@ -49,9 +52,11 @@ methods:
     description: Replace the value store at `path` in the database with `data`.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
         description: The path or reference to the value to update.
       - name: data
+        required: true
         type: Any value
         description: The value to store.
     output:
@@ -71,9 +76,11 @@ methods:
     description: Patches the value store at `path` in the database with `data`. Like `database.update` but doesn't remove unmentionned keys.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
         description: The path or reference to the value to update.
       - name: data
+        required: true
         type: Any value
         description: The value to store.
     output:
@@ -93,6 +100,7 @@ methods:
     description: Removes the value at the specified `path` in the database.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
         description: The path or reference to the value to delete.
     output:
@@ -109,9 +117,11 @@ methods:
     description: Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database.
     arguments:
       - name: pathOrRef
+        required: true
         type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
         description: The path or reference to the value to read.
       - name: event
+        required: false
         type: String
         description: Defaults to `value`. A string describing the type of event to listen for. Options includes `value`, `child_added`, `child_removed`, `child_changed` and `child_moved`. See [Reference.on](https://firebase.google.com/docs/reference/js/firebase.database.Reference#on) documentation for more information.
     output: |
