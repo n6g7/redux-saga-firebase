@@ -12,6 +12,7 @@ describe('auth', () => {
       subs.push({ nextOrObserver, error })
       return unsubscribe
     }),
+    signInAndRetrieveDataWithCredential: jest.fn(),
     signInAnonymously: jest.fn(),
     signInWithCredential: jest.fn(),
     signInWithPopup: jest.fn(),
@@ -27,6 +28,22 @@ describe('auth', () => {
 
   afterEach(() => {
     expect.hasAssertions()
+  })
+
+  describe('signInAndRetrieveDataWithCredential(credential)', () => {
+    it('returns user credentials', () => {
+      const credential = 'pqdiqjsdk'
+      const userCredentials = 'qosdqkds'
+      const iterator = authModule.signInAndRetrieveDataWithCredential.call(context, credential)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth, auth.signInAndRetrieveDataWithCredential], credential))
+
+      expect(iterator.next(userCredentials)).toEqual({
+        done: true,
+        value: userCredentials
+      })
+    })
   })
 
   describe('signInAnonymously()', () => {

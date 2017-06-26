@@ -1,6 +1,11 @@
 import { eventChannel } from 'redux-saga'
 import { call } from 'redux-saga/effects'
 
+function * signInAndRetrieveDataWithCredential (credential) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.signInAndRetrieveDataWithCredential], credential)
+}
+
 function * signInAnonymously () {
   const auth = this.app.auth()
   return yield call([auth, auth.signInAnonymously])
@@ -47,6 +52,7 @@ function channel () {
 
 export default {
   channel,
+  signInAndRetrieveDataWithCredential,
   signInAnonymously,
   signInWithCredential,
   signInWithPopup,

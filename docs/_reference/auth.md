@@ -3,6 +3,30 @@ title: Authentication
 layout: docs
 methods:
 
+  - signature: auth.signInAndRetrieveDataWithCredential(credential)
+    id: signInAndRetrieveDataWithCredential
+    generator: true
+    description: Starts the login process with the given credentials and returns any available additional user information, such as user name.
+    arguments:
+      - name: credential
+        required: true
+        type: A [firebase.auth.AuthCredential](https://firebase.google.com/docs/reference/js/firebase.auth.AuthCredential.html)
+        description: The authentication credential.
+    output: A [firebase.auth.UserCredential](https://firebase.google.com/docs/reference/js/firebase.auth#.UserCredential) instance.
+    example: |
+      ```javascript
+      function* loginSaga() {
+        const credential = yield select(...)
+        try {
+          const userCredentials = yield call(rsf.auth.signInAndRetrieveDataWithCredential, credential);
+          yield put(loginSuccess(userCredentials));
+        }
+        catch(error) {
+          yield put(loginFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.signInAnonymously()
     id: signInAnonymously
     generator: true
