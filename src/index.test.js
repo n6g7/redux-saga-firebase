@@ -21,6 +21,7 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.auth.signInAndRetrieveDataWithCredential).toBeInstanceOf(Function)
       expect(rsf.auth.signInAnonymously).toBeInstanceOf(Function)
       expect(rsf.auth.signInWithCredential).toBeInstanceOf(Function)
+      expect(rsf.auth.signInWithCustomToken).toBeInstanceOf(Function)
       expect(rsf.auth.signInWithPopup).toBeInstanceOf(Function)
       expect(rsf.auth.signInWithEmailAndPassword).toBeInstanceOf(Function)
       expect(rsf.auth.signOut).toBeInstanceOf(Function)

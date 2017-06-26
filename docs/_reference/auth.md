@@ -70,6 +70,30 @@ methods:
       }
       ```
 
+  - signature: auth.signInWithCustomToken(token)
+    id: signInWithCustomToken
+    generator: true
+    description: Starts the login process using a custom token.
+    arguments:
+      - name: token
+        required: true
+        type: String
+        description: The custom token to sign in with.
+    output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.html) instance.
+    example: |
+      ```javascript
+      function* loginSaga() {
+        const token = yield select(...)
+        try {
+          const user = yield call(rsf.auth.signInWithCustomToken, token);
+          yield put(loginSuccess(user));
+        }
+        catch(error) {
+          yield put(loginFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.signInWithEmailAndPassword(email, password)
     id: signInWithEmailAndPassword
     generator: true

@@ -15,6 +15,7 @@ describe('auth', () => {
     signInAndRetrieveDataWithCredential: jest.fn(),
     signInAnonymously: jest.fn(),
     signInWithCredential: jest.fn(),
+    signInWithCustomToken: jest.fn(),
     signInWithPopup: jest.fn(),
     signInWithEmailAndPassword: jest.fn(),
     signOut: jest.fn()
@@ -69,6 +70,22 @@ describe('auth', () => {
 
       expect(iterator.next().value)
       .toEqual(call([auth, auth.signInWithCredential], credential))
+
+      expect(iterator.next(user)).toEqual({
+        done: true,
+        value: user
+      })
+    })
+  })
+
+  describe('signInWithCustomToken(token)', () => {
+    it('returns a user', () => {
+      const user = 'qosdqkds'
+      const token = 'qpsdkqdsql'
+      const iterator = authModule.signInWithCustomToken.call(context, token)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth, auth.signInWithCustomToken], token))
 
       expect(iterator.next(user)).toEqual({
         done: true,
