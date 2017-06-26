@@ -21,16 +21,16 @@ function * signInWithCustomToken (token) {
   return yield call([auth, auth.signInWithCustomToken], token)
 }
 
+function * signInWithEmailAndPassword (email, password) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.signInWithEmailAndPassword], email, password)
+}
+
 function * signInWithPopup (authProvider) {
   const auth = this.app.auth()
   const { credential } = yield call([auth, auth.signInWithPopup], authProvider)
 
   return credential
-}
-
-function * signInWithEmailAndPassword (email, password) {
-  const auth = this.app.auth()
-  return yield call([auth, auth.signInWithEmailAndPassword], email, password)
 }
 
 function * signOut () {
@@ -61,7 +61,7 @@ export default {
   signInAnonymously,
   signInWithCredential,
   signInWithCustomToken,
-  signInWithPopup,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut
 }

@@ -16,8 +16,8 @@ describe('auth', () => {
     signInAnonymously: jest.fn(),
     signInWithCredential: jest.fn(),
     signInWithCustomToken: jest.fn(),
-    signInWithPopup: jest.fn(),
     signInWithEmailAndPassword: jest.fn(),
+    signInWithPopup: jest.fn(),
     signOut: jest.fn()
   }
 
@@ -94,22 +94,6 @@ describe('auth', () => {
     })
   })
 
-  describe('signInWithPopup(authProvider)', () => {
-    it('returns credentials', () => {
-      const authProvider = 'skqdk'
-      const credential = 'qosdqkds'
-      const iterator = authModule.signInWithPopup.call(context, authProvider)
-
-      expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithPopup], authProvider))
-
-      expect(iterator.next({ credential })).toEqual({
-        done: true,
-        value: credential
-      })
-    })
-  })
-
   describe('signInWithEmailAndPassword(email, password)', () => {
     it('returns a user', () => {
       const email = 'skqdk'
@@ -123,6 +107,22 @@ describe('auth', () => {
       expect(iterator.next(user)).toEqual({
         done: true,
         value: user
+      })
+    })
+  })
+
+  describe('signInWithPopup(authProvider)', () => {
+    it('returns credentials', () => {
+      const authProvider = 'skqdk'
+      const credential = 'qosdqkds'
+      const iterator = authModule.signInWithPopup.call(context, authProvider)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth, auth.signInWithPopup], authProvider))
+
+      expect(iterator.next({ credential })).toEqual({
+        done: true,
+        value: credential
       })
     })
   })
