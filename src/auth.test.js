@@ -18,6 +18,7 @@ describe('auth', () => {
     signInWithCustomToken: jest.fn(),
     signInWithEmailAndPassword: jest.fn(),
     signInWithPopup: jest.fn(),
+    signInWithRedirect: jest.fn(),
     signOut: jest.fn()
   }
 
@@ -123,6 +124,21 @@ describe('auth', () => {
       expect(iterator.next({ credential })).toEqual({
         done: true,
         value: credential
+      })
+    })
+  })
+
+  describe('signInWithRedirect(authProvider)', () => {
+    it('returns nothing', () => {
+      const authProvider = 'skqdk'
+      const iterator = authModule.signInWithRedirect.call(context, authProvider)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth, auth.signInWithRedirect], authProvider))
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
       })
     })
   })

@@ -33,6 +33,11 @@ function * signInWithPopup (authProvider) {
   return credential
 }
 
+function * signInWithRedirect (authProvider) {
+  const auth = this.app.auth()
+  yield call([auth, auth.signInWithRedirect], authProvider)
+}
+
 function * signOut () {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
@@ -63,5 +68,6 @@ export default {
   signInWithCustomToken,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signInWithRedirect,
   signOut
 }

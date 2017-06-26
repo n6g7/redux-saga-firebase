@@ -146,6 +146,31 @@ methods:
       }
       ```
 
+  - signature: auth.signInWithRedirect(authProvider)
+    id: signInWithRedirect
+    generator: true
+    description: Starts the login process using the specified AuthProvider.
+    arguments:
+      - name: authProvider
+        required: true
+        type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
+        description: The authentication provider to use for the request.
+    output:
+    example: |
+      ```javascript
+      const authProvider = new firebase.auth.GoogleAuthProvider();
+
+      function* loginSaga() {
+        try {
+          yield call(rsf.auth.signInWithRedirect, authProvider);
+          yield put(loginSuccess());
+        }
+        catch(error) {
+          yield put(loginFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.signOut()
     id: signOut
     generator: true
