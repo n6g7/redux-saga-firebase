@@ -12,6 +12,7 @@ class ReduxSagaFirebase {
     // Authentication methods
     this.auth = {
       signInAnonymously: auth.signInAnonymously.bind(this),
+      signInWithCredential: auth.signInWithCredential.bind(this),
       signInWithPopup: auth.signInWithPopup.bind(this),
       signInWithEmailAndPassword: auth.signInWithEmailAndPassword.bind(this),
       signOut: auth.signOut.bind(this),

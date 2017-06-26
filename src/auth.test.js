@@ -13,6 +13,7 @@ describe('auth', () => {
       return unsubscribe
     }),
     signInAnonymously: jest.fn(),
+    signInWithCredential: jest.fn(),
     signInWithPopup: jest.fn(),
     signInWithEmailAndPassword: jest.fn(),
     signOut: jest.fn()
@@ -35,6 +36,22 @@ describe('auth', () => {
 
       expect(iterator.next().value)
       .toEqual(call([auth, auth.signInAnonymously]))
+
+      expect(iterator.next(user)).toEqual({
+        done: true,
+        value: user
+      })
+    })
+  })
+
+  describe('signInWithCredential(credential)', () => {
+    it('returns a user', () => {
+      const user = 'qosdqkds'
+      const credential = 'qpsdkqdsql'
+      const iterator = authModule.signInWithCredential.call(context, credential)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth, auth.signInWithCredential], credential))
 
       expect(iterator.next(user)).toEqual({
         done: true,

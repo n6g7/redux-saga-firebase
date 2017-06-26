@@ -6,6 +6,11 @@ function * signInAnonymously () {
   return yield call([auth, auth.signInAnonymously])
 }
 
+function * signInWithCredential (credential) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.signInWithCredential], credential)
+}
+
 function * signInWithPopup (authProvider) {
   const auth = this.app.auth()
   const { credential } = yield call([auth, auth.signInWithPopup], authProvider)
@@ -43,6 +48,7 @@ function channel () {
 export default {
   channel,
   signInAnonymously,
+  signInWithCredential,
   signInWithPopup,
   signInWithEmailAndPassword,
   signOut

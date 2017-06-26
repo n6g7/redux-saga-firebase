@@ -22,6 +22,30 @@ methods:
       }
       ```
 
+  - signature: auth.signInWithCredential(credential)
+    id: signInWithCredential
+    generator: true
+    description: Starts the login process with the given credentials.
+    arguments:
+      - name: credential
+        required: true
+        type: A [firebase.auth.AuthCredential](https://firebase.google.com/docs/reference/js/firebase.auth.AuthCredential.html)
+        description: The authentication credential.
+    output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.html) instance.
+    example: |
+      ```javascript
+      function* loginSaga() {
+        const credential = yield select(...)
+        try {
+          const user = yield call(rsf.auth.signInWithCredential, credential);
+          yield put(loginSuccess(user));
+        }
+        catch(error) {
+          yield put(loginFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.signInWithEmailAndPassword(email, password)
     id: signInWithEmailAndPassword
     generator: true
