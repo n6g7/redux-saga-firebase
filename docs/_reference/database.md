@@ -139,4 +139,33 @@ methods:
         }
       }
       ```
+
+  - signature: database.sync(pathOrRef, actionCreator, transform)
+    id: sync
+    generator: true
+    description: Automatically dispatches a redux action every time `path` changes.
+    arguments:
+      - name: pathOrRef
+        required: true
+        type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
+        description: The path or reference to the value to synced.
+      - name: actionCreator
+        required: true
+        type: Function
+        description: The action creator to use. It must take a single argument being the value read from the firebase reference.
+      - name: transform
+        required: false
+        type: Function
+        description: An optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`).
+    output:
+    example: |
+      ```js
+      import { syncTodos } from '../actionCreators/todos';
+
+      function* todoRootSaga() {
+        yield [
+          rsf.database.sync('todos', syncTodos),
+        ];
+      }
+      ```
 ---

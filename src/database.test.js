@@ -1,4 +1,4 @@
-import { call } from 'redux-saga/effects'
+import { call, put, take } from 'redux-saga/effects'
 
 import dbModule from './database'
 
@@ -19,7 +19,10 @@ describe('database', () => {
       update: jest.fn()
     }
     context = {
-      _getRef: jest.fn(() => ref)
+      _getRef: jest.fn(() => ref),
+      database: {
+        channel: jest.fn()
+      }
     }
   })
 
@@ -229,6 +232,84 @@ describe('database', () => {
 
       channel.take(spy)
       emit(snapshot)
+    })
+  })
+
+  describe('sync(path, actionCreator, transform)', () => {
+    it('works', () => {
+      const path = 'skddksl'
+      const actionCreator = jest.fn()
+      const iterator = dbModule.sync.call(context, path, actionCreator)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.database.channel, path))
+
+      const channel = 'jqsdkl'
+      expect(iterator.next(channel))
+        .toEqual({
+          done: false,
+          value: take(channel)
+        })
+
+      let value = 'value1'
+      const action1 = 'psodqp'
+      actionCreator.mockReturnValueOnce(action1)
+      expect(iterator.next({ value }))
+        .toEqual({
+          done: false,
+          value: put(action1)
+        })
+      expect(actionCreator.mock.calls.length).toBe(1)
+      expect(actionCreator.mock.calls[0]).toEqual([value])
+
+      expect(iterator.next())
+        .toEqual({
+          done: false,
+          value: take(channel)
+        })
+
+      value = 'value2'
+      const action2 = 'djdqsqkp'
+      actionCreator.mockReturnValueOnce(action2)
+      expect(iterator.next({ value }))
+        .toEqual({
+          done: false,
+          value: put(action2)
+        })
+      expect(actionCreator.mock.calls.length).toBe(2)
+      expect(actionCreator.mock.calls[1]).toEqual([value])
+    })
+
+    it('uses the specified transform function', () => {
+      const path = 'skddksl'
+      const actionCreator = jest.fn()
+      const transform = jest.fn()
+      const iterator = dbModule.sync.call(context, path, actionCreator, transform)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.database.channel, path))
+
+      const channel = 'jqsdkl'
+      expect(iterator.next(channel))
+        .toEqual({
+          done: false,
+          value: take(channel)
+        })
+
+      let value = 'value1'
+      const transformed = 'transformed'
+      transform.mockReturnValueOnce(transformed)
+      const action = 'psodqp'
+      actionCreator.mockReturnValueOnce(action)
+      expect(iterator.next({ value }))
+        .toEqual({
+          done: false,
+          value: put(action)
+        })
+      expect(transform.mock.calls.length).toBe(1)
+      expect(transform.mock.calls[0]).toEqual([value])
+      expect(actionCreator.mock.calls.length).toBe(1)
+      expect(actionCreator.mock.calls[0]).toEqual([transformed])
     })
   })
 })

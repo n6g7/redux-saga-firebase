@@ -7,20 +7,6 @@ import {
 
 import rsf from '../rsf';
 
-function* syncTodosSaga() {
-  const channel = yield call(rsf.database.channel, 'todos');
-
-  while(true) {
-    const { value: todos } = yield take(channel);
-    yield put(syncTodos(
-      Object.keys(todos).map(key => ({
-        ...todos[key],
-        id: key,
-      }))
-    ));
-  }
-}
-
 function* saveNewTodo() {
   const user = yield select(state => state.login.user);
   const newTodo = yield select(state => state.todos.new);
@@ -39,8 +25,13 @@ function* setTodoStatus(action) {
 }
 
 export default function* rootSaga() {
-  yield fork(syncTodosSaga);
+  const todosTransformer = todos => Object.keys(todos).map(key => ({
+    ...todos[key],
+    id: key,
+  }))
+
   yield [
+    rsf.database.sync('todos', syncTodos, todosTransformer),
     takeEvery(types.TODOS.NEW.SAVE, saveNewTodo),
     takeEvery(types.TODOS.SET_STATUS, setTodoStatus),
   ];
