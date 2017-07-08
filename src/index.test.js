@@ -36,6 +36,7 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.database.patch).toBeInstanceOf(Function)
       expect(rsf.database.delete).toBeInstanceOf(Function)
       expect(rsf.database.channel).toBeInstanceOf(Function)
+      expect(rsf.database.sync).toBeInstanceOf(Function)
     })
 
     it('defines functions methods', () => {

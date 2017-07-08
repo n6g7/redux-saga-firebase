@@ -29,7 +29,8 @@ class ReduxSagaFirebase {
       update: database.update.bind(this),
       patch: database.patch.bind(this),
       delete: database.delete.bind(this),
-      channel: database.channel.bind(this)
+      channel: database.channel.bind(this),
+      sync: database.sync.bind(this)
     }
 
     // Functions methods

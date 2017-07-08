@@ -1,5 +1,7 @@
 import { eventChannel } from 'redux-saga'
-import { call } from 'redux-saga/effects'
+import { call, put, take } from 'redux-saga/effects'
+
+const noop = x => x
 
 function * read (pathOrRef) {
   const ref = this._getRef(pathOrRef, 'database')
@@ -49,11 +51,21 @@ function channel (pathOrRef, event = 'value') {
   return channel
 }
 
+function * sync (pathOrRef, actionCreator, transform = noop) {
+  const channel = yield call(this.database.channel, pathOrRef)
+
+  while (true) {
+    const { value } = yield take(channel)
+    yield put(actionCreator(transform(value)))
+  }
+}
+
 export default {
   read,
   create,
   update,
   patch,
   delete: _delete,
-  channel
+  channel,
+  sync
 }

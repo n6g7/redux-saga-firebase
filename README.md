@@ -74,6 +74,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*database.patch(path, data)`](https://n6g7.github.io/redux-saga-firebase/reference/database#patch)
 - [`*database.delete(path)`](https://n6g7.github.io/redux-saga-firebase/reference/database#delete)
 - [`database.channel(path, event)`](https://n6g7.github.io/redux-saga-firebase/reference/database#channel)
+- [`database.sync(path, actionCreator, transform)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
 
 **Functions**
 
