@@ -26,6 +26,15 @@ function * signInWithEmailAndPassword (email, password) {
   return yield call([auth, auth.signInWithEmailAndPassword], email, password)
 }
 
+function * signInWithPhoneNumber (phoneNumber, applicationVerifier) {
+  const auth = this.app.auth()
+  return yield call(
+    [auth, auth.signInWithPhoneNumber],
+    phoneNumber,
+    applicationVerifier
+  )
+}
+
 function * signInWithPopup (authProvider) {
   const auth = this.app.auth()
   const { credential } = yield call([auth, auth.signInWithPopup], authProvider)
@@ -67,6 +76,7 @@ export default {
   signInWithCredential,
   signInWithCustomToken,
   signInWithEmailAndPassword,
+  signInWithPhoneNumber,
   signInWithPopup,
   signInWithRedirect,
   signOut

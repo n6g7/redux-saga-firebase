@@ -17,6 +17,7 @@ describe('auth', () => {
     signInWithCredential: jest.fn(),
     signInWithCustomToken: jest.fn(),
     signInWithEmailAndPassword: jest.fn(),
+    signInWithPhoneNumber: jest.fn(),
     signInWithPopup: jest.fn(),
     signInWithRedirect: jest.fn(),
     signOut: jest.fn()
@@ -108,6 +109,23 @@ describe('auth', () => {
       expect(iterator.next(user)).toEqual({
         done: true,
         value: user
+      })
+    })
+  })
+
+  describe('signInWithPhoneNumber(phoneNumber, applicationVerifier)', () => {
+    it('returns a confirmation result', () => {
+      const phoneNumber = 'skqdk'
+      const applicationVerifier = 'lqksdqkd'
+      const iterator = authModule.signInWithPhoneNumber.call(context, phoneNumber, applicationVerifier)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth, auth.signInWithPhoneNumber], phoneNumber, applicationVerifier))
+
+      const confirmationResult = 'oqsdoqpdl'
+      expect(iterator.next(confirmationResult)).toEqual({
+        done: true,
+        value: confirmationResult
       })
     })
   })

@@ -66,6 +66,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*auth.signInWithCustomToken(token)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithCustomToken)
 - [`*auth.signInWithEmailAndPassword(email, password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithEmailAndPassword)
 - [`*auth.signInWithPopup(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithPopup)
+- [`*auth.signInWithPhoneNumber(phoneNumber, applicationVerifier)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithPhoneNumber)
 - [`*auth.signInWithRedirect(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithRedirect)
 - [`*auth.signOut()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signOut)
 - [`auth.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#channel)
