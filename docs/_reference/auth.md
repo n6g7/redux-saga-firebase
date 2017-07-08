@@ -121,6 +121,39 @@ methods:
       }
       ```
 
+  - signature: auth.signInWithPhoneNumber(phoneNumber, applicationVerifier)
+    id: signInWithPhoneNumber
+    generator: true
+    description: Starts the login process using the specified phone number.
+    arguments:
+      - name: phoneNumber
+        required: true
+        type: String
+        description: The user's phone number in E.164 format (e.g. +16505550101).
+      - name: applicationVerifier
+        required: true
+        type: A [firebase.auth.ApplicationVerifier](https://firebase.google.com/docs/reference/js/firebase.auth.ApplicationVerifier)
+        description: The verifier to use.
+    output: A [firebase.auth.ConfirmationResult](https://firebase.google.com/docs/reference/js/firebase.auth.ConfirmationResult) instance.
+    example: |
+      ```javascript
+      const applicationVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+
+      function* loginSaga() {
+        const phoneNumber = yield select(state => ...)
+
+        try {
+          const confirmationResult = yield call(rsf.auth.signInWithPhoneNumber, phoneNumber, applicationVerifier);
+          const verificationCode = /* implement your own logic to get the user's verification code */
+          const credentials = yield call(confirmationResult.confirm, verificationCode);
+          yield put(loginSuccess(credentials));
+        }
+        catch(error) {
+          yield put(loginFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.signInWithPopup(authProvider)
     id: signInWithPopup
     generator: true
