@@ -4,6 +4,7 @@
 .gitattributes
 circle.yml
 coverage
+docs
 example
 node_modules
 *.test.js
