@@ -47,7 +47,7 @@ function* loginSaga() {
 
 export default function* rootSaga() {
   yield [
-    takeEvery(types.LOGIN.REQUEST, loginSaga);
+    takeEvery(types.LOGIN.REQUEST, loginSaga)
   ];
 }
 ```
