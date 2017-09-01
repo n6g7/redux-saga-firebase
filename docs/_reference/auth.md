@@ -222,7 +222,7 @@ methods:
       ```javascript
       function* SignUpSaga(email, password) {
         try {
-          const data = yield call(rsf.auth.signUpWithEmailAndPassword, email, password);
+          const user = yield call(rsf.auth.signUpWithEmailAndPassword, email, password);
           yield put(signUpSuccess(data));
         }
         catch(error) {
