@@ -204,8 +204,8 @@ methods:
       }
       ```
 
-  - signature: auth.signUpWithEmailAndPassword(email, password)
-    id: signUpWithEmailAndPassword
+  - signature: auth.createUserWithEmailAndPassword(email, password)
+    id: createUserWithEmailAndPassword
     generator: true
     description: Creates a new user account associated with the specified email address and password.
     arguments:
@@ -220,13 +220,13 @@ methods:
     output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.html) instance.
     example: |
       ```javascript
-      function* SignUpSaga(email, password) {
+      function* createUserSaga(email, password) {
         try {
-          const user = yield call(rsf.auth.signUpWithEmailAndPassword, email, password);
-          yield put(signUpSuccess(data));
+          const user = yield call(rsf.auth.createUserWithEmailAndPassword, email, password);
+          yield put(createUserSuccess(data));
         }
         catch(error) {
-          yield put(signUpFailure(error));
+          yield put(createUserFailure(error));
         }
       }
       ```
