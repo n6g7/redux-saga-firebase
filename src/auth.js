@@ -47,6 +47,11 @@ function * signInWithRedirect (authProvider) {
   yield call([auth, auth.signInWithRedirect], authProvider)
 }
 
+function * createUserWithEmailAndPassword (email, password) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
+}
+
 function * signOut () {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
@@ -79,5 +84,6 @@ export default {
   signInWithPhoneNumber,
   signInWithPopup,
   signInWithRedirect,
+  createUserWithEmailAndPassword,
   signOut
 }

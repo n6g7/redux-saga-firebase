@@ -20,6 +20,7 @@ describe('auth', () => {
     signInWithPhoneNumber: jest.fn(),
     signInWithPopup: jest.fn(),
     signInWithRedirect: jest.fn(),
+    createUserWithEmailAndPassword: jest.fn(),
     signOut: jest.fn()
   }
 
@@ -157,6 +158,28 @@ describe('auth', () => {
       expect(iterator.next()).toEqual({
         done: true,
         value: undefined
+      })
+    })
+  })
+
+  describe('createUserWithEmailAndPassword(email, password)', () => {
+    it('returns a user', () => {
+      const email = 'skqdk'
+      const password = 'skqdk'
+      const user = 'qosdqkds'
+      const iterator = authModule.createUserWithEmailAndPassword.call(
+        context,
+        email,
+        password
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.createUserWithEmailAndPassword], email, password)
+      )
+
+      expect(iterator.next(user)).toEqual({
+        done: true,
+        value: user
       })
     })
   })
