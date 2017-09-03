@@ -76,6 +76,7 @@ function channel () {
 
 export default {
   channel,
+  createUserWithEmailAndPassword,
   signInAndRetrieveDataWithCredential,
   signInAnonymously,
   signInWithCredential,
@@ -84,6 +85,5 @@ export default {
   signInWithPhoneNumber,
   signInWithPopup,
   signInWithRedirect,
-  createUserWithEmailAndPassword,
   signOut
 }

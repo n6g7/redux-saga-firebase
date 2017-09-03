@@ -204,6 +204,25 @@ methods:
       }
       ```
 
+  - signature: auth.signOut()
+    id: signOut
+    generator: true
+    description: Logs the user out.
+    arguments:
+    output:
+    example: |
+      ```javascript
+      function* signOutSaga() {
+        try {
+          const data = yield call(rsf.auth.signOut);
+          yield put(signOutSuccess(data));
+        }
+        catch(error) {
+          yield put(signOutFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.createUserWithEmailAndPassword(email, password)
     id: createUserWithEmailAndPassword
     generator: true
@@ -223,29 +242,10 @@ methods:
       function* createUserSaga(email, password) {
         try {
           const user = yield call(rsf.auth.createUserWithEmailAndPassword, email, password);
-          yield put(createUserSuccess(data));
+          yield put(createUserSuccess(user));
         }
         catch(error) {
           yield put(createUserFailure(error));
-        }
-      }
-      ```
-
-  - signature: auth.signOut()
-    id: signOut
-    generator: true
-    description: Logs the user out.
-    arguments:
-    output:
-    example: |
-      ```javascript
-      function* signOutSaga() {
-        try {
-          const data = yield call(rsf.auth.signOut);
-          yield put(signOutSuccess(data));
-        }
-        catch(error) {
-          yield put(signOutFailure(error));
         }
       }
       ```
