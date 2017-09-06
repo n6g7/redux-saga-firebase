@@ -186,12 +186,13 @@ describe('auth', () => {
     })
   })
 
-  describe('sendEmailVerification()', () => {
+  describe('sendEmailVerification(currentUser)', () => {
     it('works', () => {
-      const iterator = authModule.sendEmailVerification.call(context)
+      const currentUser = 'qosdqkds'
+      const iterator = authModule.sendEmailVerification.call(context, currentUser)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.sendEmailVerification]))
+      .toEqual(call(currentUser.sendEmailVerification))
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -200,16 +201,18 @@ describe('auth', () => {
     })
   })
 
-  describe('updatePassword(password)', () => {
+  describe('updatePassword(currentUser, password)', () => {
     it('works', () => {
+      const currentUser = 'qosdqkds'
       const password = 'skqdk'
       const iterator = authModule.updatePassword.call(
         context,
+        currentUser,
         password
       )
 
       expect(iterator.next().value).toEqual(
-        call([auth, auth.updatePassword], password)
+        call(currentUser.updatePassword, password)
       )
 
       expect(iterator.next()).toEqual({

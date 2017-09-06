@@ -52,14 +52,12 @@ function * createUserWithEmailAndPassword (email, password) {
   return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
 }
 
-function * sendEmailVerification () {
-  const auth = this.app.auth().currentUser
-  return yield call([auth, auth.sendEmailVerification])
+function * sendEmailVerification (currentUser) {
+  return yield call(currentUser.sendEmailVerification)
 }
 
-function * updatePassword (password) {
-  const auth = this.app.auth().currentUser
-  return yield call([auth, auth.updatePassword], password)
+function * updatePassword (currentUser, password) {
+  return yield call(currentUser.updatePassword, password)
 }
 
 function * signOut () {
