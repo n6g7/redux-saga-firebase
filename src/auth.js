@@ -53,12 +53,12 @@ function * createUserWithEmailAndPassword (email, password) {
 }
 
 function * sendEmailVerification () {
-  const auth = this.app.auth()
+  const auth = this.app.auth().currentUser
   return yield call([auth, auth.sendEmailVerification])
 }
 
 function * updatePassword (password) {
-  const auth = this.app.auth()
+  const auth = this.app.auth().currentUser
   return yield call([auth, auth.updatePassword], password)
 }
 
