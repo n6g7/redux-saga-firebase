@@ -188,7 +188,7 @@ describe('auth', () => {
   describe('sendPasswordResetEmail(email)', () => {
     it('works', () => {
       const email = 'skqdk'
-      const iterator = authModule.createUserWithEmailAndPassword.call(
+      const iterator = authModule.sendPasswordResetEmail.call(
         context,
         email
       )
