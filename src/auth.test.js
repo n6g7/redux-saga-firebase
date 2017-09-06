@@ -202,7 +202,7 @@ describe('auth', () => {
         value: undefined
       })
     })
-  })  
+  })
 
   describe('signOut()', () => {
     it('works', () => {
