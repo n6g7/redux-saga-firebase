@@ -250,6 +250,29 @@ methods:
       }
       ```
 
+  - signature: auth.sendPasswordResetEmail(email)
+    id: sendPasswordResetEmail
+    generator: true
+    description: You can send a password reset email to a user.
+    arguments:
+      - name: email
+        required: true
+        type: String
+        description: The user's email address.
+    output:
+    example: |
+      ```javascript
+      function* sendPasswordResetEmailSaga(email) {
+        try {
+          yield call(rsf.auth.sendPasswordResetEmail, email);
+          yield put(sendPasswordResetEmailSuccess());
+        }
+        catch(error) {
+          yield put(sendPasswordResetEmailFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.channel()
     id: channel
     generator: false
