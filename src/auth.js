@@ -52,6 +52,16 @@ function * createUserWithEmailAndPassword (email, password) {
   return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
 }
 
+function * sendEmailVerification () {
+  const auth = this.app.auth()
+  return yield call([auth, auth.sendEmailVerification])
+}
+
+function * updatePassword (password) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.updatePassword], password)
+}
+
 function * signOut () {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
@@ -77,6 +87,8 @@ function channel () {
 export default {
   channel,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updatePassword,
   signInAndRetrieveDataWithCredential,
   signInAnonymously,
   signInWithCredential,
