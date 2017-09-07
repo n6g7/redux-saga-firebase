@@ -223,15 +223,11 @@ methods:
       }
       ```
 
-  - signature: auth.updatePassword(currentUser, password)
+  - signature: auth.updatePassword(password)
     id: updatePassword
     generator: true
     description: You can set a user's password.
     arguments:
-    - name: currentUser
-        required: true
-        type: Object
-        description: The user reference.
     - name: password
         required: true
         type: String
@@ -239,9 +235,9 @@ methods:
     output:
     example: |
       ```javascript
-      function* updatePasswordSaga(currentUser,password) {
+      function* updatePasswordSaga(password) {
         try {
-          yield call(rsf.auth.updatePassword, currentUser, password);
+          yield call(rsf.auth.updatePassword, password);
           yield put(updatePasswordSuccess());
         }
         catch(error) {
@@ -250,24 +246,24 @@ methods:
       }
       ```
 
-  - signature: auth.sendEmailVerification(currentUser)
+  - signature: auth.sendEmailVerification(actionCodeSettings)
     id: sendEmailVerification
     generator: true
     description: You can send an address verification email to a user
     arguments:
-    - name: currentUser
-        required: true
+    - name: actionCodeSettings
+        required: false
         type: Object
-        description: The user reference.
+        description: Action code settings.
     example: |
       ```javascript
-      function* emailVerificationSaga(currentUser) {
+      function* emailVerificationSaga(actionCodeSettings) {
         try {
-          yield call(rsf.auth.sendEmailVerification);
-          yield put(emailVerificationSuccess(currentUser));
+          yield call(rsf.auth.sendEmailVerification, actionCodeSettings);
+          yield put(emailVerificationSendSuccess());
         }
         catch(error) {
-          yield put(emailVerificationFailure(error));
+          yield put(emailVerificationSendFailure(error));
         }
       }
       ```
