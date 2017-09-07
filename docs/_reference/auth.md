@@ -228,11 +228,11 @@ methods:
     generator: true
     description: You can set a user's password.
     arguments:
-    - name: password
+      - name: password
         required: true
         type: String
         description: The user's password.
-    output:
+    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise.html) instance.
     example: |
       ```javascript
       function* updatePasswordSaga(password) {
@@ -251,10 +251,11 @@ methods:
     generator: true
     description: You can send an address verification email to a user
     arguments:
-    - name: actionCodeSettings
+      - name: actionCodeSettings
         required: false
-        type: Object
-        description: Action code settings.
+        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
+        description: The action code settings.
+    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise.html) instance.
     example: |
       ```javascript
       function* emailVerificationSaga(actionCodeSettings) {
