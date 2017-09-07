@@ -21,6 +21,10 @@ describe('auth', () => {
     signInWithPopup: jest.fn(),
     signInWithRedirect: jest.fn(),
     createUserWithEmailAndPassword: jest.fn(),
+    currentUser: {
+      sendEmailVerification: jest.fn(),
+      updatePassword: jest.fn()
+    },
     signOut: jest.fn()
   }
 
@@ -180,6 +184,42 @@ describe('auth', () => {
       expect(iterator.next(user)).toEqual({
         done: true,
         value: user
+      })
+    })
+  })
+
+  describe('sendEmailVerification(actionCodeSettings)', () => {
+    it('works', () => {
+      const actionCodeSettings = {
+        url: 'bolket42'
+      }
+      const iterator = authModule.sendEmailVerification.call(context, actionCodeSettings)
+
+      expect(iterator.next().value)
+      .toEqual(call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings))
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('updatePassword(password)', () => {
+    it('works', () => {
+      const password = 'skqdk'
+      const iterator = authModule.updatePassword.call(
+        context,
+        password
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth.currentUser, auth.currentUser.updatePassword], password)
+      )
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
       })
     })
   })
