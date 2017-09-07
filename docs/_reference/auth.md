@@ -263,7 +263,6 @@ methods:
         required: false
         type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
         description: The action code settings.
-    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise.html) instance.
     example: |
       ```javascript
       function* sendPasswordResetEmailSaga(email, actionCodeSettings) {
