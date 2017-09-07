@@ -250,7 +250,7 @@ methods:
       }
       ```
 
-  - signature: auth.sendPasswordResetEmail(email)
+  - signature: auth.sendPasswordResetEmail(email, actionCodeSettings)
     id: sendPasswordResetEmail
     generator: true
     description: You can send a password reset email to a user.
@@ -259,12 +259,16 @@ methods:
         required: true
         type: String
         description: The user's email address.
+      - name: actionCodeSettings
+        required: false
+        type: Object
+        description: Action code setting.
     output:
     example: |
       ```javascript
-      function* sendPasswordResetEmailSaga(email) {
+      function* sendPasswordResetEmailSaga(email, actionCodeSettings) {
         try {
-          yield call(rsf.auth.sendPasswordResetEmail, email);
+          yield call(rsf.auth.sendPasswordResetEmail, email, actionCodeSettings);
           yield put(sendPasswordResetEmailSuccess());
         }
         catch(error) {

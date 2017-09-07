@@ -52,9 +52,9 @@ function * createUserWithEmailAndPassword (email, password) {
   return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
 }
 
-function * sendPasswordResetEmail (email) {
+function * sendPasswordResetEmail (email, actionCodeSettings) {
   const auth = this.app.auth()
-  return yield call([auth, auth.sendPasswordResetEmail], email)
+  return yield call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
 }
 
 function * signOut () {

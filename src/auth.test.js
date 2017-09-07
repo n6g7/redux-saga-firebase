@@ -185,16 +185,18 @@ describe('auth', () => {
     })
   })
 
-  describe('sendPasswordResetEmail(email)', () => {
+  describe('sendPasswordResetEmail(email, actionCodeSettings)', () => {
     it('works', () => {
       const email = 'skqdk'
+      const actionCodeSettings = 'bolket42';
       const iterator = authModule.sendPasswordResetEmail.call(
         context,
-        email
+        email,
+        actionCodeSettings
       )
 
       expect(iterator.next().value).toEqual(
-        call([auth, auth.sendPasswordResetEmail], email)
+        call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
       )
 
       expect(iterator.next()).toEqual({
