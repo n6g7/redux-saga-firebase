@@ -250,6 +250,33 @@ methods:
       }
       ```
 
+  - signature: auth.confirmPasswordReset(code, newPassword)
+    id: confirmPasswordReset
+    generator: true
+    description: Completes the password reset process, given a confirmation code and new password.
+    arguments:
+      - name: code
+        required: true
+        type: String
+        description: The confirmation code send via email to the user.
+      - name: newPassword
+        required: true
+        type: String
+        description: The new password.
+    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise.html) instance.
+    example: |
+      ```javascript
+      function* confirmPasswordResetSaga(code, newPassword) {
+        try {
+          yield call(rsf.auth.confirmPasswordReset, code, newPassword);
+          yield put(confirmPasswordResetSuccess());
+        }
+        catch(error) {
+          yield put(confirmPasswordResetFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.channel()
     id: channel
     generator: false
