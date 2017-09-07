@@ -21,6 +21,7 @@ describe('auth', () => {
     signInWithPopup: jest.fn(),
     signInWithRedirect: jest.fn(),
     createUserWithEmailAndPassword: jest.fn(),
+    applyActionCode: jest.fn(),
     signOut: jest.fn()
   }
 
@@ -180,6 +181,25 @@ describe('auth', () => {
       expect(iterator.next(user)).toEqual({
         done: true,
         value: user
+      })
+    })
+  })
+
+  describe('applyActionCode(code)', () => {
+    it('returns a user', () => {
+      const code = 'skqdk'
+      const iterator = authModule.applyActionCode.call(
+        context,
+        code
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.applyActionCode], code)
+      )
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
       })
     })
   })

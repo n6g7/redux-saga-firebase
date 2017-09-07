@@ -250,6 +250,29 @@ methods:
       }
       ```
 
+  - signature: auth.applyActionCode(code)
+    id: applyActionCode
+    generator: true
+    description: Applies a verification code sent to the user by email or other out-of-band mechanism.
+    arguments:
+      - name: code
+        required: true
+        type: String
+        description: A verification code sent to the user.
+    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise.html) instance.
+    example: |
+      ```javascript
+      function* applyActionCodeSaga(code) {
+        try {
+          yield call(rsf.auth.applyActionCode, code);
+          yield put(applyActionCodeSuccess());
+        }
+        catch(error) {
+          yield put(applyActionCodeFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.channel()
     id: channel
     generator: false
