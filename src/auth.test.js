@@ -188,7 +188,9 @@ describe('auth', () => {
   describe('sendPasswordResetEmail(email, actionCodeSettings)', () => {
     it('works', () => {
       const email = 'skqdk'
-      const actionCodeSettings = 'bolket42';
+      const actionCodeSettings = {
+        url: 'bolket42'
+      }
       const iterator = authModule.sendPasswordResetEmail.call(
         context,
         email,
