@@ -263,7 +263,6 @@ methods:
         required: true
         type: String
         description: The new password.
-    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise.html) instance.
     example: |
       ```javascript
       function* confirmPasswordResetSaga(code, newPassword) {
