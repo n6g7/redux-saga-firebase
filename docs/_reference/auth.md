@@ -258,12 +258,12 @@ methods:
       - name: email
         required: true
         type: String
-        description: The user's email address.
+        description: The email address with the password to be reset.
       - name: actionCodeSettings
         required: false
-        type: Object
-        description: Action code setting.
-    output:
+        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
+        description: The action code settings.
+    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise.html) instance.
     example: |
       ```javascript
       function* sendPasswordResetEmailSaga(email, actionCodeSettings) {
