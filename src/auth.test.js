@@ -207,7 +207,7 @@ describe('auth', () => {
       })
     })
   })
-  
+
   describe('sendEmailVerification(actionCodeSettings)', () => {
     it('works', () => {
       const actionCodeSettings = {

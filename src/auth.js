@@ -56,7 +56,7 @@ function * applyActionCode (code) {
   const auth = this.app.auth()
   return yield call([auth, auth.applyActionCode], code)
 }
-  
+
 function * sendEmailVerification (actionCodeSettings) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings)
