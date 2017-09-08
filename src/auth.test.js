@@ -224,7 +224,7 @@ describe('auth', () => {
       })
     })
   })
-  
+
   describe('confirmPasswordReset(code, password)', () => {
     it('works', () => {
       const code = 'skqdk'
