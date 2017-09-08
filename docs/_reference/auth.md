@@ -294,6 +294,57 @@ methods:
       }
       ```
 
+  - signature: auth.sendPasswordResetEmail(email, actionCodeSettings)
+    id: sendPasswordResetEmail
+    generator: true
+    description: You can send a password reset email to a user.
+    arguments:
+      - name: email
+        required: true
+        type: String
+        description: The email address with the password to be reset.
+      - name: actionCodeSettings
+        required: false
+        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
+        description: The action code settings.
+    example: |
+      ```javascript
+      function* sendPasswordResetEmailSaga(email, actionCodeSettings) {
+        try {
+          yield call(rsf.auth.sendPasswordResetEmail, email, actionCodeSettings);
+          yield put(sendPasswordResetEmailSuccess());
+        }
+        catch(error) {
+          yield put(sendPasswordResetEmailFailure(error));
+        }
+      }
+      ```
+
+  - signature: auth.confirmPasswordReset(code, newPassword)
+    id: confirmPasswordReset
+    generator: true
+    description: Completes the password reset process, given a confirmation code and new password.
+    arguments:
+      - name: code
+        required: true
+        type: String
+        description: The confirmation code send via email to the user.
+      - name: newPassword
+        required: true
+        type: String
+        description: The new password.
+    example: |
+      ```javascript
+      function* confirmPasswordResetSaga(code, newPassword) {
+        try {
+          yield call(rsf.auth.confirmPasswordReset, code, newPassword);
+          yield put(confirmPasswordResetSuccess());
+        }
+        catch(error) {
+          yield put(confirmPasswordResetFailure(error));
+        }
+      }
+      ```
   - signature: auth.applyActionCode(code)
     id: applyActionCode
     generator: true
@@ -315,7 +366,7 @@ methods:
         }
       }
       ```
-
+      
   - signature: auth.channel()
     id: channel
     generator: false
