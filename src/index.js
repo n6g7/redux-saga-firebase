@@ -20,6 +20,8 @@ class ReduxSagaFirebase {
       signInWithPhoneNumber: auth.signInWithPhoneNumber.bind(this),
       signInWithRedirect: auth.signInWithRedirect.bind(this),
       createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(this),
+      confirmPasswordReset: auth.confirmPasswordReset.bind(this),
+      sendPasswordResetEmail: auth.sendPasswordResetEmail.bind(this),
       signOut: auth.signOut.bind(this),
       sendEmailVerification: auth.sendEmailVerification.bind(this),
       updatePassword: auth.updatePassword.bind(this),

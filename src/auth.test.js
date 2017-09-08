@@ -21,10 +21,12 @@ describe('auth', () => {
     signInWithPopup: jest.fn(),
     signInWithRedirect: jest.fn(),
     createUserWithEmailAndPassword: jest.fn(),
+    sendPasswordResetEmail: jest.fn(),
     currentUser: {
       sendEmailVerification: jest.fn(),
       updatePassword: jest.fn()
     },
+    confirmPasswordReset: jest.fn(),
     signOut: jest.fn()
   }
 
@@ -188,6 +190,24 @@ describe('auth', () => {
     })
   })
 
+  describe('sendPasswordResetEmail(email, actionCodeSettings)', () => {
+    it('works', () => {
+      const email = 'skqdk'
+      const actionCodeSettings = {
+        url: 'bolket42'
+      }
+      const iterator = authModule.sendPasswordResetEmail.call(
+        context,
+        email,
+        actionCodeSettings
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
+      )
+    })
+  })
+
   describe('sendEmailVerification(actionCodeSettings)', () => {
     it('works', () => {
       const actionCodeSettings = {
@@ -215,6 +235,27 @@ describe('auth', () => {
 
       expect(iterator.next().value).toEqual(
         call([auth.currentUser, auth.currentUser.updatePassword], password)
+      )
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('confirmPasswordReset(code, password)', () => {
+    it('works', () => {
+      const code = 'skqdk'
+      const password = 'skqdk'
+      const iterator = authModule.confirmPasswordReset.call(
+        context,
+        code,
+        password
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.confirmPasswordReset], code, password)
       )
 
       expect(iterator.next()).toEqual({
