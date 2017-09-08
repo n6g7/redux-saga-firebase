@@ -1,4 +1,5 @@
-import { call, put, take } from 'redux-saga/effects'
+import { channel } from 'redux-saga'
+import { call, cancelled, put, take } from 'redux-saga/effects'
 
 import dbModule from './database'
 
@@ -278,6 +279,18 @@ describe('database', () => {
         })
       expect(actionCreator.mock.calls.length).toBe(2)
       expect(actionCreator.mock.calls[1]).toEqual([value])
+
+      expect(iterator.return())
+        .toEqual({
+          done: false,
+          value: cancelled()
+        })
+
+      expect(iterator.next(false))
+        .toEqual({
+          done: true,
+          value: undefined
+        })
     })
 
     it('uses the specified transform function', () => {
@@ -310,6 +323,32 @@ describe('database', () => {
       expect(transform.mock.calls[0]).toEqual([value])
       expect(actionCreator.mock.calls.length).toBe(1)
       expect(actionCreator.mock.calls[0]).toEqual([transformed])
+    })
+
+    it('closes the channel when it is cancelled', () => {
+      const path = 'skddksl'
+      const actionCreator = jest.fn()
+      const transform = jest.fn()
+      const chan = channel()
+      const iterator = dbModule.sync.call(context, path, actionCreator, transform)
+
+      // Channel creation
+      iterator.next()
+
+      // First take
+      iterator.next(chan)
+
+      // This gets us in the finally block
+      expect(iterator.return())
+        .toEqual({
+          done: false,
+          value: cancelled()
+        })
+
+      chan.close = jest.fn()
+      iterator.next(true)
+
+      expect(chan.close).toHaveBeenCalledTimes(1)
     })
   })
 })

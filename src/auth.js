@@ -57,6 +57,16 @@ function * confirmPasswordReset (code, newPassword) {
   return yield call([auth, auth.confirmPasswordReset], code, newPassword)
 }
 
+function * sendEmailVerification (actionCodeSettings) {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings)
+}
+
+function * updatePassword (password) {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.updatePassword], password)
+}
+
 function * signOut () {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
@@ -82,6 +92,8 @@ function channel () {
 export default {
   channel,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updatePassword,
   signInAndRetrieveDataWithCredential,
   signInAnonymously,
   signInWithCredential,
