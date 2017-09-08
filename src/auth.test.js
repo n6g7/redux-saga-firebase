@@ -208,7 +208,7 @@ describe('auth', () => {
       )
     })
   })
-  
+
   describe('applyActionCode(code)', () => {
     it('returns a user', () => {
       const code = 'skqdk'
