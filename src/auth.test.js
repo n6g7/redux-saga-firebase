@@ -21,6 +21,7 @@ describe('auth', () => {
     signInWithPopup: jest.fn(),
     signInWithRedirect: jest.fn(),
     createUserWithEmailAndPassword: jest.fn(),
+    sendPasswordResetEmail: jest.fn(),
     currentUser: {
       sendEmailVerification: jest.fn(),
       updatePassword: jest.fn()
@@ -186,6 +187,24 @@ describe('auth', () => {
         done: true,
         value: user
       })
+    })
+  })
+
+  describe('sendPasswordResetEmail(email, actionCodeSettings)', () => {
+    it('works', () => {
+      const email = 'skqdk'
+      const actionCodeSettings = {
+        url: 'bolket42'
+      }
+      const iterator = authModule.sendPasswordResetEmail.call(
+        context,
+        email,
+        actionCodeSettings
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
+      )
     })
   })
 

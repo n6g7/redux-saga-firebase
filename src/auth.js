@@ -52,6 +52,7 @@ function * createUserWithEmailAndPassword (email, password) {
   return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
 }
 
+
 function * confirmPasswordReset (code, newPassword) {
   const auth = this.app.auth()
   return yield call([auth, auth.confirmPasswordReset], code, newPassword)
@@ -108,5 +109,6 @@ export default {
   signInWithPopup,
   signInWithRedirect,
   confirmPasswordReset,
+  sendPasswordResetEmail,
   signOut
 }

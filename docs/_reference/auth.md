@@ -345,7 +345,7 @@ methods:
         }
       }
       ```
-
+      
   - signature: auth.channel()
     id: channel
     generator: false
