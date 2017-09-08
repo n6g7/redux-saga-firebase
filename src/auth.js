@@ -57,6 +57,11 @@ function * confirmPasswordReset (code, newPassword) {
   return yield call([auth, auth.confirmPasswordReset], code, newPassword)
 }
 
+function * sendPasswordResetEmail (email, actionCodeSettings) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
+}
+
 function * sendEmailVerification (actionCodeSettings) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings)
