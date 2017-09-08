@@ -26,6 +26,7 @@ describe('auth', () => {
       sendEmailVerification: jest.fn(),
       updatePassword: jest.fn()
     },
+    confirmPasswordReset: jest.fn(),
     signOut: jest.fn()
   }
 
@@ -234,6 +235,27 @@ describe('auth', () => {
 
       expect(iterator.next().value).toEqual(
         call([auth.currentUser, auth.currentUser.updatePassword], password)
+      )
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('confirmPasswordReset(code, password)', () => {
+    it('works', () => {
+      const code = 'skqdk'
+      const password = 'skqdk'
+      const iterator = authModule.confirmPasswordReset.call(
+        context,
+        code,
+        password
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.confirmPasswordReset], code, password)
       )
 
       expect(iterator.next()).toEqual({
