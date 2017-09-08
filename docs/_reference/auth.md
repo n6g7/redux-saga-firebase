@@ -223,6 +223,50 @@ methods:
       }
       ```
 
+  - signature: auth.updatePassword(password)
+    id: updatePassword
+    generator: true
+    description: Updates the user's password.
+    arguments:
+      - name: password
+        required: true
+        type: String
+        description: The user's password.
+    example: |
+      ```javascript
+      function* updatePasswordSaga(password) {
+        try {
+          yield call(rsf.auth.updatePassword, password);
+          yield put(updatePasswordSuccess());
+        }
+        catch(error) {
+          yield put(updatePasswordFailure(error));
+        }
+      }
+      ```
+
+  - signature: auth.sendEmailVerification(actionCodeSettings)
+    id: sendEmailVerification
+    generator: true
+    description: Sends a verification email to a user.
+    arguments:
+      - name: actionCodeSettings
+        required: false
+        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
+        description: The action code settings.
+    example: |
+      ```javascript
+      function* emailVerificationSaga(actionCodeSettings) {
+        try {
+          yield call(rsf.auth.sendEmailVerification, actionCodeSettings);
+          yield put(emailVerificationSendSuccess());
+        }
+        catch(error) {
+          yield put(emailVerificationSendFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.createUserWithEmailAndPassword(email, password)
     id: createUserWithEmailAndPassword
     generator: true

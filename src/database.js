@@ -1,5 +1,5 @@
 import { eventChannel } from 'redux-saga'
-import { call, put, take } from 'redux-saga/effects'
+import { call, cancelled, put, take } from 'redux-saga/effects'
 
 const noop = x => x
 
@@ -54,9 +54,13 @@ function channel (pathOrRef, event = 'value') {
 function * sync (pathOrRef, actionCreator, transform = noop) {
   const channel = yield call(this.database.channel, pathOrRef)
 
-  while (true) {
-    const { value } = yield take(channel)
-    yield put(actionCreator(transform(value)))
+  try {
+    while (true) {
+      const { value } = yield take(channel)
+      yield put(actionCreator(transform(value)))
+    }
+  } finally {
+    if (yield cancelled()) channel.close()
   }
 }
 
