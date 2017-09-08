@@ -203,6 +203,9 @@ describe('auth', () => {
 
       expect(iterator.next().value).toEqual(
         call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
+      )
+    })
+  })
 
   describe('sendEmailVerification(actionCodeSettings)', () => {
     it('works', () => {
