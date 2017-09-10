@@ -3,6 +3,149 @@ title: Authentication
 layout: docs
 methods:
 
+  - signature: auth.applyActionCode(code)
+    id: applyActionCode
+    generator: true
+    description: Applies a verification code sent to the user by email or other out-of-band mechanism.
+    arguments:
+      - name: code
+        required: true
+        type: String
+        description: A verification code sent to the user.
+    example: |
+      ```javascript
+      function* applyActionCodeSaga(code) {
+        try {
+          yield call(rsf.auth.applyActionCode, code);
+          yield put(applyActionCodeSuccess());
+        }
+        catch(error) {
+          yield put(applyActionCodeFailure(error));
+        }
+      }
+      ```
+
+  - signature: auth.channel()
+    id: channel
+    generator: false
+    description: Gets a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every user change.
+    arguments:
+    output: A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits for every user change.
+    example: |
+      ```javascript
+      function* syncUserSaga() {
+        const channel = yield call(rsf.auth.channel);
+
+        while(true) {
+          const { error, user } = yield take(channel);
+
+          if (user) yield put(syncUser(user));
+          else yield put(syncError(error));
+        }
+      }
+      ```
+
+  - signature: auth.confirmPasswordReset(code, newPassword)
+    id: confirmPasswordReset
+    generator: true
+    description: Completes the password reset process, given a confirmation code and new password.
+    arguments:
+      - name: code
+        required: true
+        type: String
+        description: The confirmation code send via email to the user.
+      - name: newPassword
+        required: true
+        type: String
+        description: The new password.
+    example: |
+      ```javascript
+      function* confirmPasswordResetSaga(code, newPassword) {
+        try {
+          yield call(rsf.auth.confirmPasswordReset, code, newPassword);
+          yield put(confirmPasswordResetSuccess());
+        }
+        catch(error) {
+          yield put(confirmPasswordResetFailure(error));
+        }
+      }
+      ```
+
+  - signature: auth.createUserWithEmailAndPassword(email, password)
+    id: createUserWithEmailAndPassword
+    generator: true
+    description: Creates a new user account associated with the specified email address and password.
+    arguments:
+      - name: email
+        required: true
+        type: String
+        description: The user's email address.
+      - name: password
+        required: true
+        type: String
+        description: The user's password.
+    output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.html) instance.
+    example: |
+      ```javascript
+      function* createUserSaga(email, password) {
+        try {
+          const user = yield call(rsf.auth.createUserWithEmailAndPassword, email, password);
+          yield put(createUserSuccess(user));
+        }
+        catch(error) {
+          yield put(createUserFailure(error));
+        }
+      }
+      ```
+
+  - signature: auth.sendEmailVerification(actionCodeSettings)
+    id: sendEmailVerification
+    generator: true
+    description: Sends a verification email to a user.
+    arguments:
+      - name: actionCodeSettings
+        required: false
+        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
+        description: The action code settings.
+    example: |
+      ```javascript
+      function* emailVerificationSaga(actionCodeSettings) {
+        try {
+          yield call(rsf.auth.sendEmailVerification, actionCodeSettings);
+          yield put(emailVerificationSendSuccess());
+        }
+        catch(error) {
+          yield put(emailVerificationSendFailure(error));
+        }
+      }
+      ```
+
+  - signature: auth.sendPasswordResetEmail(email, actionCodeSettings)
+    id: sendPasswordResetEmail
+    generator: true
+    description: You can send a password reset email to a user.
+    arguments:
+      - name: email
+        required: true
+        type: String
+        description: The email address with the password to be reset.
+      - name: actionCodeSettings
+        required: false
+        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
+        description: The action code settings.
+    example: |
+      ```javascript
+      function* sendPasswordResetEmailSaga(email, actionCodeSettings) {
+        try {
+          yield call(rsf.auth.sendPasswordResetEmail, email, actionCodeSettings);
+          yield put(sendPasswordResetEmailSuccess());
+        }
+        catch(error) {
+          yield put(sendPasswordResetEmailFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.signInAndRetrieveDataWithCredential(credential)
     id: signInAndRetrieveDataWithCredential
     generator: true
@@ -241,148 +384,6 @@ methods:
         }
         catch(error) {
           yield put(updatePasswordFailure(error));
-        }
-      }
-      ```
-
-  - signature: auth.sendEmailVerification(actionCodeSettings)
-    id: sendEmailVerification
-    generator: true
-    description: Sends a verification email to a user.
-    arguments:
-      - name: actionCodeSettings
-        required: false
-        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
-        description: The action code settings.
-    example: |
-      ```javascript
-      function* emailVerificationSaga(actionCodeSettings) {
-        try {
-          yield call(rsf.auth.sendEmailVerification, actionCodeSettings);
-          yield put(emailVerificationSendSuccess());
-        }
-        catch(error) {
-          yield put(emailVerificationSendFailure(error));
-        }
-      }
-      ```
-
-  - signature: auth.createUserWithEmailAndPassword(email, password)
-    id: createUserWithEmailAndPassword
-    generator: true
-    description: Creates a new user account associated with the specified email address and password.
-    arguments:
-      - name: email
-        required: true
-        type: String
-        description: The user's email address.
-      - name: password
-        required: true
-        type: String
-        description: The user's password.
-    output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User.html) instance.
-    example: |
-      ```javascript
-      function* createUserSaga(email, password) {
-        try {
-          const user = yield call(rsf.auth.createUserWithEmailAndPassword, email, password);
-          yield put(createUserSuccess(user));
-        }
-        catch(error) {
-          yield put(createUserFailure(error));
-        }
-      }
-      ```
-
-  - signature: auth.sendPasswordResetEmail(email, actionCodeSettings)
-    id: sendPasswordResetEmail
-    generator: true
-    description: You can send a password reset email to a user.
-    arguments:
-      - name: email
-        required: true
-        type: String
-        description: The email address with the password to be reset.
-      - name: actionCodeSettings
-        required: false
-        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
-        description: The action code settings.
-    example: |
-      ```javascript
-      function* sendPasswordResetEmailSaga(email, actionCodeSettings) {
-        try {
-          yield call(rsf.auth.sendPasswordResetEmail, email, actionCodeSettings);
-          yield put(sendPasswordResetEmailSuccess());
-        }
-        catch(error) {
-          yield put(sendPasswordResetEmailFailure(error));
-        }
-      }
-      ```
-
-  - signature: auth.confirmPasswordReset(code, newPassword)
-    id: confirmPasswordReset
-    generator: true
-    description: Completes the password reset process, given a confirmation code and new password.
-    arguments:
-      - name: code
-        required: true
-        type: String
-        description: The confirmation code send via email to the user.
-      - name: newPassword
-        required: true
-        type: String
-        description: The new password.
-    example: |
-      ```javascript
-      function* confirmPasswordResetSaga(code, newPassword) {
-        try {
-          yield call(rsf.auth.confirmPasswordReset, code, newPassword);
-          yield put(confirmPasswordResetSuccess());
-        }
-        catch(error) {
-          yield put(confirmPasswordResetFailure(error));
-        }
-      }
-      ```
-  - signature: auth.applyActionCode(code)
-    id: applyActionCode
-    generator: true
-    description: Applies a verification code sent to the user by email or other out-of-band mechanism.
-    arguments:
-      - name: code
-        required: true
-        type: String
-        description: A verification code sent to the user.
-    example: |
-      ```javascript
-      function* applyActionCodeSaga(code) {
-        try {
-          yield call(rsf.auth.applyActionCode, code);
-          yield put(applyActionCodeSuccess());
-        }
-        catch(error) {
-          yield put(applyActionCodeFailure(error));
-        }
-      }
-      ```
-      
-  - signature: auth.channel()
-    id: channel
-    generator: false
-    description: Gets a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every user change.
-    arguments:
-    output: A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits for every user change.
-    example: |
-      ```javascript
-      function* syncUserSaga() {
-        const channel = yield call(rsf.auth.channel);
-
-        while(true) {
-          const { error, user } = yield take(channel);
-
-          if (user) yield put(syncUser(user));
-          else yield put(syncError(error));
         }
       }
       ```

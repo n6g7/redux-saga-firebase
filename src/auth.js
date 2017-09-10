@@ -1,6 +1,48 @@
 import { eventChannel } from 'redux-saga'
 import { call } from 'redux-saga/effects'
 
+function * applyActionCode (code) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.applyActionCode], code)
+}
+
+function channel () {
+  if (this._authChannel) return this._authChannel
+
+  const auth = this.app.auth()
+  const channel = eventChannel(emit => {
+    const unsubscribe = auth.onAuthStateChanged(
+      user => emit({ user }),
+      error => emit({ error })
+    )
+
+    return unsubscribe
+  })
+
+  this._authChannel = channel
+  return channel
+}
+
+function * confirmPasswordReset (code, newPassword) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.confirmPasswordReset], code, newPassword)
+}
+
+function * createUserWithEmailAndPassword (email, password) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
+}
+
+function * sendEmailVerification (actionCodeSettings) {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings)
+}
+
+function * sendPasswordResetEmail (email, actionCodeSettings) {
+  const auth = this.app.auth()
+  return yield call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
+}
+
 function * signInAndRetrieveDataWithCredential (credential) {
   const auth = this.app.auth()
   return yield call([auth, auth.signInAndRetrieveDataWithCredential], credential)
@@ -47,29 +89,9 @@ function * signInWithRedirect (authProvider) {
   yield call([auth, auth.signInWithRedirect], authProvider)
 }
 
-function * createUserWithEmailAndPassword (email, password) {
+function * signOut () {
   const auth = this.app.auth()
-  return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
-}
-
-function * applyActionCode (code) {
-  const auth = this.app.auth()
-  return yield call([auth, auth.applyActionCode], code)
-}
-
-function * confirmPasswordReset (code, newPassword) {
-  const auth = this.app.auth()
-  return yield call([auth, auth.confirmPasswordReset], code, newPassword)
-}
-
-function * sendPasswordResetEmail (email, actionCodeSettings) {
-  const auth = this.app.auth()
-  return yield call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
-}
-
-function * sendEmailVerification (actionCodeSettings) {
-  const auth = this.app.auth()
-  return yield call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings)
+  yield call([auth, auth.signOut])
 }
 
 function * updatePassword (password) {
@@ -77,33 +99,13 @@ function * updatePassword (password) {
   return yield call([auth.currentUser, auth.currentUser.updatePassword], password)
 }
 
-function * signOut () {
-  const auth = this.app.auth()
-  yield call([auth, auth.signOut])
-}
-
-function channel () {
-  if (this._authChannel) return this._authChannel
-
-  const auth = this.app.auth()
-  const channel = eventChannel(emit => {
-    const unsubscribe = auth.onAuthStateChanged(
-      user => emit({ user }),
-      error => emit({ error })
-    )
-
-    return unsubscribe
-  })
-
-  this._authChannel = channel
-  return channel
-}
-
 export default {
+  applyActionCode,
   channel,
+  confirmPasswordReset,
   createUserWithEmailAndPassword,
   sendEmailVerification,
-  updatePassword,
+  sendPasswordResetEmail,
   signInAndRetrieveDataWithCredential,
   signInAnonymously,
   signInWithCredential,
@@ -112,8 +114,6 @@ export default {
   signInWithPhoneNumber,
   signInWithPopup,
   signInWithRedirect,
-  applyActionCode,
-  confirmPasswordReset,
-  sendPasswordResetEmail,
-  signOut
+  signOut,
+  updatePassword
 }
