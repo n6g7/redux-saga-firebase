@@ -60,7 +60,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 
 **Authentication**
 
-- [`*auth.applyActionCode()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#applyActionCode)
+- [`*auth.applyActionCode(code)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#applyActionCode)
 - [`auth.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#channel)
 - [`*auth.confirmPasswordReset(code, newPassword)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#confirmPasswordReset)
 - [`*auth.createUserWithEmailAndPassword(email, password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#createUserWithEmailAndPassword)

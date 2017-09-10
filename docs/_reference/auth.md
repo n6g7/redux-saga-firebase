@@ -105,7 +105,7 @@ methods:
     arguments:
       - name: actionCodeSettings
         required: false
-        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
+        type: An [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
         description: The action code settings.
     example: |
       ```javascript
@@ -123,7 +123,7 @@ methods:
   - signature: auth.sendPasswordResetEmail(email, actionCodeSettings)
     id: sendPasswordResetEmail
     generator: true
-    description: You can send a password reset email to a user.
+    description: Sends a password reset email to the given email address.
     arguments:
       - name: email
         required: true
@@ -131,7 +131,7 @@ methods:
         description: The email address with the password to be reset.
       - name: actionCodeSettings
         required: false
-        type: [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
+        type: An [firebase.auth.ActionCodeSettings](https://firebase.google.com/docs/reference/js/firebase.auth.html#.ActionCodeSettings)
         description: The action code settings.
     example: |
       ```javascript
