@@ -11,6 +11,8 @@ class Footer extends PureComponent {
         <Button.GitHub />
         <Button.Docs />
       </nav>
+
+      <p className='disclaimer'>The content of this site is reset every 3 hours.</p>
     </footer>;
   }
 }

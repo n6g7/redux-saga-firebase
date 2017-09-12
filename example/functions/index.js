@@ -25,3 +25,29 @@ exports.ping = functions.https.onRequest((request, response) => {
     });
   });
 });
+
+exports.clean = functions.https.onRequest((request, response) => {
+  admin.database().ref('/').set({
+    todos: {
+      '-KtqzKEE4kQHdckAXEmh': {
+        done: true,
+        label: "Hello"
+      },
+      '-KtqzL-Rgzmox9liHblv': {
+        done: false,
+        label: "World"
+      }
+    }
+  })
+
+  admin.storage().bucket().upload(
+    'clean.png',
+    { destination: 'test.png' }
+  )
+
+  cors(request, response, () => {
+    response.json({
+      done: true
+    })
+  })
+})
