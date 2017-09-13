@@ -37,7 +37,7 @@ const authProvider = new firebase.auth.GoogleAuthProvider();
 
 function* loginSaga() {
   try {
-    const data = yield call(reduxSagaFirebase.signInWithPopup, authProvider);
+    const data = yield call(reduxSagaFirebase.auth.signInWithPopup, authProvider);
     yield put(loginSuccess(data));
   }
   catch(error) {
