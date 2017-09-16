@@ -23,9 +23,14 @@ class TodoList extends PureComponent {
       title="Todo list"
       className="todo-list"
       snippets={[
-        doc(10, 22),
-        doc(24, 33),
-        doc(35, 39),
+        doc(10, 19),
+        `function* syncTodosSaga() {
+  yield fork(
+    rsf.database.sync,
+    \'todos\',
+    syncTodos
+  );
+}`,
       ]}
     >
       <p>
