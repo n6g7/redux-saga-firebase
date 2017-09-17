@@ -1,5 +1,6 @@
 # redux-saga-firebase
 [![CircleCI](https://circleci.com/gh/n6g7/redux-saga-firebase.svg?style=svg)](https://circleci.com/gh/n6g7/redux-saga-firebase) [![npm version](https://badge.fury.io/js/redux-saga-firebase.svg)](https://badge.fury.io/js/redux-saga-firebase) [![Coverage Status](https://coveralls.io/repos/github/n6g7/redux-saga-firebase/badge.svg?branch=master)](https://coveralls.io/github/n6g7/redux-saga-firebase?branch=master) [![bitHound Overall Score](https://www.bithound.io/github/n6g7/redux-saga-firebase/badges/score.svg)](https://www.bithound.io/github/n6g7/redux-saga-firebase) [![Known Vulnerabilities](https://snyk.io/test/github/n6g7/redux-saga-firebase/badge.svg)](https://snyk.io/test/github/n6g7/redux-saga-firebase)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fn6g7%2Fredux-saga-firebase.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fn6g7%2Fredux-saga-firebase?ref=badge_shield)
 
 
 A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [firebase](https://firebase.google.com/).
@@ -104,3 +105,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*storage.getFileMetadata(path)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#getFileMetadata)
 - [`*storage.updateFileMetadata(path, newMetadata)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#updateFileMetadata)
 - [`*storage.deleteFile(path)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#deleteFile)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fn6g7%2Fredux-saga-firebase.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fn6g7%2Fredux-saga-firebase?ref=badge_large)
