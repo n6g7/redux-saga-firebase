@@ -1,5 +1,6 @@
 import auth from './auth'
 import database from './database'
+import firestore from './firestore'
 import functions from './functions'
 import messaging from './messaging'
 import storage from './storage'
@@ -99,7 +100,7 @@ class ReduxSagaFirebase {
   _getCollectionDocument (collectionRef, documentRef, service) {
     return (typeof collectionRef === 'string' && typeof documentRef === 'string')
       ? this.app[service]().collection(collectionRef).doc(documentRef)
-      : pathOrRef
+      : collectionRef
   }
 }
 

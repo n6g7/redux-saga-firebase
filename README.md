@@ -87,17 +87,17 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`database.channel(path, event)`](https://n6g7.github.io/redux-saga-firebase/reference/database#channel)
 - [`*database.sync(path, actionCreator, transform)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
 
-**Firestorm**
+**Firestore**
 
-- [`*firestorm.documentAdd(collection, data)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update)
-- [`*firestorm.documentEmptyAdd(collection)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update)
-- [`*firestorm.documentSet(collection, document, data, merge)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update)
-- [`*firestorm.documentUpdate(collection, document, data)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update)
-- [`*firestorm.documentGet(collection, document)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get)
-- [`*firestorm.documentAllGet(collection)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get)
-- [`*firestorm.documentFilterGet(collection, filters)`](https://firebase.google.com/docs/firestore/query-data/queries)
-- [`*firestorm.documentDelete(collection, filters)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#delete)
-- [`*firestorm.documentFieldsDelete(collection, document, fields)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#update)
+- [`*firestore.documentAdd(collection, data)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update)
+- [`*firestore.documentEmptyAdd(collection)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update)
+- [`*firestore.documentSet(collection, document, data, merge)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update)
+- [`*firestore.documentUpdate(collection, document, data)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update)
+- [`*firestore.documentGet(collection, document)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get)
+- [`*firestore.documentAllGet(collection)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get)
+- [`*firestore.documentFilterGet(collection, filters)`](https://firebase.google.com/docs/firestore/query-data/queries)
+- [`*firestore.documentDelete(collection, filters)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#delete)
+- [`*firestore.documentFieldsDelete(collection, document, fields)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#update)
 
 
 **Functions**

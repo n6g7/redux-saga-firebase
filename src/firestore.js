@@ -13,10 +13,8 @@ import { call, cancelled, put, take } from 'redux-saga/effects'
 function * documentAdd(collection, data)
 {
   const collectionRef = this._getCollection(collection, 'firestore')
-  const addRequest = yield call([collectionRef,collectionRef.add], data)
-  addRequest
-  .then(docRef=>docRef.id)
-  .catch(err=>err)
+  console.log(collectionRef)
+  return yield call([collectionRef,collectionRef.add], data)
 }
 
 /**
@@ -45,10 +43,7 @@ function * documentEmptyAdd(collection)
 function * documentSet(collection, document, data, merge=false)
 {
   const docRef = this._getCollectionDocument(collection, document, 'firestore')
-  const setRequest = yield call([docRef,docRef.set], data,{merge:merge})
-  return setRequest
-  .then(()=> true) // Document Set Success
-  .catch(err=>err);
+  return yield call([docRef,docRef.set], data,{merge:merge})
 }
 
 /**
@@ -62,10 +57,7 @@ function * documentSet(collection, document, data, merge=false)
 function * documentUpdate(collection, document, data)
 {
   const docRef = this._getCollectionDocument(collection, document, 'firestore')
-  const updateRequest = yield call([docRef,docRef.update], data)
-  return updateRequest
-    .then(()=>true) // Document Update Success
-    .catch(err=>err);
+  return yield call([docRef,docRef.update], data)
 }
 
 /**
@@ -77,10 +69,8 @@ function * documentUpdate(collection, document, data)
 function * documentGet(collection, document)
 {
   const docRef = this._getCollectionDocument(collection, document, 'firestore')
-  const getRequest = yield call([docRef, docRef.get])
-  return getRequest
-  .then(doc=> !doc.exists ? false : doc.data()) // Handle non-existent document or else return document
-  .catch(err=>err);
+  const documentSnapshot = yield call([docRef, docRef.get])
+  return documentSnapshot.data()
 }
 
 /**
@@ -94,8 +84,8 @@ function * documentGet(collection, document)
 function * documentAllGet(collection)
 {
   const collectionRef = this._getCollection(collection, 'firestore')
-  const getRequest = yield call([collectionRef, collectionRef.get])
-  return getRequest.then(querySnapshot => querySnapshot.map(doc => doc.data())) // Transform database snapshot into data
+  const querySnapshot = yield call([collectionRef, collectionRef.get])
+  return querySnapshot.docs.map(doc=>doc.data())
 }
 
 /**
@@ -116,18 +106,21 @@ function * documentAllGet(collection)
  */
 function * documentFilterGet(collection, filters)
 {
-  const collectionRef = this._getCollection(collection, 'firestore')
-  if(filters.limit) collectionRef.limit(filter.limit)
-  if(filters.paginate.startAfter) collectionRef.startAt(filters.paginate.startAfter)
-  if(filters.paginate.startAt) collectionRef.startAt(filters.paginate.startAt)
-  if(filters.paginate.endAt) collectionRef.endAt(filters.paginate.endAt)
-  if(filters.paginate.endBefore) collectionRef.endBefore(filters.paginate.endBefore)
-  if(filters.orderBy) filters.orderBy.forEach( orderBy => collectionRef.orderBy(orderBy))
-  if(filters.where) filters.where.forEach( where => collectionRef.where(...where))
-  const getRequest = yield call([collectionRef, collectionRef.get])
-  return getRequest
-  .then(querySnapshot => querySnapshot.map(doc => doc.data()))
-  .catch(err=>err)
+  let collectionRef = this._getCollection(collection, 'firestore')
+  if(filters)
+  {
+    if(filters.limit) collectionRef = collectionRef.limit(filters.limit)
+    if(filters.orderBy) filters.orderBy.forEach( orderBy => collectionRef = collectionRef.orderBy(orderBy))
+    if (filters.paginate) {
+      if(filters.paginate.startAfter) collectionRef = collectionRef.startAfter(filters.paginate.startAfter)
+      if(filters.paginate.startAt) collectionRef = collectionRef.startAt(filters.paginate.startAt)
+      if(filters.paginate.endAt) collectionRef = collectionRef.endAt(filters.paginate.endAt)
+      if(filters.paginate.endBefore) collectionRef = collectionRef.endBefore(filters.paginate.endBefore)
+    }
+    if(filters.where)  filters.where.forEach( where => collectionRef = collectionRef.where(...where))
+  }
+  const querySnapshot = yield call([collectionRef, collectionRef.get])
+  return querySnapshot.docs.map(doc=>doc.data())
 }
 
 /**
@@ -141,10 +134,7 @@ function * documentFilterGet(collection, filters)
 function * documentDelete(collection, document)
 {
   const docRef = this._getCollectionDocument(collection,document, 'firestore')
-  const deleteRequest = yield call([docRef,docRef.delete])
-  return deleteRequest
-  .then(()=> true) // Document Delete Success
-  .catch(err=>err);
+  return yield call([docRef,docRef.delete])
 }
 
 /**
@@ -157,10 +147,23 @@ function * documentDelete(collection, document)
  */
 function * documentFieldsDelete(collection, document, fields)
 {
-  const docRef = this._getCollectionDocument(collection,document, 'firestore')
-  fields.map(field=>({[field]:firebase.firestore.FieldValue.delete()}))
-  const updateRequest = yield call([docRef,docRef.update], fields)
-  return updateRequest
-  .then(()=> true) // Document Fields Delete Confirmed
-  .catch(err=>err);
+  const firestore = this.app.firestore()
+  const fieldsDelete = {}
+  console.log(firestore)
+  const docRef = yield this._getCollectionDocument(collection,document, 'firestore')
+  console.log(docRef)
+  fields.forEach(field=>(fieldsDelete[field] = firestore.FieldValue.delete()))
+  return yield call([docRef,docRef.update], fields)
+}
+
+export default {
+  documentAdd,
+  documentEmptyAdd,
+  documentSet,
+  documentUpdate,
+  documentGet,
+  documentAllGet,
+  documentFilterGet,
+  documentDelete,
+  documentFieldsDelete
 }
