@@ -97,7 +97,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*firestorm.documentAllGet(collection)`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get)
 - [`*firestorm.documentFilterGet(collection, filters)`](https://firebase.google.com/docs/firestore/query-data/queries)
 - [`*firestorm.documentDelete(collection, filters)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#delete)
-- [`*firestorm.documentDelete(collection, document, fields)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#update)
+- [`*firestorm.documentFieldsDelete(collection, document, fields)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#update)
 
 **Functions**
 
