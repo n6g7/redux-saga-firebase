@@ -40,6 +40,11 @@ class ReduxSagaFirebase {
       sync: database.sync.bind(this)
     }
 
+    // Firestore methods
+    this.firestore = {
+
+    }
+
     // Functions methods
     this.functions = {
       call: functions.call.bind(this)
@@ -76,6 +81,16 @@ class ReduxSagaFirebase {
   _getRef (pathOrRef, service) {
     return (typeof pathOrRef === 'string')
       ? this.app[service]().ref(pathOrRef)
+      : pathOrRef
+  }
+  _getCollection (pathOrRef, service) {
+    return (typeof pathOrRef === 'string')
+      ? this.app[service]().collection(pathOrRef)
+      : pathOrRef
+  }
+  _getCollectionDocument (collectionRef, documentRef, service) {
+    return (typeof collectionRef === 'string' && typeof documentRef === 'string')
+      ? this.app[service]().collection(collectionRef).doc(documentRef)
       : pathOrRef
   }
 }
