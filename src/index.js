@@ -42,7 +42,15 @@ class ReduxSagaFirebase {
 
     // Firestore methods
     this.firestore = {
-
+      documentAdd: firestore.documentAdd.bind(this),
+      documentEmptyAdd: firestore.documentEmptyAdd.bind(this),
+      documentSet: firestore.documentSet.bind(this),
+      documentUpdate: firestore.documentUpdate.bind(this),
+      documentGet: firestore.documentGet.bind(this),
+      documentAllGet: firestore.documentAllGet.bind(this),
+      documentFilterGet: firestore.documentFilterGet.bind(this),
+      documentDelete: firestore.documentDelete.bind(this),
+      documentFieldsDelete: firestore.documentFieldsDelete.bind(this),
     }
 
     // Functions methods

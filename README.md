@@ -99,6 +99,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*firestorm.documentDelete(collection, filters)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#delete)
 - [`*firestorm.documentFieldsDelete(collection, document, fields)`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#update)
 
+
 **Functions**
 
 - [`*functions.call(functionName, parameters={})`](https://n6g7.github.io/redux-saga-firebase/reference/functions#call)
