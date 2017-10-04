@@ -2,17 +2,53 @@ import { eventChannel } from 'redux-saga'
 import { call, cancelled, put, take } from 'redux-saga/effects'
 
 /**
- * @func documentSet
+ * @func documentAdd
  * @param {String} collection 
- * @param {String} document 
  * @param {Object} data 
- * 
- * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update
+ * @desc Add document to collection, after passing data from Frontend to Backend(Firestore).
+ * @resource https://firebase.google.com/docs/firestore/manage-data/add-data
+ * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#add
+ * @return {String} auto-generated document ID
  */
-function * documentSet (collection, document, data)
+function * documentAdd(collection, data)
 {
-  const docRef = this._getCollectionDocument(collection, document, 'firestorm')
-  yield call([docRef,docRef.set], data)
+  const collectionRef = this._getCollection(collection, 'firestore')
+  const addRequest = yield call([collectionRef,collectionRef.add], data)
+  addRequest
+  .then(docRef=>docRef.id)
+  .catch(err=>err)
+}
+
+/**
+ * @func documentEmptyAdd
+ * @param {String} collection 
+ * @desc Add document to collection and return auto-generated key.
+ * @resource https://firebase.google.com/docs/firestore/manage-data/add-data
+ * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#doc
+ * @return {String} auto-generated document ID
+ */
+function * documentEmptyAdd(collection)
+{
+  const collectionRef = this._getCollection(collection, 'firestore')
+  return yield call([collectionRef,collectionRef.doc]) // Auto-generated ID
+}
+
+/**
+ * @func documentSet
+ * @param {String} collection
+ * @param {String} document
+ * @param {Object} data
+ * @param {Boolean} merge
+ * @desc Edit document, passing data object from Frontend, overwriting or merging with the existing data structure in the Backend(Firestore)
+ * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#set
+ */
+function * documentSet(collection, document, data, merge=false)
+{
+  const docRef = this._getCollectionDocument(collection, document, 'firestore')
+  const setRequest = yield call([docRef,docRef.set], data,{merge:merge})
+  return setRequest
+  .then(()=> true) // Document Set Success
+  .catch(err=>err);
 }
 
 /**
@@ -23,12 +59,12 @@ function * documentSet (collection, document, data)
  * 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update
  */
-function * documentUpdate (collection, document, data)
+function * documentUpdate(collection, document, data)
 {
-  const docRef = this._getCollectionDocument(collection, document, 'firestorm')
-  const status = yield call([docRef,docRef.update], data)
-  return status
-    .then(()=>true)
+  const docRef = this._getCollectionDocument(collection, document, 'firestore')
+  const updateRequest = yield call([docRef,docRef.update], data)
+  return updateRequest
+    .then(()=>true) // Document Update Success
     .catch(err=>err);
 }
 
@@ -38,17 +74,12 @@ function * documentUpdate (collection, document, data)
  * @param {String} document 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get
  */
-function * documentGet (collection, document)
+function * documentGet(collection, document)
 {
-  const docRef = this._getCollectionDocument(collection, document, 'firestorm')
-  const result = yield call([docRef, docRef.get])
-
-  return result
-  .then(doc=> 
-  {
-    if(!doc.exists) return false
-    return doc.data()
-  })
+  const docRef = this._getCollectionDocument(collection, document, 'firestore')
+  const getRequest = yield call([docRef, docRef.get])
+  return getRequest
+  .then(doc=> !doc.exists ? false : doc.data()) // Handle non-existent document or else return document
   .catch(err=>err);
 }
 
@@ -57,33 +88,46 @@ function * documentGet (collection, document)
  * @param {String} collection 
  * @param {String} document 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get
+ * 
+ * @return {Array} All documents from collection  
  */
-function * documentAllGet (collection, document)
+function * documentAllGet(collection)
 {
-  const collectionRef = this._getCollection(collection, 'firestorm')
-  const data = yield call([collectionRef, collectionRef.get])
-  const result = yield data.then(querySnapshot => querySnapshot.map(doc => doc.data()))
-  return result
+  const collectionRef = this._getCollection(collection, 'firestore')
+  const getRequest = yield call([collectionRef, collectionRef.get])
+  return getRequest.then(querySnapshot => querySnapshot.map(doc => doc.data())) // Transform database snapshot into data
 }
 
 /**
  * @func documentFilterGet
  * @param {String} collection 
  * @param {Object} filters
- * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get
+ * @param {String/Number} filters.startAfter
+ * @param {String/Number} filters.startAt
+ * @param {String/Number} filters.endAt
+ * @param {String/Number} filters.endBefore
+ * @param {Array} filters.orderBy
+ * @param {Array} filters.where
+ * 
+ * @resource https://firebase.google.com/docs/firestore/query-data/queries
+ * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get
+ * 
+ * * @return {Array} Filtered documents from collection
  */
-function * documentFilterGet (collection, filters)
+function * documentFilterGet(collection, filters)
 {
-  const docRef = this._getCollection(collection, 'firestorm')
-  if(filters.limit) docRef.limit(filter.limit)
-  if(filters.paginate.startAfter) docRef.startAt(filters.paginate.startAfter)
-  if(filters.paginate.startAt) docRef.startAt(filters.paginate.startAt)
-  if(filters.paginate.endAt) docRef.endAt(filters.paginate.endAt)
-  if(filters.paginate.endBefore) docRef.endBefore(filters.paginate.endBefore)
-  if(filters.orderBy) filters.orderBy.forEach( orderBy => docRef.orderBy(orderBy))
-  if(filters.where) filters.where.forEach( where => docRef.where(...where))
-  const result = yield data.then(querySnapshot => querySnapshot.map(doc => doc.data()))
-  return result
+  const collectionRef = this._getCollection(collection, 'firestore')
+  if(filters.limit) collectionRef.limit(filter.limit)
+  if(filters.paginate.startAfter) collectionRef.startAt(filters.paginate.startAfter)
+  if(filters.paginate.startAt) collectionRef.startAt(filters.paginate.startAt)
+  if(filters.paginate.endAt) collectionRef.endAt(filters.paginate.endAt)
+  if(filters.paginate.endBefore) collectionRef.endBefore(filters.paginate.endBefore)
+  if(filters.orderBy) filters.orderBy.forEach( orderBy => collectionRef.orderBy(orderBy))
+  if(filters.where) filters.where.forEach( where => collectionRef.where(...where))
+  const getRequest = yield call([collectionRef, collectionRef.get])
+  return getRequest
+  .then(querySnapshot => querySnapshot.map(doc => doc.data()))
+  .catch(err=>err)
 }
 
 /**
@@ -92,14 +136,14 @@ function * documentFilterGet (collection, filters)
  * @param {String} document 
  * @param {Object} data 
  * 
- * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update
+ * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#delete
  */
-function * documentDelete (collection, document, data)
+function * documentDelete(collection, document)
 {
-  const docRef = this._getCollectionDocument(collection,document, 'firestorm')
-  const status = yield call([docRef,docRef.delete])
-  return status
-  .then(()=> true) // Document Delete Confirmed
+  const docRef = this._getCollectionDocument(collection,document, 'firestore')
+  const deleteRequest = yield call([docRef,docRef.delete])
+  return deleteRequest
+  .then(()=> true) // Document Delete Success
   .catch(err=>err);
 }
 
@@ -111,12 +155,12 @@ function * documentDelete (collection, document, data)
  * 
  * @desc Delete an array of document fields
  */
-function * documentFieldsDelete (collection, document, fields)
+function * documentFieldsDelete(collection, document, fields)
 {
-  const docRef = this._getCollectionDocument(collection,document, 'firestorm')
+  const docRef = this._getCollectionDocument(collection,document, 'firestore')
   fields.map(field=>({[field]:firebase.firestore.FieldValue.delete()}))
-  const status = yield call([docRef,docRef.update], fields)
-  return status
+  const updateRequest = yield call([docRef,docRef.update], fields)
+  return updateRequest
   .then(()=> true) // Document Fields Delete Confirmed
   .catch(err=>err);
 }
