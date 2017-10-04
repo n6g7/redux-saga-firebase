@@ -1,5 +1,6 @@
 import auth from './auth'
 import database from './database'
+import firestore from './firestore'
 import functions from './functions'
 import messaging from './messaging'
 import storage from './storage'
@@ -14,10 +15,14 @@ class ReduxSagaFirebase {
       applyActionCode: auth.applyActionCode.bind(this),
       channel: auth.channel.bind(this),
       confirmPasswordReset: auth.confirmPasswordReset.bind(this),
-      createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(this),
+      createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(
+        this
+      ),
       sendEmailVerification: auth.sendEmailVerification.bind(this),
       sendPasswordResetEmail: auth.sendPasswordResetEmail.bind(this),
-      signInAndRetrieveDataWithCredential: auth.signInAndRetrieveDataWithCredential.bind(this),
+      signInAndRetrieveDataWithCredential: auth.signInAndRetrieveDataWithCredential.bind(
+        this
+      ),
       signInAnonymously: auth.signInAnonymously.bind(this),
       signInWithCredential: auth.signInWithCredential.bind(this),
       signInWithCustomToken: auth.signInWithCustomToken.bind(this),
@@ -38,6 +43,15 @@ class ReduxSagaFirebase {
       delete: database.delete.bind(this),
       channel: database.channel.bind(this),
       sync: database.sync.bind(this)
+    }
+
+    // Firestore methods
+    this.firestore = {
+      getDoc: firestore.getDoc.bind(this)
+      // set: firestore.set.bind(this),
+      // add: firestore.add.bind(this),
+      // update: firestore.update.bind(this),
+      // delete: firestore.delete.bind(this)
     }
 
     // Functions methods
@@ -74,8 +88,14 @@ class ReduxSagaFirebase {
   }
 
   _getRef (pathOrRef, service) {
-    return (typeof pathOrRef === 'string')
+    return typeof pathOrRef === 'string'
       ? this.app[service]().ref(pathOrRef)
+      : pathOrRef
+  }
+
+  _getCollection (pathOrRef, service) {
+    return typeof pathOrRef === 'string'
+      ? this.app[service]().collection(pathOrRef)
       : pathOrRef
   }
 }
