@@ -21,6 +21,27 @@ methods:
       }
       ```
 
+  - signature: messaging.syncToken(actionCreator)
+    id: syncToken
+    generator: true
+    description: Automatically dispatches a redux action every time a new registration token is received.
+    arguments:
+      - name: actionCreator
+        required: true
+        type: Function
+        description: The action creator to use. It must take a single argument being the new registration token.
+    output:
+    example: |
+      ```js
+      import { setToken } from '../actionCreators/messaging';
+
+      function* notificationsRootSaga() {
+        yield [
+          rsf.messaging.syncToken(setToken),
+        ];
+      }
+      ```
+
   - signature: messaging.tokenRefreshChannel()
     id: channel
     generator: false
