@@ -94,6 +94,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 **Messaging**
 
 - [`messaging.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#channel)
+- [`messaging.syncToken(actionCreator)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncToken)
 - [`messaging.tokenRefreshChannel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#tokenRefreshChannel)
 
 **Storage**
