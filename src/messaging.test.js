@@ -1,3 +1,6 @@
+import { channel } from 'redux-saga'
+import { call, cancelled, put, take } from 'redux-saga/effects'
+
 import messagingModule from './messaging'
 
 describe('messaging', () => {
@@ -20,6 +23,9 @@ describe('messaging', () => {
     context = {
       app: {
         messaging: jest.fn(() => messaging)
+      },
+      messaging: {
+        tokenRefreshChannel: jest.fn()
       }
     }
   })
@@ -88,6 +94,87 @@ describe('messaging', () => {
 
       channel.take(spy)
       emit()
+    })
+  })
+
+  describe('syncToken(path, actionCreator, transform)', () => {
+    it('works', () => {
+      const actionCreator = jest.fn()
+      const iterator = messagingModule.syncToken.call(context, actionCreator)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.messaging.tokenRefreshChannel))
+
+      const channel = 'jqsdkl'
+      expect(iterator.next(channel))
+        .toEqual({
+          done: false,
+          value: take(channel)
+        })
+
+      let token = 'toktok1'
+      const action1 = 'psodqp'
+      actionCreator.mockReturnValueOnce(action1)
+      expect(iterator.next(token))
+        .toEqual({
+          done: false,
+          value: put(action1)
+        })
+      expect(actionCreator.mock.calls.length).toBe(1)
+      expect(actionCreator.mock.calls[0]).toEqual([token])
+
+      expect(iterator.next())
+        .toEqual({
+          done: false,
+          value: take(channel)
+        })
+
+      token = 'toktok2'
+      const action2 = 'djdqsqkp'
+      actionCreator.mockReturnValueOnce(action2)
+      expect(iterator.next(token))
+        .toEqual({
+          done: false,
+          value: put(action2)
+        })
+      expect(actionCreator.mock.calls.length).toBe(2)
+      expect(actionCreator.mock.calls[1]).toEqual([token])
+
+      expect(iterator.return())
+        .toEqual({
+          done: false,
+          value: cancelled()
+        })
+
+      expect(iterator.next(false))
+        .toEqual({
+          done: true,
+          value: undefined
+        })
+    })
+
+    it('closes the channel when it is cancelled', () => {
+      const actionCreator = jest.fn()
+      const chan = channel()
+      const iterator = messagingModule.syncToken.call(context, actionCreator)
+
+      // Channel creation
+      iterator.next()
+
+      // First take
+      iterator.next(chan)
+
+      // This gets us in the finally block
+      expect(iterator.return())
+        .toEqual({
+          done: false,
+          value: cancelled()
+        })
+
+      chan.close = jest.fn()
+      iterator.next(true)
+
+      expect(chan.close).toHaveBeenCalledTimes(1)
     })
   })
 })
