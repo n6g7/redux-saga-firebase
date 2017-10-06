@@ -33,7 +33,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "jest": "^21.0.1",
     "rimraf": "^2.6.1",
-    "standard": "^10.0.2",
+    "standard": "^10.0.3",
     "whatwg-fetch": "^2.0.3"
   },
   "jest": {
