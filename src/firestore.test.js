@@ -28,7 +28,8 @@ describe('firestore', () => {
       const docRef = 'skddksld'
       const val = 'jqdqkld'
       const result = {
-        data: jest.fn(() => val)
+        data: jest.fn(() => val),
+        id: 0
       }
       const iterator = dbModule.getDoc.call(context, collectionRef, docRef)
 
@@ -40,11 +41,8 @@ describe('firestore', () => {
 
       expect(iterator.next(result)).toEqual({
         done: true,
-        value: val
+        value: result
       })
-
-      expect(result.data.mock.calls.length).toBe(1)
-      expect(result.data.mock.calls[0]).toEqual([])
     })
   })
 

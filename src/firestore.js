@@ -4,7 +4,7 @@ function * getDoc (collectionRef, docRef) {
   const doc = this._getCollection(collectionRef).doc(docRef)
   const result = yield call([doc, doc.get])
 
-  return result.data()
+  return result
 }
 
 function * getCollection (collectionRef) {
