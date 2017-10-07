@@ -46,6 +46,11 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.database.sync).toBeInstanceOf(Function)
     })
 
+    it('defines firestore methods', () => {
+      expect(rsf.firestore.getCollection).toBeInstanceOf(Function)
+      expect(rsf.firestore.getDoc).toBeInstanceOf(Function)
+    })
+
     it('defines functions methods', () => {
       expect(rsf.functions.call).toBeInstanceOf(Function)
     })
@@ -169,6 +174,45 @@ describe('ReduxSagaFirebase', () => {
       expect(storage.ref.mock.calls.length).toBe(0)
 
       expect(ref).toEqual(storageRef)
+    })
+  })
+
+  describe('_getCollection(pathOrRef, service)', () => {
+    let collectionRef, firestore, app, rsf
+
+    beforeEach(() => {
+      collectionRef = {
+        key: 'key'
+      }
+      firestore = {
+        collection: jest.fn(() => collectionRef)
+      }
+      app = {
+        firestore: jest.fn(() => firestore)
+      }
+      rsf = new ReduxSagaFirebase(app)
+    })
+
+    it('returns a collection ref from path string', () => {
+      const path = 'path'
+      const ref = rsf._getCollection(path)
+
+      expect(app.firestore.mock.calls.length).toBe(1)
+      expect(app.firestore.mock.calls[0]).toEqual([])
+
+      expect(firestore.collection.mock.calls.length).toBe(1)
+      expect(firestore.collection.mock.calls[0]).toEqual([path])
+
+      expect(ref).toEqual(collectionRef)
+    })
+
+    it('returns the collection ref that was passed to it', () => {
+      const ref = rsf._getCollection(collectionRef)
+
+      expect(app.firestore.mock.calls.length).toBe(0)
+      expect(firestore.collection.mock.calls.length).toBe(0)
+
+      expect(ref).toEqual(collectionRef)
     })
   })
 })
