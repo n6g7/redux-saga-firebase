@@ -16,6 +16,19 @@ function channel () {
   return channel
 }
 
+function * syncMessages (actionCreator) {
+  const channel = yield call(this.messaging.channel)
+
+  try {
+    while (true) {
+      const message = yield take(channel)
+      yield put(actionCreator(message))
+    }
+  } finally {
+    if (yield cancelled()) channel.close()
+  }
+}
+
 function tokenRefreshChannel () {
   if (this._tokenRefreshChannel) return this._tokenRefreshChannel
   const messaging = this.app.messaging()
@@ -47,6 +60,7 @@ function * syncToken (actionCreator) {
 
 export default {
   channel,
+  syncMessages,
   syncToken,
   tokenRefreshChannel
 }
