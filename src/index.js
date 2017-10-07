@@ -1,5 +1,6 @@
 import auth from './auth'
 import database from './database'
+import firestore from './firestore'
 import functions from './functions'
 import messaging from './messaging'
 import storage from './storage'
@@ -38,6 +39,19 @@ class ReduxSagaFirebase {
       delete: database.delete.bind(this),
       channel: database.channel.bind(this),
       sync: database.sync.bind(this)
+    }
+
+    // Firestore methods
+    this.firestore = {
+      documentAdd: firestore.documentAdd.bind(this),
+      documentEmptyAdd: firestore.documentEmptyAdd.bind(this),
+      documentSet: firestore.documentSet.bind(this),
+      documentUpdate: firestore.documentUpdate.bind(this),
+      documentGet: firestore.documentGet.bind(this),
+      documentAllGet: firestore.documentAllGet.bind(this),
+      documentFilterGet: firestore.documentFilterGet.bind(this),
+      documentDelete: firestore.documentDelete.bind(this),
+      documentFieldsDelete: firestore.documentFieldsDelete.bind(this),
     }
 
     // Functions methods
@@ -79,6 +93,16 @@ class ReduxSagaFirebase {
     return (typeof pathOrRef === 'string')
       ? this.app[service]().ref(pathOrRef)
       : pathOrRef
+  }
+  _getCollection (pathOrRef, service) {
+    return (typeof pathOrRef === 'string')
+      ? this.app[service]().collection(pathOrRef)
+      : pathOrRef
+  }
+  _getCollectionDocument (collectionRef, documentRef, service) {
+    return (typeof collectionRef === 'string' && typeof documentRef === 'string')
+      ? this.app[service]().collection(collectionRef).doc(documentRef)
+      : collectionRef
   }
 }
 
