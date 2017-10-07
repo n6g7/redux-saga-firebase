@@ -52,6 +52,7 @@ describe('ReduxSagaFirebase', () => {
 
     it('defines messaging methods', () => {
       expect(rsf.messaging.channel).toBeInstanceOf(Function)
+      expect(rsf.messaging.syncMessages).toBeInstanceOf(Function)
       expect(rsf.messaging.syncToken).toBeInstanceOf(Function)
       expect(rsf.messaging.tokenRefreshChannel).toBeInstanceOf(Function)
     })
