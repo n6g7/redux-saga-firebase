@@ -59,8 +59,9 @@ class ReduxSagaFirebase {
     // Messaging methods
     this.messaging = {
       channel: messaging.channel.bind(this),
-      tokenRefreshChannel: messaging.tokenRefreshChannel.bind(this),
-    };
+      syncToken: messaging.syncToken.bind(this),
+      tokenRefreshChannel: messaging.tokenRefreshChannel.bind(this)
+    }
 
     // Storage methods
     this.storage = {

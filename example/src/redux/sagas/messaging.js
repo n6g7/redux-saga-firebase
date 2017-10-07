@@ -1,4 +1,4 @@
-import { fork, put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import firebase from 'firebase';
 
 import { setRegistrationToken } from '../reducer/messaging.actions';
@@ -25,19 +25,11 @@ function* messageHandlerSaga() {
   });
 }
 
-function* tokenRefreshSaga() {
-  const tokenRefreshChannel = rsf.messaging.tokenRefreshChannel();
-
-  yield takeEvery(tokenRefreshChannel, function*(token) {
-    yield put(setRegistrationToken(token));
-  });
-}
-
 export default function*() {
   yield requestPermissionSaga()
 
   yield [
     messageHandlerSaga,
-    tokenRefreshSaga
+    rsf.messaging.syncToken(setRegistrationToken)
   ]
 }
