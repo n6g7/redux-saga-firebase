@@ -2,16 +2,12 @@ import { call } from 'redux-saga/effects'
 
 function * getDoc (collectionRef, docRef) {
   const doc = this._getCollection(collectionRef).doc(docRef)
-  const result = yield call([doc, doc.get])
-
-  return result
+  return yield call([doc, doc.get])
 }
 
 function * getCollection (collectionRef) {
   const collection = this._getCollection(collectionRef)
-  const querySnapshot = yield call([collection, collection.get])
-
-  return querySnapshot
+  return yield call([collection, collection.get])
 }
 
 export default {
