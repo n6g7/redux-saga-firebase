@@ -21,6 +21,27 @@ methods:
       }
       ```
 
+  - signature: messaging.syncMessages(actionCreator)
+    id: syncMessages
+    generator: true
+    description: Automatically dispatches a redux action every time a new message is received.
+    arguments:
+      - name: actionCreator
+        required: true
+        type: Function
+        description: The action creator to use. It must takes a new message as a single argument.
+    output:
+    example: |
+      ```js
+      import { showMessage } from '../actionCreators/messaging';
+
+      function* notificationsRootSaga() {
+        yield [
+          rsf.messaging.syncMessages(showMessage),
+        ];
+      }
+      ```
+
   - signature: messaging.syncToken(actionCreator)
     id: syncToken
     generator: true
