@@ -90,6 +90,12 @@ class ReduxSagaFirebase {
       ? this.app[service]().ref(pathOrRef)
       : pathOrRef
   }
+
+  _getCollection (pathOrRef) {
+    return typeof pathOrRef === 'string'
+      ? this.app.firestore().collection(pathOrRef)
+      : pathOrRef
+  }
 }
 
 export default ReduxSagaFirebase

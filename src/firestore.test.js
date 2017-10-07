@@ -36,7 +36,7 @@ describe('firestore', () => {
         .toEqual(call([doc, doc.get]))
 
       expect(context._getCollection.mock.calls.length).toBe(1)
-      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef, 'firestore'])
+      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
 
       expect(iterator.next(result)).toEqual({
         done: true,
@@ -64,15 +64,12 @@ describe('firestore', () => {
         .toEqual(call([collection, collection.get]))
 
       expect(context._getCollection.mock.calls.length).toBe(1)
-      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef, 'firestore'])
+      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
 
       expect(iterator.next(response)).toEqual({
         done: true,
-        value: {[val]: val}
+        value: response
       })
-
-      expect(result.data.mock.calls.length).toBe(2)
-      expect(result.data.mock.calls[0]).toEqual([])
     })
   })
 })
