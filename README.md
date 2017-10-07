@@ -87,6 +87,11 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`database.channel(path, event)`](https://n6g7.github.io/redux-saga-firebase/reference/database#channel)
 - [`*database.sync(path, actionCreator, transform)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
 
+**Firestore**
+
+- [`*firestore.getCollection(collectionRef) `](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getCollection)
+- [`*firestore.getDoc(collectionRef, docRef) `](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getDoc)
+
 **Functions**
 
 - [`*functions.call(functionName, parameters={})`](https://n6g7.github.io/redux-saga-firebase/reference/functions#call)
