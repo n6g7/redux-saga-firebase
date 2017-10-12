@@ -1,6 +1,6 @@
 import { call } from 'redux-saga/effects'
 
-import dbModule from './firestore'
+import firestoreModule from './firestore'
 
 describe('firestore', () => {
   let doc, collection, context
@@ -32,7 +32,7 @@ describe('firestore', () => {
       }
       const response = [result, result]
 
-      const iterator = dbModule.getCollection.call(context, collectionRef)
+      const iterator = firestoreModule.getCollection.call(context, collectionRef)
 
       expect(iterator.next().value)
         .toEqual(call([collection, collection.get]))
@@ -56,7 +56,7 @@ describe('firestore', () => {
         data: jest.fn(() => val),
         id: 0
       }
-      const iterator = dbModule.getDocument.call(context, collectionRef, docRef)
+      const iterator = firestoreModule.getDocument.call(context, collectionRef, docRef)
 
       expect(iterator.next().value)
         .toEqual(call([doc, doc.get]))
