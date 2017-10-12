@@ -54,7 +54,7 @@ methods:
   - signature: firestore.getCollection(collectionRef)
     id: getCollection
     generator: true
-    description: Reads the collection referred to by this docRef.
+    description: Reads the collection referred to by this collectionRef.
     arguments:
       - name: collectionRef
         required: true
@@ -76,15 +76,15 @@ methods:
       }
       ```
 
-  - signature: firestore.getDocument(collectionRef, docRef)
+  - signature: firestore.getDocument(collectionRef, documentRef)
     id: getDocument
     generator: true
-    description: Reads the document referred to by this docRef.
+    description: Reads the document referred to by this documentRef.
     arguments:
       - name: collectionRef
         required: true
         type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
-      - name: docRef
+      - name: documentRef
         required: true
         type: A slash-separated path to a document (string).
     output: A [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot)
