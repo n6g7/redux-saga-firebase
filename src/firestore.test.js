@@ -9,7 +9,8 @@ describe('firestore', () => {
     doc = {
       delete: jest.fn(),
       get: jest.fn(),
-      set: jest.fn()
+      set: jest.fn(),
+      update: jest.fn()
     }
     collection = {
       add: jest.fn(),
@@ -132,6 +133,32 @@ describe('firestore', () => {
 
       expect(iterator.next().value)
         .toEqual(call([doc, doc.set], data, options))
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('updateDocument(collectionRef, docRef, ...args)', () => {
+    it('works', () => {
+      const collectionRef = 'skddksl'
+      const docRef = 'skddksld'
+      const args = ['qlsdl', 'pkqosdqk^']
+
+      const iterator = firestoreModule.updateDocument.call(
+        context,
+        collectionRef,
+        docRef,
+        ...args
+      )
+
+      expect(iterator.next().value)
+        .toEqual(call([doc, doc.update], ...args))
 
       expect(context._getCollection.mock.calls.length).toBe(1)
       expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])

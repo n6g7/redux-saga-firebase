@@ -114,13 +114,34 @@ methods:
         type: An object of the fields and values for the document.
       - name: options
         required: false
-        type: An object to configure the set behavior. Pass `{merge: true}` to only replace the values specified in the data argument. Fields omitted will remain untouched.
+        type: "An object to configure the set behavior. Pass `{ merge: true }` to only replace the values specified in the data argument. Fields omitted will remain untouched."
     example: |
       ```js
       function* setDocument() {
         yield call(rsf.firestore.setDocument, 'users', '1', {
           firstName: 'Leonardo'
         });
+      }
+      ```
+
+  - signature: firestore.updateDocument(collectionRef, documentRef, ...args)
+    id: updateDocument
+    generator: true
+    description: Updates fields in the document referred to by this DocumentReference. The update will fail if applied to a document that does not exist.
+    arguments:
+      - name: collectionRef
+        required: true
+        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
+      - name: documentRef
+        required: true
+        type: A slash-separated path to a document (string).
+      - name: args
+        required: true
+        type: Either an object containing all of the fields and values to update, or a series of arguments alternating between fields (as string or firebase.firestore.FieldPath objects) and values.
+    example: |
+      ```js
+      function* updateDocument() {
+        yield call(rsf.firestore.updateDocument, 'users', '1', 'lastName', 'Da Vinci');
       }
       ```
 
