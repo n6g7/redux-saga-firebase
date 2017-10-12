@@ -3,6 +3,32 @@ title: Firestore
 layout: docs
 methods:
 
+  - signature: firestore.addDocument(collectionRef, data)
+    id: addDocument
+    generator: true
+    description: Adds a new document to this collection with the specified data, assigning it a document ID automatically.
+    arguments:
+      - name: collectionRef
+        required: true
+        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
+      - name: data
+        required: true
+        type: An object
+    output: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference)
+    example: |
+      ```js
+      function* addDocument() {
+        const doc = yield call(
+          rsf.firestore.addDocument,
+          'users',
+          {
+            firstName: 'Elon',
+            lastName: 'Musk'
+          }
+        );
+      }
+      ```
+
   - signature: firestore.getCollection(collectionRef)
     id: getCollection
     generator: true

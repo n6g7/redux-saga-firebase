@@ -1,5 +1,10 @@
 import { call } from 'redux-saga/effects'
 
+function * addDocument (collectionRef, data) {
+  const collection = this._getCollection(collectionRef)
+  return yield call([collection, collection.add], data)
+}
+
 function * getCollection (collectionRef) {
   const collection = this._getCollection(collectionRef)
   return yield call([collection, collection.get])
@@ -11,6 +16,7 @@ function * getDocument (collectionRef, docRef) {
 }
 
 export default {
+  addDocument,
   getCollection,
   getDocument
 }

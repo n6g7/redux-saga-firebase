@@ -10,6 +10,7 @@ describe('firestore', () => {
       get: jest.fn()
     }
     collection = {
+      add: jest.fn(),
       doc: jest.fn(() => doc),
       get: jest.fn()
     }
@@ -20,6 +21,27 @@ describe('firestore', () => {
 
   afterEach(() => {
     expect.hasAssertions()
+  })
+
+  describe('addDocument(collectionRef, data)', () => {
+    it('works', () => {
+      const collectionRef = 'skddksl'
+      const data = 'qplsmdkqlm'
+      const result = 'kd'
+
+      const iterator = firestoreModule.addDocument.call(context, collectionRef, data)
+
+      expect(iterator.next().value)
+        .toEqual(call([collection, collection.add], data))
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+
+      expect(iterator.next(result)).toEqual({
+        done: true,
+        value: result
+      })
+    })
   })
 
   describe('getCollection(collectionRef)', () => {
