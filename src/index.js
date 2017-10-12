@@ -50,7 +50,8 @@ class ReduxSagaFirebase {
       addDocument: firestore.addDocument.bind(this),
       deleteDocument: firestore.deleteDocument.bind(this),
       getCollection: firestore.getCollection.bind(this),
-      getDocument: firestore.getDocument.bind(this)
+      getDocument: firestore.getDocument.bind(this),
+      setDocument: firestore.setDocument.bind(this)
     }
 
     // Functions methods

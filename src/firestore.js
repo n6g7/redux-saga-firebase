@@ -20,9 +20,15 @@ function * getDocument (collectionRef, docRef) {
   return yield call([doc, doc.get])
 }
 
+function * setDocument (collectionRef, docRef, data, options) {
+  const doc = this._getCollection(collectionRef).doc(docRef)
+  return yield call([doc, doc.set], data, options)
+}
+
 export default {
   addDocument,
   deleteDocument,
   getCollection,
-  getDocument
+  getDocument,
+  setDocument
 }

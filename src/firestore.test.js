@@ -8,7 +8,8 @@ describe('firestore', () => {
   beforeEach(() => {
     doc = {
       delete: jest.fn(),
-      get: jest.fn()
+      get: jest.fn(),
+      set: jest.fn()
     }
     collection = {
       add: jest.fn(),
@@ -110,6 +111,34 @@ describe('firestore', () => {
       expect(iterator.next(result)).toEqual({
         done: true,
         value: result
+      })
+    })
+  })
+
+  describe('setDocument(collectionRef, docRef, data, options)', () => {
+    it('works', () => {
+      const collectionRef = 'skddksl'
+      const docRef = 'skddksld'
+      const data = 'qlsdl'
+      const options = 'oqskdqm'
+
+      const iterator = firestoreModule.setDocument.call(
+        context,
+        collectionRef,
+        docRef,
+        data,
+        options
+      )
+
+      expect(iterator.next().value)
+        .toEqual(call([doc, doc.set], data, options))
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
       })
     })
   })

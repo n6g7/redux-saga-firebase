@@ -98,4 +98,30 @@ methods:
       }
       ```
 
+  - signature: firestore.setDocument(collectionRef, documentRef, data, options)
+    id: setDocument
+    generator: true
+    description: Writes to the document referred to by this DocumentReference. If the document does not exist yet, it will be created. If you pass options, the provided data can be merged into the existing document.
+    arguments:
+      - name: collectionRef
+        required: true
+        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
+      - name: documentRef
+        required: true
+        type: A slash-separated path to a document (string).
+      - name: data
+        required: true
+        type: An object of the fields and values for the document.
+      - name: options
+        required: false
+        type: An object to configure the set behavior. Pass `{merge: true}` to only replace the values specified in the data argument. Fields omitted will remain untouched.
+    example: |
+      ```js
+      function* setDocument() {
+        yield call(rsf.firestore.setDocument, 'users', '1', {
+          firstName: 'Leonardo'
+        });
+      }
+      ```
+
 ---
