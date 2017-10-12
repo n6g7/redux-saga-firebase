@@ -90,6 +90,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 **Firestore**
 
 - [`*firestore.addDocument(collectionRef, data) `](https://n6g7.github.io/redux-saga-firebase/reference/firestore#addDocument)
+- [`*firestore.deleteDocument(collectionRef, documentRef) `](https://n6g7.github.io/redux-saga-firebase/reference/firestore#deleteDocument)
 - [`*firestore.getCollection(collectionRef) `](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getCollection)
 - [`*firestore.getDocument(collectionRef, docRef) `](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getDocument)
 

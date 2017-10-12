@@ -48,6 +48,7 @@ describe('ReduxSagaFirebase', () => {
 
     it('defines firestore methods', () => {
       expect(rsf.firestore.addDocument).toBeInstanceOf(Function)
+      expect(rsf.firestore.deleteDocument).toBeInstanceOf(Function)
       expect(rsf.firestore.getCollection).toBeInstanceOf(Function)
       expect(rsf.firestore.getDocument).toBeInstanceOf(Function)
     })

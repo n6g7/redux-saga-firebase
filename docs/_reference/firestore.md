@@ -29,6 +29,28 @@ methods:
       }
       ```
 
+  - signature: firestore.deleteDocument(collectionRef, documentRef)
+    id: deleteDocument
+    generator: true
+    description: Deletes the document referred to by this DocumentReference.
+    arguments:
+      - name: collectionRef
+        required: true
+        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
+      - name: documentRef
+        required: true
+        type: A slash-separated path to a document (string).
+    example: |
+      ```js
+      function* deleteDocument() {
+        const doc = yield call(
+          rsf.firestore.deleteDocument,
+          'users',
+          'elonm'
+        );
+      }
+      ```
+
   - signature: firestore.getCollection(collectionRef)
     id: getCollection
     generator: true

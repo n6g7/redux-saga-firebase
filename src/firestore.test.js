@@ -7,6 +7,7 @@ describe('firestore', () => {
 
   beforeEach(() => {
     doc = {
+      delete: jest.fn(),
       get: jest.fn()
     }
     collection = {
@@ -40,6 +41,26 @@ describe('firestore', () => {
       expect(iterator.next(result)).toEqual({
         done: true,
         value: result
+      })
+    })
+  })
+
+  describe('deleteDocument(collectionRef, documentRef)', () => {
+    it('works', () => {
+      const collectionRef = 'skddksl'
+      const documentRef = 'qplsmdkqlm'
+
+      const iterator = firestoreModule.deleteDocument.call(context, collectionRef, documentRef)
+
+      expect(iterator.next().value)
+        .toEqual(call([doc, doc.delete]))
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
       })
     })
   })
