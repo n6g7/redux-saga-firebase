@@ -90,11 +90,11 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 **Firestore**
 
 - [`*firestore.addDocument(collectionRef, data)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#addDocument)
-- [`*firestore.deleteDocument(collectionRef, documentRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#deleteDocument)
+- [`*firestore.deleteDocument(documentRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#deleteDocument)
 - [`*firestore.getCollection(collectionRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getCollection)
-- [`*firestore.getDocument(collectionRef, docRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getDocument)
-- [`*firestore.setDocument(collectionRef, docRef, data, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#setDocument)
-- [`*firestore.updateDocument(collectionRef, docRef, ...args)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#updateDocument)
+- [`*firestore.getDocument(docRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getDocument)
+- [`*firestore.setDocument(docRef, data, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#setDocument)
+- [`*firestore.updateDocument(docRef, ...args)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#updateDocument)
 
 **Functions**
 

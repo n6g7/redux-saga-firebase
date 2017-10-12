@@ -101,6 +101,12 @@ class ReduxSagaFirebase {
       ? this.app.firestore().collection(pathOrRef)
       : pathOrRef
   }
+
+  _getDocument (pathOrRef) {
+    return typeof pathOrRef === 'string'
+      ? this.app.firestore().doc(pathOrRef)
+      : pathOrRef
+  }
 }
 
 export default ReduxSagaFirebase

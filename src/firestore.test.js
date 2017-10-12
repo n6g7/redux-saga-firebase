@@ -18,7 +18,8 @@ describe('firestore', () => {
       get: jest.fn()
     }
     context = {
-      _getCollection: jest.fn(() => collection)
+      _getCollection: jest.fn(() => collection),
+      _getDocument: jest.fn(() => doc)
     }
   })
 
@@ -47,18 +48,17 @@ describe('firestore', () => {
     })
   })
 
-  describe('deleteDocument(collectionRef, documentRef)', () => {
+  describe('deleteDocument(documentRef)', () => {
     it('works', () => {
-      const collectionRef = 'skddksl'
       const documentRef = 'qplsmdkqlm'
 
-      const iterator = firestoreModule.deleteDocument.call(context, collectionRef, documentRef)
+      const iterator = firestoreModule.deleteDocument.call(context, documentRef)
 
       expect(iterator.next().value)
         .toEqual(call([doc, doc.delete]))
 
-      expect(context._getCollection.mock.calls.length).toBe(1)
-      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+      expect(context._getDocument.mock.calls.length).toBe(1)
+      expect(context._getDocument.mock.calls[0]).toEqual([documentRef])
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -92,22 +92,21 @@ describe('firestore', () => {
     })
   })
 
-  describe('getDocument(collectionRef, docRef)', () => {
+  describe('getDocument(documentRef)', () => {
     it('works', () => {
-      const collectionRef = 'skddksl'
-      const docRef = 'skddksld'
+      const documentRef = 'skddksld'
       const val = 'jqdqkld'
       const result = {
         data: jest.fn(() => val),
         id: 0
       }
-      const iterator = firestoreModule.getDocument.call(context, collectionRef, docRef)
+      const iterator = firestoreModule.getDocument.call(context, documentRef)
 
       expect(iterator.next().value)
         .toEqual(call([doc, doc.get]))
 
-      expect(context._getCollection.mock.calls.length).toBe(1)
-      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+      expect(context._getDocument.mock.calls.length).toBe(1)
+      expect(context._getDocument.mock.calls[0]).toEqual([documentRef])
 
       expect(iterator.next(result)).toEqual({
         done: true,
@@ -116,17 +115,15 @@ describe('firestore', () => {
     })
   })
 
-  describe('setDocument(collectionRef, docRef, data, options)', () => {
+  describe('setDocument(documentRef, data, options)', () => {
     it('works', () => {
-      const collectionRef = 'skddksl'
-      const docRef = 'skddksld'
+      const documentRef = 'skddksld'
       const data = 'qlsdl'
       const options = 'oqskdqm'
 
       const iterator = firestoreModule.setDocument.call(
         context,
-        collectionRef,
-        docRef,
+        documentRef,
         data,
         options
       )
@@ -134,8 +131,8 @@ describe('firestore', () => {
       expect(iterator.next().value)
         .toEqual(call([doc, doc.set], data, options))
 
-      expect(context._getCollection.mock.calls.length).toBe(1)
-      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+      expect(context._getDocument.mock.calls.length).toBe(1)
+      expect(context._getDocument.mock.calls[0]).toEqual([documentRef])
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -144,24 +141,22 @@ describe('firestore', () => {
     })
   })
 
-  describe('updateDocument(collectionRef, docRef, ...args)', () => {
+  describe('updateDocument(documentRef, ...args)', () => {
     it('works', () => {
-      const collectionRef = 'skddksl'
-      const docRef = 'skddksld'
+      const documentRef = 'skddksld'
       const args = ['qlsdl', 'pkqosdqk^']
 
       const iterator = firestoreModule.updateDocument.call(
         context,
-        collectionRef,
-        docRef,
+        documentRef,
         ...args
       )
 
       expect(iterator.next().value)
         .toEqual(call([doc, doc.update], ...args))
 
-      expect(context._getCollection.mock.calls.length).toBe(1)
-      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+      expect(context._getDocument.mock.calls.length).toBe(1)
+      expect(context._getDocument.mock.calls[0]).toEqual([documentRef])
 
       expect(iterator.next()).toEqual({
         done: true,

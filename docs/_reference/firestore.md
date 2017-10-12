@@ -29,25 +29,18 @@ methods:
       }
       ```
 
-  - signature: firestore.deleteDocument(collectionRef, documentRef)
+  - signature: firestore.deleteDocument(documentRef)
     id: deleteDocument
     generator: true
     description: Deletes the document referred to by this DocumentReference.
     arguments:
-      - name: collectionRef
-        required: true
-        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
       - name: documentRef
         required: true
-        type: A slash-separated path to a document (string).
+        type: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document (string).
     example: |
       ```js
       function* deleteDocument() {
-        const doc = yield call(
-          rsf.firestore.deleteDocument,
-          'users',
-          'elonm'
-        );
+        yield call(rsf.firestore.deleteDocument, 'users/elonm');
       }
       ```
 
@@ -76,39 +69,33 @@ methods:
       }
       ```
 
-  - signature: firestore.getDocument(collectionRef, documentRef)
+  - signature: firestore.getDocument(documentRef)
     id: getDocument
     generator: true
     description: Reads the document referred to by this documentRef.
     arguments:
-      - name: collectionRef
-        required: true
-        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
       - name: documentRef
         required: true
-        type: A slash-separated path to a document (string).
+        type: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document (string).
     output: A [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot)
     example: |
       ```js
       function* getDocument() {
-        const snapshot = yield call(rsf.firestore.getDocument, 'users', '1');
+        const snapshot = yield call(rsf.firestore.getDocument, 'users/1');
         const user = snapshot.data();
 
         yield put(gotUser(user));
       }
       ```
 
-  - signature: firestore.setDocument(collectionRef, documentRef, data, options)
+  - signature: firestore.setDocument(documentRef, data, options)
     id: setDocument
     generator: true
     description: Writes to the document referred to by this DocumentReference. If the document does not exist yet, it will be created. If you pass options, the provided data can be merged into the existing document.
     arguments:
-      - name: collectionRef
-        required: true
-        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
       - name: documentRef
         required: true
-        type: A slash-separated path to a document (string).
+        type: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document (string).
       - name: data
         required: true
         type: An object of the fields and values for the document.
@@ -118,30 +105,29 @@ methods:
     example: |
       ```js
       function* setDocument() {
-        yield call(rsf.firestore.setDocument, 'users', '1', {
-          firstName: 'Leonardo'
-        });
+        yield call(
+          rsf.firestore.setDocument,
+          'users/1',
+          { firstName: 'Leonardo' }
+        );
       }
       ```
 
-  - signature: firestore.updateDocument(collectionRef, documentRef, ...args)
+  - signature: firestore.updateDocument(documentRef, ...args)
     id: updateDocument
     generator: true
     description: Updates fields in the document referred to by this DocumentReference. The update will fail if applied to a document that does not exist.
     arguments:
-      - name: collectionRef
-        required: true
-        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
       - name: documentRef
         required: true
-        type: A slash-separated path to a document (string).
+        type: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document (string).
       - name: args
         required: true
         type: Either an object containing all of the fields and values to update, or a series of arguments alternating between fields (as string or firebase.firestore.FieldPath objects) and values.
     example: |
       ```js
       function* updateDocument() {
-        yield call(rsf.firestore.updateDocument, 'users', '1', 'lastName', 'Da Vinci');
+        yield call(rsf.firestore.updateDocument, 'users/1', 'lastName', 'Da Vinci');
       }
       ```
 

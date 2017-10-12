@@ -5,8 +5,8 @@ function * addDocument (collectionRef, data) {
   return yield call([collection, collection.add], data)
 }
 
-function * deleteDocument (collectionRef, docRef) {
-  const doc = this._getCollection(collectionRef).doc(docRef)
+function * deleteDocument (documentRef) {
+  const doc = this._getDocument(documentRef)
   return yield call([doc, doc.delete])
 }
 
@@ -15,18 +15,18 @@ function * getCollection (collectionRef) {
   return yield call([collection, collection.get])
 }
 
-function * getDocument (collectionRef, docRef) {
-  const doc = this._getCollection(collectionRef).doc(docRef)
+function * getDocument (documentRef) {
+  const doc = this._getDocument(documentRef)
   return yield call([doc, doc.get])
 }
 
-function * setDocument (collectionRef, docRef, data, options) {
-  const doc = this._getCollection(collectionRef).doc(docRef)
+function * setDocument (documentRef, data, options) {
+  const doc = this._getDocument(documentRef)
   return yield call([doc, doc.set], data, options)
 }
 
-function * updateDocument (collectionRef, docRef, ...args) {
-  const doc = this._getCollection(collectionRef).doc(docRef)
+function * updateDocument (documentRef, ...args) {
+  const doc = this._getDocument(documentRef)
   return yield call([doc, doc.update], ...args)
 }
 
