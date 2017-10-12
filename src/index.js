@@ -48,7 +48,7 @@ class ReduxSagaFirebase {
     // Firestore methods
     this.firestore = {
       getCollection: firestore.getCollection.bind(this),
-      getDoc: firestore.getDoc.bind(this)
+      getDocument: firestore.getDocument.bind(this)
     }
 
     // Functions methods

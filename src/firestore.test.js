@@ -22,30 +22,6 @@ describe('firestore', () => {
     expect.hasAssertions()
   })
 
-  describe('getDoc(collectionRef, docRef)', () => {
-    it('works', () => {
-      const collectionRef = 'skddksl'
-      const docRef = 'skddksld'
-      const val = 'jqdqkld'
-      const result = {
-        data: jest.fn(() => val),
-        id: 0
-      }
-      const iterator = dbModule.getDoc.call(context, collectionRef, docRef)
-
-      expect(iterator.next().value)
-        .toEqual(call([doc, doc.get]))
-
-      expect(context._getCollection.mock.calls.length).toBe(1)
-      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
-
-      expect(iterator.next(result)).toEqual({
-        done: true,
-        value: result
-      })
-    })
-  })
-
   describe('getCollection(collectionRef)', () => {
     it('works', () => {
       const collectionRef = 'skddksl'
@@ -67,6 +43,30 @@ describe('firestore', () => {
       expect(iterator.next(response)).toEqual({
         done: true,
         value: response
+      })
+    })
+  })
+
+  describe('getDocument(collectionRef, docRef)', () => {
+    it('works', () => {
+      const collectionRef = 'skddksl'
+      const docRef = 'skddksld'
+      const val = 'jqdqkld'
+      const result = {
+        data: jest.fn(() => val),
+        id: 0
+      }
+      const iterator = dbModule.getDocument.call(context, collectionRef, docRef)
+
+      expect(iterator.next().value)
+        .toEqual(call([doc, doc.get]))
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+      expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+
+      expect(iterator.next(result)).toEqual({
+        done: true,
+        value: result
       })
     })
   })

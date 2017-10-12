@@ -28,8 +28,8 @@ methods:
       }
       ```
 
-  - signature: firestore.getDoc(collectionRef, docRef)
-    id: getDoc
+  - signature: firestore.getDocument(collectionRef, docRef)
+    id: getDocument
     generator: true
     description: Reads the document referred to by this docRef.
     arguments:
@@ -43,7 +43,7 @@ methods:
     example: |
       ```js
       function* getDocument() {
-        const snapshot = yield call(rsf.firestore.getDoc, 'users', '1');
+        const snapshot = yield call(rsf.firestore.getDocument, 'users', '1');
         const user = snapshot.data();
 
         yield put(gotUser(user));
