@@ -21,7 +21,7 @@
     "type": "git"
   },
   "dependencies": {
-    "redux-saga": "^0.15.4"
+    "redux-saga": "^0.16.0"
   },
   "peerDependencies": {
     "firebase": "^4.1.1"
