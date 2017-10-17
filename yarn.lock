@@ -2822,9 +2822,9 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-redux-saga@^0.15.4:
-  version "0.15.4"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.15.4.tgz#27982a947280053b7ecbb5d3170c837a5fe6b261"
+redux-saga@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
 
 regenerate@^1.2.1:
   version "1.3.2"
