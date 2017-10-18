@@ -160,7 +160,7 @@ function documentGet(collection, document) {
 
         case 3:
           documentSnapshot = _context5.sent;
-          return _context5.abrupt('return', documentSnapshot.data());
+          return _context5.abrupt('return', { id: documentSnapshot.id, data: documentSnapshot.data() });
 
         case 5:
         case 'end':
@@ -191,7 +191,7 @@ function documentAllGet(collection) {
         case 3:
           querySnapshot = _context6.sent;
           return _context6.abrupt('return', querySnapshot.docs.map(function (doc) {
-            return doc.data();
+            return { id: doc.id, data: doc.data() };
           }));
 
         case 5:

@@ -70,7 +70,7 @@ function * documentGet(collection, document)
 {
   const docRef = this._getCollectionDocument(collection, document, 'firestore')
   const documentSnapshot = yield call([docRef, docRef.get])
-  return documentSnapshot.data()
+  return {id: documentSnapshot.id, data:documentSnapshot.data()}
 }
 
 /**
@@ -85,7 +85,7 @@ function * documentAllGet(collection)
 {
   const collectionRef = this._getCollection(collection, 'firestore')
   const querySnapshot = yield call([collectionRef, collectionRef.get])
-  return querySnapshot.docs.map(doc=>doc.data())
+  return querySnapshot.docs.map(doc=>({id: doc.id, data:doc.data()}))
 }
 
 /**
