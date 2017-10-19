@@ -102,6 +102,21 @@ class ReduxSagaFirebase {
       ? this.app[service]().collection(collectionRef).doc(documentRef)
       : collectionRef
   }
+  /**
+   * 
+   * @param {Array} branches @desc Recursively access collection,document,collection,document...sub-collections
+   * @param {String} service 
+   */
+  _getCollectionDocumentRecursive (branches, service) {
+    let destination = this.app[service]()
+    branches.forEach(branch=> {
+      let key = Object.keys(branch)[0]
+      let value = branch[key]
+      destination.key(value)
+    })
+    console.log(destination)
+    return destination
+  }
 }
 
 export default ReduxSagaFirebase
