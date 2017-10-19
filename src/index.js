@@ -92,16 +92,6 @@ class ReduxSagaFirebase {
       ? this.app[service]().ref(pathOrRef)
       : pathOrRef
   }
-  _getCollection (pathOrRef, service) {
-    return (typeof pathOrRef === 'string')
-      ? this.app[service]().collection(pathOrRef)
-      : pathOrRef
-  }
-  _getCollectionDocument (collectionRef, documentRef, service) {
-    return (typeof collectionRef === 'string' && typeof documentRef === 'string')
-      ? this.app[service]().collection(collectionRef).doc(documentRef)
-      : collectionRef
-  }
   /**
    * 
    * @param {Array} branch @desc Recursively access collection,document,collection,document...sub-collections
