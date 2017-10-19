@@ -104,18 +104,17 @@ class ReduxSagaFirebase {
   }
   /**
    * 
-   * @param {Array} branches @desc Recursively access collection,document,collection,document...sub-collections
+   * @param {Array} branch @desc Recursively access collection,document,collection,document...sub-collections
    * @param {String} service 
    */
-  _getBranch (branches, service) {
-    let destination = this.app[service]()
-    branches.forEach(branch=> {
-      let key = Object.keys(branch)[0]
-      let value = branch[key]
-      destination.key(value)
-    })
-    console.log(destination)
-    return destination
+  _getBranch (branch, service) {
+    return [this.app[service](), ...branch].reduce((a, v, i)=> {
+      return !i 
+      ? v
+      : i % 2
+        ? a.collection(v)
+        : a.doc(v)
+    });
   }
 }
 

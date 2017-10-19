@@ -10,11 +10,10 @@ import { call, cancelled, put, take } from 'redux-saga/effects'
  * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#add
  * @return {String} auto-generated document ID
  */
-function * documentAdd(collection, data)
+function * documentAdd(branch, data)
 {
-  const collectionRef = this._getCollection(collection, 'firestore')
-  console.log(collectionRef)
-  return yield call([collectionRef,collectionRef.add], data)
+  const ref = this._getBranch(branch, 'firestore')
+  return yield call([ref,ref.add], data)
 }
 
 /**
@@ -25,10 +24,10 @@ function * documentAdd(collection, data)
  * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#doc
  * @return {String} auto-generated document ID
  */
-function * documentEmptyAdd(collection)
+function * documentEmptyAdd(branch)
 {
-  const collectionRef = this._getCollection(collection, 'firestore')
-  return yield call([collectionRef,collectionRef.doc]) // Auto-generated ID
+  const ref = this._getBranch(branch, 'firestore')
+  return yield call([ref,ref.doc]) // Auto-generated ID
 }
 
 /**
@@ -40,10 +39,10 @@ function * documentEmptyAdd(collection)
  * @desc Edit document, passing data object from Frontend, overwriting or merging with the existing data structure in the Backend(Firestore)
  * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#set
  */
-function * documentSet(collection, document, data, merge=false)
+function * documentSet(branch, data, merge=false)
 {
-  const docRef = this._getCollectionDocument(collection, document, 'firestore')
-  return yield call([docRef,docRef.set], data,{merge:merge})
+  const ref = this._getBranch(branch, 'firestore')
+  return yield call([ref,ref.set], data,{merge:merge})
 }
 
 /**
@@ -54,9 +53,9 @@ function * documentSet(collection, document, data, merge=false)
  * 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update
  */
-function * documentUpdate(branches, data)
+function * documentUpdate(branch, data)
 {
-  const ref = this._getBranch(branches, 'firestore')
+  const ref = this._getBranch(branch, 'firestore')
   return yield call([ref,ref.update], data)
 }
 
@@ -66,10 +65,11 @@ function * documentUpdate(branches, data)
  * @param {String} document 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get
  */
-function * documentGet(collection, document)
+function * documentGet(branch, document)
 {
-  const docRef = this._getCollectionDocument(collection, document, 'firestore')
-  const documentSnapshot = yield call([docRef, docRef.get])
+  const ref = this._getBranch(branch, 'firestore')
+  console.log(ref)
+  const documentSnapshot = yield call([ref, ref.get])
   return {id: documentSnapshot.id, data:documentSnapshot.data()}
 }
 
@@ -81,10 +81,10 @@ function * documentGet(collection, document)
  * 
  * @return {Array} All documents from collection  
  */
-function * documentAllGet(collection)
+function * documentAllGet(branch)
 {
-  const collectionRef = this._getCollection(collection, 'firestore')
-  const querySnapshot = yield call([collectionRef, collectionRef.get])
+  const ref = this._getBranch(branch, 'firestore')
+  const querySnapshot = yield call([ref, ref.get])
   return querySnapshot.docs.map(doc=>({id: doc.id, data:doc.data()}))
 }
 
@@ -104,22 +104,22 @@ function * documentAllGet(collection)
  * 
  * * @return {Array} Filtered documents from collection
  */
-function * documentFilterGet(collection, filters)
+function * documentFilterGet(branch, filters)
 {
-  let collectionRef = this._getCollection(collection, 'firestore')
+  let ref = this._getBranch(branch, 'firestore')
   if(filters)
   {
-    if(filters.limit) collectionRef = collectionRef.limit(filters.limit)
-    if(filters.orderBy) filters.orderBy.forEach( orderBy => collectionRef = collectionRef.orderBy(orderBy))
+    if(filters.limit) ref = ref.limit(filters.limit)
+    if(filters.orderBy) filters.orderBy.forEach( orderBy => ref = ref.orderBy(orderBy))
     if (filters.paginate) {
-      if(filters.paginate.startAfter) collectionRef = collectionRef.startAfter(filters.paginate.startAfter)
-      if(filters.paginate.startAt) collectionRef = collectionRef.startAt(filters.paginate.startAt)
-      if(filters.paginate.endAt) collectionRef = collectionRef.endAt(filters.paginate.endAt)
-      if(filters.paginate.endBefore) collectionRef = collectionRef.endBefore(filters.paginate.endBefore)
+      if(filters.paginate.startAfter) ref = ref.startAfter(filters.paginate.startAfter)
+      if(filters.paginate.startAt) ref = ref.startAt(filters.paginate.startAt)
+      if(filters.paginate.endAt) ref = ref.endAt(filters.paginate.endAt)
+      if(filters.paginate.endBefore) ref = ref.endBefore(filters.paginate.endBefore)
     }
-    if(filters.where)  filters.where.forEach( where => collectionRef = collectionRef.where(...where))
+    if(filters.where)  filters.where.forEach( where => ref = ref.where(...where))
   }
-  const querySnapshot = yield call([collectionRef, collectionRef.get])
+  const querySnapshot = yield call([ref, ref.get])
   return querySnapshot.docs.map(doc=>({id: doc.id, data:doc.data()}))
 }
 
@@ -131,10 +131,10 @@ function * documentFilterGet(collection, filters)
  * 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#delete
  */
-function * documentDelete(collection, document)
+function * documentDelete(branch)
 {
-  const docRef = this._getCollectionDocument(collection,document, 'firestore')
-  return yield call([docRef,docRef.delete])
+  const ref = this._getBranch(branch, 'firestore')
+  return yield call([ref,ref.delete])
 }
 
 /**
@@ -147,13 +147,11 @@ function * documentDelete(collection, document)
  */
 function * documentFieldsDelete(collection, document, fields)
 {
-  const firestore = this.app.firestore()
+  const firestore = this.app.firestore() // Required to access Field Constructor
   const fieldsDelete = {}
-  console.log(firestore)
-  const docRef = yield this._getCollectionDocument(collection,document, 'firestore')
-  console.log(docRef)
+  const ref = this._getBranch(branch, 'firestore')
   fields.forEach(field=>(fieldsDelete[field] = firestore.FieldValue.delete()))
-  return yield call([docRef,docRef.update], fields)
+  return yield call([ref,ref.update], fields)
 }
 
 export default {

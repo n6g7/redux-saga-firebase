@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _keys = require('babel-runtime/core-js/object/keys');
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
-var _keys2 = _interopRequireDefault(_keys);
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
@@ -139,21 +139,16 @@ var ReduxSagaFirebase = function () {
     }
     /**
      * 
-     * @param {Array} branches @desc Recursively access collection,document,collection,document...sub-collections
+     * @param {Array} branch @desc Recursively access collection,document,collection,document...sub-collections
      * @param {String} service 
      */
 
   }, {
     key: '_getBranch',
-    value: function _getBranch(branches, service) {
-      var destination = this.app[service]();
-      branches.forEach(function (branch) {
-        var key = (0, _keys2.default)(branch)[0];
-        var value = branch[key];
-        destination.key(value);
+    value: function _getBranch(branch, service) {
+      return [this.app[service]()].concat((0, _toConsumableArray3.default)(branch)).reduce(function (a, v, i) {
+        return !i ? v : i % 2 ? a.collection(v) : a.doc(v);
       });
-      console.log(destination);
-      return destination;
     }
   }]);
   return ReduxSagaFirebase;

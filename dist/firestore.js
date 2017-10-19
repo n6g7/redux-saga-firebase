@@ -29,22 +29,20 @@ var _marked = [documentAdd, documentEmptyAdd, documentSet, documentUpdate, docum
  * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#add
  * @return {String} auto-generated document ID
  */
-function documentAdd(collection, data) {
-  var collectionRef;
+function documentAdd(branch, data) {
+  var ref;
   return _regenerator2.default.wrap(function documentAdd$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          collectionRef = this._getCollection(collection, 'firestore');
+          ref = this._getBranch(branch, 'firestore');
+          _context.next = 3;
+          return (0, _effects.call)([ref, ref.add], data);
 
-          console.log(collectionRef);
-          _context.next = 4;
-          return (0, _effects.call)([collectionRef, collectionRef.add], data);
-
-        case 4:
+        case 3:
           return _context.abrupt('return', _context.sent);
 
-        case 5:
+        case 4:
         case 'end':
           return _context.stop();
       }
@@ -60,15 +58,15 @@ function documentAdd(collection, data) {
  * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#doc
  * @return {String} auto-generated document ID
  */
-function documentEmptyAdd(collection) {
-  var collectionRef;
+function documentEmptyAdd(branch) {
+  var ref;
   return _regenerator2.default.wrap(function documentEmptyAdd$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          collectionRef = this._getCollection(collection, 'firestore');
+          ref = this._getBranch(branch, 'firestore');
           _context2.next = 3;
-          return (0, _effects.call)([collectionRef, collectionRef.doc] // Auto-generated ID
+          return (0, _effects.call)([ref, ref.doc] // Auto-generated ID
           );
 
         case 3:
@@ -91,16 +89,16 @@ function documentEmptyAdd(collection) {
  * @desc Edit document, passing data object from Frontend, overwriting or merging with the existing data structure in the Backend(Firestore)
  * @resource https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#set
  */
-function documentSet(collection, document, data) {
-  var merge = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-  var docRef;
+function documentSet(branch, data) {
+  var merge = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var ref;
   return _regenerator2.default.wrap(function documentSet$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          docRef = this._getCollectionDocument(collection, document, 'firestore');
+          ref = this._getBranch(branch, 'firestore');
           _context3.next = 3;
-          return (0, _effects.call)([docRef, docRef.set], data, { merge: merge });
+          return (0, _effects.call)([ref, ref.set], data, { merge: merge });
 
         case 3:
           return _context3.abrupt('return', _context3.sent);
@@ -121,13 +119,13 @@ function documentSet(collection, document, data) {
  * 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update
  */
-function documentUpdate(branches, data) {
+function documentUpdate(branch, data) {
   var ref;
   return _regenerator2.default.wrap(function documentUpdate$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          ref = this._getBranch(branches, 'firestore');
+          ref = this._getBranch(branch, 'firestore');
           _context4.next = 3;
           return (0, _effects.call)([ref, ref.update], data);
 
@@ -148,21 +146,23 @@ function documentUpdate(branches, data) {
  * @param {String} document 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#get
  */
-function documentGet(collection, document) {
-  var docRef, documentSnapshot;
+function documentGet(branch, document) {
+  var ref, documentSnapshot;
   return _regenerator2.default.wrap(function documentGet$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          docRef = this._getCollectionDocument(collection, document, 'firestore');
-          _context5.next = 3;
-          return (0, _effects.call)([docRef, docRef.get]);
+          ref = this._getBranch(branch, 'firestore');
 
-        case 3:
+          console.log(ref);
+          _context5.next = 4;
+          return (0, _effects.call)([ref, ref.get]);
+
+        case 4:
           documentSnapshot = _context5.sent;
           return _context5.abrupt('return', { id: documentSnapshot.id, data: documentSnapshot.data() });
 
-        case 5:
+        case 6:
         case 'end':
           return _context5.stop();
       }
@@ -178,15 +178,15 @@ function documentGet(collection, document) {
  * 
  * @return {Array} All documents from collection  
  */
-function documentAllGet(collection) {
-  var collectionRef, querySnapshot;
+function documentAllGet(branch) {
+  var ref, querySnapshot;
   return _regenerator2.default.wrap(function documentAllGet$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
-          collectionRef = this._getCollection(collection, 'firestore');
+          ref = this._getBranch(branch, 'firestore');
           _context6.next = 3;
-          return (0, _effects.call)([collectionRef, collectionRef.get]);
+          return (0, _effects.call)([ref, ref.get]);
 
         case 3:
           querySnapshot = _context6.sent;
@@ -218,33 +218,33 @@ function documentAllGet(collection) {
  * 
  * * @return {Array} Filtered documents from collection
  */
-function documentFilterGet(collection, filters) {
-  var collectionRef, querySnapshot;
+function documentFilterGet(branch, filters) {
+  var ref, querySnapshot;
   return _regenerator2.default.wrap(function documentFilterGet$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
-          collectionRef = this._getCollection(collection, 'firestore');
+          ref = this._getBranch(branch, 'firestore');
 
           if (filters) {
-            if (filters.limit) collectionRef = collectionRef.limit(filters.limit);
+            if (filters.limit) ref = ref.limit(filters.limit);
             if (filters.orderBy) filters.orderBy.forEach(function (orderBy) {
-              return collectionRef = collectionRef.orderBy(orderBy);
+              return ref = ref.orderBy(orderBy);
             });
             if (filters.paginate) {
-              if (filters.paginate.startAfter) collectionRef = collectionRef.startAfter(filters.paginate.startAfter);
-              if (filters.paginate.startAt) collectionRef = collectionRef.startAt(filters.paginate.startAt);
-              if (filters.paginate.endAt) collectionRef = collectionRef.endAt(filters.paginate.endAt);
-              if (filters.paginate.endBefore) collectionRef = collectionRef.endBefore(filters.paginate.endBefore);
+              if (filters.paginate.startAfter) ref = ref.startAfter(filters.paginate.startAfter);
+              if (filters.paginate.startAt) ref = ref.startAt(filters.paginate.startAt);
+              if (filters.paginate.endAt) ref = ref.endAt(filters.paginate.endAt);
+              if (filters.paginate.endBefore) ref = ref.endBefore(filters.paginate.endBefore);
             }
             if (filters.where) filters.where.forEach(function (where) {
-              var _collectionRef;
+              var _ref;
 
-              return collectionRef = (_collectionRef = collectionRef).where.apply(_collectionRef, (0, _toConsumableArray3.default)(where));
+              return ref = (_ref = ref).where.apply(_ref, (0, _toConsumableArray3.default)(where));
             });
           }
           _context7.next = 4;
-          return (0, _effects.call)([collectionRef, collectionRef.get]);
+          return (0, _effects.call)([ref, ref.get]);
 
         case 4:
           querySnapshot = _context7.sent;
@@ -268,15 +268,15 @@ function documentFilterGet(collection, filters) {
  * 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#delete
  */
-function documentDelete(collection, document) {
-  var docRef;
+function documentDelete(branch) {
+  var ref;
   return _regenerator2.default.wrap(function documentDelete$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
         case 0:
-          docRef = this._getCollectionDocument(collection, document, 'firestore');
+          ref = this._getBranch(branch, 'firestore');
           _context8.next = 3;
-          return (0, _effects.call)([docRef, docRef.delete]);
+          return (0, _effects.call)([ref, ref.delete]);
 
         case 3:
           return _context8.abrupt('return', _context8.sent);
@@ -298,32 +298,26 @@ function documentDelete(collection, document) {
  * @desc Delete an array of document fields
  */
 function documentFieldsDelete(collection, document, fields) {
-  var firestore, fieldsDelete, docRef;
+  var firestore, fieldsDelete, ref;
   return _regenerator2.default.wrap(function documentFieldsDelete$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
-          firestore = this.app.firestore();
+          firestore = this.app.firestore // Required to access Field Constructor
+          ();
           fieldsDelete = {};
+          ref = this._getBranch(branch, 'firestore');
 
-          console.log(firestore);
-          _context9.next = 5;
-          return this._getCollectionDocument(collection, document, 'firestore');
-
-        case 5:
-          docRef = _context9.sent;
-
-          console.log(docRef);
           fields.forEach(function (field) {
             return fieldsDelete[field] = firestore.FieldValue.delete();
           });
-          _context9.next = 10;
-          return (0, _effects.call)([docRef, docRef.update], fields);
+          _context9.next = 6;
+          return (0, _effects.call)([ref, ref.update], fields);
 
-        case 10:
+        case 6:
           return _context9.abrupt('return', _context9.sent);
 
-        case 11:
+        case 7:
         case 'end':
           return _context9.stop();
       }
