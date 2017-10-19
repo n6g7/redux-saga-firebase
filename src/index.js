@@ -98,7 +98,7 @@ class ReduxSagaFirebase {
    * @param {String} service 
    */
   _getBranch (branch, service) {
-    return [this.app[service](), ...branch].reduce((a, v, i)=> {
+    return [this.app.firestore(), ...branch].reduce((a, v, i)=> {
       return !i 
       ? v
       : i % 2
