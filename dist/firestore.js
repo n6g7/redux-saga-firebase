@@ -121,15 +121,15 @@ function documentSet(collection, document, data) {
  * 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update
  */
-function documentUpdate(collection, document, data) {
-  var docRef;
+function documentUpdate(branches, data) {
+  var ref;
   return _regenerator2.default.wrap(function documentUpdate$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          docRef = this._getCollectionDocument(collection, document, 'firestore');
+          ref = this._getBranch(branches, 'firestore');
           _context4.next = 3;
-          return (0, _effects.call)([docRef, docRef.update], data);
+          return (0, _effects.call)([ref, ref.update], data);
 
         case 3:
           return _context4.abrupt('return', _context4.sent);

@@ -54,10 +54,10 @@ function * documentSet(collection, document, data, merge=false)
  * 
  * @desc https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#update
  */
-function * documentUpdate(collection, document, data)
+function * documentUpdate(branches, data)
 {
-  const docRef = this._getCollectionDocument(collection, document, 'firestore')
-  return yield call([docRef,docRef.update], data)
+  const ref = this._getBranch(branches, 'firestore')
+  return yield call([ref,ref.update], data)
 }
 
 /**

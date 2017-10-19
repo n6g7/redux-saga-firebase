@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -132,6 +136,24 @@ var ReduxSagaFirebase = function () {
     key: '_getCollectionDocument',
     value: function _getCollectionDocument(collectionRef, documentRef, service) {
       return typeof collectionRef === 'string' && typeof documentRef === 'string' ? this.app[service]().collection(collectionRef).doc(documentRef) : collectionRef;
+    }
+    /**
+     * 
+     * @param {Array} branches @desc Recursively access collection,document,collection,document...sub-collections
+     * @param {String} service 
+     */
+
+  }, {
+    key: '_getBranch',
+    value: function _getBranch(branches, service) {
+      var destination = this.app[service]();
+      branches.forEach(function (branch) {
+        var key = (0, _keys2.default)(branch)[0];
+        var value = branch[key];
+        destination.key(value);
+      });
+      console.log(destination);
+      return destination;
     }
   }]);
   return ReduxSagaFirebase;
