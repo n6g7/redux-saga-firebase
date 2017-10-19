@@ -127,16 +127,6 @@ var ReduxSagaFirebase = function () {
     value: function _getRef(pathOrRef, service) {
       return typeof pathOrRef === 'string' ? this.app[service]().ref(pathOrRef) : pathOrRef;
     }
-  }, {
-    key: '_getCollection',
-    value: function _getCollection(pathOrRef, service) {
-      return typeof pathOrRef === 'string' ? this.app[service]().collection(pathOrRef) : pathOrRef;
-    }
-  }, {
-    key: '_getCollectionDocument',
-    value: function _getCollectionDocument(collectionRef, documentRef, service) {
-      return typeof collectionRef === 'string' && typeof documentRef === 'string' ? this.app[service]().collection(collectionRef).doc(documentRef) : collectionRef;
-    }
     /**
      * 
      * @param {Array} branch @desc Recursively access collection,document,collection,document...sub-collections
