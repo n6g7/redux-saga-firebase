@@ -136,7 +136,7 @@ var ReduxSagaFirebase = function () {
   }, {
     key: '_getBranch',
     value: function _getBranch(branch, service) {
-      return [this.app[service]()].concat((0, _toConsumableArray3.default)(branch)).reduce(function (a, v, i) {
+      return [this.app.firestore()].concat((0, _toConsumableArray3.default)(branch)).reduce(function (a, v, i) {
         return !i ? v : i % 2 ? a.collection(v) : a.doc(v);
       });
     }
