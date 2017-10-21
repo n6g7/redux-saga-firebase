@@ -24,7 +24,7 @@
     "redux-saga": "^0.16.0"
   },
   "peerDependencies": {
-    "firebase": "^4.1.1"
+    "firebase": "^4.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

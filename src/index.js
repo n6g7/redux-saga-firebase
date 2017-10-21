@@ -6,8 +6,9 @@ import messaging from './messaging'
 import storage from './storage'
 
 class ReduxSagaFirebase {
-  constructor (firebaseApp) {
+  constructor (firebaseApp, firestoreDb) {
     this.app = firebaseApp
+    this.firestoreDb = firestoreDb
     this.region = 'us-central1'
 
     // Authentication methods
@@ -98,13 +99,13 @@ class ReduxSagaFirebase {
 
   _getCollection (pathOrRef) {
     return typeof pathOrRef === 'string'
-      ? this.app.firestore().collection(pathOrRef)
+      ? this.firestoreDb.collection(pathOrRef)
       : pathOrRef
   }
 
   _getDocument (pathOrRef) {
     return typeof pathOrRef === 'string'
-      ? this.app.firestore().doc(pathOrRef)
+      ? this.firestoreDb.doc(pathOrRef)
       : pathOrRef
   }
 }
