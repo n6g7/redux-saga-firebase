@@ -35,7 +35,6 @@ describe('utils', () => {
         })
 
       let data = 'abc'
-      let transformedData = 'def'
       const action1 = 'psodqp'
       actionCreator.mockReturnValueOnce(action1)
 
@@ -54,7 +53,6 @@ describe('utils', () => {
         })
 
       data = 'ghi'
-      transformedData = 'jkl'
       const action2 = 'djdqsqkp'
       actionCreator.mockReturnValueOnce(action2)
       expect(iterator.next(data))
