@@ -1,25 +1,32 @@
-import { call } from 'redux-saga/effects'
+import { call, fork } from 'redux-saga/effects'
 
 import firestoreModule from './firestore'
+import { syncChannel } from './utils'
 
 describe('firestore', () => {
-  let doc, collection, context
+  let document, collection, context, unsubscribe
 
   beforeEach(() => {
-    doc = {
+    unsubscribe = jest.fn()
+    document = {
       delete: jest.fn(),
       get: jest.fn(),
+      onSnapshot: jest.fn(() => unsubscribe),
       set: jest.fn(),
       update: jest.fn()
     }
     collection = {
       add: jest.fn(),
-      doc: jest.fn(() => doc),
-      get: jest.fn()
+      doc: jest.fn(() => document),
+      get: jest.fn(),
+      onSnapshot: jest.fn(() => unsubscribe)
     }
     context = {
       _getCollection: jest.fn(() => collection),
-      _getDocument: jest.fn(() => doc)
+      _getDocument: jest.fn(() => document),
+      firestore: {
+        channel: jest.fn()
+      }
     }
   })
 
@@ -48,6 +55,46 @@ describe('firestore', () => {
     })
   })
 
+  describe('channel(path, type)', () => {
+    it('works for collections', () => {
+      const path = 'skddksl'
+      const type = 'collection'
+      firestoreModule.channel.call(context, path, type)
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+      expect(context._getCollection.mock.calls[0]).toEqual([path])
+
+      expect(collection.onSnapshot.mock.calls.length).toBe(1)
+    })
+
+    it('works for documents', () => {
+      const path = 'skddksl'
+      const type = 'document'
+      firestoreModule.channel.call(context, path, type)
+
+      expect(context._getDocument.mock.calls.length).toBe(1)
+      expect(context._getDocument.mock.calls[0]).toEqual([path])
+
+      expect(document.onSnapshot.mock.calls.length).toBe(1)
+    })
+
+    it('uses "collection" for default type', () => {
+      const path = 'path'
+      firestoreModule.channel.call(context, path)
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+    })
+
+    it('unsubscribes when the channel is closed', () => {
+      const path = 'path'
+      const type = 'type'
+      const channel = firestoreModule.channel.call(context, path, type)
+      channel.close()
+
+      expect(unsubscribe.mock.calls.length).toBe(1)
+    })
+  })
+
   describe('deleteDocument(documentRef)', () => {
     it('works', () => {
       const documentRef = 'qplsmdkqlm'
@@ -55,7 +102,7 @@ describe('firestore', () => {
       const iterator = firestoreModule.deleteDocument.call(context, documentRef)
 
       expect(iterator.next().value)
-        .toEqual(call([doc, doc.delete]))
+        .toEqual(call([document, document.delete]))
 
       expect(context._getDocument.mock.calls.length).toBe(1)
       expect(context._getDocument.mock.calls[0]).toEqual([documentRef])
@@ -103,7 +150,7 @@ describe('firestore', () => {
       const iterator = firestoreModule.getDocument.call(context, documentRef)
 
       expect(iterator.next().value)
-        .toEqual(call([doc, doc.get]))
+        .toEqual(call([document, document.get]))
 
       expect(context._getDocument.mock.calls.length).toBe(1)
       expect(context._getDocument.mock.calls[0]).toEqual([documentRef])
@@ -129,7 +176,7 @@ describe('firestore', () => {
       )
 
       expect(iterator.next().value)
-        .toEqual(call([doc, doc.set], data, options))
+        .toEqual(call([document, document.set], data, options))
 
       expect(context._getDocument.mock.calls.length).toBe(1)
       expect(context._getDocument.mock.calls[0]).toEqual([documentRef])
@@ -138,6 +185,46 @@ describe('firestore', () => {
         done: true,
         value: undefined
       })
+    })
+  })
+
+  describe('sync(path, actionCreator, transform)', () => {
+    it('works', () => {
+      const path = 'skddksl'
+      const actionCreator = jest.fn()
+      const transform = jest.fn()
+      const iterator = firestoreModule.sync.call(context, path, actionCreator, transform)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.firestore.channel, path))
+
+      const chan = 'eeeerqd'
+      expect(iterator.next(chan))
+        .toEqual({
+          done: false,
+          value: fork(syncChannel, chan, actionCreator, transform)
+        })
+
+      expect(iterator.next())
+        .toEqual({
+          done: true,
+          value: undefined
+        })
+    })
+
+    it('provides a sensible transform default', () => {
+      const path = 'skddksl'
+      const actionCreator = jest.fn()
+      const iterator = firestoreModule.sync.call(context, path, actionCreator)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.firestore.channel, path))
+
+      const chan = 'qlsdql'
+      const defaultTransform = iterator.next(chan).value.FORK.args[2]
+
+      const value = 'qosdksm'
+      expect(defaultTransform(value)).toEqual(value)
     })
   })
 
@@ -153,7 +240,7 @@ describe('firestore', () => {
       )
 
       expect(iterator.next().value)
-        .toEqual(call([doc, doc.update], ...args))
+        .toEqual(call([document, document.update], ...args))
 
       expect(context._getDocument.mock.calls.length).toBe(1)
       expect(context._getDocument.mock.calls[0]).toEqual([documentRef])

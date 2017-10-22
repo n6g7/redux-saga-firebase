@@ -29,6 +29,31 @@ methods:
       }
       ```
 
+  - signature: firestore.channel(pathOrRef, type)
+    id: channel
+    generator: false
+    description: Returns a redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every time the data at `pathOrRef` in firestore changes.
+    arguments:
+      - name: pathOrRef
+        required: true
+        type: String, [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference), [Firebase DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document or a collection (string).
+      - name: type
+        required: false
+        type: A string
+        description: Either `collection` or `document`. Defaults to `collection`.
+    output: A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every time the data at `pathOrRef` in firestore changes.
+    example: |
+      ```js
+      function* syncTodosSaga() {
+        const channel = rsf.firestore.channel('todos');
+
+        while(true) {
+          const todos = yield take(channel);
+          yield put(syncTodos(todos));
+        }
+      }
+      ```
+
   - signature: firestore.deleteDocument(documentRef)
     id: deleteDocument
     generator: true
@@ -110,6 +135,34 @@ methods:
           'users/1',
           { firstName: 'Leonardo' }
         );
+      }
+      ```
+
+  - signature: firestore.sync(pathOrRef, actionCreator, transform)
+    id: sync
+    generator: true
+    description: Automatically dispatches a redux action every time a new message is received.
+    arguments:
+      - name: pathOrRef
+        required: true
+        type: String, [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference), [Firebase DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document or a collection (string).
+      - name: actionCreator
+        required: true
+        type: Function
+        description: The action creator to use. It must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument.
+      - name: transform
+        required: false
+        type: Function
+        description: An optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`).
+    output:
+    example: |
+      ```js
+      import { syncTodos } from '../actionCreators/firestore';
+
+      function* todosRootSaga() {
+        yield [
+          rsf.firestore.sync('todos', syncTodos),
+        ];
       }
       ```
 
