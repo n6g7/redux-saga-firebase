@@ -54,7 +54,8 @@ class ReduxSagaFirebase {
       getCollection: firestore.getCollection.bind(this),
       getDocument: firestore.getDocument.bind(this),
       setDocument: firestore.setDocument.bind(this),
-      sync: firestore.sync.bind(this),
+      syncCollection: firestore.syncCollection.bind(this),
+      syncDocument: firestore.syncDocument.bind(this),
       updateDocument: firestore.updateDocument.bind(this)
     }
 

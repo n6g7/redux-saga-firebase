@@ -138,10 +138,10 @@ methods:
       }
       ```
 
-  - signature: firestore.sync(pathOrRef, actionCreator, transform)
-    id: sync
+  - signature: firestore.syncCollection(pathOrRef, actionCreator, transform)
+    id: syncCollection
     generator: true
-    description: Automatically dispatches a redux action every time a new message is received.
+    description: Automatically dispatches a redux action every time the collection at `pathOrRef` changes.
     arguments:
       - name: pathOrRef
         required: true
@@ -161,7 +161,35 @@ methods:
 
       function* todosRootSaga() {
         yield [
-          rsf.firestore.sync('todos', syncTodos),
+          rsf.firestore.syncCollection('todos', syncTodos),
+        ];
+      }
+      ```
+
+  - signature: firestore.syncDocument(pathOrRef, actionCreator, transform)
+    id: syncDocument
+    generator: true
+    description: Automatically dispatches a redux action every time the document at `pathOrRef` changes.
+    arguments:
+      - name: pathOrRef
+        required: true
+        type: String, [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference), [Firebase DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document or a collection (string).
+      - name: actionCreator
+        required: true
+        type: Function
+        description: The action creator to use. It must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument.
+      - name: transform
+        required: false
+        type: Function
+        description: An optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`).
+    output:
+    example: |
+      ```js
+      import { syncTodo } from '../actionCreators/firestore';
+
+      function* todosRootSaga() {
+        yield [
+          rsf.firestore.syncDocument('todos/1', syncTodo),
         ];
       }
       ```
