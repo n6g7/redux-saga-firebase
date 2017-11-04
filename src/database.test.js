@@ -236,12 +236,12 @@ describe('database', () => {
     })
   })
 
-  describe('sync(path, actionCreator, transform)', () => {
+  describe('sync(path, successActionCreator, transform)', () => {
     it('works', () => {
       const path = 'skddksl'
-      const actionCreator = jest.fn()
+      const successActionCreator = jest.fn()
       const transform = jest.fn()
-      const iterator = dbModule.sync.call(context, path, actionCreator, transform)
+      const iterator = dbModule.sync.call(context, path, successActionCreator, transform)
 
       expect(iterator.next().value)
         .toEqual(call(context.database.channel, path))
@@ -250,7 +250,7 @@ describe('database', () => {
       expect(iterator.next(chan))
         .toEqual({
           done: false,
-          value: fork(syncChannel, chan, actionCreator, transform)
+          value: fork(syncChannel, chan, successActionCreator, transform)
         })
 
       expect(iterator.next())
@@ -262,8 +262,8 @@ describe('database', () => {
 
     it('provides a sensible transform default', () => {
       const path = 'skddksl'
-      const actionCreator = jest.fn()
-      const iterator = dbModule.sync.call(context, path, actionCreator)
+      const successActionCreator = jest.fn()
+      const iterator = dbModule.sync.call(context, path, successActionCreator)
 
       expect(iterator.next().value)
         .toEqual(call(context.database.channel, path))
