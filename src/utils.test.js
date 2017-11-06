@@ -124,5 +124,52 @@ describe('utils', () => {
 
       expect(chan.close).toHaveBeenCalledTimes(1)
     })
+
+    it('dispatch failureActionCreator on error', () => {
+      const chan = channel()
+      const successActionCreator = jest.fn()
+      const failureActionCreator = jest.fn()
+      const transform = jest.fn()
+      const error = 'asdfasdf'
+      const iterator = syncChannel.call(context, chan, successActionCreator, transform, failureActionCreator)
+
+      // First take
+      iterator.next()
+
+      const action = 'psodqp'
+      failureActionCreator.mockReturnValueOnce(action)
+
+      // This gets us in the catch block
+      expect(iterator.throw(error))
+        .toEqual({
+          done: false,
+          value: put(action)
+        })
+
+      expect(failureActionCreator.mock.calls.length).toBe(1)
+      expect(failureActionCreator.mock.calls[0]).toEqual([error])
+    })
+
+    it('do not dispatch on error if no failureActionCreator', () => {
+      const chan = channel()
+      const successActionCreator = jest.fn()
+      const error = 'asdfasdf'
+      const iterator = syncChannel.call(context, chan, successActionCreator)
+
+      // First take
+      iterator.next()
+
+      // This gets us in the catch block
+      expect(iterator.throw(error))
+        .toEqual({
+          done: false,
+          value: cancelled()
+        })
+
+      chan.close = jest.fn()
+      iterator.next(true)
+
+      expect(chan.close).toHaveBeenCalledTimes(1)
+    })
   })
 })

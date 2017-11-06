@@ -80,6 +80,19 @@ describe('messaging', () => {
           value: undefined
         })
     })
+
+    it('provides a null default value for failureActionCreator', () => {
+      const successActionCreator = jest.fn()
+      const iterator = messagingModule.syncMessages.call(context, successActionCreator)
+
+      iterator.next()
+      const channel = 'jqsdkl'
+      expect(iterator.next(channel))
+        .toEqual({
+          done: false,
+          value: fork(syncChannel, channel, successActionCreator, null)
+        })
+    })
   })
 
   describe('tokenRefreshChannel()', () => {
@@ -142,6 +155,19 @@ describe('messaging', () => {
         .toEqual({
           done: true,
           value: undefined
+        })
+    })
+
+    it('provides a null default value for failureActionCreator', () => {
+      const successActionCreator = jest.fn()
+      const iterator = messagingModule.syncToken.call(context, successActionCreator)
+
+      iterator.next()
+      const channel = 'jqsdkl'
+      expect(iterator.next(channel))
+        .toEqual({
+          done: false,
+          value: fork(syncChannel, channel, successActionCreator, null)
         })
     })
   })
