@@ -236,12 +236,13 @@ describe('database', () => {
     })
   })
 
-  describe('sync(path, successActionCreator, transform)', () => {
+  describe('sync(path, successActionCreator, transform, failureActionCreator)', () => {
     it('works', () => {
       const path = 'skddksl'
       const successActionCreator = jest.fn()
+      const failureActionCreator = jest.fn()
       const transform = jest.fn()
-      const iterator = dbModule.sync.call(context, path, successActionCreator, transform)
+      const iterator = dbModule.sync.call(context, path, successActionCreator, transform, failureActionCreator)
 
       expect(iterator.next().value)
         .toEqual(call(context.database.channel, path))
@@ -250,7 +251,7 @@ describe('database', () => {
       expect(iterator.next(chan))
         .toEqual({
           done: false,
-          value: fork(syncChannel, chan, successActionCreator, transform)
+          value: fork(syncChannel, chan, successActionCreator, transform, failureActionCreator)
         })
 
       expect(iterator.next())

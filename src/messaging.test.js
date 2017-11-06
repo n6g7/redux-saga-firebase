@@ -58,10 +58,11 @@ describe('messaging', () => {
     })
   })
 
-  describe('syncMessages(successActionCreator)', () => {
+  describe('syncMessages(successActionCreator, failureActionCreator)', () => {
     it('works', () => {
       const successActionCreator = jest.fn()
-      const iterator = messagingModule.syncMessages.call(context, successActionCreator)
+      const failureActionCreator = jest.fn()
+      const iterator = messagingModule.syncMessages.call(context, successActionCreator, failureActionCreator)
 
       expect(iterator.next().value)
         .toEqual(call(context.messaging.channel))
@@ -70,7 +71,7 @@ describe('messaging', () => {
       expect(iterator.next(channel))
         .toEqual({
           done: false,
-          value: fork(syncChannel, channel, successActionCreator)
+          value: fork(syncChannel, channel, successActionCreator, failureActionCreator)
         })
 
       expect(iterator.next())
@@ -121,10 +122,11 @@ describe('messaging', () => {
     })
   })
 
-  describe('syncToken(successActionCreator)', () => {
+  describe('syncToken(successActionCreator, failureActionCreator)', () => {
     it('works', () => {
       const successActionCreator = jest.fn()
-      const iterator = messagingModule.syncToken.call(context, successActionCreator)
+      const failureActionCreator = jest.fn()
+      const iterator = messagingModule.syncToken.call(context, successActionCreator, failureActionCreator)
 
       expect(iterator.next().value)
         .toEqual(call(context.messaging.tokenRefreshChannel))
@@ -133,7 +135,7 @@ describe('messaging', () => {
       expect(iterator.next(channel))
         .toEqual({
           done: false,
-          value: fork(syncChannel, channel, successActionCreator)
+          value: fork(syncChannel, channel, successActionCreator, failureActionCreator)
         })
 
       expect(iterator.next())

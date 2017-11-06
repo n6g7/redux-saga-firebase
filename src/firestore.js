@@ -48,14 +48,14 @@ function * updateDocument (documentRef, ...args) {
   return yield call([doc, doc.update], ...args)
 }
 
-function * syncCollection (pathOrRef, successActionCreator, transform = noop) {
+function * syncCollection (pathOrRef, successActionCreator, transform = noop, failureActionCreator = null) {
   const channel = yield call(this.firestore.channel, pathOrRef, 'collection')
-  yield fork(syncChannel, channel, successActionCreator, transform)
+  yield fork(syncChannel, channel, successActionCreator, transform, failureActionCreator)
 }
 
-function * syncDocument (pathOrRef, successActionCreator, transform = noop) {
+function * syncDocument (pathOrRef, successActionCreator, transform = noop, failureActionCreator = null) {
   const channel = yield call(this.firestore.channel, pathOrRef, 'document')
-  yield fork(syncChannel, channel, successActionCreator, transform)
+  yield fork(syncChannel, channel, successActionCreator, transform, failureActionCreator)
 }
 
 export default {

@@ -188,12 +188,13 @@ describe('firestore', () => {
     })
   })
 
-  describe('syncCollection(path, successActionCreator, transform)', () => {
+  describe('syncCollection(path, successActionCreator, transform), failureActionCreator', () => {
     it('works', () => {
       const path = 'skddksl'
       const successActionCreator = jest.fn()
+      const failureActionCreator = jest.fn()
       const transform = jest.fn()
-      const iterator = firestoreModule.syncCollection.call(context, path, successActionCreator, transform)
+      const iterator = firestoreModule.syncCollection.call(context, path, successActionCreator, transform, failureActionCreator)
 
       expect(iterator.next().value)
         .toEqual(call(context.firestore.channel, path, 'collection'))
@@ -202,7 +203,7 @@ describe('firestore', () => {
       expect(iterator.next(chan))
         .toEqual({
           done: false,
-          value: fork(syncChannel, chan, successActionCreator, transform)
+          value: fork(syncChannel, chan, successActionCreator, transform, failureActionCreator)
         })
 
       expect(iterator.next())
@@ -228,12 +229,13 @@ describe('firestore', () => {
     })
   })
 
-  describe('syncDocument(path, successActionCreator, transform)', () => {
+  describe('syncDocument(path, successActionCreator, transform, failureActionCreator)', () => {
     it('works', () => {
       const path = 'skddksl'
       const successActionCreator = jest.fn()
+      const failureActionCreator = jest.fn()
       const transform = jest.fn()
-      const iterator = firestoreModule.syncDocument.call(context, path, successActionCreator, transform)
+      const iterator = firestoreModule.syncDocument.call(context, path, successActionCreator, transform, failureActionCreator)
 
       expect(iterator.next().value)
         .toEqual(call(context.firestore.channel, path, 'document'))
@@ -242,7 +244,7 @@ describe('firestore', () => {
       expect(iterator.next(chan))
         .toEqual({
           done: false,
-          value: fork(syncChannel, chan, successActionCreator, transform)
+          value: fork(syncChannel, chan, successActionCreator, transform, failureActionCreator)
         })
 
       expect(iterator.next())

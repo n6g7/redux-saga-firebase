@@ -52,9 +52,9 @@ function channel (pathOrRef, event = 'value') {
 }
 
 const defaultTransform = data => data.value
-function * sync (pathOrRef, successActionCreator, transform = defaultTransform) {
+function * sync (pathOrRef, successActionCreator, transform = defaultTransform, failureActionCreator = null) {
   const channel = yield call(this.database.channel, pathOrRef)
-  yield fork(syncChannel, channel, successActionCreator, transform)
+  yield fork(syncChannel, channel, successActionCreator, transform, failureActionCreator)
 }
 
 export default {
