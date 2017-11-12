@@ -1,22 +1,13 @@
 import { channel } from 'redux-saga'
 import { cancelled, put, take } from 'redux-saga/effects'
-import { noop, syncChannel } from './utils'
+import { syncChannel } from './utils'
 
 describe('utils', () => {
   afterEach(() => {
     expect.hasAssertions()
   })
 
-  describe('noop()', () => {
-    it('works', () => {
-      const arg = 'skddksl'
-      const result = noop(arg)
-
-      expect(result).toEqual(arg)
-    })
-  })
-
-  describe('syncChannel(successActionCreator)', () => {
+  describe('syncChannel(channel, options)', () => {
     let context
 
     beforeEach(() => {
@@ -26,7 +17,7 @@ describe('utils', () => {
     it('works', () => {
       const channel = 'qposdqpsdl'
       const successActionCreator = jest.fn()
-      const iterator = syncChannel.call(context, channel, successActionCreator)
+      const iterator = syncChannel.call(context, channel, { successActionCreator })
 
       expect(iterator.next())
         .toEqual({
@@ -80,7 +71,7 @@ describe('utils', () => {
       const channel = 'qposdqpsdl'
       const successActionCreator = jest.fn()
       const transform = jest.fn()
-      const iterator = syncChannel.call(context, channel, successActionCreator, transform)
+      const iterator = syncChannel.call(context, channel, { successActionCreator, transform })
 
       expect(iterator.next())
         .toEqual({
@@ -107,7 +98,7 @@ describe('utils', () => {
     it('closes the channel when it is cancelled', () => {
       const chan = channel()
       const successActionCreator = jest.fn()
-      const iterator = syncChannel.call(context, chan, successActionCreator)
+      const iterator = syncChannel.call(context, chan, { successActionCreator })
 
       // First take
       iterator.next()
@@ -131,7 +122,7 @@ describe('utils', () => {
       const failureActionCreator = jest.fn()
       const transform = jest.fn()
       const error = 'asdfasdf'
-      const iterator = syncChannel.call(context, chan, successActionCreator, transform, failureActionCreator)
+      const iterator = syncChannel.call(context, chan, { successActionCreator, transform, failureActionCreator })
 
       // First take
       iterator.next()
@@ -154,7 +145,7 @@ describe('utils', () => {
       const chan = channel()
       const successActionCreator = jest.fn()
       const error = 'asdfasdf'
-      const iterator = syncChannel.call(context, chan, successActionCreator)
+      const iterator = syncChannel.call(context, chan, { successActionCreator })
 
       // First take
       iterator.next()

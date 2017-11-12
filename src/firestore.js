@@ -1,7 +1,7 @@
 import { eventChannel } from 'redux-saga'
 import { call, fork } from 'redux-saga/effects'
 
-import { noop, syncChannel } from './utils'
+import { syncChannel } from './utils'
 
 function * addDocument (collectionRef, data) {
   const collection = this._getCollection(collectionRef)
@@ -48,14 +48,14 @@ function * updateDocument (documentRef, ...args) {
   return yield call([doc, doc.update], ...args)
 }
 
-function * syncCollection (pathOrRef, successActionCreator, transform = noop, failureActionCreator = null) {
+function * syncCollection (pathOrRef, options) {
   const channel = yield call(this.firestore.channel, pathOrRef, 'collection')
-  yield fork(syncChannel, channel, successActionCreator, transform, failureActionCreator)
+  yield fork(syncChannel, channel, options)
 }
 
-function * syncDocument (pathOrRef, successActionCreator, transform = noop, failureActionCreator = null) {
+function * syncDocument (pathOrRef, options) {
   const channel = yield call(this.firestore.channel, pathOrRef, 'document')
-  yield fork(syncChannel, channel, successActionCreator, transform, failureActionCreator)
+  yield fork(syncChannel, channel, options)
 }
 
 export default {

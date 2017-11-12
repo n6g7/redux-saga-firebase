@@ -236,13 +236,12 @@ describe('database', () => {
     })
   })
 
-  describe('sync(path, successActionCreator, transform, failureActionCreator)', () => {
+  describe('sync(path, options)', () => {
     it('works', () => {
       const path = 'skddksl'
-      const successActionCreator = jest.fn()
-      const failureActionCreator = jest.fn()
       const transform = jest.fn()
-      const iterator = dbModule.sync.call(context, path, successActionCreator, transform, failureActionCreator)
+      const options = { transform }
+      const iterator = dbModule.sync.call(context, path, options)
 
       expect(iterator.next().value)
         .toEqual(call(context.database.channel, path))
@@ -251,7 +250,7 @@ describe('database', () => {
       expect(iterator.next(chan))
         .toEqual({
           done: false,
-          value: fork(syncChannel, chan, successActionCreator, transform, failureActionCreator)
+          value: fork(syncChannel, chan, options)
         })
 
       expect(iterator.next())
@@ -264,13 +263,13 @@ describe('database', () => {
     it('provides a sensible transform default', () => {
       const path = 'skddksl'
       const successActionCreator = jest.fn()
-      const iterator = dbModule.sync.call(context, path, successActionCreator)
+      const iterator = dbModule.sync.call(context, path, { successActionCreator })
 
       expect(iterator.next().value)
         .toEqual(call(context.database.channel, path))
 
       const chan = 'qlsdql'
-      const defaultTransform = iterator.next(chan).value.FORK.args[2]
+      const defaultTransform = iterator.next(chan).value.FORK.args[1].transform
 
       const value = 'qosdksm'
       expect(defaultTransform({ value })).toEqual(value)
