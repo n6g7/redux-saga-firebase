@@ -8,10 +8,12 @@
     </p>
 
     <div class="ui fluid vertical pointing menu">
-      <div class="red item {% if page.url == '/' %}active{% endif %}">
+      {% assign prefix = page.url | slice: 0,7 %}
+      <div class="red item {% if page.url == '/' or prefix == '/guides' %}active{% endif %}">
         Guides
         <div class="menu">
           <a href="{{ site.baseurl }}/" class="red item {% if page.url == '/' %}active{% endif %}">Getting started</a>
+          <a href="{{ "/guides/sorting-filtering" | relative_url }}" class="red item {% if page.url == '/guides/sorting-filtering.html' %}active{% endif %}">Sorting and filtering</a>
           <a href="https://github.com/n6g7/redux-saga-firebase/releases" target="blank" class="red item">
             <i class="external icon"></i>
             Release notes
