@@ -10,10 +10,12 @@ methods:
     arguments:
       - name: collectionRef
         required: true
-        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
+        type: String or [firebase.firestore.CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
+        description: If using a string, it is a slash-separated path to a collection.
       - name: data
         required: true
-        type: An object
+        type: Object
+        description: The data to store.
     output: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference)
     example: |
       ```js
@@ -36,7 +38,8 @@ methods:
     arguments:
       - name: pathOrRef
         required: true
-        type: String, [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference), [Firebase DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document or a collection (string).
+        type: String, [firebase.firestore.CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference), [firebase.firestore.DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or [firebase.firestore.Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query)
+        description: To [filter](https://firebase.google.com/docs/firestore/query-data/get-data), [order or limit](https://firebase.google.com/docs/firestore/query-data/order-limit-data) data, pass a [firebase.firestore.Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query) (eg. `rsf.firestore.channel(colRef.where("capital", "==", true))`). If using a string, it is a slash-separated path to a document or a collection (unfiltered).
       - name: type
         required: false
         type: A string
@@ -61,7 +64,8 @@ methods:
     arguments:
       - name: documentRef
         required: true
-        type: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document (string).
+        type: String or [firebase.firestore.DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference).
+        description: If using a string, it is a slash-separated path to a document.
     example: |
       ```js
       function* deleteDocument() {
@@ -76,7 +80,8 @@ methods:
     arguments:
       - name: collectionRef
         required: true
-        type: String or [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference)
+        type: String or [firebase.firestore.CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference) or [firebase.firestore.Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query)
+        description: To [filter](https://firebase.google.com/docs/firestore/query-data/get-data), [order or limit](https://firebase.google.com/docs/firestore/query-data/order-limit-data) data, pass a [Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query) (eg. `yield call(rsf.firestore.getCollection, colRef.where("capital", "==", true))`). If using a string, it is a slash-separated path to a collection (unfiltered).
     output: A [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot)
     example: |
       ```js
@@ -101,7 +106,8 @@ methods:
     arguments:
       - name: documentRef
         required: true
-        type: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document (string).
+        type: String or [firebase.firestore.DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference).
+        description: If using a string, it is a slash-separated path to a document.
     output: A [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot)
     example: |
       ```js
@@ -120,13 +126,16 @@ methods:
     arguments:
       - name: documentRef
         required: true
-        type: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document (string).
+        type: String or [firebase.firestore.DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference).
+        description: If using a string, it is a slash-separated path to a document.
       - name: data
         required: true
-        type: An object of the fields and values for the document.
+        type: Object
+        description: An object of the fields and values for the document.
       - name: options
         required: false
-        type: "An object to configure the set behavior. Pass `{ merge: true }` to only replace the values specified in the data argument. Fields omitted will remain untouched."
+        type: Object
+        description: "An object to configure the set behavior. Pass `{ merge: true }` to only replace the values specified in the data argument. Fields omitted will remain untouched."
     example: |
       ```js
       function* setDocument() {
@@ -145,7 +154,8 @@ methods:
     arguments:
       - name: pathOrRef
         required: true
-        type: String, [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference), [Firebase DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document or a collection (string).
+        type: String or [firebase.firestore.CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference) or [firebase.firestore.Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query)
+        description: To [filter](https://firebase.google.com/docs/firestore/query-data/get-data), [order or limit](https://firebase.google.com/docs/firestore/query-data/order-limit-data) data, pass a [Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query) (eg. `yield call(rsf.firestore.syncCollection, colRef.where("capital", "==", true), ...)`). If using a string, it is a slash-separated path to a collection (unfiltered).
       - name: actionCreator
         required: true
         type: Function
@@ -173,7 +183,8 @@ methods:
     arguments:
       - name: pathOrRef
         required: true
-        type: String, [Firebase CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference), [Firebase DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document or a collection (string).
+        type: String or [firebase.firestore.DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference)
+        description: If using a string, it is a slash-separated path to a document.
       - name: actionCreator
         required: true
         type: Function
@@ -201,10 +212,12 @@ methods:
     arguments:
       - name: documentRef
         required: true
-        type: A [DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference) or a slash-separated path to a document (string).
+        type: String or [firebase.firestore.DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference)
+        description: If using a string, it is a slash-separated path to a document.
       - name: args
         required: true
-        type: Either an object containing all of the fields and values to update, or a series of arguments alternating between fields (as string or firebase.firestore.FieldPath objects) and values.
+        type: Object
+        description: Either an object containing all of the fields and values to update, or a series of arguments alternating between fields (as string or firebase.firestore.FieldPath objects) and values.
     example: |
       ```js
       function* updateDocument() {
