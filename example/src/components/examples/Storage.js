@@ -1,72 +1,72 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import {
   sendFile,
-  setFile,
-} from '../../redux/reducer/storage.actions';
+  setFile
+} from '../../redux/reducer/storage.actions'
 
-import Example from './Example';
-import { Button, FileButton } from '../common';
+import Example from './Example'
+import { FileButton } from '../common'
 
-import upload from '../../images/upload.svg';
+import upload from '../../images/upload.svg'
 
-import './Storage.styl';
+import './Storage.styl'
 
-import extractLines from '../../extract';
-import storageSaga from '!raw-loader!../../redux/sagas/storage.js';
+import extractLines from '../../extract'
+import storageSaga from '!raw-loader!../../redux/sagas/storage.js'
 
-const doc = extractLines(storageSaga);
+const doc = extractLines(storageSaga)
 
 class Storage extends PureComponent {
   static propTypes = {
-    file: PropTypes.instanceOf(File),
+    file: PropTypes.instanceOf(window.File),
     loading: PropTypes.bool.isRequired,
-    fileURL: PropTypes.string,
+    fileURL: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
-    this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this)
   }
 
-  onChange(event) {
-    const file = event.target.files[0];
-    this.props.setFile(file);
-    this.props.sendFile();
+  onChange (event) {
+    const file = event.target.files[0]
+    this.props.setFile(file)
+    this.props.sendFile()
   }
 
-  render() {
+  render () {
     return <Example
-      title="Storage"
-      className="storage"
+      title='Storage'
+      className='storage'
       snippets={[
         doc(19, 32),
-        doc(9, 17),
+        doc(9, 17)
       ]}
     >
       <FileButton onChange={this.onChange} loading={this.props.loading}>
         <img src={upload} />
         Send file
       </FileButton>
-      <img src={this.props.fileURL} width="300" />
-    </Example>;
+      <img src={this.props.fileURL} width='300' />
+    </Example>
   }
 }
 
 const mapStateToProps = state => ({
   file: state.storage.file,
   loading: state.storage.loading,
-  fileURL: state.storage.url,
-});
+  fileURL: state.storage.url
+})
 const mapDispatchToProps = {
   sendFile,
-  setFile,
-};
+  setFile
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Storage);
+)(Storage)

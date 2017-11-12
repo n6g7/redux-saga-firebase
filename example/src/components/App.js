@@ -1,19 +1,19 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 
-import Header from './Header';
-import Footer from './Footer';
-import {
+import Header from './Header'
+import Footer from './Footer'
+import {
   AuthenticationExample,
   StorageExample,
-  TodoListExample,
-} from './examples';
+  TodoListExample
+} from './examples'
 
-import './App.styl';
+import './App.styl'
 
 class App extends PureComponent {
   static propTypes = {};
 
-  render() {
+  render () {
     return <main>
       <Header />
 
@@ -22,8 +22,8 @@ class App extends PureComponent {
       <StorageExample />
 
       <Footer />
-    </main>;
+    </main>
   }
 }
 
-export default App;
+export default App

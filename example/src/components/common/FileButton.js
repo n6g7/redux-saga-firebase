@@ -1,44 +1,44 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-import Button from './Button';
+import Button from './Button'
 
-import './FileButton.styl';
+import './FileButton.styl'
 
 class FileButton extends PureComponent {
   static propTypes = {
     children: PropTypes.any.isRequired,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
-    this.onClick = this.onClick.bind(this);
+    this.onClick = this.onClick.bind(this)
   }
 
-  onClick() {
-    this.input.click();
+  onClick () {
+    this.input.click()
   }
 
-  render() {
+  render () {
     const {
       children,
       onChange,
-      ...props,
-    } = this.props;
+      ...props
+    } = this.props
 
-    return <div className="file-button">
+    return <div className='file-button'>
       <input
-        type="file"
+        type='file'
         onChange={onChange}
-        ref={ref => this.input = ref}
+        ref={ref => { this.input = ref }}
       />
       <Button onClick={this.onClick} {...props}>
         { children }
       </Button>
-    </div>;
+    </div>
   }
 }
 
-export default FileButton;
+export default FileButton

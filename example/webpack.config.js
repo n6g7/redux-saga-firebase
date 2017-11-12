@@ -1,5 +1,5 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -19,7 +19,7 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'stylus-loader',
+          'stylus-loader'
         ]
       },
       {
@@ -29,7 +29,7 @@ module.exports = {
           'url-loader',
           'img-loader'
         ]
-      },
+      }
     ]
   },
   output: {
@@ -38,6 +38,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './dist'
   }
 }
