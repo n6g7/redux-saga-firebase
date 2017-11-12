@@ -147,7 +147,7 @@ methods:
       }
       ```
 
-  - signature: firestore.syncCollection(pathOrRef, actionCreator, transform)
+  - signature: firestore.syncCollection(pathOrRef, options)
     id: syncCollection
     generator: true
     description: Automatically dispatches a redux action every time the collection at `pathOrRef` changes.
@@ -156,14 +156,10 @@ methods:
         required: true
         type: String or [firebase.firestore.CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference) or [firebase.firestore.Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query)
         description: To [filter](https://firebase.google.com/docs/firestore/query-data/get-data), [order or limit](https://firebase.google.com/docs/firestore/query-data/order-limit-data) data, pass a [Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query) (eg. `yield call(rsf.firestore.syncCollection, colRef.where("capital", "==", true), ...)`). If using a string, it is a slash-separated path to a collection (unfiltered).
-      - name: actionCreator
+      - name: options
         required: true
-        type: Function
-        description: The action creator to use. It must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument.
-      - name: transform
-        required: false
-        type: Function
-        description: An optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`).
+        type: Object
+        description: "An object to configure how the collection should be synchronised. It must contain at least the `successActionCreator` which must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
     output:
     example: |
       ```js
@@ -171,12 +167,12 @@ methods:
 
       function* todosRootSaga() {
         yield [
-          rsf.firestore.syncCollection('todos', syncTodos),
+          rsf.firestore.syncCollection('todos', { successActionCreator: syncTodos }),
         ];
       }
       ```
 
-  - signature: firestore.syncDocument(pathOrRef, actionCreator, transform)
+  - signature: firestore.syncDocument(pathOrRef, options)
     id: syncDocument
     generator: true
     description: Automatically dispatches a redux action every time the document at `pathOrRef` changes.
@@ -185,14 +181,10 @@ methods:
         required: true
         type: String or [firebase.firestore.DocumentReference](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference)
         description: If using a string, it is a slash-separated path to a document.
-      - name: actionCreator
+      - name: options
         required: true
-        type: Function
-        description: The action creator to use. It must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument.
-      - name: transform
-        required: false
-        type: Function
-        description: An optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`).
+        type: Object
+        description: "An object to configure how the document should be synchronised. It must contain at least the `successActionCreator` which must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
     output:
     example: |
       ```js
@@ -200,7 +192,7 @@ methods:
 
       function* todosRootSaga() {
         yield [
-          rsf.firestore.syncDocument('todos/1', syncTodo),
+          rsf.firestore.syncDocument('todos/1', { successActionCreator: syncTodo }),
         ];
       }
       ```

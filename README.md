@@ -87,7 +87,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*database.patch(path, data)`](https://n6g7.github.io/redux-saga-firebase/reference/database#patch)
 - [`*database.delete(path)`](https://n6g7.github.io/redux-saga-firebase/reference/database#delete)
 - [`database.channel(path, event)`](https://n6g7.github.io/redux-saga-firebase/reference/database#channel)
-- [`*database.sync(path, actionCreator, transform)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
+- [`*database.sync(path, options)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
 
 **Firestore**
 
@@ -97,8 +97,8 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*firestore.getCollection(collectionRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getCollection)
 - [`*firestore.getDocument(docRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getDocument)
 - [`*firestore.setDocument(docRef, data, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#setDocument)
-- [`*firestore.syncCollection(pathOrRef, actionCreator, transform)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncCollection)
-- [`*firestore.syncDocument(pathOrRef, actionCreator, transform)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncDocument)
+- [`*firestore.syncCollection(pathOrRef, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncCollection)
+- [`*firestore.syncDocument(pathOrRef, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncDocument)
 - [`*firestore.updateDocument(docRef, ...args)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#updateDocument)
 
 **Functions**
@@ -108,8 +108,8 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 **Messaging**
 
 - [`messaging.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#channel)
-- [`*messaging.syncMessages(actionCreator)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncMessages)
-- [`*messaging.syncToken(actionCreator)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncToken)
+- [`*messaging.syncMessages(options)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncMessages)
+- [`*messaging.syncToken(options)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncToken)
 - [`messaging.tokenRefreshChannel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#tokenRefreshChannel)
 
 **Storage**

@@ -21,15 +21,15 @@ methods:
       }
       ```
 
-  - signature: messaging.syncMessages(actionCreator)
+  - signature: messaging.syncMessages(options)
     id: syncMessages
     generator: true
     description: Automatically dispatches a redux action every time a new message is received.
     arguments:
-      - name: actionCreator
+      - name: options
         required: true
-        type: Function
-        description: The action creator to use. It must takes a new message as a single argument.
+        type: Object
+        description: "An object to configure how the messages should be synchronised. It must contain at least the `successActionCreator` which must take a new message as a single argument. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
     output:
     example: |
       ```js
@@ -37,20 +37,20 @@ methods:
 
       function* notificationsRootSaga() {
         yield [
-          rsf.messaging.syncMessages(showMessage),
+          rsf.messaging.syncMessages({ successActionCreator: showMessage }),
         ];
       }
       ```
 
-  - signature: messaging.syncToken(actionCreator)
+  - signature: messaging.syncToken(options)
     id: syncToken
     generator: true
     description: Automatically dispatches a redux action every time a new registration token is received.
     arguments:
-      - name: actionCreator
+      - name: options
         required: true
-        type: Function
-        description: The action creator to use. It must take a single argument being the new registration token.
+        type: Object
+        description: "An object to configure how the token should be synchronised. It must contain at least the `successActionCreator` which must take a single argument being the new registration token. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
     output:
     example: |
       ```js
@@ -58,7 +58,7 @@ methods:
 
       function* notificationsRootSaga() {
         yield [
-          rsf.messaging.syncToken(setToken),
+          rsf.messaging.syncToken({ successActionCreator: setToken }),
         ];
       }
       ```
