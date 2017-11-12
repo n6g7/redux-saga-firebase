@@ -30,6 +30,8 @@ export default function*() {
 
   yield [
     messageHandlerSaga,
-    rsf.messaging.syncToken(setRegistrationToken)
+    rsf.messaging.syncToken({
+      successActionCreator: setRegistrationToken
+    })
   ]
 }

@@ -31,7 +31,13 @@ export default function* rootSaga() {
   }))
 
   yield [
-    rsf.database.sync('todos', syncTodos, todosTransformer),
+    rsf.database.sync(
+      'todos',
+      {
+        successActionCreator: syncTodos,
+        transform: todosTransformer
+      }
+    ),
     takeEvery(types.TODOS.NEW.SAVE, saveNewTodo),
     takeEvery(types.TODOS.SET_STATUS, setTodoStatus),
   ];

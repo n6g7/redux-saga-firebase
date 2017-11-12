@@ -35,7 +35,13 @@ export default function* rootSaga() {
   }
 
   yield [
-    rsf.firestore.sync('todos', syncTodos, todosTransformer),
+    rsf.firestore.syncCollection(
+      'todos',
+      {
+        successActionCreator: syncTodos,
+        transform: todosTransformer
+      }
+    ),
     takeEvery(types.TODOS.NEW.SAVE, saveNewTodo),
     takeEvery(types.TODOS.SET_STATUS, setTodoStatus),
   ];

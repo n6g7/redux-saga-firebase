@@ -28,7 +28,7 @@ class TodoList extends PureComponent {
   yield fork(
     rsf.database.sync,
     \'todos\',
-    syncTodos
+    { successActionCreator: syncTodos }
   );
 }`,
       ]}
