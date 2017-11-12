@@ -188,12 +188,11 @@ describe('firestore', () => {
     })
   })
 
-  describe('syncCollection(path, actionCreator, transform)', () => {
+  describe('syncCollection(path, options)', () => {
     it('works', () => {
       const path = 'skddksl'
-      const actionCreator = jest.fn()
-      const transform = jest.fn()
-      const iterator = firestoreModule.syncCollection.call(context, path, actionCreator, transform)
+      const options = {}
+      const iterator = firestoreModule.syncCollection.call(context, path, options)
 
       expect(iterator.next().value)
         .toEqual(call(context.firestore.channel, path, 'collection'))
@@ -202,7 +201,7 @@ describe('firestore', () => {
       expect(iterator.next(chan))
         .toEqual({
           done: false,
-          value: fork(syncChannel, chan, actionCreator, transform)
+          value: fork(syncChannel, chan, options)
         })
 
       expect(iterator.next())
@@ -210,30 +209,14 @@ describe('firestore', () => {
           done: true,
           value: undefined
         })
-    })
-
-    it('provides a sensible transform default', () => {
-      const path = 'skddksl'
-      const actionCreator = jest.fn()
-      const iterator = firestoreModule.syncCollection.call(context, path, actionCreator)
-
-      expect(iterator.next().value)
-        .toEqual(call(context.firestore.channel, path, 'collection'))
-
-      const chan = 'qlsdql'
-      const defaultTransform = iterator.next(chan).value.FORK.args[2]
-
-      const value = 'qosdksm'
-      expect(defaultTransform(value)).toEqual(value)
     })
   })
 
-  describe('syncDocument(path, actionCreator, transform)', () => {
+  describe('syncDocument(path, options)', () => {
     it('works', () => {
       const path = 'skddksl'
-      const actionCreator = jest.fn()
-      const transform = jest.fn()
-      const iterator = firestoreModule.syncDocument.call(context, path, actionCreator, transform)
+      const options = {}
+      const iterator = firestoreModule.syncDocument.call(context, path, options)
 
       expect(iterator.next().value)
         .toEqual(call(context.firestore.channel, path, 'document'))
@@ -242,7 +225,7 @@ describe('firestore', () => {
       expect(iterator.next(chan))
         .toEqual({
           done: false,
-          value: fork(syncChannel, chan, actionCreator, transform)
+          value: fork(syncChannel, chan, options)
         })
 
       expect(iterator.next())
@@ -250,21 +233,6 @@ describe('firestore', () => {
           done: true,
           value: undefined
         })
-    })
-
-    it('provides a sensible transform default', () => {
-      const path = 'skddksl'
-      const actionCreator = jest.fn()
-      const iterator = firestoreModule.syncDocument.call(context, path, actionCreator)
-
-      expect(iterator.next().value)
-        .toEqual(call(context.firestore.channel, path, 'document'))
-
-      const chan = 'qlsdql'
-      const defaultTransform = iterator.next(chan).value.FORK.args[2]
-
-      const value = 'qosdksm'
-      expect(defaultTransform(value)).toEqual(value)
     })
   })
 

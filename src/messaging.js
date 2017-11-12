@@ -18,9 +18,9 @@ function channel () {
   return channel
 }
 
-function * syncMessages (actionCreator) {
+function * syncMessages (options) {
   const channel = yield call(this.messaging.channel)
-  yield fork(syncChannel, channel, actionCreator)
+  yield fork(syncChannel, channel, options)
 }
 
 function tokenRefreshChannel () {
@@ -39,9 +39,9 @@ function tokenRefreshChannel () {
   return channel
 }
 
-function * syncToken (actionCreator) {
+function * syncToken (options) {
   const channel = yield call(this.messaging.tokenRefreshChannel)
-  yield fork(syncChannel, channel, actionCreator)
+  yield fork(syncChannel, channel, options)
 }
 
 export default {

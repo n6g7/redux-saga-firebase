@@ -1,13 +1,20 @@
 import { cancelled, put, take } from 'redux-saga/effects'
 
-export const noop = x => x
+export function * syncChannel (channel, options) {
+  const {
+    successActionCreator,
+    failureActionCreator,
+    transform
+  } = options
 
-export function * syncChannel (channel, actionCreator, transform = noop) {
   try {
     while (true) {
       const data = yield take(channel)
-      yield put(actionCreator(transform(data)))
+      const transformedData = transform ? transform(data) : data
+      yield put(successActionCreator(transformedData))
     }
+  } catch (err) {
+    if (failureActionCreator) yield put(failureActionCreator(err))
   } finally {
     if (yield cancelled()) channel.close()
   }
