@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
@@ -17,6 +18,13 @@ import authSaga from '!raw-loader!../../redux/sagas/login.js';
 const doc = extractLines(authSaga);
 
 class Authentication extends PureComponent {
+  static propTypes = {
+    loggedIn: PropTypes.bool.isRequired,
+    login: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+    user: PropTypes.object,
+  };
+
   render() {
     return <Example
       title="Authentication"
@@ -43,13 +51,6 @@ class Authentication extends PureComponent {
     </Example>;
   }
 }
-
-Authentication.propTypes = {
-  loggedIn: React.PropTypes.bool.isRequired,
-  login: React.PropTypes.func.isRequired,
-  logout: React.PropTypes.func.isRequired,
-  user: React.PropTypes.object,
-};
 
 const mapStateToProps = state => ({
   loggedIn: state.login.loggedIn,

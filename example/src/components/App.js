@@ -11,6 +11,8 @@ import {
 import './App.styl';
 
 class App extends PureComponent {
+  static propTypes = {};
+
   render() {
     return <main>
       <Header />
@@ -23,7 +25,5 @@ class App extends PureComponent {
     </main>;
   }
 }
-
-App.propTypes = {};
 
 export default App;

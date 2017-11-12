@@ -1,10 +1,24 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import docs from '../../images/docs.svg';
 import gh from '../../images/github.svg';
 import './Button.styl';
 
 class Button extends PureComponent {
+  static propTypes = {
+    callToAction: PropTypes.bool.isRequired,
+    children: PropTypes.any.isRequired,
+    link: PropTypes.string,
+    loading: PropTypes.bool.isRequired,
+  };
+
+  static defaultProps = {
+    callToAction: false,
+    className: '',
+    loading: false,
+  };
+
   render() {
     const {
       callToAction,
@@ -31,19 +45,6 @@ class Button extends PureComponent {
       : <button {...props}>{ children }</button>;
   }
 }
-
-Button.propTypes = {
-  callToAction: React.PropTypes.bool.isRequired,
-  children: React.PropTypes.any.isRequired,
-  link: React.PropTypes.string,
-  loading: React.PropTypes.bool.isRequired,
-};
-
-Button.defaultProps = {
-  callToAction: false,
-  className: '',
-  loading: false,
-};
 
 export default Button;
 

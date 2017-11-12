@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react';
 import { Button } from './common';
 
 class Header extends PureComponent {
+  static propTypes = {};
+
   render() {
     return <header>
       <h1>redux-saga-firebase</h1>
@@ -27,7 +29,5 @@ class Header extends PureComponent {
     </header>;
   }
 }
-
-Header.propTypes = {};
 
 export default Header;

@@ -1,8 +1,16 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import './Checkbox.styl';
 
 class Checkbox extends PureComponent {
+  static propTypes = {
+    checked: PropTypes.bool.isRequired,
+    children: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+  };
+
   render() {
     const {
       checked,
@@ -22,12 +30,5 @@ class Checkbox extends PureComponent {
     </p>;
   }
 }
-
-Checkbox.propTypes = {
-  checked: React.PropTypes.bool.isRequired,
-  children: React.PropTypes.string.isRequired,
-  id: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func,
-};
 
 export default Checkbox;

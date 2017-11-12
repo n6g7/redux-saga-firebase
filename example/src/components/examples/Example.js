@@ -1,10 +1,21 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import hljsStyle from './hljs-style';
 
 import './Example.styl';
 
 class Example extends PureComponent {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+    snippets: PropTypes.arrayOf(PropTypes.string).isRequired,
+    title: PropTypes.string.isRequired,
+  };
+
+  static defaultProps = {
+    snippets: [],
+  };
+
   render() {
     const {
       children,
@@ -30,15 +41,5 @@ class Example extends PureComponent {
     </article>;
   }
 }
-
-Example.propTypes = {
-  children: React.PropTypes.node.isRequired,
-  snippets: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  title: React.PropTypes.string.isRequired,
-};
-
-Example.defaultProps = {
-  snippets: [],
-};
 
 export default Example;

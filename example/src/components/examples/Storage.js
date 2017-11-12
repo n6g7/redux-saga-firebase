@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
@@ -19,6 +20,12 @@ import storageSaga from '!raw-loader!../../redux/sagas/storage.js';
 const doc = extractLines(storageSaga);
 
 class Storage extends PureComponent {
+  static propTypes = {
+    file: PropTypes.instanceOf(File),
+    loading: PropTypes.bool.isRequired,
+    fileURL: PropTypes.string,
+  };
+
   constructor(props) {
     super(props);
 
@@ -48,12 +55,6 @@ class Storage extends PureComponent {
     </Example>;
   }
 }
-
-Storage.propTypes = {
-  file: React.PropTypes.instanceOf(File),
-  loading: React.PropTypes.bool.isRequired,
-  fileURL: React.PropTypes.string,
-};
 
 const mapStateToProps = state => ({
   file: state.storage.file,

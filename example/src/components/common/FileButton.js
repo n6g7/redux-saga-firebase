@@ -1,10 +1,16 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from './Button';
 
 import './FileButton.styl';
 
 class FileButton extends PureComponent {
+  static propTypes = {
+    children: PropTypes.any.isRequired,
+    onChange: PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
 
@@ -34,10 +40,5 @@ class FileButton extends PureComponent {
     </div>;
   }
 }
-
-FileButton.propTypes = {
-  children: React.PropTypes.any.isRequired,
-  onChange: React.PropTypes.func,
-};
 
 export default FileButton;

@@ -1,9 +1,23 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from './Button';
 import './InputGroup.styl';
 
 class InputGroup extends PureComponent {
+  static propTypes = {
+    children: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    onSubmit: PropTypes.func,
+    placeholder: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  };
+
+  static defaultProps = {
+    placeholder: '',
+    value: '',
+  };
+
   render() {
     const {
       children,
@@ -26,18 +40,5 @@ class InputGroup extends PureComponent {
     </div>;
   }
 }
-
-InputGroup.propTypes = {
-  children: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func,
-  onSubmit: React.PropTypes.func,
-  placeholder: React.PropTypes.string.isRequired,
-  value: React.PropTypes.string.isRequired,
-};
-
-InputGroup.defaultProps = {
-  placeholder: '',
-  value: '',
-};
 
 export default InputGroup;

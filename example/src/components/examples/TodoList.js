@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
@@ -18,6 +19,14 @@ import todosSaga from '!raw-loader!../../redux/sagas/todos.js';
 const doc = extractLines(todosSaga);
 
 class TodoList extends PureComponent {
+  static propTypes = {
+    changeNewTodo: PropTypes.func.isRequired,
+    newTodo: PropTypes.string.isRequired,
+    saveNewTodo: PropTypes.func.isRequired,
+    setTodoStatus: PropTypes.func.isRequired,
+    todos: PropTypes.array.isRequired,
+  };
+
   render() {
     return <Example
       title="Todo list"
@@ -61,14 +70,6 @@ class TodoList extends PureComponent {
       </ul>
     </Example>;
   }
-}
-
-TodoList.propTypes = {
-  changeNewTodo: React.PropTypes.func.isRequired,
-  newTodo: React.PropTypes.string.isRequired,
-  saveNewTodo: React.PropTypes.func.isRequired,
-  setTodoStatus: React.PropTypes.func.isRequired,
-  todos: React.PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({
