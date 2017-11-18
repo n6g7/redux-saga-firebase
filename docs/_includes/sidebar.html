@@ -8,13 +8,25 @@
     </p>
 
     <div class="ui fluid vertical pointing menu">
-      <a href="{{ site.baseurl }}/" class="red item {% if page.url == '/' %}active{% endif %}">Getting started</a>
+      {% assign prefix = page.url | slice: 0,7 %}
+      <div class="red item {% if page.url == '/' or prefix == '/guides' %}active{% endif %}">
+        Guides
+        <div class="menu">
+          <a href="{{ site.baseurl }}/" class="red item {% if page.url == '/' %}active{% endif %}">Getting started</a>
+          <a href="{{ "/guides/sorting-filtering" | relative_url }}" class="red item {% if page.url == '/guides/sorting-filtering.html' %}active{% endif %}">Sorting and filtering</a>
+          <a href="https://github.com/n6g7/redux-saga-firebase/releases" target="blank" class="red item">
+            <i class="external icon"></i>
+            Release notes
+          </a>
+        </div>
+      </div>
       {% assign prefix = page.url | slice: 0,10 %}
       <div class="red item {% if prefix == '/reference' %}active{% endif %}">
         Reference
         <div class="menu">
           <a href="{{ "/reference/auth" | relative_url }}" class="red item {% if page.url == '/reference/auth.html' %}active{% endif %}">Authentication</a>
           <a href="{{ "/reference/database" | relative_url }}" class="red item {% if page.url == '/reference/database.html' %}active{% endif %}">Database</a>
+          <a href="{{ "/reference/firestore" | relative_url }}" class="red item {% if page.url == '/reference/firestore.html' %}active{% endif %}">Firestore</a>
           <a href="{{ "/reference/functions" | relative_url }}" class="red item {% if page.url == '/reference/functions.html' %}active{% endif %}">Functions</a>
           <a href="{{ "/reference/messaging" | relative_url }}" class="red item {% if page.url == '/reference/messaging.html' %}active{% endif %}">Messaging</a>
           <a href="{{ "/reference/storage" | relative_url }}" class="red item {% if page.url == '/reference/storage.html' %}active{% endif %}">Storage</a>

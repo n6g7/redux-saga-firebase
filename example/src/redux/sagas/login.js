@@ -1,5 +1,5 @@
-import firebase from 'firebase';
-import { call, fork, put, take, takeEvery } from 'redux-saga/effects';
+import firebase from 'firebase'
+import { call, fork, put, take, takeEvery } from 'redux-saga/effects'
 
 import {
   types,
@@ -7,48 +7,46 @@ import {
   loginFailure,
   logoutSuccess,
   logoutFailure,
-  syncUser,
-} from '../reducer/login.actions';
+  syncUser
+} from '../reducer/login.actions'
 
-import rsf from '../rsf';
+import rsf from '../rsf'
 
-const authProvider = new firebase.auth.GoogleAuthProvider();
+const authProvider = new firebase.auth.GoogleAuthProvider()
 
-function* loginSaga() {
+function * loginSaga () {
   try {
-    const data = yield call(rsf.auth.signInWithPopup, authProvider);
-    yield put(loginSuccess(data));
-  }
-  catch(error) {
-    yield put(loginFailure(error));
+    const data = yield call(rsf.auth.signInWithPopup, authProvider)
+    yield put(loginSuccess(data))
+  } catch (error) {
+    yield put(loginFailure(error))
   }
 }
 
-function* logoutSaga() {
+function * logoutSaga () {
   try {
-    const data = yield call(rsf.auth.signOut);
-    yield put(logoutSuccess(data));
-  }
-  catch(error) {
-    yield put(logoutFailure(error));
-  }
-}
-
-function* syncUserSaga() {
-  const channel = yield call(rsf.auth.channel);
-
-  while(true) {
-    const { error, user } = yield take(channel);
-
-    if (user) yield put(syncUser(user));
-    else yield put(syncUser(null));
+    const data = yield call(rsf.auth.signOut)
+    yield put(logoutSuccess(data))
+  } catch (error) {
+    yield put(logoutFailure(error))
   }
 }
 
-export default function* loginRootSaga() {
-  yield fork(syncUserSaga);
+function * syncUserSaga () {
+  const channel = yield call(rsf.auth.channel)
+
+  while (true) {
+    const { user } = yield take(channel)
+
+    if (user) yield put(syncUser(user))
+    else yield put(syncUser(null))
+  }
+}
+
+export default function * loginRootSaga () {
+  yield fork(syncUserSaga)
   yield [
     takeEvery(types.LOGIN.REQUEST, loginSaga),
-    takeEvery(types.LOGOUT.REQUEST, logoutSaga),
-  ];
+    takeEvery(types.LOGOUT.REQUEST, logoutSaga)
+  ]
 }

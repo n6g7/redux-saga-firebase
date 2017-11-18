@@ -1,52 +1,61 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import {
   changeNewTodo,
   saveNewTodo,
-  setTodoStatus,
-} from '../../redux/reducer/todos.actions';
+  setTodoStatus
+} from '../../redux/reducer/todos.actions'
 
-import Example from './Example';
-import { Checkbox, InputGroup } from '../common';
+import Example from './Example'
+import { Checkbox, InputGroup } from '../common'
 
-import './TodoList.styl';
+import './TodoList.styl'
 
-import extractLines from '../../extract';
-import todosSaga from '!raw-loader!../../redux/sagas/todos.js';
+import extractLines from '../../extract'
+import todosSaga from '!raw-loader!../../redux/sagas/todos.js'
 
-const doc = extractLines(todosSaga);
+const doc = extractLines(todosSaga)
 
 class TodoList extends PureComponent {
-  render() {
+  static propTypes = {
+    changeNewTodo: PropTypes.func.isRequired,
+    newTodo: PropTypes.string.isRequired,
+    saveNewTodo: PropTypes.func.isRequired,
+    setTodoStatus: PropTypes.func.isRequired,
+    todos: PropTypes.array.isRequired
+  };
+
+  render () {
     return <Example
-      title="Todo list"
-      className="todo-list"
+      title='Todo list'
+      className='todo-list'
       snippets={[
         doc(10, 19),
         `function* syncTodosSaga() {
   yield fork(
     rsf.database.sync,
-    \'todos\',
-    syncTodos
+    'todos',
+    { successActionCreator: syncTodos }
   );
-}`,
+}`
       ]}
     >
       <p>
-        Open this page in <a href="#" target="blank">another tab or window</a> to see the realtime database in action!
+        Open this page in <a href='#' target='blank'>another tab or window</a> to see the realtime database in action!
       </p>
 
       <InputGroup
         value={this.props.newTodo}
         onChange={e => this.props.changeNewTodo(e.target.value)}
-        placeholder="New todo"
+        placeholder='New todo'
         onSubmit={this.props.saveNewTodo}
       >
         Add item
       </InputGroup>
 
-      <ul className="checklist">
+      <ul className='checklist'>
         { this.props.todos.map(todo =>
           <li key={todo.id}>
             <Checkbox
@@ -59,29 +68,21 @@ class TodoList extends PureComponent {
           </li>
         )}
       </ul>
-    </Example>;
+    </Example>
   }
-}
-
-TodoList.propTypes = {
-  changeNewTodo: React.PropTypes.func.isRequired,
-  newTodo: React.PropTypes.string.isRequired,
-  saveNewTodo: React.PropTypes.func.isRequired,
-  setTodoStatus: React.PropTypes.func.isRequired,
-  todos: React.PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({
   newTodo: state.todos.new,
-  todos: state.todos.list,
-});
+  todos: state.todos.list
+})
 const mapDispatchToProps = {
   changeNewTodo,
   saveNewTodo,
-  setTodoStatus,
-};
+  setTodoStatus
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList);
+)(TodoList)

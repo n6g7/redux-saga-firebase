@@ -1,33 +1,34 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-import './Checkbox.styl';
+import './Checkbox.styl'
 
 class Checkbox extends PureComponent {
-  render() {
+  static propTypes = {
+    checked: PropTypes.bool.isRequired,
+    children: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    onChange: PropTypes.func
+  };
+
+  render () {
     const {
       checked,
       children,
       id,
-      onChange,
-    } = this.props;
+      onChange
+    } = this.props
 
-    return <p className="checkbox">
+    return <p className='checkbox'>
       <input
-        type="checkbox"
+        type='checkbox'
         id={id}
         checked={checked}
         onChange={onChange}
       />
-    <label htmlFor={id}>{children}</label>
-    </p>;
+      <label htmlFor={id}>{children}</label>
+    </p>
   }
 }
 
-Checkbox.propTypes = {
-  checked: React.PropTypes.bool.isRequired,
-  children: React.PropTypes.string.isRequired,
-  id: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func,
-};
-
-export default Checkbox;
+export default Checkbox

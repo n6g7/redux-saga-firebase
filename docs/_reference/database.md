@@ -140,7 +140,7 @@ methods:
       }
       ```
 
-  - signature: database.sync(pathOrRef, actionCreator, transform)
+  - signature: database.sync(pathOrRef, options)
     id: sync
     generator: true
     description: Automatically dispatches a redux action every time `path` changes.
@@ -149,14 +149,10 @@ methods:
         required: true
         type: String or [Firebase Database Reference](https://firebase.google.com/docs/reference/js/firebase.database.Reference)
         description: The path or reference to the value to synced.
-      - name: actionCreator
+      - name: options
         required: true
-        type: Function
-        description: The action creator to use. It must take a single argument being the value read from the firebase reference.
-      - name: transform
-        required: false
-        type: Function
-        description: An optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`).
+        type: Object
+        description: "An object to configure how the database should be synchronised. It must contain at least the `successActionCreator` which must take a single argument being the value read from the firebase reference. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
     output:
     example: |
       ```js
@@ -164,7 +160,7 @@ methods:
 
       function* todoRootSaga() {
         yield [
-          rsf.database.sync('todos', syncTodos),
+          rsf.database.sync('todos', { successActionCreator: syncTodos }),
         ];
       }
       ```

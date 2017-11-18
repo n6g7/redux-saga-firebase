@@ -1,21 +1,35 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-import Button from './Button';
-import './InputGroup.styl';
+import Button from './Button'
+import './InputGroup.styl'
 
 class InputGroup extends PureComponent {
-  render() {
+  static propTypes = {
+    children: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    onSubmit: PropTypes.func,
+    placeholder: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired
+  };
+
+  static defaultProps = {
+    placeholder: '',
+    value: ''
+  };
+
+  render () {
     const {
       children,
       onChange,
       onSubmit,
       placeholder,
-      value,
-    } = this.props;
+      value
+    } = this.props
 
-    return <div className="input-group">
+    return <div className='input-group'>
       <input
-        type="text"
+        type='text'
         value={value}
         onChange={onChange}
         placeholder={placeholder}
@@ -23,21 +37,8 @@ class InputGroup extends PureComponent {
       <Button onClick={onSubmit}>
         { children }
       </Button>
-    </div>;
+    </div>
   }
 }
 
-InputGroup.propTypes = {
-  children: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func,
-  onSubmit: React.PropTypes.func,
-  placeholder: React.PropTypes.string.isRequired,
-  value: React.PropTypes.string.isRequired,
-};
-
-InputGroup.defaultProps = {
-  placeholder: '',
-  value: '',
-};
-
-export default InputGroup;
+export default InputGroup

@@ -11,7 +11,7 @@ function * saveNewTodo () {
   const user = yield select(state => state.login.user)
   const newTodo = yield select(state => state.todos.new)
 
-  yield call(rsf.database.create, 'todos', {
+  yield call(rsf.firestore.addDocument, 'todos', {
     creator: user ? user.uid : null,
     done: false,
     label: newTodo
@@ -19,19 +19,23 @@ function * saveNewTodo () {
 }
 
 function * setTodoStatus (action) {
-  yield call(rsf.database.patch, `todos/${action.todoId}`, {
+  yield call(rsf.firestore.updateDocument, `todos/${action.todoId}`, {
     done: action.done
   })
 }
 
 export default function * rootSaga () {
-  const todosTransformer = todos => Object.keys(todos).map(key => ({
-    ...todos[key],
-    id: key
-  }))
+  const todosTransformer = todos => {
+    const res = []
+    todos.forEach(doc => res.push({
+      id: doc.id,
+      ...doc.data()
+    }))
+    return res
+  }
 
   yield [
-    rsf.database.sync(
+    rsf.firestore.syncCollection(
       'todos',
       {
         successActionCreator: syncTodos,

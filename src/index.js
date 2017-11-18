@@ -1,12 +1,14 @@
 import auth from './auth'
 import database from './database'
+import firestore from './firestore'
 import functions from './functions'
 import messaging from './messaging'
 import storage from './storage'
 
 class ReduxSagaFirebase {
-  constructor (firebaseApp) {
+  constructor (firebaseApp, firestoreDb) {
     this.app = firebaseApp
+    this.firestoreDb = firestoreDb
     this.region = 'us-central1'
 
     // Authentication methods
@@ -14,10 +16,14 @@ class ReduxSagaFirebase {
       applyActionCode: auth.applyActionCode.bind(this),
       channel: auth.channel.bind(this),
       confirmPasswordReset: auth.confirmPasswordReset.bind(this),
-      createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(this),
+      createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(
+        this
+      ),
       sendEmailVerification: auth.sendEmailVerification.bind(this),
       sendPasswordResetEmail: auth.sendPasswordResetEmail.bind(this),
-      signInAndRetrieveDataWithCredential: auth.signInAndRetrieveDataWithCredential.bind(this),
+      signInAndRetrieveDataWithCredential: auth.signInAndRetrieveDataWithCredential.bind(
+        this
+      ),
       signInAnonymously: auth.signInAnonymously.bind(this),
       signInWithCredential: auth.signInWithCredential.bind(this),
       signInWithCustomToken: auth.signInWithCustomToken.bind(this),
@@ -40,6 +46,19 @@ class ReduxSagaFirebase {
       sync: database.sync.bind(this)
     }
 
+    // Firestore methods
+    this.firestore = {
+      addDocument: firestore.addDocument.bind(this),
+      channel: firestore.channel.bind(this),
+      deleteDocument: firestore.deleteDocument.bind(this),
+      getCollection: firestore.getCollection.bind(this),
+      getDocument: firestore.getDocument.bind(this),
+      setDocument: firestore.setDocument.bind(this),
+      syncCollection: firestore.syncCollection.bind(this),
+      syncDocument: firestore.syncDocument.bind(this),
+      updateDocument: firestore.updateDocument.bind(this)
+    }
+
     // Functions methods
     this.functions = {
       call: functions.call.bind(this)
@@ -48,6 +67,8 @@ class ReduxSagaFirebase {
     // Messaging methods
     this.messaging = {
       channel: messaging.channel.bind(this),
+      syncMessages: messaging.syncMessages.bind(this),
+      syncToken: messaging.syncToken.bind(this),
       tokenRefreshChannel: messaging.tokenRefreshChannel.bind(this)
     }
 
@@ -74,8 +95,20 @@ class ReduxSagaFirebase {
   }
 
   _getRef (pathOrRef, service) {
-    return (typeof pathOrRef === 'string')
+    return typeof pathOrRef === 'string'
       ? this.app[service]().ref(pathOrRef)
+      : pathOrRef
+  }
+
+  _getCollection (pathOrRef) {
+    return typeof pathOrRef === 'string'
+      ? this.firestoreDb.collection(pathOrRef)
+      : pathOrRef
+  }
+
+  _getDocument (pathOrRef) {
+    return typeof pathOrRef === 'string'
+      ? this.firestoreDb.doc(pathOrRef)
       : pathOrRef
   }
 }

@@ -17,6 +17,12 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.app).toBe(app)
     })
 
+    it('takes an optional firestore db as argument', () => {
+      const db = 'ksqld'
+      rsf = new ReduxSagaFirebase(app, db)
+      expect(rsf.firestoreDb).toBe(db)
+    })
+
     it('defines authentication methods', () => {
       expect(rsf.auth.applyActionCode).toBeInstanceOf(Function)
       expect(rsf.auth.channel).toBeInstanceOf(Function)
@@ -46,12 +52,26 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.database.sync).toBeInstanceOf(Function)
     })
 
+    it('defines firestore methods', () => {
+      expect(rsf.firestore.addDocument).toBeInstanceOf(Function)
+      expect(rsf.firestore.channel).toBeInstanceOf(Function)
+      expect(rsf.firestore.deleteDocument).toBeInstanceOf(Function)
+      expect(rsf.firestore.getCollection).toBeInstanceOf(Function)
+      expect(rsf.firestore.getDocument).toBeInstanceOf(Function)
+      expect(rsf.firestore.setDocument).toBeInstanceOf(Function)
+      expect(rsf.firestore.syncCollection).toBeInstanceOf(Function)
+      expect(rsf.firestore.syncDocument).toBeInstanceOf(Function)
+      expect(rsf.firestore.updateDocument).toBeInstanceOf(Function)
+    })
+
     it('defines functions methods', () => {
       expect(rsf.functions.call).toBeInstanceOf(Function)
     })
 
     it('defines messaging methods', () => {
       expect(rsf.messaging.channel).toBeInstanceOf(Function)
+      expect(rsf.messaging.syncMessages).toBeInstanceOf(Function)
+      expect(rsf.messaging.syncToken).toBeInstanceOf(Function)
       expect(rsf.messaging.tokenRefreshChannel).toBeInstanceOf(Function)
     })
 
@@ -167,6 +187,72 @@ describe('ReduxSagaFirebase', () => {
       expect(storage.ref.mock.calls.length).toBe(0)
 
       expect(ref).toEqual(storageRef)
+    })
+  })
+
+  describe('_getCollection(pathOrRef)', () => {
+    let collectionRef, firestore, app, rsf
+
+    beforeEach(() => {
+      collectionRef = {
+        key: 'key'
+      }
+      firestore = {
+        collection: jest.fn(() => collectionRef)
+      }
+      app = {}
+      rsf = new ReduxSagaFirebase(app, firestore)
+    })
+
+    it('returns a collection ref from path string', () => {
+      const path = 'path'
+      const ref = rsf._getCollection(path)
+
+      expect(firestore.collection.mock.calls.length).toBe(1)
+      expect(firestore.collection.mock.calls[0]).toEqual([path])
+
+      expect(ref).toEqual(collectionRef)
+    })
+
+    it('returns the collection ref that was passed to it', () => {
+      const ref = rsf._getCollection(collectionRef)
+
+      expect(firestore.collection.mock.calls.length).toBe(0)
+
+      expect(ref).toEqual(collectionRef)
+    })
+  })
+
+  describe('_getDocument(pathOrRef)', () => {
+    let documentRef, firestore, app, rsf
+
+    beforeEach(() => {
+      documentRef = {
+        key: 'key'
+      }
+      firestore = {
+        doc: jest.fn(() => documentRef)
+      }
+      app = {}
+      rsf = new ReduxSagaFirebase(app, firestore)
+    })
+
+    it('returns a collection ref from path string', () => {
+      const path = 'path'
+      const ref = rsf._getDocument(path)
+
+      expect(firestore.doc.mock.calls.length).toBe(1)
+      expect(firestore.doc.mock.calls[0]).toEqual([path])
+
+      expect(ref).toEqual(documentRef)
+    })
+
+    it('returns the collection ref that was passed to it', () => {
+      const ref = rsf._getDocument(documentRef)
+
+      expect(firestore.doc.mock.calls.length).toBe(0)
+
+      expect(ref).toEqual(documentRef)
     })
   })
 })

@@ -11,6 +11,8 @@ npm:
   url: https://www.npmjs.com/package/redux-saga-firebase
 
 collections:
+  guides:
+    output: true
   reference:
     output: true
 

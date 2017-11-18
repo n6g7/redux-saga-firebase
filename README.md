@@ -28,6 +28,8 @@ const myFirebaseApp = firebase.initializeApp({
 });
 
 const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp)
+// Or, to use firestore:
+const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp, firebase.firestore())
 ```
 
 You can now use `reduxSagaFirebase` methods in your sagas:
@@ -85,7 +87,19 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*database.patch(path, data)`](https://n6g7.github.io/redux-saga-firebase/reference/database#patch)
 - [`*database.delete(path)`](https://n6g7.github.io/redux-saga-firebase/reference/database#delete)
 - [`database.channel(path, event)`](https://n6g7.github.io/redux-saga-firebase/reference/database#channel)
-- [`*database.sync(path, actionCreator, transform)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
+- [`*database.sync(path, options)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
+
+**Firestore**
+
+- [`*firestore.addDocument(collectionRef, data)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#addDocument)
+- [`firestore.channel(pathOrRef, type)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#channel)
+- [`*firestore.deleteDocument(documentRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#deleteDocument)
+- [`*firestore.getCollection(collectionRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getCollection)
+- [`*firestore.getDocument(docRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getDocument)
+- [`*firestore.setDocument(docRef, data, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#setDocument)
+- [`*firestore.syncCollection(pathOrRef, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncCollection)
+- [`*firestore.syncDocument(pathOrRef, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncDocument)
+- [`*firestore.updateDocument(docRef, ...args)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#updateDocument)
 
 **Functions**
 
@@ -94,6 +108,8 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 **Messaging**
 
 - [`messaging.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#channel)
+- [`*messaging.syncMessages(options)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncMessages)
+- [`*messaging.syncToken(options)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncToken)
 - [`messaging.tokenRefreshChannel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#tokenRefreshChannel)
 
 **Storage**

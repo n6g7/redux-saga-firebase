@@ -1,4 +1,7 @@
+import { call, fork } from 'redux-saga/effects'
+
 import messagingModule from './messaging'
+import { syncChannel } from './utils'
 
 describe('messaging', () => {
   let context
@@ -20,6 +23,10 @@ describe('messaging', () => {
     context = {
       app: {
         messaging: jest.fn(() => messaging)
+      },
+      messaging: {
+        channel: jest.fn(),
+        tokenRefreshChannel: jest.fn()
       }
     }
   })
@@ -48,6 +55,29 @@ describe('messaging', () => {
       expect(messaging.onMessage.mock.calls.length).toBe(0)
 
       expect(context._messageChannel).toBe(result)
+    })
+  })
+
+  describe('syncMessages(options)', () => {
+    it('works', () => {
+      const options = {}
+      const iterator = messagingModule.syncMessages.call(context, options)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.messaging.channel))
+
+      const channel = 'jqsdkl'
+      expect(iterator.next(channel))
+        .toEqual({
+          done: false,
+          value: fork(syncChannel, channel, options)
+        })
+
+      expect(iterator.next())
+        .toEqual({
+          done: true,
+          value: undefined
+        })
     })
   })
 
@@ -88,6 +118,29 @@ describe('messaging', () => {
 
       channel.take(spy)
       emit()
+    })
+  })
+
+  describe('syncToken(options)', () => {
+    it('works', () => {
+      const options = {}
+      const iterator = messagingModule.syncToken.call(context, options)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.messaging.tokenRefreshChannel))
+
+      const channel = 'jqsdkl'
+      expect(iterator.next(channel))
+        .toEqual({
+          done: false,
+          value: fork(syncChannel, channel, options)
+        })
+
+      expect(iterator.next())
+        .toEqual({
+          done: true,
+          value: undefined
+        })
     })
   })
 })
