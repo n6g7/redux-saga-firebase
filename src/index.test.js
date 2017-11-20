@@ -100,10 +100,10 @@ describe('ReduxSagaFirebase', () => {
     })
 
     it('infers a project id from the firebase app (complex)', () => {
-      const projectId = 'jskdqdlqd'
+      const projectId = 'jskdqdlqd-a1b2c'
       const app = {
         options: {
-          authDomain: `${projectId}-a1b2c.firebaseapp.com`
+          authDomain: `${projectId}.firebaseapp.com`
         }
       }
       const rsf = new ReduxSagaFirebase(app)
