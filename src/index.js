@@ -86,7 +86,7 @@ class ReduxSagaFirebase {
   projectId () {
     if (this._projectId) return this._projectId
 
-    const regex = /^([a-z0-9-]+?(-[a-z0-9]{5})*)?\.firebaseapp\.com$/
+    const regex = /^([a-z0-9-]+)\.firebaseapp\.com$/
     const projectId = this.app.options.authDomain.match(regex)[1]
 
     this._projectId = projectId
