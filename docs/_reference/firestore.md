@@ -218,3 +218,22 @@ methods:
       ```
 
 ---
+
+When using firestore don't forget to install and load the `@firebase/firestore` dependency into your project (as it's not part of the `firebase` package yet):
+
+- install the firestore package: `yarn add @firebase/firestore`
+- import it in your project:
+  ```js
+  import firebase from 'firebase'
+  import '@firebase/firestore' // 👈 Don't forget this ...
+  import ReduxSagaFirebase from 'redux-saga-firebase'
+
+  const firebaseApp = firebase.initializeApp({ ... })
+
+  const rsf = new ReduxSagaFirebase(
+    firebaseApp,
+    firebase.firestore() // 👈 ... and this
+  )
+
+  export default rsf
+  ```

@@ -67,10 +67,7 @@
 .highlight .il { color: #009999; }
 .highlight .gc { color: #999; background-color: #EAF2F5; }
 
-p code,
-ul code,
-ol code,
-table code {
+:not(pre) > code {
   background-color: rgba(27,31,35,0.05);
   border-radius: 3px;
   font-size: 90%;
