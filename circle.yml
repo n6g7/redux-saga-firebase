@@ -1,11 +1,11 @@
 version: 2
 
 jobs:
-  build:
+  lib:
     working_directory: ~/redux-saga-firebase
 
     docker:
-      - image: node:7
+      - image: node:latest
 
     steps:
       - checkout
@@ -20,10 +20,6 @@ jobs:
       - run:
           name: Install dependencies
           command: yarn
-
-      - run:
-          name: Check yarn.lock is up to date
-          command: yarn check
 
       - run:
           name: Run tests
@@ -46,3 +42,40 @@ jobs:
           paths:
             - ~/.yarn
             - ~/redux-saga-firebase/node_modules
+
+  demo:
+    working_directory: ~/redux-saga-firebase
+
+    docker:
+      - image: node:latest
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - demo-{{ .Branch }}-{{ checksum "example/package.json" }}
+            - demo-{{ .Branch }}
+            - demo-master-{{ checksum "example/package.json" }}
+            - demo-master
+
+      - run:
+          name: Install dependencies
+          command: cd example && yarn
+
+      - run:
+          name: Run tests
+          command: cd example && yarn test
+
+      - save_cache:
+          key: demo-{{ .Branch }}-{{ checksum "example/package.json" }}
+          paths:
+            - ~/.yarn
+            - ~/redux-saga-firebase/example/node_modules
+
+workflows:
+  version: 2
+  stack:
+    jobs:
+      - lib
+      - demo
