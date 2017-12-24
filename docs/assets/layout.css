@@ -11,10 +11,6 @@ body {
   margin: 2rem 0;
 }
 
-#sidebar-content .list {
-  margin: 3rem 0;
-}
-
 #sidebar-content .list .item .image {
   height: 16px;
 }
