@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require('webpack')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -9,8 +8,14 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader'
+        oneOf: [
+          {
+            resourceQuery: /raw/,
+            use: 'raw-loader'
+          },
+          {
+            use: 'babel-loader'
+          }
         ]
       },
       {

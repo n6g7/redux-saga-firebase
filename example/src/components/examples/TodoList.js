@@ -14,7 +14,7 @@ import { Checkbox, InputGroup } from '../common'
 import './TodoList.styl'
 
 import extractLines from '../../extract'
-import todosSaga from '!raw-loader!../../redux/sagas/todos.js'
+import todosSaga from '../../redux/sagas/todos.js?raw'
 
 const doc = extractLines(todosSaga)
 

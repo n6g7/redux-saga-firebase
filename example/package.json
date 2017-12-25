@@ -50,6 +50,10 @@
     ]
   },
   "standard": {
+    "globals": [
+      "firebase",
+      "importScripts"
+    ],
     "parser": "babel-eslint"
   }
 }

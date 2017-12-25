@@ -15,7 +15,7 @@ import upload from '../../images/upload.svg'
 import './Storage.styl'
 
 import extractLines from '../../extract'
-import storageSaga from '!raw-loader!../../redux/sagas/storage.js'
+import storageSaga from '../../redux/sagas/storage.js?raw'
 
 const doc = extractLines(storageSaga)
 
@@ -43,7 +43,7 @@ class Storage extends PureComponent {
       title='Storage'
       className='storage'
       snippets={[
-        doc(19, 32),
+        doc(18, 32),
         doc(9, 17)
       ]}
     >

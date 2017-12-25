@@ -13,7 +13,7 @@ import Button from '../common/Button'
 import './Authentication.styl'
 
 import extractLines from '../../extract'
-import authSaga from '!raw-loader!../../redux/sagas/login.js'
+import authSaga from '../../redux/sagas/login.js?raw'
 
 const doc = extractLines(authSaga)
 
@@ -30,7 +30,7 @@ class Authentication extends PureComponent {
       title='Authentication'
       snippets={[
         doc(17, 25),
-        doc(37, 46)
+        doc(35, 45)
       ]}
       className='authentication'
     >
