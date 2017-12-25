@@ -30,13 +30,29 @@ Since calling [`push`](https://firebase.google.com/docs/reference/js/firebase.da
 The alternative is to use the [`set`](https://firebase.google.com/docs/reference/js/firebase.database.Reference#set) method (or RSF's [`database.update`](/redux-saga-firebase/reference/database#update)) with the key already built in the reference:
 
 ```js
-function updateUserSaga * (userId, userData) {
+function createUserSaga * (userData) {
   yield call(
     rsf.database.update,
-    `users/${userId}`,
+    `users/${userData.username}`,
     userData
   )
 }
 ```
 
 See [issue#82](https://github.com/n6g7/redux-saga-firebase/issues/82) for more info.
+
+## Using firestore
+
+There is a very similar behaviour when using firestore:
+- [`firestore.addDocument`](/redux-saga-firebase/reference/firestore#addDocument) ([`CollectionReference.add`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#add)) will automatically generate an ID for the new document
+- use [`firestore.setDocument`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#setDocument) ([`DocumentReference.set`](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#set)) instead to be able to choose the ID of the new document:
+
+```js
+function createUserSaga * (userData) {
+  yield call(
+    rsf.firestore.setDocument,
+    `users/${userData.username}`,
+    userData
+  )
+}
+```
