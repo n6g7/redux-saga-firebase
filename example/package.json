@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack -p",
     "deploy": "firebase deploy",
-    "dev": "webpack-dashboard -- webpack-dev-server",
+    "dev": "webpack-dev-server",
     "test": "standard"
   },
   "dependencies": {
@@ -39,7 +39,6 @@
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.8.1",
-    "webpack-dashboard": "^1.0.2",
     "webpack-dev-server": "^2.9.4"
   },
   "babel": {
