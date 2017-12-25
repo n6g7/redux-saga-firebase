@@ -73,9 +73,65 @@ jobs:
             - ~/.yarn
             - ~/redux-saga-firebase/example/node_modules
 
+  deploy:
+    working_directory: ~/redux-saga-firebase
+
+    docker:
+      - image: node:latest
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - deploy-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
+            - deploy-{{ .Branch }}
+            - deploy-master-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
+            - deploy-master
+
+      - run:
+          name: Install lib dependencies
+          command: yarn
+
+      - run:
+          name: Install demo dependencies
+          command: cd example && yarn
+
+      - run:
+          name: Install demo functions dependencies
+          command: cd example/functions && yarn
+
+      - run:
+          name: Build demo
+          command: cd example && yarn build
+
+      - run:
+          name: Install Firebase CLI
+          command: yarn global add firebase-tools
+
+      - run:
+          name: Deploy demo
+          command: cd example && yarn deploy --token "$FIREBASE_TOKEN"
+
+      - save_cache:
+          key: deploy-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
+          paths:
+            - ~/.yarn
+            - ~/redux-saga-firebase/node_modules
+            - ~/redux-saga-firebase/example/node_modules
+            - ~/redux-saga-firebase/example/functions/node_modules
+
 workflows:
   version: 2
   stack:
     jobs:
       - lib
       - demo
+      - deploy:
+          requires:
+            - lib
+            - demo
+          filters:
+            branches:
+              only:
+                - master
