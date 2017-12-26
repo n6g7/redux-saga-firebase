@@ -1,0 +1,7 @@
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /test.png {
+      allow read, write;
+    }
+  }
+}
