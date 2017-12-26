@@ -25,8 +25,8 @@ function * setTodoStatus (action) {
 }
 
 export default function * rootSaga () {
-  const todosTransformer = todos => Object.keys(todos).map(key => ({
-    ...todos[key],
+  const todosTransformer = ({ value }) => Object.keys(value).map(key => ({
+    ...value[key],
     id: key
   }))
 
