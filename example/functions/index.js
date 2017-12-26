@@ -40,6 +40,25 @@ exports.clean = functions.https.onRequest((request, response) => {
     }
   })
 
+  const documentReferences = []
+  const todos = admin.firestore().collection('todos')
+
+  todos.stream()
+  .on('data', snapshot => documentReferences.push(snapshot.ref))
+  .on('end', () => {
+    Promise.all(documentReferences.map(ref => ref.delete()))
+    .then(() => {
+      todos.add({
+        done: true,
+        label: 'Hello'
+      })
+      todos.add({
+        done: false,
+        label: 'World'
+      })
+    })
+  })
+
   admin.storage().bucket().upload(
     'clean.png',
     { destination: 'test.png' }
