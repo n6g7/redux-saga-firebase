@@ -54,6 +54,29 @@ describe('database', () => {
       expect(result.val.mock.calls.length).toBe(1)
       expect(result.val.mock.calls[0]).toEqual([])
     })
+
+    it('accepts a firebase.database.Reference argument', () => {
+      context._getRef = jest.fn(ref => ref)
+      const val = 'jqdqkld'
+      const result = {
+        val: jest.fn(() => val)
+      }
+      const iterator = dbModule.read.call(context, ref)
+
+      expect(iterator.next().value)
+        .toEqual(call([ref, ref.once], 'value'))
+
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([ref, 'database'])
+
+      expect(iterator.next(result)).toEqual({
+        done: true,
+        value: val
+      })
+
+      expect(result.val.mock.calls.length).toBe(1)
+      expect(result.val.mock.calls[0]).toEqual([])
+    })
   })
 
   describe('create(path, data)', () => {
@@ -234,6 +257,18 @@ describe('database', () => {
       channel.take(spy)
       emit(snapshot)
     })
+
+    it('accepts a firebase.database.Reference argument', () => {
+      const event = 'okqdkj'
+      context._getRef = jest.fn(ref => ref)
+      dbModule.channel.call(context, ref, event)
+
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([ref, 'database'])
+
+      expect(ref.on.mock.calls.length).toBe(1)
+      expect(ref.on.mock.calls[0][0]).toBe(event)
+    })
   })
 
   describe('sync(path, options)', () => {
@@ -273,6 +308,29 @@ describe('database', () => {
 
       const value = 'qosdksm'
       expect(defaultTransform({ value })).toEqual(value)
+    })
+
+    it('accepts a firebase.database.Reference argument', () => {
+      context._getRef = jest.fn(ref => ref)
+      const transform = jest.fn()
+      const options = { transform }
+      const iterator = dbModule.sync.call(context, ref, options)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.database.channel, ref))
+
+      const chan = 'eeeerqd'
+      expect(iterator.next(chan))
+        .toEqual({
+          done: false,
+          value: fork(syncChannel, chan, options)
+        })
+
+      expect(iterator.next())
+        .toEqual({
+          done: true,
+          value: undefined
+        })
     })
   })
 })

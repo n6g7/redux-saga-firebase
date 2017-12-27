@@ -93,6 +93,26 @@ describe('firestore', () => {
 
       expect(unsubscribe.mock.calls.length).toBe(1)
     })
+
+    it('accepts a firebase.firestore.CollectionReference', () => {
+      const type = 'collection'
+      firestoreModule.channel.call(context, collection, type)
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+      expect(context._getCollection.mock.calls[0]).toEqual([collection])
+
+      expect(collection.onSnapshot.mock.calls.length).toBe(1)
+    })
+
+    it('accepts a firebase.firestore.DocumentReference', () => {
+      const type = 'doc'
+      firestoreModule.channel.call(context, document, type)
+
+      expect(context._getDocument.mock.calls.length).toBe(1)
+      expect(context._getDocument.mock.calls[0]).toEqual([document])
+
+      expect(document.onSnapshot.mock.calls.length).toBe(1)
+    })
   })
 
   describe('deleteDocument(documentRef)', () => {
@@ -131,6 +151,28 @@ describe('firestore', () => {
 
       expect(context._getCollection.mock.calls.length).toBe(1)
       expect(context._getCollection.mock.calls[0]).toEqual([collectionRef])
+
+      expect(iterator.next(response)).toEqual({
+        done: true,
+        value: response
+      })
+    })
+
+    it('accepts a firebase.firestore.CollectionReference', () => {
+      const val = 'asd'
+      const result = {
+        data: jest.fn(() => val),
+        id: val
+      }
+      const response = [result, result]
+
+      const iterator = firestoreModule.getCollection.call(context, collection)
+
+      expect(iterator.next().value)
+        .toEqual(call([collection, collection.get]))
+
+      expect(context._getCollection.mock.calls.length).toBe(1)
+      expect(context._getCollection.mock.calls[0]).toEqual([collection])
 
       expect(iterator.next(response)).toEqual({
         done: true,
@@ -196,6 +238,27 @@ describe('firestore', () => {
 
       expect(iterator.next().value)
         .toEqual(call(context.firestore.channel, path, 'collection'))
+
+      const chan = 'eeeerqd'
+      expect(iterator.next(chan))
+        .toEqual({
+          done: false,
+          value: fork(syncChannel, chan, options)
+        })
+
+      expect(iterator.next())
+        .toEqual({
+          done: true,
+          value: undefined
+        })
+    })
+
+    it('accepts a firebase.firestore.CollectionReference', () => {
+      const options = {}
+      const iterator = firestoreModule.syncCollection.call(context, collection, options)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.firestore.channel, collection, 'collection'))
 
       const chan = 'eeeerqd'
       expect(iterator.next(chan))
