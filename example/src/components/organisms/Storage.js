@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import {
   sendFile,
@@ -11,10 +12,18 @@ import { Example, FileButton } from '@molecules'
 
 import { upload } from '@assets'
 
-import './Storage.styl'
-
 import extractLines from '../../extract'
 import storageSaga from '../../redux/sagas/storage.js?raw'
+
+const StyledFileButton = styled(FileButton)`
+  margin-bottom: ${p => 2 * p.theme.spacing}px;
+`
+
+const Image = styled.img`
+  height: ${p => 40 * p.theme.spacing}px;
+  object-fit: contain;
+  width: ${p => 60 * p.theme.spacing}px;
+`
 
 const doc = extractLines(storageSaga)
 
@@ -46,11 +55,11 @@ class Storage extends PureComponent {
         doc(9, 17)
       ]}
     >
-      <FileButton onChange={this.onChange} loading={this.props.loading}>
+      <StyledFileButton onChange={this.onChange} loading={this.props.loading}>
         <img src={upload} />
         Send file
-      </FileButton>
-      <img src={this.props.fileURL} width='300' />
+      </StyledFileButton>
+      <Image src={this.props.fileURL} width='300' />
     </Example>
   }
 }
