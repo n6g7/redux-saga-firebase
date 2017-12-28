@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import docs from '../../images/docs.svg'
-import gh from '../../images/github.svg'
+import { docs, gh } from '@assets'
 import './Button.styl'
 
 class Button extends PureComponent {

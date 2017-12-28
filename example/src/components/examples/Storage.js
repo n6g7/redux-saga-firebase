@@ -10,7 +10,7 @@ import {
 import Example from './Example'
 import { FileButton } from '../common'
 
-import upload from '../../images/upload.svg'
+import { upload } from '@assets'
 
 import './Storage.styl'
 

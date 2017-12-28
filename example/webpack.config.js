@@ -3,6 +3,11 @@ const path = require('path')
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: ['babel-polyfill', './index.js'],
+  resolve: {
+    alias: {
+      '@assets': path.resolve(__dirname, 'src/assets')
+    }
+  },
   module: {
     rules: [
       {
