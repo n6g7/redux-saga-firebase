@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import {
   login,
@@ -10,10 +11,14 @@ import {
 import { Button } from '@atoms'
 import { Example } from '@molecules'
 
-import './Authentication.styl'
-
 import extractLines from '../../extract'
 import authSaga from '../../redux/sagas/login.js?raw'
+
+const Container = styled(Example)`
+  button + button {
+    margin-left: ${p => p.theme.spacing}px;
+  }
+`
 
 const doc = extractLines(authSaga)
 
@@ -26,13 +31,12 @@ class Authentication extends PureComponent {
   };
 
   render () {
-    return <Example
+    return <Container
       title='Authentication'
       snippets={[
         doc(17, 25),
         doc(35, 45)
       ]}
-      className='authentication'
     >
       <Button
         onClick={this.props.login}
@@ -48,7 +52,7 @@ class Authentication extends PureComponent {
       </Button>
 
       <p>User: {this.props.user ? this.props.user.displayName : 'none'}</p>
-    </Example>
+    </Container>
   }
 }
 
