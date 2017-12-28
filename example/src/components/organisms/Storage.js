@@ -7,8 +7,7 @@ import {
   setFile
 } from '../../redux/reducer/storage.actions'
 
-import Example from './Example'
-import { FileButton } from '../common'
+import { Example, FileButton } from '@molecules'
 
 import { upload } from '@assets'
 

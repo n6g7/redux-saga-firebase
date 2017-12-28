@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import { Button } from './common'
+import { Button } from '@atoms'
 
 class Header extends PureComponent {
   static propTypes = {};

@@ -8,8 +8,8 @@ import {
   setTodoStatus
 } from '../../redux/reducer/todos.actions'
 
-import Example from './Example'
-import { Checkbox, InputGroup } from '../common'
+import { Checkbox } from '@atoms'
+import { Example, InputGroup } from '@molecules'
 
 import './TodoList.styl'
 
