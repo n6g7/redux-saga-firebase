@@ -6,7 +6,7 @@ import {
   changeNewTodo,
   saveNewTodo,
   setTodoStatus
-} from '../../redux/reducer/todos.actions'
+} from '@actions/todos'
 
 import { Checkbox } from '@atoms'
 import { Example, InputGroup } from '@molecules'

@@ -3,7 +3,7 @@ import { call, select, takeEvery } from 'redux-saga/effects'
 import {
   types,
   syncTodos
-} from '../reducer/todos.actions'
+} from '@actions/todos'
 
 import rsf from '../rsf'
 

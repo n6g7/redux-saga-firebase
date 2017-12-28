@@ -1,4 +1,4 @@
-import { types } from './storage.actions'
+import { types } from '@actions/storage'
 
 const initialState = {
   file: null,

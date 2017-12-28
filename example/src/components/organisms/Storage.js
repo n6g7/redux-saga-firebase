@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {
   sendFile,
   setFile
-} from '../../redux/reducer/storage.actions'
+} from '@actions/storage'
 
 import { Example, FileButton } from '@molecules'
 

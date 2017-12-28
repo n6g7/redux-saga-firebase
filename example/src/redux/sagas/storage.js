@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 
-import { types, setFileURL } from '../reducer/storage.actions'
+import { types, setFileURL } from '@actions/storage'
 
 import rsf from '../rsf'
 

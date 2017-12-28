@@ -8,7 +8,7 @@ import {
   logoutSuccess,
   logoutFailure,
   syncUser
-} from '../reducer/login.actions'
+} from '@actions/login'
 
 import rsf from '../rsf'
 
