@@ -7,8 +7,8 @@ import {
   logout
 } from '../../redux/reducer/login.actions'
 
-import Example from './Example'
-import Button from '../common/Button'
+import { Button } from '@atoms'
+import { Example } from '@molecules'
 
 import './Authentication.styl'
 

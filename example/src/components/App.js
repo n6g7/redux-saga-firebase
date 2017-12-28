@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react'
 
-import Header from './Header'
-import Footer from './Footer'
 import {
   AuthenticationExample,
+  Footer,
+  Header,
   StorageExample,
   TodoListExample
-} from './examples'
+} from '@organisms'
 
 import './App.styl'
 
