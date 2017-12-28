@@ -1,4 +1,4 @@
-import { types } from './todos.actions'
+import { types } from '@actions/todos'
 
 const initialState = {
   list: [],

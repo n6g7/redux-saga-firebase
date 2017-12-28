@@ -1,5 +1,5 @@
 import { call, select, takeEvery } from 'redux-saga/effects'
-import { types } from '../reducer/todos.actions'
+import { types } from '@actions/todos'
 
 import rsf from '../rsf'
 

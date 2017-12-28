@@ -1,4 +1,4 @@
-import { types } from './messaging.actions'
+import { types } from '@actions/messaging'
 
 const initialState = {
   registrationToken: null

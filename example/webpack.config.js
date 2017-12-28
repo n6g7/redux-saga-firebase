@@ -5,6 +5,7 @@ module.exports = {
   entry: ['babel-polyfill', './index.js'],
   resolve: {
     alias: {
+      '@actions': path.resolve(__dirname, 'src/redux/actions'),
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@atoms': path.resolve(__dirname, 'src/components/atoms'),
       '@molecules': path.resolve(__dirname, 'src/components/molecules'),

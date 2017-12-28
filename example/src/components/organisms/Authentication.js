@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {
   login,
   logout
-} from '../../redux/reducer/login.actions'
+} from '@actions/login'
 
 import { Button } from '@atoms'
 import { Example } from '@molecules'
