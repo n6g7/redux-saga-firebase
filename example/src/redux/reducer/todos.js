@@ -2,7 +2,8 @@ import { types } from '@actions/todos'
 
 const initialState = {
   list: [],
-  new: ''
+  new: '',
+  useFirestore: false
 }
 
 export default function reducer (state = initialState, action = {}) {
@@ -16,6 +17,11 @@ export default function reducer (state = initialState, action = {}) {
       return {
         ...state,
         new: action.todo
+      }
+    case types.TODOS.SET_FIRESTORE:
+      return {
+        ...state,
+        useFirestore: action.useFirestore
       }
     default:
       return state

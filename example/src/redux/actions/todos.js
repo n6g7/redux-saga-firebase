@@ -5,7 +5,8 @@ export const types = {
     NEW: {
       CHANGE: 'TODOS.NEW.CHANGE',
       SAVE: 'TODOS.NEW.SAVE'
-    }
+    },
+    SET_FIRESTORE: 'TODOS.SET_FIRESTORE'
   }
 }
 
@@ -27,4 +28,9 @@ export const setTodoStatus = (todoId, done) => ({
   type: types.TODOS.SET_STATUS,
   todoId,
   done
+})
+
+export const setFirestore = useFirestore => ({
+  type: types.TODOS.SET_FIRESTORE,
+  useFirestore
 })

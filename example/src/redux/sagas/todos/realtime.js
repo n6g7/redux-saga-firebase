@@ -1,11 +1,11 @@
-import { call, select, takeEvery } from 'redux-saga/effects'
+import { call, fork, select, takeEvery } from 'redux-saga/effects'
 
 import {
   types,
   syncTodos
 } from '@actions/todos'
 
-import rsf from '../rsf'
+import rsf from '../../rsf'
 
 function * saveNewTodo () {
   const user = yield select(state => state.login.user)
@@ -24,20 +24,25 @@ function * setTodoStatus (action) {
   })
 }
 
-export default function * rootSaga () {
-  const todosTransformer = ({ value }) => Object.keys(value).map(key => ({
-    ...value[key],
-    id: key
-  }))
+const todosTransformer = ({ value }) => Object.keys(value).map(key => ({
+  ...value[key],
+  id: key
+}))
 
+function * syncTodosSaga () {
+  yield fork(
+    rsf.database.sync,
+    'todos',
+    {
+      successActionCreator: syncTodos,
+      transform: todosTransformer
+    }
+  )
+}
+
+export default function * rootSaga () {
   yield [
-    rsf.database.sync(
-      'todos',
-      {
-        successActionCreator: syncTodos,
-        transform: todosTransformer
-      }
-    ),
+    fork(syncTodosSaga),
     takeEvery(types.TODOS.NEW.SAVE, saveNewTodo),
     takeEvery(types.TODOS.SET_STATUS, setTodoStatus)
   ]

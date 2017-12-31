@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Prism from 'prismjs'
@@ -36,10 +36,13 @@ class Snippet extends PureComponent {
       ...props
     } = this.props
 
+    const html = Prism.highlight(children, Prism.languages.javascript)
+
     return <Pre {...props}>
-      <Code className={`language-${language}`}>
-        { children }
-      </Code>
+      <Code
+        className={`language-${language}`}
+        dangerouslySetInnerHTML={{__html: html}}
+      />
     </Pre>
   }
 }

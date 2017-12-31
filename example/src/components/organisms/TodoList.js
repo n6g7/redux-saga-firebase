@@ -2,10 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { Checkbox as SemanticCheckbox, Label } from 'semantic-ui-react'
 
 import {
   changeNewTodo,
   saveNewTodo,
+  setFirestore,
   setTodoStatus
 } from '@actions/todos'
 
@@ -13,7 +15,31 @@ import { Checkbox, Link } from '@atoms'
 import { Example, InputGroup } from '@molecules'
 
 import extractLines from '../../extract'
-import todosSaga from '../../redux/sagas/todos.js?raw'
+import firestoreSaga from '../../redux/sagas/todos/firestore.js?raw'
+import realtimeSaga from '../../redux/sagas/todos/realtime.js?raw'
+
+const StyledSemanticCheckbox = styled(SemanticCheckbox)`
+  margin-bottom: ${p => 2 * p.theme.spacing}px;
+
+  &.ui.toggle {
+    input:not(:checked) ~ label {
+      color: white !important;
+
+      &::before {
+        background: rgba(255,255,255,0.15) !important;
+      }
+    }
+
+    input:checked ~ label,
+    input:checked:focus ~ label {
+      color: white !important;
+
+      &::before {
+        background-color: ${p => p.theme.colour.primary} !important;
+      }
+    }
+  }
+`
 
 const StyledInputGroup = styled(InputGroup)`
   margin: ${p => 2 * p.theme.spacing}px auto 0;
@@ -42,7 +68,17 @@ const ChecklistItem = styled.li`
   }
 `
 
-const doc = extractLines(todosSaga)
+const firestoreDoc = extractLines(firestoreSaga)
+const realtimeDoc = extractLines(realtimeSaga)
+
+const firestoreSnippets = [
+  firestoreDoc(10, 19),
+  firestoreDoc(36, 45)
+]
+const realtimeSnippets = [
+  realtimeDoc(10, 20),
+  realtimeDoc(32, 41)
+]
 
 class TodoList extends PureComponent {
   static propTypes = {
@@ -50,44 +86,55 @@ class TodoList extends PureComponent {
     newTodo: PropTypes.string.isRequired,
     saveNewTodo: PropTypes.func.isRequired,
     setTodoStatus: PropTypes.func.isRequired,
-    todos: PropTypes.array.isRequired
-  };
+    todos: PropTypes.array.isRequired,
+    useFirestore: PropTypes.bool.isRequired
+  }
+
+  toggleFirestore = (event, { checked }) => this.props.setFirestore(checked)
 
   render () {
+    const {
+      changeNewTodo,
+      newTodo,
+      saveNewTodo,
+      setTodoStatus,
+      todos,
+      useFirestore
+    } = this.props
+
     return <Example
       title='Todo list'
       className='todo-list'
-      snippets={[
-        doc(10, 19),
-        `function * syncTodosSaga () {
-  yield fork(
-    rsf.database.sync,
-    'todos',
-    { successActionCreator: syncTodos }
-  );
-}`
-      ]}
+      snippets={useFirestore ? firestoreSnippets : realtimeSnippets}
     >
+      <StyledSemanticCheckbox
+        label='Use firestore'
+        checked={useFirestore}
+        onChange={this.toggleFirestore}
+        toggle
+      />
+      <Label pointing='left' color='yellow' size='tiny' horizontal>Beta</Label>
+
       <p>
         Open this page in <Link href='#' target='blank'>another tab or window</Link> to see the realtime database in action!
       </p>
 
       <StyledInputGroup
-        value={this.props.newTodo}
-        onChange={e => this.props.changeNewTodo(e.target.value)}
+        value={newTodo}
+        onChange={e => changeNewTodo(e.target.value)}
         placeholder='New todo'
-        onSubmit={this.props.saveNewTodo}
+        onSubmit={saveNewTodo}
       >
         Add item
       </StyledInputGroup>
 
       <Checklist>
-        { this.props.todos.map(todo =>
+        { todos.map(todo =>
           <ChecklistItem key={todo.id}>
             <Checkbox
               id={todo.id}
               checked={todo.done}
-              onChange={() => this.props.setTodoStatus(todo.id, !todo.done)}
+              onChange={() => setTodoStatus(todo.id, !todo.done)}
               >
               { todo.label }
             </Checkbox>
@@ -100,12 +147,14 @@ class TodoList extends PureComponent {
 
 const mapStateToProps = state => ({
   newTodo: state.todos.new,
-  todos: state.todos.list
+  todos: state.todos.list,
+  useFirestore: state.todos.useFirestore
 })
 const mapDispatchToProps = {
   changeNewTodo,
   saveNewTodo,
-  setTodoStatus
+  setTodoStatus,
+  setFirestore
 }
 
 export default connect(
