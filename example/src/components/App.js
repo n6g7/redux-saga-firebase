@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 
 import {
   AuthenticationExample,
@@ -8,13 +9,18 @@ import {
   TodoListExample
 } from '@organisms'
 
-import './App.styl'
+const Container = styled.main`
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0 auto;
+  max-width: ${p => 160 * p.theme.spacing}px;
+`
 
 class App extends PureComponent {
-  static propTypes = {};
+  static propTypes = {}
 
   render () {
-    return <main>
+    return <Container>
       <Header />
 
       <AuthenticationExample />
@@ -22,7 +28,7 @@ class App extends PureComponent {
       <StorageExample />
 
       <Footer />
-    </main>
+    </Container>
   }
 }
 

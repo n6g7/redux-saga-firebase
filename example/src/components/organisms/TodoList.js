@@ -10,6 +10,7 @@ import {
 } from '@actions/todos'
 
 import { Checkbox } from '@atoms'
+import { Link } from '@atoms'
 import { Example, InputGroup } from '@molecules'
 
 import extractLines from '../../extract'
@@ -69,7 +70,7 @@ class TodoList extends PureComponent {
       ]}
     >
       <p>
-        Open this page in <a href='#' target='blank'>another tab or window</a> to see the realtime database in action!
+        Open this page in <Link href='#' target='blank'>another tab or window</Link> to see the realtime database in action!
       </p>
 
       <StyledInputGroup
