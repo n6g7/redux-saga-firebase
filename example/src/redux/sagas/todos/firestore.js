@@ -1,4 +1,4 @@
-import { call, select, takeEvery } from 'redux-saga/effects'
+import { call, fork, select, takeEvery } from 'redux-saga/effects'
 
 import {
   types,
@@ -24,24 +24,29 @@ function * setTodoStatus (action) {
   })
 }
 
-export default function * rootSaga () {
-  const todosTransformer = todos => {
-    const res = []
-    todos.forEach(doc => res.push({
-      id: doc.id,
-      ...doc.data()
-    }))
-    return res
-  }
+const todosTransformer = todos => {
+  const res = []
+  todos.forEach(doc => res.push({
+    id: doc.id,
+    ...doc.data()
+  }))
+  return res
+}
 
+function * syncTodosSaga () {
+  yield fork(
+    rsf.firestore.syncCollection,
+    'todos',
+    {
+      successActionCreator: syncTodos,
+      transform: todosTransformer
+    }
+  )
+}
+
+export default function * rootSaga () {
   yield [
-    rsf.firestore.syncCollection(
-      'todos',
-      {
-        successActionCreator: syncTodos,
-        transform: todosTransformer
-      }
-    ),
+    fork(syncTodosSaga),
     takeEvery(types.TODOS.NEW.SAVE, saveNewTodo),
     takeEvery(types.TODOS.SET_STATUS, setTodoStatus)
   ]
