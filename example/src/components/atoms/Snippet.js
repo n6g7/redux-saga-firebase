@@ -36,10 +36,13 @@ class Snippet extends PureComponent {
       ...props
     } = this.props
 
+    const html = Prism.highlight(children, Prism.languages.javascript)
+
     return <Pre {...props}>
-      <Code className={`language-${language}`}>
-        { children }
-      </Code>
+      <Code
+        className={`language-${language}`}
+        dangerouslySetInnerHTML={{__html: html}}
+      />
     </Pre>
   }
 }
