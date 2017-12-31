@@ -48,10 +48,11 @@ class InputGroup extends PureComponent {
       onChange,
       onSubmit,
       placeholder,
-      value
+      value,
+      ...props
     } = this.props
 
-    return <Container>
+    return <Container {...props}>
       <StyledInput
         value={value}
         onChange={onChange}

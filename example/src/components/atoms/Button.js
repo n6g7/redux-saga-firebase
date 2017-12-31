@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { docs, gh, loader } from '@assets'
+import { docs, github, loader } from '@assets'
 
 const StyledButton = styled.button`
   align-items: center;
@@ -25,6 +25,11 @@ const StyledButton = styled.button`
   text-decoration: none;
   transition: .2s;
 
+  img {
+    height: ${p => 3 * p.theme.spacing}px;
+    margin-right: ${p => p.theme.spacing}px;
+  }
+
   ${p => p.disabled && `
     background: ${p.theme.colour.disabled};
     cursor: default;
@@ -41,11 +46,6 @@ const StyledButton = styled.button`
       margin-right: ${2 * p.theme.spacing}px;
     }
   `}
-
-  img {
-    height: ${p => 3 * p.theme.spacing}px;
-    margin-right: ${p => p.theme.spacing}px;
-  }
 
   &:active {
     transform: translateY(${p => p.theme.spacing / 2}px);
@@ -100,7 +100,7 @@ export default Button
 class GitHubButton extends PureComponent {
   render () {
     return <Button link='https://github.com/n6g7/redux-saga-firebase' callToAction>
-      <img src={gh} />
+      <img src={github} />
       Source on GitHub
     </Button>
   }
