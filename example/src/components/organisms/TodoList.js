@@ -2,10 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { Checkbox as SemanticCheckbox, Label } from 'semantic-ui-react'
 
 import {
   changeNewTodo,
   saveNewTodo,
+  setFirestore,
   setTodoStatus
 } from '@actions/todos'
 
@@ -13,7 +15,30 @@ import { Checkbox, Link } from '@atoms'
 import { Example, InputGroup } from '@molecules'
 
 import extractLines from '../../extract'
-import todosSaga from '../../redux/sagas/todos.js?raw'
+import todosSaga from '../../redux/sagas/todos/realtime.js?raw'
+
+const StyledSemanticCheckbox = styled(SemanticCheckbox)`
+  margin-bottom: ${p => 2 * p.theme.spacing}px;
+
+  &.ui.toggle {
+    input:not(:checked) ~ label {
+      color: white !important;
+
+      &::before {
+        background: rgba(255,255,255,0.15) !important;
+      }
+    }
+
+    input:checked ~ label,
+    input:checked:focus ~ label {
+      color: white !important;
+
+      &::before {
+        background-color: ${p => p.theme.colour.primary} !important;
+      }
+    }
+  }
+`
 
 const StyledInputGroup = styled(InputGroup)`
   margin: ${p => 2 * p.theme.spacing}px auto 0;
@@ -50,8 +75,11 @@ class TodoList extends PureComponent {
     newTodo: PropTypes.string.isRequired,
     saveNewTodo: PropTypes.func.isRequired,
     setTodoStatus: PropTypes.func.isRequired,
-    todos: PropTypes.array.isRequired
-  };
+    todos: PropTypes.array.isRequired,
+    useFirestore: PropTypes.bool.isRequired
+  }
+
+  toggleFirestore = (event, { checked }) => this.props.setFirestore(checked)
 
   render () {
     const {
@@ -59,7 +87,8 @@ class TodoList extends PureComponent {
       newTodo,
       saveNewTodo,
       setTodoStatus,
-      todos
+      todos,
+      useFirestore
     } = this.props
 
     return <Example
@@ -76,6 +105,14 @@ class TodoList extends PureComponent {
 }`
       ]}
     >
+      <StyledSemanticCheckbox
+        label='Use firestore'
+        checked={useFirestore}
+        onChange={this.toggleFirestore}
+        toggle
+      />
+      <Label pointing='left' color='yellow' size='tiny' horizontal>Beta</Label>
+
       <p>
         Open this page in <Link href='#' target='blank'>another tab or window</Link> to see the realtime database in action!
       </p>
@@ -108,12 +145,14 @@ class TodoList extends PureComponent {
 
 const mapStateToProps = state => ({
   newTodo: state.todos.new,
-  todos: state.todos.list
+  todos: state.todos.list,
+  useFirestore: state.todos.useFirestore
 })
 const mapDispatchToProps = {
   changeNewTodo,
   saveNewTodo,
-  setTodoStatus
+  setTodoStatus,
+  setFirestore
 }
 
 export default connect(
