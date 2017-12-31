@@ -20,6 +20,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
+    "semantic-ui-react": "^0.77.1",
     "styled-components": "^2.4.0",
     "whatwg-fetch": "^2.0.3"
   },
