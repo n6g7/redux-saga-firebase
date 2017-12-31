@@ -3,6 +3,15 @@ const path = require('path')
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: ['babel-polyfill', './index.js'],
+  resolve: {
+    alias: {
+      '@actions': path.resolve(__dirname, 'src/redux/actions'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@atoms': path.resolve(__dirname, 'src/components/atoms'),
+      '@molecules': path.resolve(__dirname, 'src/components/molecules'),
+      '@organisms': path.resolve(__dirname, 'src/components/organisms')
+    }
+  },
   module: {
     rules: [
       {
@@ -16,15 +25,6 @@ module.exports = {
           {
             use: 'babel-loader'
           }
-        ]
-      },
-      {
-        test: /\.styl$/,
-        exclude: /node_modules/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'stylus-loader'
         ]
       },
       {

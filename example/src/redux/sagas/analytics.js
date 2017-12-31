@@ -1,8 +1,8 @@
 import ReactGA from 'react-ga'
 import { takeEvery } from 'redux-saga/effects'
-import { types as loginTypes } from '../reducer/login.actions'
-import { types as storageTypes } from '../reducer/storage.actions'
-import { types as todosTypes } from '../reducer/todos.actions'
+import { types as loginTypes } from '@actions/login'
+import { types as storageTypes } from '@actions/storage'
+import { types as todosTypes } from '@actions/todos'
 
 function loginSaga ({ user }) {
   if (user) {

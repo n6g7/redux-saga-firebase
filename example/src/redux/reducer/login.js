@@ -1,4 +1,4 @@
-import { types } from './login.actions'
+import { types } from '@actions/login'
 
 const initialState = {
   loading: false,

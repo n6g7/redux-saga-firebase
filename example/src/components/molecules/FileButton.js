@@ -1,9 +1,14 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Button from './Button'
+import { Button } from '@atoms'
 
-import './FileButton.styl'
+const Input = styled.input.attrs({
+  type: 'file'
+})`
+  display: none;
+`
 
 class FileButton extends PureComponent {
   static propTypes = {
@@ -28,9 +33,8 @@ class FileButton extends PureComponent {
       ...props
     } = this.props
 
-    return <div className='file-button'>
-      <input
-        type='file'
+    return <div>
+      <Input
         onChange={onChange}
         ref={ref => { this.input = ref }}
       />

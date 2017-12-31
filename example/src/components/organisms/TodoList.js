@@ -1,20 +1,46 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import {
   changeNewTodo,
   saveNewTodo,
   setTodoStatus
-} from '../../redux/reducer/todos.actions'
+} from '@actions/todos'
 
-import Example from './Example'
-import { Checkbox, InputGroup } from '../common'
-
-import './TodoList.styl'
+import { Checkbox, Link } from '@atoms'
+import { Example, InputGroup } from '@molecules'
 
 import extractLines from '../../extract'
 import todosSaga from '../../redux/sagas/todos.js?raw'
+
+const StyledInputGroup = styled(InputGroup)`
+  margin: ${p => 2 * p.theme.spacing}px auto 0;
+  width: ${p => 40 * p.theme.spacing}px;
+
+  input {
+    flex-grow: 1;
+  }
+`
+
+const Checklist = styled.ul`
+  align-items: stretch;
+  display: inline-flex;
+  flex-flow: column nowrap;
+  list-style: none;
+  margin: ${p => 3 * p.theme.spacing}px 0 0;
+  padding: 0;
+  width: ${p => 40 * p.theme.spacing}px;
+`
+
+const ChecklistItem = styled.li`
+  text-align: left;
+
+  &:not(:first-child) {
+    margin-top: ${p => p.theme.spacing}px;
+  }
+`
 
 const doc = extractLines(todosSaga)
 
@@ -43,21 +69,21 @@ class TodoList extends PureComponent {
       ]}
     >
       <p>
-        Open this page in <a href='#' target='blank'>another tab or window</a> to see the realtime database in action!
+        Open this page in <Link href='#' target='blank'>another tab or window</Link> to see the realtime database in action!
       </p>
 
-      <InputGroup
+      <StyledInputGroup
         value={this.props.newTodo}
         onChange={e => this.props.changeNewTodo(e.target.value)}
         placeholder='New todo'
         onSubmit={this.props.saveNewTodo}
       >
         Add item
-      </InputGroup>
+      </StyledInputGroup>
 
-      <ul className='checklist'>
+      <Checklist>
         { this.props.todos.map(todo =>
-          <li key={todo.id}>
+          <ChecklistItem key={todo.id}>
             <Checkbox
               id={todo.id}
               checked={todo.done}
@@ -65,9 +91,9 @@ class TodoList extends PureComponent {
               >
               { todo.label }
             </Checkbox>
-          </li>
+          </ChecklistItem>
         )}
-      </ul>
+      </Checklist>
     </Example>
   }
 }

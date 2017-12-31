@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import firebase from 'firebase'
 
-import { setRegistrationToken } from '../reducer/messaging.actions'
+import { setRegistrationToken } from '@actions/messaging'
 
 import rsf from '../rsf'
 

@@ -20,6 +20,7 @@
     "react-syntax-highlighter": "^6.1.1",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
+    "styled-components": "^2.4.0",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
@@ -30,13 +31,9 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "css-loader": "^0.28.7",
     "img-loader": "^2.0.0",
     "raw-loader": "^0.5.1",
     "standard": "^10.0.3",
-    "style-loader": "^0.19.1",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"

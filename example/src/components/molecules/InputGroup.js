@@ -1,8 +1,32 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Button from './Button'
-import './InputGroup.styl'
+import { Button, Input } from '@atoms'
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+`
+
+const StyledInput = Input.extend.attrs({
+  type: 'text'
+})`
+  border-right: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+`
+
+const StyledButton = styled(Button)`
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  min-width: 0;
+
+  &:active {
+    transform: none;
+  }
+`
 
 class InputGroup extends PureComponent {
   static propTypes = {
@@ -24,20 +48,20 @@ class InputGroup extends PureComponent {
       onChange,
       onSubmit,
       placeholder,
-      value
+      value,
+      ...props
     } = this.props
 
-    return <div className='input-group'>
-      <input
-        type='text'
+    return <Container {...props}>
+      <StyledInput
         value={value}
         onChange={onChange}
         placeholder={placeholder}
       />
-      <Button onClick={onSubmit}>
+      <StyledButton onClick={onSubmit}>
         { children }
-      </Button>
-    </div>
+      </StyledButton>
+    </Container>
   }
 }
 
