@@ -9,8 +9,7 @@ import {
   setTodoStatus
 } from '@actions/todos'
 
-import { Checkbox } from '@atoms'
-import { Link } from '@atoms'
+import { Checkbox, Link } from '@atoms'
 import { Example, InputGroup } from '@molecules'
 
 import extractLines from '../../extract'
