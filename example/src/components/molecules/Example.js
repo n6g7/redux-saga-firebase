@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import SyntaxHighlighter from 'react-syntax-highlighter'
 import styled from 'styled-components'
-import hljsStyle from './hljs-style'
+
+import { Snippet } from '@atoms'
 
 const StyledExample = styled.article`
   background: ${p => p.theme.colour.example};
@@ -16,24 +16,16 @@ const Title = styled.h2`
   margin: 0 0 ${p => 3 * p.theme.spacing}px;
 `
 
-const Snippet = styled.aside`
+const Snippets = styled.figure`
   align-items: stretch;
   display: flex;
   flex-flow: row wrap;
   margin: ${p => 4 * p.theme.spacing}px 0 0;
+`
 
-  pre {
-    border: 1px solid #18191E;
-    border-width: ${p => p.theme.spacing / 4}px 1px ${p => p.theme.spacing / 4}px;
-    flex-grow: 1;
-    margin: 0;
-    text-align: left;
-    width: 30%;
-
-    code {
-      font-family: 'Source Code Pro', monospace;
-    }
-  }
+const StyledSnippet = styled(Snippet)`
+  flex-grow: 1;
+  width: 30%;
 `
 
 class Example extends PureComponent {
@@ -61,13 +53,13 @@ class Example extends PureComponent {
       { children }
 
       { snippets.length > 0 &&
-        <Snippet>
+        <Snippets>
           {snippets.map((snippet, index) =>
-            <SyntaxHighlighter language='javascript' style={hljsStyle} key={index}>
-              { snippet }
-            </SyntaxHighlighter>
+            <StyledSnippet key={index}>
+              {snippet}
+            </StyledSnippet>
           )}
-        </Snippet>
+        </Snippets>
       }
     </StyledExample>
   }
