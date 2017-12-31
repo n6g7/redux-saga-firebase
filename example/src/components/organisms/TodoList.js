@@ -59,7 +59,7 @@ class TodoList extends PureComponent {
       className='todo-list'
       snippets={[
         doc(10, 19),
-        `function* syncTodosSaga() {
+        `function * syncTodosSaga () {
   yield fork(
     rsf.database.sync,
     'todos',
