@@ -28,15 +28,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.styl$/,
-        exclude: /node_modules/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'stylus-loader'
-        ]
-      },
-      {
         test: /\.svg$/,
         exclude: /node_modules/,
         use: [
