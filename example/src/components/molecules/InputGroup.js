@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Button } from '@atoms'
+import { Button, Input } from '@atoms'
 
 const Container = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ const Container = styled.div`
   flex-flow: row nowrap;
 `
 
-const Input = styled.input.attrs({
+const StyledInput = Input.extend.attrs({
   type: 'text'
 })`
   border-right: 0;
@@ -52,7 +52,7 @@ class InputGroup extends PureComponent {
     } = this.props
 
     return <Container>
-      <Input
+      <StyledInput
         value={value}
         onChange={onChange}
         placeholder={placeholder}
