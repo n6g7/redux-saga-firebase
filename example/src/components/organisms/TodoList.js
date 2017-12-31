@@ -15,7 +15,8 @@ import { Checkbox, Link } from '@atoms'
 import { Example, InputGroup } from '@molecules'
 
 import extractLines from '../../extract'
-import todosSaga from '../../redux/sagas/todos/realtime.js?raw'
+import firestoreSaga from '../../redux/sagas/todos/firestore.js?raw'
+import realtimeSaga from '../../redux/sagas/todos/realtime.js?raw'
 
 const StyledSemanticCheckbox = styled(SemanticCheckbox)`
   margin-bottom: ${p => 2 * p.theme.spacing}px;
@@ -67,7 +68,17 @@ const ChecklistItem = styled.li`
   }
 `
 
-const doc = extractLines(todosSaga)
+const firestoreDoc = extractLines(firestoreSaga)
+const realtimeDoc = extractLines(realtimeSaga)
+
+const firestoreSnippets = [
+  firestoreDoc(10, 19),
+  firestoreDoc(36, 45)
+]
+const realtimeSnippets = [
+  realtimeDoc(10, 20),
+  realtimeDoc(32, 41)
+]
 
 class TodoList extends PureComponent {
   static propTypes = {
@@ -94,16 +105,7 @@ class TodoList extends PureComponent {
     return <Example
       title='Todo list'
       className='todo-list'
-      snippets={[
-        doc(10, 19),
-        `function * syncTodosSaga () {
-  yield fork(
-    rsf.database.sync,
-    'todos',
-    { successActionCreator: syncTodos }
-  );
-}`
-      ]}
+      snippets={useFirestore ? firestoreSnippets : realtimeSnippets}
     >
       <StyledSemanticCheckbox
         label='Use firestore'
