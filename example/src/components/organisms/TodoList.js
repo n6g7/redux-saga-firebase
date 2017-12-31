@@ -54,6 +54,14 @@ class TodoList extends PureComponent {
   };
 
   render () {
+    const {
+      changeNewTodo,
+      newTodo,
+      saveNewTodo,
+      setTodoStatus,
+      todos
+    } = this.props
+
     return <Example
       title='Todo list'
       className='todo-list'
@@ -73,21 +81,21 @@ class TodoList extends PureComponent {
       </p>
 
       <StyledInputGroup
-        value={this.props.newTodo}
-        onChange={e => this.props.changeNewTodo(e.target.value)}
+        value={newTodo}
+        onChange={e => changeNewTodo(e.target.value)}
         placeholder='New todo'
-        onSubmit={this.props.saveNewTodo}
+        onSubmit={saveNewTodo}
       >
         Add item
       </StyledInputGroup>
 
       <Checklist>
-        { this.props.todos.map(todo =>
+        { todos.map(todo =>
           <ChecklistItem key={todo.id}>
             <Checkbox
               id={todo.id}
               checked={todo.done}
-              onChange={() => this.props.setTodoStatus(todo.id, !todo.done)}
+              onChange={() => setTodoStatus(todo.id, !todo.done)}
               >
               { todo.label }
             </Checkbox>
