@@ -25,6 +25,10 @@ const StyledButton = styled.button`
   text-decoration: none;
   transition: .2s;
 
+  &:hover {
+    color: white;
+  }
+
   img {
     height: ${p => 3 * p.theme.spacing}px;
     margin-right: ${p => p.theme.spacing}px;
