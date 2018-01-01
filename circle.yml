@@ -84,23 +84,23 @@ jobs:
 
       - restore_cache:
           keys:
-            - docs2-{{ .Branch }}-{{ checksum "docs/Gemfile" }}
-            - docs2-{{ .Branch }}
-            - docs2-master-{{ checksum "docs/Gemfile" }}
-            - docs2-master
+            - docs-v1-{{ .Branch }}-{{ checksum "docs/Gemfile" }}
+            - docs-v1-{{ .Branch }}
+            - docs-v1-master-{{ checksum "docs/Gemfile" }}
+            - docs-v1-master
 
       - run:
           name: Install dependencies
-          command: cd docs && bundle install
+          command: cd docs && bundle install --path=vendor/bundle
 
       - run:
           name: Run tests
           command: cd docs && bundle exec jekyll build
 
       - save_cache:
-          key: docs2-{{ .Branch }}-{{ checksum "docs/Gemfile" }}
+          key: docs-v1-{{ .Branch }}-{{ checksum "docs/Gemfile" }}
           paths:
-            - /usr/local/bundle/gems
+            - vendor/bundle
 
   deploy:
     working_directory: ~/redux-saga-firebase
