@@ -10,6 +10,8 @@
     "del": "rimraf dist",
     "build": "yarn del && NODE_ENV=production babel src --out-dir dist",
     "build:win": "yarn del&&set NODE_ENV=production&&babel src --out-dir dist",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test",
     "pretest": "standard 'src/**/*.js'",
     "test": "NODE_ENV=test jest",
     "test:coverage": "yarn test -- --coverage",
