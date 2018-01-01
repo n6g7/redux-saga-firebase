@@ -140,7 +140,7 @@ methods:
       }
       ```
 
-  - signature: database.sync(pathOrRef, options)
+  - signature: database.sync(pathOrRef, options, event)
     id: sync
     generator: true
     description: Automatically dispatches a redux action every time `path` changes.
@@ -153,6 +153,10 @@ methods:
         required: true
         type: Object
         description: "An object to configure how the database should be synchronised. It must contain at least the `successActionCreator` which must take a single argument being the value read from the firebase reference. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
+      - name: event
+        required: false
+        type: String
+        description: "One of the following strings: `value`, `child_added`, `child_changed`, `child_removed`, or `child_moved`. Defaults to `value`. More details on the [Reference.on doc](https://firebase.google.com/docs/reference/js/firebase.database.Reference#on)."
     output:
     example: |
       ```js
