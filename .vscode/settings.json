@@ -3,6 +3,6 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "javascript.validate.enable": false,
-  "standard.autoFixOnSave": true,
+  "standard.autoFixOnSave": false,
   "standard.enable": true,
 }
