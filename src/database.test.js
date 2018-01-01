@@ -271,7 +271,7 @@ describe('database', () => {
     })
   })
 
-  describe('sync(path, options)', () => {
+  describe('sync(path, options, event)', () => {
     it('works', () => {
       const path = 'skddksl'
       const transform = jest.fn()
@@ -279,7 +279,7 @@ describe('database', () => {
       const iterator = dbModule.sync.call(context, path, options)
 
       expect(iterator.next().value)
-        .toEqual(call(context.database.channel, path))
+        .toEqual(call(context.database.channel, path, undefined))
 
       const chan = 'eeeerqd'
       expect(iterator.next(chan))
@@ -301,7 +301,7 @@ describe('database', () => {
       const iterator = dbModule.sync.call(context, path, { successActionCreator })
 
       expect(iterator.next().value)
-        .toEqual(call(context.database.channel, path))
+        .toEqual(call(context.database.channel, path, undefined))
 
       const chan = 'qlsdql'
       const defaultTransform = iterator.next(chan).value.FORK.args[1].transform
@@ -317,7 +317,31 @@ describe('database', () => {
       const iterator = dbModule.sync.call(context, ref, options)
 
       expect(iterator.next().value)
-        .toEqual(call(context.database.channel, ref))
+        .toEqual(call(context.database.channel, ref, undefined))
+
+      const chan = 'eeeerqd'
+      expect(iterator.next(chan))
+        .toEqual({
+          done: false,
+          value: fork(syncChannel, chan, options)
+        })
+
+      expect(iterator.next())
+        .toEqual({
+          done: true,
+          value: undefined
+        })
+    })
+
+    it('accepts an optional event type argument', () => {
+      context._getRef = jest.fn(ref => ref)
+      const transform = jest.fn()
+      const options = { transform }
+      const event = 'qosdkqlms'
+      const iterator = dbModule.sync.call(context, ref, options, event)
+
+      expect(iterator.next().value)
+        .toEqual(call(context.database.channel, ref, event))
 
       const chan = 'eeeerqd'
       expect(iterator.next(chan))
