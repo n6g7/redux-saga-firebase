@@ -2,6 +2,7 @@
 .bithoundrc
 .git
 .gitattributes
+.vscode
 circle.yml
 coverage
 docs
