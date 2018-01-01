@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 export default styled.a`
-  &, &:visited {
+  &,
+  &:hover,
+  &:visited {
     border-bottom: 1px solid ${p => p.theme.colour.primary};
     color: ${p => p.theme.colour.primary};
     font-weight: bold;
