@@ -73,6 +73,23 @@ jobs:
             - ~/.yarn
             - ~/redux-saga-firebase/example/node_modules
 
+  docs:
+    working_directory: ~/redux-saga-firebase
+
+    docker:
+      - image: circleci/ruby:2.4.3-node
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: cd docs && bundle install
+
+      - run:
+          name: Run tests
+          command: cd docs && bundle exec jekyll build
+
   deploy:
     working_directory: ~/redux-saga-firebase
 
@@ -127,10 +144,12 @@ workflows:
     jobs:
       - lib
       - demo
+      - docs
       - deploy:
           requires:
             - lib
             - demo
+            - docs
           filters:
             branches:
               only:
