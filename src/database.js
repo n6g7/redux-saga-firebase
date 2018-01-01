@@ -52,10 +52,20 @@ function channel (pathOrRef, event = 'value') {
 }
 
 const defaultTransform = data => data.value
-function * sync (pathOrRef, options) {
-  if (!options.transform) options.transform = defaultTransform
-  const channel = yield call(this.database.channel, pathOrRef)
-  yield fork(syncChannel, channel, options)
+function * sync (pathOrRef, options, event) {
+  const channel = yield call(
+    this.database.channel,
+    pathOrRef,
+    event
+  )
+  yield fork(
+    syncChannel,
+    channel,
+    {
+      transform: defaultTransform,
+      ...options
+    }
+  )
 }
 
 export default {
