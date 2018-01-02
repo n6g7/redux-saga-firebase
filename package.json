@@ -1,5 +1,5 @@
 {
-  "name": "@heathh/redux-saga-firebase",
+  "name": "redux-saga-firebase",
   "version": "0.7.1",
   "description": "A redux saga integration for firebase.",
   "author": "Nathan Gaberel <nathan@gnab.fr>",
