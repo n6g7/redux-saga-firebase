@@ -97,7 +97,6 @@ function * signInWithPopup (authProvider) {
 function * signInWithRedirect (authProvider) {
   const auth = this.app.auth()
   yield call([auth, auth.signInWithRedirect], authProvider)
-  yield call([auth, auth.getRedirectResult])
 }
 
 function * signOut () {

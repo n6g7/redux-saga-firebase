@@ -24,7 +24,10 @@ describe('auth', () => {
     sendPasswordResetEmail: jest.fn(),
     applyActionCode: jest.fn(),
     currentUser: {
+      linkWithPopup: jest.fn(),
+      linkWithRedirect: jest.fn(),
       sendEmailVerification: jest.fn(),
+      unlink: jest.fn(),
       updatePassword: jest.fn()
     },
     confirmPasswordReset: jest.fn(),
@@ -316,7 +319,7 @@ describe('auth', () => {
   })
 
   describe('unlink()', () => {
-    it('returns something', () => {
+    it('returns user', () => {
       const authProvider = 'skqdk'
       const userMock = { uid: 'uid' }
       const iterator = authModule.unlink.call(context, authProvider)
