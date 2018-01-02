@@ -299,6 +299,39 @@ describe('auth', () => {
     })
   })
 
+  describe('linkWithPopup(authProvider)', () => {
+    it('returns link result', () => {
+      const authProvider = 'skqdk'
+      const credential = 'qosdqkds'
+      const iterator = authModule.linkWithPopup.call(context, authProvider)
+
+      expect(iterator.next().value)
+        .toEqual(call([auth.currentUser, auth.currentUser.linkWithPopup], authProvider))
+
+      expect(iterator.next({ credential })).toEqual({
+        done: true,
+        value: { credential }
+      })
+    })
+  })
+
+  describe('unlink()', () => {
+    it('returns something', () => {
+      const authProvider = 'skqdk'
+      const userMock = { uid: 'uid' }
+      const iterator = authModule.unlink.call(context, authProvider)
+
+      expect(iterator.next().value)
+        .toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
+
+      expect(iterator.next(userMock))
+        .toEqual({
+          done: true,
+          value: userMock
+        })
+    })
+  })
+
   describe('channel()', () => {
     it('works', () => {
       const result = authModule.channel.call(context)

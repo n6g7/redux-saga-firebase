@@ -98,6 +98,53 @@ methods:
       }
       ```
 
+  - signature: auth.linkWithPopup(authProvider)
+    id: linkWithPopup
+    generator: true
+    description: Links the authenticated provider to the user account using a pop-up based OAuth flow.
+    arguments:
+      - name: authProvider
+      required: true
+      type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
+      description: The authentication provider to use for the request.
+    output: A [firebase.auth.UserCredential](https://firebase.google.com/docs/reference/js/firebase.auth#.UserCredential) instance.
+    example: |
+      ```javascript
+      const authProvider = new firebase.auth.GoogleAuthProvider();
+
+      function* linkSaga() {
+        try {
+          const data = yield(rsf.auth.linkWithPopup, authProvider);
+          yield put(linkSuccess(data));
+        } catch(error) {
+          yield put(loginFailure(error));
+        }
+      }
+      ```
+
+  - signature: auth.linkWithRedirect(authProvider)
+    id: linkWithRedirect
+    generator: true
+    description: Links the authenticated provider to the user account using a full-page redirect flow.
+    arguments:
+      - name: authProvider
+      required: true
+      type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
+      description: The authentication provider to use for the request.
+    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise) containing void.
+    example: |
+      ```javascript
+      const authProvider = new firebase.auth.GoogleAuthProvider();
+
+      function* linkSaga() {
+        try {
+          yield(rsf.auth.linkWithRedirect, authProvider);
+        } catch(error) {
+          yield put(loginFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.sendEmailVerification(actionCodeSettings)
     id: sendEmailVerification
     generator: true
@@ -365,6 +412,33 @@ methods:
         }
       }
       ```
+
+  - signature: auth.unlink(authProvider)
+    id: unlink
+    generator: true
+    description: Unlinks a provider from a user account.
+    arguments:
+      - name: authProvider
+        required: true
+        type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
+        description: The authentication provider to use for the request.
+    output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User) instance.
+    example: |
+    ```javascript
+      const authProvider = new firebase.auth.GoogleAuthProvider();
+
+      function* unlinkSaga() {
+        try {
+          const data = yield call(rsf.auth.unlink, authProvider);
+          yield put(unlinkSuccess(data));
+        }
+        catch(error) {
+          yield put(unlinkFailure(error));
+        }
+      }
+    ```
+
+
 
   - signature: auth.updatePassword(password)
     id: updatePassword

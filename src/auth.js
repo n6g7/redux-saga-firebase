@@ -33,6 +33,16 @@ function * createUserWithEmailAndPassword (email, password) {
   return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
 }
 
+function * linkWithPopup (authProvider) {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.linkWithPopup], authProvider)
+}
+
+function * linkWithRedirect (authProvider) {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.linkWithRedirect], authProvider)
+}
+
 function * sendEmailVerification (actionCodeSettings) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings)
@@ -87,11 +97,17 @@ function * signInWithPopup (authProvider) {
 function * signInWithRedirect (authProvider) {
   const auth = this.app.auth()
   yield call([auth, auth.signInWithRedirect], authProvider)
+  yield call([auth, auth.getRedirectResult])
 }
 
 function * signOut () {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
+}
+
+function * unlink (provider) {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.unlink], provider)
 }
 
 function * updatePassword (password) {
@@ -104,6 +120,8 @@ export default {
   channel,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
+  linkWithPopup,
+  linkWithRedirect,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInAndRetrieveDataWithCredential,
@@ -115,5 +133,6 @@ export default {
   signInWithPopup,
   signInWithRedirect,
   signOut,
+  unlink,
   updatePassword
 }
