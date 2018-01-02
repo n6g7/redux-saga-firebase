@@ -104,9 +104,9 @@ methods:
     description: Links the authenticated provider to the user account using a pop-up based OAuth flow.
     arguments:
       - name: authProvider
-      required: true
-      type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
-      description: The authentication provider to use for the request.
+        required: true
+        type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
+        description: The authentication provider to use for the request.
     output: A [firebase.auth.UserCredential](https://firebase.google.com/docs/reference/js/firebase.auth#.UserCredential) instance.
     example: |
       ```javascript
@@ -114,7 +114,7 @@ methods:
 
       function* linkSaga() {
         try {
-          const data = yield(rsf.auth.linkWithPopup, authProvider);
+          const data = yield call(rsf.auth.linkWithPopup, authProvider);
           yield put(linkSuccess(data));
         } catch(error) {
           yield put(loginFailure(error));
@@ -128,17 +128,16 @@ methods:
     description: Links the authenticated provider to the user account using a full-page redirect flow.
     arguments:
       - name: authProvider
-      required: true
-      type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
-      description: The authentication provider to use for the request.
-    output: A [firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise) containing void.
+        required: true
+        type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
+        description: The authentication provider to use for the request.
     example: |
       ```javascript
       const authProvider = new firebase.auth.GoogleAuthProvider();
 
       function* linkSaga() {
         try {
-          yield(rsf.auth.linkWithRedirect, authProvider);
+          yield call(rsf.auth.linkWithRedirect, authProvider);
         } catch(error) {
           yield put(loginFailure(error));
         }

@@ -163,7 +163,22 @@ describe('auth', () => {
       const iterator = authModule.signInWithRedirect.call(context, authProvider)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithRedirect], authProvider))
+        .toEqual(call([auth, auth.signInWithRedirect], authProvider))
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('signInWithRedirect(authProvider)', () => {
+    it('returns nothing', () => {
+      const authProvider = 'skqdk'
+      const iterator = authModule.linkWithRedirect.call(context, authProvider)
+
+      expect(iterator.next().value)
+        .toEqual(call([auth.currentUser, auth.currentUser.linkWithRedirect], authProvider))
 
       expect(iterator.next()).toEqual({
         done: true,
