@@ -17,7 +17,7 @@
     "test:win": "set NODE_ENV=test&&jest"
   },
   "repository": {
-    "url": "git@github.com:hhorne/redux-saga-firebase.git",
+    "url": "git@github.com:n6g7/redux-saga-firebase.git",
     "type": "git"
   },
   "dependencies": {
@@ -56,12 +56,5 @@
       "it",
       "jest"
     ]
-  },
-  "bugs": {
-    "url": "https://github.com/n6g7/redux-saga-firebase/issues"
-  },
-  "directories": {
-    "doc": "docs",
-    "example": "example"
   }
 }
