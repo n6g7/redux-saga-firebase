@@ -172,21 +172,6 @@ describe('auth', () => {
     })
   })
 
-  describe('signInWithRedirect(authProvider)', () => {
-    it('returns nothing', () => {
-      const authProvider = 'skqdk'
-      const iterator = authModule.linkWithRedirect.call(context, authProvider)
-
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.linkWithRedirect], authProvider))
-
-      expect(iterator.next()).toEqual({
-        done: true,
-        value: undefined
-      })
-    })
-  })
-
   describe('createUserWithEmailAndPassword(email, password)', () => {
     it('returns a user', () => {
       const email = 'skqdk'
@@ -329,6 +314,21 @@ describe('auth', () => {
       expect(iterator.next({ credential })).toEqual({
         done: true,
         value: { credential }
+      })
+    })
+  })
+
+  describe('linkWithRedirect(authProvider)', () => {
+    it('returns nothing', () => {
+      const authProvider = 'skqdk'
+      const iterator = authModule.linkWithRedirect.call(context, authProvider)
+
+      expect(iterator.next().value)
+        .toEqual(call([auth.currentUser, auth.currentUser.linkWithRedirect], authProvider))
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
       })
     })
   })
