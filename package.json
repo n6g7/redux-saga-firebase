@@ -1,5 +1,5 @@
 {
-  "name": "redux-saga-firebase",
+  "name": "@heathh/redux-saga-firebase",
   "version": "0.7.1",
   "description": "A redux saga integration for firebase.",
   "author": "Nathan Gaberel <nathan@gnab.fr>",
@@ -17,7 +17,7 @@
     "test:win": "set NODE_ENV=test&&jest"
   },
   "repository": {
-    "url": "git@github.com:n6g7/redux-saga-firebase.git",
+    "url": "git@github.com:hhorne/redux-saga-firebase.git",
     "type": "git"
   },
   "dependencies": {
@@ -56,5 +56,12 @@
       "it",
       "jest"
     ]
+  },
+  "bugs": {
+    "url": "https://github.com/n6g7/redux-saga-firebase/issues"
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "example"
   }
 }
