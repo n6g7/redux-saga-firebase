@@ -24,7 +24,10 @@ describe('auth', () => {
     sendPasswordResetEmail: jest.fn(),
     applyActionCode: jest.fn(),
     currentUser: {
+      linkWithPopup: jest.fn(),
+      linkWithRedirect: jest.fn(),
       sendEmailVerification: jest.fn(),
+      unlink: jest.fn(),
       updatePassword: jest.fn()
     },
     confirmPasswordReset: jest.fn(),
@@ -160,7 +163,7 @@ describe('auth', () => {
       const iterator = authModule.signInWithRedirect.call(context, authProvider)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithRedirect], authProvider))
+        .toEqual(call([auth, auth.signInWithRedirect], authProvider))
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -296,6 +299,54 @@ describe('auth', () => {
         done: true,
         value: undefined
       })
+    })
+  })
+
+  describe('linkWithPopup(authProvider)', () => {
+    it('returns link result', () => {
+      const authProvider = 'skqdk'
+      const credential = 'qosdqkds'
+      const iterator = authModule.linkWithPopup.call(context, authProvider)
+
+      expect(iterator.next().value)
+        .toEqual(call([auth.currentUser, auth.currentUser.linkWithPopup], authProvider))
+
+      expect(iterator.next({ credential })).toEqual({
+        done: true,
+        value: { credential }
+      })
+    })
+  })
+
+  describe('linkWithRedirect(authProvider)', () => {
+    it('returns nothing', () => {
+      const authProvider = 'skqdk'
+      const iterator = authModule.linkWithRedirect.call(context, authProvider)
+
+      expect(iterator.next().value)
+        .toEqual(call([auth.currentUser, auth.currentUser.linkWithRedirect], authProvider))
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('unlink()', () => {
+    it('returns user', () => {
+      const authProvider = 'skqdk'
+      const userMock = { uid: 'uid' }
+      const iterator = authModule.unlink.call(context, authProvider)
+
+      expect(iterator.next().value)
+        .toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
+
+      expect(iterator.next(userMock))
+        .toEqual({
+          done: true,
+          value: userMock
+        })
     })
   })
 
