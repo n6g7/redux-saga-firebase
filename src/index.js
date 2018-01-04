@@ -19,6 +19,8 @@ class ReduxSagaFirebase {
       createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(
         this
       ),
+      linkWithPopup: auth.linkWithPopup.bind(this),
+      linkWithRedirect: auth.linkWithRedirect.bind(this),
       sendEmailVerification: auth.sendEmailVerification.bind(this),
       sendPasswordResetEmail: auth.sendPasswordResetEmail.bind(this),
       signInAndRetrieveDataWithCredential: auth.signInAndRetrieveDataWithCredential.bind(
@@ -32,6 +34,7 @@ class ReduxSagaFirebase {
       signInWithPhoneNumber: auth.signInWithPhoneNumber.bind(this),
       signInWithRedirect: auth.signInWithRedirect.bind(this),
       signOut: auth.signOut.bind(this),
+      unlink: auth.unlink.bind(this),
       updatePassword: auth.updatePassword.bind(this)
     }
 

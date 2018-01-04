@@ -67,6 +67,8 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`auth.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#channel)
 - [`*auth.confirmPasswordReset(code, newPassword)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#confirmPasswordReset)
 - [`*auth.createUserWithEmailAndPassword(email, password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#createUserWithEmailAndPassword)
+- [`*auth.linkWithPopup(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#linkWithPopup)
+- [`*auth.linkWithRedirect(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#linkWithRedirect)
 - [`*auth.sendEmailVerification(actionCodeSettings)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#sendEmailVerification)
 - [`*auth.sendPasswordResetEmail(email, actionCodeSettings)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#sendPasswordResetEmail)
 - [`*auth.signInAndRetrieveDataWithCredential(credential)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInAndRetrieveDataWithCredential)
@@ -78,6 +80,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*auth.signInWithPopup(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithPopup)
 - [`*auth.signInWithRedirect(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithRedirect)
 - [`*auth.signOut()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signOut)
+- [`*auth.unlink(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#unlink)
 - [`*auth.updatePassword(password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#updatePassword)
 
 **Database**
