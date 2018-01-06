@@ -423,21 +423,19 @@ methods:
         description: The authentication provider to use for the request.
     output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User) instance.
     example: |
-    ```javascript
-      const authProvider = new firebase.auth.GoogleAuthProvider();
+      ```javascript
+        const authProvider = new firebase.auth.GoogleAuthProvider();
 
-      function* unlinkSaga() {
-        try {
-          const data = yield call(rsf.auth.unlink, authProvider);
-          yield put(unlinkSuccess(data));
+        function* unlinkSaga() {
+          try {
+            const data = yield call(rsf.auth.unlink, authProvider);
+            yield put(unlinkSuccess(data));
+          }
+          catch(error) {
+            yield put(unlinkFailure(error));
+          }
         }
-        catch(error) {
-          yield put(unlinkFailure(error));
-        }
-      }
-    ```
-
-
+      ```
 
   - signature: auth.updatePassword(password)
     id: updatePassword
