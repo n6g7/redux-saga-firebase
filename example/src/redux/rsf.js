@@ -16,4 +16,6 @@ const rsf = new ReduxSagaFirebase(
   firebase.firestore()
 )
 
+export const authProvider = new firebase.auth.GoogleAuthProvider()
+
 export default rsf

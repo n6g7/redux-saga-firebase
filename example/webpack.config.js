@@ -9,20 +9,21 @@ module.exports = {
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@atoms': path.resolve(__dirname, 'src/components/atoms'),
       '@molecules': path.resolve(__dirname, 'src/components/molecules'),
-      '@organisms': path.resolve(__dirname, 'src/components/organisms')
+      '@organisms': path.resolve(__dirname, 'src/components/organisms'),
+      '@selectors': path.resolve(__dirname, 'src/redux/selectors')
     }
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         oneOf: [
           {
             resourceQuery: /raw/,
             use: 'raw-loader'
           },
           {
+            exclude: /node_modules/,
             use: 'babel-loader'
           }
         ]
