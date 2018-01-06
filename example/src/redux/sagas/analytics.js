@@ -34,6 +34,14 @@ function updateTodoSaga () {
   })
 }
 
+function setFirestoreSaga ({ useFirestore }) {
+  ReactGA.event({
+    category: 'Todo',
+    action: 'Toggle firestore',
+    label: useFirestore ? 'activate' : 'deactivate'
+  })
+}
+
 function sendFileSaga () {
   ReactGA.event({
     category: 'File',
@@ -46,6 +54,7 @@ export default function * functionRootSaga () {
     takeEvery(loginTypes.SYNC_USER, loginSaga),
     takeEvery(todosTypes.TODOS.NEW.SAVE, newTodoSaga),
     takeEvery(todosTypes.TODOS.SET_STATUS, updateTodoSaga),
+    takeEvery(todosTypes.TODOS.SET_FIRESTORE, setFirestoreSaga),
     takeEvery(storageTypes.SEND_FILE, sendFileSaga)
   ]
 }
