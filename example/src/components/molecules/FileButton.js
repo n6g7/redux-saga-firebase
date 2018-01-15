@@ -36,7 +36,7 @@ class FileButton extends PureComponent {
     return <div>
       <Input
         onChange={onChange}
-        ref={ref => { this.input = ref }}
+        innerRef={ref => { this.input = ref }}
       />
       <Button onClick={this.onClick} {...props}>
         { children }
