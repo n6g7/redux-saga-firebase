@@ -6,13 +6,13 @@ import styled from 'styled-components'
 import {
   login,
   logout
-} from '@actions/login'
+} from 'rsf-auth/actions'
 
 import { Button } from '@atoms'
 import { Example } from '@molecules'
 
 import extractLines from '../../extract'
-import authSaga from '../../redux/sagas/login.js?raw'
+import authSaga from 'rsf-auth/lib/sagas.js?raw'
 
 const Container = styled(Example)`
   button + button {
@@ -34,8 +34,8 @@ class Authentication extends PureComponent {
     return <Container
       title='Authentication'
       snippets={[
-        doc(17, 25),
-        doc(35, 45)
+        doc(12, 19),
+        doc(30, 39)
       ]}
     >
       <Button

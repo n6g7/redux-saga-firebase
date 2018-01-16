@@ -1,6 +1,7 @@
 import ReactGA from 'react-ga'
 import { takeEvery } from 'redux-saga/effects'
-import { types as loginTypes } from '@actions/login'
+import { types as loginTypes } from 'rsf-auth'
+
 import { types as storageTypes } from '@actions/storage'
 import { types as todosTypes } from '@actions/todos'
 

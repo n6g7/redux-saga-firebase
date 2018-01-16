@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
+import { reducer as login } from 'rsf-auth'
 
-import login from './login'
 import messaging from './messaging'
 import storage from './storage'
 import todos from './todos'

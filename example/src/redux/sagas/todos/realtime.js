@@ -4,11 +4,12 @@ import {
   types,
   syncTodos
 } from '@actions/todos'
+import { userSelector } from '@selectors/login'
 
 import rsf from '../../rsf'
 
 function * saveNewTodo () {
-  const user = yield select(state => state.login.user)
+  const user = yield select(userSelector)
   const newTodo = yield select(state => state.todos.new)
 
   yield call(rsf.database.create, 'todos', {
