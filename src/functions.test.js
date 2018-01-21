@@ -19,7 +19,7 @@ describe('functions', () => {
     expect.hasAssertions()
   })
 
-  describe('call(functionName, queryParams={})', () => {
+  describe('call(functionName, queryParams={}, init={})', () => {
     it('works with text', () => {
       const functionName = 'qsdsqldlq'
       const contentType = 'qlmdkd'
@@ -36,7 +36,8 @@ describe('functions', () => {
       expect(iterator.next().value)
       .toEqual(call(
         fetch,
-        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`
+        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+        {}
       ))
 
       expect(context.projectId.mock.calls.length).toBe(1)
@@ -71,7 +72,8 @@ describe('functions', () => {
       expect(iterator.next().value)
       .toEqual(call(
         fetch,
-        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`
+        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+        {}
       ))
 
       expect(context.projectId.mock.calls.length).toBe(1)
@@ -90,6 +92,28 @@ describe('functions', () => {
       })
     })
 
+    it('passes the init parameter to fetch', () => {
+      const functionName = 'postEndpoint'
+      const response = {
+        ok: true
+      }
+      const init = {
+        headers: {
+          'Authorization': 'Bearer abc123'
+        },
+        method: 'POST'
+      }
+
+      const iterator = functionsModule.call.call(context, functionName, {}, init)
+
+      expect(iterator.next().value)
+      .toEqual(call(
+        fetch,
+        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+        init
+      ))
+    })
+
     it('throws when it fails', () => {
       const functionName = 'qsdsqldlq'
       const response = {
@@ -102,7 +126,8 @@ describe('functions', () => {
         expect(iterator.next().value)
         .toEqual(call(
           fetch,
-          `https://${region}-${projectId}.cloudfunctions.net/${functionName}`
+          `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+          {}
         ))
 
         expect(context.projectId.mock.calls.length).toBe(1)

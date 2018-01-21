@@ -3,7 +3,7 @@ title: Functions
 layout: docs
 methods:
 
-  - signature: functions.call(functionName, queryParams)
+  - signature: functions.call(functionName, queryParams, init)
     id: call
     generator: true
     description: |
@@ -29,14 +29,29 @@ methods:
         required: false
         type: Object
         description: Defaults to `{}`. A javascript object describing the query parameters to use in the http request.
+      - name: init
+        required: false
+        type: Object
+        description: Defaults to `{}`. An options object containing any custom settings that you want to apply to the request. Identical to [`fetch`'s argument](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
     output: A javascript object (`application/json`) or a string (anything else) depending on the Content-Type of the response.
     example: |
       ```js
       function* callFunction() {
-        // Will call: https://us-central1-project-id.firebaseapp.com/sayHello?name=Alfred
-        const result = yield call(rsf.functions.call, 'sayHello', {
-          name: 'Alfred'
-        });
+        // Will make a POST request to https://us-central1-project-id.firebaseapp.com/sayHello?name=Alfred
+        // with custom headers
+        const result = yield call(
+          rsf.functions.call,
+          'sayHello',
+          {
+            name: 'Elon'
+          },
+          {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer abc123'
+            }
+          }
+        );
 
         // `result` is either an object or a string (depends on response's Content-Type)
       }
