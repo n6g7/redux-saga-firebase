@@ -10,3 +10,4 @@ example
 node_modules
 *.test.js
 src
+yarn-error.log
