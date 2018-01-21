@@ -3,7 +3,7 @@ title: Functions
 layout: docs
 methods:
 
-  - signature: functions.call(functionName, parameters)
+  - signature: functions.call(functionName, queryParams)
     id: call
     generator: true
     description: |
@@ -25,7 +25,7 @@ methods:
         required: true
         type: String
         description: A string representing the function name. This will be used as a pathname in the https request.
-      - name: parameters
+      - name: queryParams
         required: false
         type: Object
         description: Defaults to `{}`. A javascript object describing the query parameters to use in the http request.

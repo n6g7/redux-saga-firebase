@@ -11,8 +11,8 @@ export function getFunctionURL (functionName, parameters = {}) {
   else return baseUrl
 }
 
-function * _call (functionName, parameters = {}) {
-  const url = getFunctionURL.call(this, functionName, parameters)
+function * _call (functionName, queryParams = {}) {
+  const url = getFunctionURL.call(this, functionName, queryParams)
 
   const response = yield call(fetch, url)
 

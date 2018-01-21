@@ -107,7 +107,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 
 **Functions**
 
-- [`*functions.call(functionName, parameters={})`](https://n6g7.github.io/redux-saga-firebase/reference/functions#call)
+- [`*functions.call(functionName, queryParams={})`](https://n6g7.github.io/redux-saga-firebase/reference/functions#call)
 
 **Messaging**
 

@@ -19,7 +19,7 @@ describe('functions', () => {
     expect.hasAssertions()
   })
 
-  describe('call(functionName, parameters={})', () => {
+  describe('call(functionName, queryParams={})', () => {
     it('works with text', () => {
       const functionName = 'qsdsqldlq'
       const contentType = 'qlmdkd'
