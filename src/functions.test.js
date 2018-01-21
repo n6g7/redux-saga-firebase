@@ -94,9 +94,6 @@ describe('functions', () => {
 
     it('passes the init parameter to fetch', () => {
       const functionName = 'postEndpoint'
-      const response = {
-        ok: true
-      }
       const init = {
         headers: {
           'Authorization': 'Bearer abc123'
