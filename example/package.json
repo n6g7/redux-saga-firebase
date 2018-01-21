@@ -10,17 +10,17 @@
     "test": "standard"
   },
   "dependencies": {
-    "@firebase/firestore": "^0.2.2",
-    "firebase": "^4.8.1",
-    "prismjs": "^1.9.0",
+    "@firebase/firestore": "^0.3.1",
+    "firebase": "^4.9.0",
+    "prismjs": "^1.10.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-ga": "^2.3.5",
+    "react-ga": "^2.4.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
-    "semantic-ui-react": "^0.77.1",
+    "semantic-ui-react": "^0.77.2",
     "styled-components": "^2.4.0",
     "whatwg-fetch": "^2.0.3"
   },
@@ -37,7 +37,7 @@
     "standard": "^10.0.3",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^2.11.1"
   },
   "babel": {
     "presets": [
