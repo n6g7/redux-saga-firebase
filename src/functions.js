@@ -1,7 +1,11 @@
 import { call } from 'redux-saga/effects'
 
 export function getFunctionURL (functionName, parameters = {}) {
-  const baseUrl = `https://${this.region}-${this.projectId()}.cloudfunctions.net/${functionName}`
+  // If the function name is already a URL, just return it.
+  const baseUrl = /^https?:\/\//.test(functionName)
+    ? functionName
+    : `https://${this.region}-${this.projectId()}.cloudfunctions.net/${functionName}`
+
   const query = Object
     .keys(parameters)
     .map(key => `${key}=${parameters[key]}`)

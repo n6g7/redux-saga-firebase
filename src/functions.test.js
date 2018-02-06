@@ -137,6 +137,33 @@ describe('functions', () => {
         expect(error).toBe(response)
       }
     })
+
+    it('calls urls when passed directly (http, no parameters)', () => {
+      const functionName = 'http://a.b.c/d'
+      const iterator = functionsModule.call.call(context, functionName)
+
+      expect(iterator.next().value)
+      .toEqual(call(
+        fetch,
+        functionName,
+        {}
+      ))
+    })
+
+    it('calls urls when passed directly (https, with parameters)', () => {
+      const functionName = 'http://a.b.c/d'
+      const params = {
+        e: 'f'
+      }
+      const iterator = functionsModule.call.call(context, functionName, params)
+
+      expect(iterator.next().value)
+      .toEqual(call(
+        fetch,
+        `${functionName}?e=f`,
+        {}
+      ))
+    })
   })
 
   describe('getFunctionURL(functionName, parameters)', () => {
@@ -158,6 +185,20 @@ describe('functions', () => {
 
       expect(result)
       .toBe(`https://${region}-${projectId}.cloudfunctions.net/${functionName}?a=${parameters.a}&b=${parameters.b}`)
+    })
+
+    it('returns url directly (http)', () => {
+      const functionName = 'http://a.b.c/d'
+      const result = getFunctionURL.call(context, functionName)
+
+      expect(result).toBe(functionName)
+    })
+
+    it('returns url directly (https)', () => {
+      const functionName = 'https://a.b.c/d'
+      const result = getFunctionURL.call(context, functionName)
+
+      expect(result).toBe(functionName)
     })
   })
 })

@@ -24,7 +24,7 @@ methods:
       - name: functionName
         required: true
         type: String
-        description: A string representing the function name. This will be used as a pathname in the https request.
+        description: A string representing the function name. This will be used as a pathname in the https request. Can also be an URL, in that case it is used as is when making the function call.
       - name: queryParams
         required: false
         type: Object
@@ -37,7 +37,7 @@ methods:
     example: |
       ```js
       function* callFunction() {
-        // Will make a POST request to https://us-central1-project-id.firebaseapp.com/sayHello?name=Alfred
+        // Will make a POST request to https://us-central1-project-id.firebaseapp.com/sayHello?name=Elon
         // with custom headers
         const result = yield call(
           rsf.functions.call,
@@ -54,6 +54,18 @@ methods:
         );
 
         // `result` is either an object or a string (depends on response's Content-Type)
+      }
+      ```
+      ```js
+      function* callFunction() {
+        // Will make a GET request to https://my.host/sayHello?name=Elon
+        const result = yield call(
+          rsf.functions.call,
+          'https://my.host/sayHello',
+          {
+            name: 'Elon'
+          }
+        );
       }
       ```
 ---
