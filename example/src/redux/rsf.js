@@ -11,9 +11,6 @@ const firebaseApp = firebase.initializeApp({
   messagingSenderId: '231632772443'
 })
 
-const rsf = new ReduxSagaFirebase(
-  firebaseApp,
-  firebase.firestore()
-)
+const rsf = new ReduxSagaFirebase(firebaseApp)
 
 export default rsf
