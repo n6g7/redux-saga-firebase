@@ -29,8 +29,6 @@ const myFirebaseApp = firebase.initializeApp({
 });
 
 const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp)
-// Or, to use firestore:
-const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp, firebase.firestore())
 ```
 
 You can now use `reduxSagaFirebase` methods in your sagas:

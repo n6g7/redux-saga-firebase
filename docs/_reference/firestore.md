@@ -225,15 +225,12 @@ When using firestore don't forget to install and load the `@firebase/firestore` 
 - import it in your project:
   ```js
   import firebase from 'firebase'
-  import '@firebase/firestore' // 👈 Don't forget this ...
+  import '@firebase/firestore' // 👈 Don't forget this!
   import ReduxSagaFirebase from 'redux-saga-firebase'
 
   const firebaseApp = firebase.initializeApp({ ... })
 
-  const rsf = new ReduxSagaFirebase(
-    firebaseApp,
-    firebase.firestore() // 👈 ... and this
-  )
+  const rsf = new ReduxSagaFirebase(firebaseApp)
 
   export default rsf
   ```
