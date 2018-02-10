@@ -1,3 +1,4 @@
+import assert from './assert'
 import auth from './auth'
 import database from './database'
 import firestore from './firestore'
@@ -103,12 +104,26 @@ class ReduxSagaFirebase {
   }
 
   _getCollection (pathOrRef) {
+    assert(
+      !!this.app.firestore,
+      "Firestore isn't installed. " +
+      "Did you forget to `import '@firebase/firestore'`? " +
+      'See https://n6g7.github.io/redux-saga-firebase/ for more information.'
+    )
+
     return typeof pathOrRef === 'string'
       ? this.app.firestore().collection(pathOrRef)
       : pathOrRef
   }
 
   _getDocument (pathOrRef) {
+    assert(
+      !!this.app.firestore,
+      "Firestore isn't installed. " +
+      "Did you forget to `import '@firebase/firestore'`? " +
+      'See https://n6g7.github.io/redux-saga-firebase/ for more information.'
+    )
+
     return typeof pathOrRef === 'string'
       ? this.app.firestore().doc(pathOrRef)
       : pathOrRef
