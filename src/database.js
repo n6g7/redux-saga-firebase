@@ -8,7 +8,7 @@ function * read (pathOrRef) {
   const result = yield call([ref, ref.once], 'value')
   const exists = yield call(result.exists)
 
-  return (exists)? result.val() : null
+  return (exists) ? result.val() : null
 }
 
 function * create (pathOrRef, data) {
