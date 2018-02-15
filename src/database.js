@@ -6,9 +6,8 @@ import { syncChannel } from './utils'
 function * read (pathOrRef) {
   const ref = this._getRef(pathOrRef, 'database')
   const result = yield call([ref, ref.once], 'value')
-  const exists = yield call(result, exists)
 
-  return (exists)? result.val() : null
+  return (exists.exists()) ? result.val() : null
 }
 
 function * create (pathOrRef, data) {

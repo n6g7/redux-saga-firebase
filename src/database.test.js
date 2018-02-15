@@ -32,11 +32,36 @@ describe('database', () => {
   })
 
   describe('read(path)', () => {
-    it('works', () => {
+    it('returns value if path exists', () => {
       const path = 'skddksl'
       const val = 'jqdqkld'
       const result = {
-        val: jest.fn(() => val)
+        val: jest.fn(() => val),
+        exists: () => true,
+      }
+      const iterator = dbModule.read.call(context, path)
+
+      expect(iterator.next().value)
+        .toEqual(call([ref, ref.once], 'value'))
+
+      expect(context._getRef.mock.calls.length).toBe(1)
+      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
+
+      expect(iterator.next(result)).toEqual({
+        done: true,
+        value: val
+      })
+
+      expect(result.val.mock.calls.length).toBe(1)
+      expect(result.val.mock.calls[0]).toEqual([])
+    })
+
+    it('returns null if path does not exist', () => {
+      const path = 'doesnotexists'
+      const val = null
+      const result = {
+        val: jest.fn(() => val),
+        exists: () => false,
       }
       const iterator = dbModule.read.call(context, path)
 
