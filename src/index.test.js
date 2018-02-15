@@ -17,12 +17,6 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.app).toBe(app)
     })
 
-    it('takes an optional firestore db as argument', () => {
-      const db = 'ksqld'
-      rsf = new ReduxSagaFirebase(app, db)
-      expect(rsf.firestoreDb).toBe(db)
-    })
-
     it('defines authentication methods', () => {
       expect(rsf.auth.applyActionCode).toBeInstanceOf(Function)
       expect(rsf.auth.channel).toBeInstanceOf(Function)
@@ -200,14 +194,18 @@ describe('ReduxSagaFirebase', () => {
       firestore = {
         collection: jest.fn(() => collectionRef)
       }
-      app = {}
-      rsf = new ReduxSagaFirebase(app, firestore)
+      app = {
+        firestore: jest.fn(() => firestore)
+      }
+      rsf = new ReduxSagaFirebase(app)
     })
 
     it('returns a collection ref from path string', () => {
       const path = 'path'
       const ref = rsf._getCollection(path)
 
+      expect(app.firestore.mock.calls.length).toBe(1)
+      expect(app.firestore.mock.calls[0]).toEqual([])
       expect(firestore.collection.mock.calls.length).toBe(1)
       expect(firestore.collection.mock.calls[0]).toEqual([path])
 
@@ -233,14 +231,18 @@ describe('ReduxSagaFirebase', () => {
       firestore = {
         doc: jest.fn(() => documentRef)
       }
-      app = {}
-      rsf = new ReduxSagaFirebase(app, firestore)
+      app = {
+        firestore: jest.fn(() => firestore)
+      }
+      rsf = new ReduxSagaFirebase(app)
     })
 
     it('returns a collection ref from path string', () => {
       const path = 'path'
       const ref = rsf._getDocument(path)
 
+      expect(app.firestore.mock.calls.length).toBe(1)
+      expect(app.firestore.mock.calls[0]).toEqual([])
       expect(firestore.doc.mock.calls.length).toBe(1)
       expect(firestore.doc.mock.calls[0]).toEqual([path])
 
