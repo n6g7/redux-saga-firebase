@@ -37,7 +37,7 @@ describe('database', () => {
       const val = 'jqdqkld'
       const result = {
         val: jest.fn(() => val),
-        exists: () => true,
+        exists: () => true
       }
       const iterator = dbModule.read.call(context, path)
 
@@ -61,7 +61,7 @@ describe('database', () => {
       const val = null
       const result = {
         val: jest.fn(() => val),
-        exists: () => false,
+        exists: () => false
       }
       const iterator = dbModule.read.call(context, path)
 
@@ -76,15 +76,16 @@ describe('database', () => {
         value: val
       })
 
-      expect(result.val.mock.calls.length).toBe(1)
-      expect(result.val.mock.calls[0]).toEqual([])
+      expect(result.val.mock.calls.length).toBe(0)
+      expect(result.val.mock.calls[0]).toEqual(undefined)
     })
 
     it('accepts a firebase.database.Reference argument', () => {
       context._getRef = jest.fn(ref => ref)
       const val = 'jqdqkld'
       const result = {
-        val: jest.fn(() => val)
+        val: jest.fn(() => val),
+        exists: () => true
       }
       const iterator = dbModule.read.call(context, ref)
 
