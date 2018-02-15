@@ -7,7 +7,7 @@ function * read (pathOrRef) {
   const ref = this._getRef(pathOrRef, 'database')
   const result = yield call([ref, ref.once], 'value')
 
-  return (exists.exists()) ? result.val() : null
+  return (result.exists()) ? result.val() : null
 }
 
 function * create (pathOrRef, data) {
