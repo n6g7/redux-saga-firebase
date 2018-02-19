@@ -51,7 +51,7 @@ describe('auth', () => {
       const iterator = authModule.signInAndRetrieveDataWithCredential.call(context, credential)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInAndRetrieveDataWithCredential], credential))
+        .toEqual(call([auth, auth.signInAndRetrieveDataWithCredential], credential))
 
       expect(iterator.next(userCredentials)).toEqual({
         done: true,
@@ -66,7 +66,7 @@ describe('auth', () => {
       const iterator = authModule.signInAnonymously.call(context)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInAnonymously]))
+        .toEqual(call([auth, auth.signInAnonymously]))
 
       expect(iterator.next(user)).toEqual({
         done: true,
@@ -82,7 +82,7 @@ describe('auth', () => {
       const iterator = authModule.signInWithCredential.call(context, credential)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithCredential], credential))
+        .toEqual(call([auth, auth.signInWithCredential], credential))
 
       expect(iterator.next(user)).toEqual({
         done: true,
@@ -98,7 +98,7 @@ describe('auth', () => {
       const iterator = authModule.signInWithCustomToken.call(context, token)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithCustomToken], token))
+        .toEqual(call([auth, auth.signInWithCustomToken], token))
 
       expect(iterator.next(user)).toEqual({
         done: true,
@@ -115,7 +115,7 @@ describe('auth', () => {
       const iterator = authModule.signInWithEmailAndPassword.call(context, email, password)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithEmailAndPassword], email, password))
+        .toEqual(call([auth, auth.signInWithEmailAndPassword], email, password))
 
       expect(iterator.next(user)).toEqual({
         done: true,
@@ -131,7 +131,7 @@ describe('auth', () => {
       const iterator = authModule.signInWithPhoneNumber.call(context, phoneNumber, applicationVerifier)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithPhoneNumber], phoneNumber, applicationVerifier))
+        .toEqual(call([auth, auth.signInWithPhoneNumber], phoneNumber, applicationVerifier))
 
       const confirmationResult = 'oqsdoqpdl'
       expect(iterator.next(confirmationResult)).toEqual({
@@ -148,7 +148,7 @@ describe('auth', () => {
       const iterator = authModule.signInWithPopup.call(context, authProvider)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signInWithPopup], authProvider))
+        .toEqual(call([auth, auth.signInWithPopup], authProvider))
 
       expect(iterator.next({ credential })).toEqual({
         done: true,
@@ -239,7 +239,7 @@ describe('auth', () => {
       const iterator = authModule.sendEmailVerification.call(context, actionCodeSettings)
 
       expect(iterator.next().value)
-      .toEqual(call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings))
+        .toEqual(call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings))
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -293,7 +293,7 @@ describe('auth', () => {
       const iterator = authModule.signOut.call(context)
 
       expect(iterator.next().value)
-      .toEqual(call([auth, auth.signOut]))
+        .toEqual(call([auth, auth.signOut]))
 
       expect(iterator.next()).toEqual({
         done: true,

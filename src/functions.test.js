@@ -34,16 +34,16 @@ describe('functions', () => {
       const iterator = functionsModule.call.call(context, functionName)
 
       expect(iterator.next().value)
-      .toEqual(call(
-        fetch,
-        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
-        {}
-      ))
+        .toEqual(call(
+          fetch,
+          `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+          {}
+        ))
 
       expect(context.projectId.mock.calls.length).toBe(1)
 
       expect(iterator.next(response).value)
-      .toEqual(call([response, response.text]))
+        .toEqual(call([response, response.text]))
 
       expect(response.headers.get.mock.calls.length).toBe(1)
       expect(response.headers.get.mock.calls[0]).toEqual([
@@ -70,16 +70,16 @@ describe('functions', () => {
       const iterator = functionsModule.call.call(context, functionName)
 
       expect(iterator.next().value)
-      .toEqual(call(
-        fetch,
-        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
-        {}
-      ))
+        .toEqual(call(
+          fetch,
+          `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+          {}
+        ))
 
       expect(context.projectId.mock.calls.length).toBe(1)
 
       expect(iterator.next(response).value)
-      .toEqual(call([response, response.json]))
+        .toEqual(call([response, response.json]))
 
       expect(response.headers.get.mock.calls.length).toBe(1)
       expect(response.headers.get.mock.calls[0]).toEqual([
@@ -104,11 +104,11 @@ describe('functions', () => {
       const iterator = functionsModule.call.call(context, functionName, {}, init)
 
       expect(iterator.next().value)
-      .toEqual(call(
-        fetch,
-        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
-        init
-      ))
+        .toEqual(call(
+          fetch,
+          `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+          init
+        ))
     })
 
     it('throws when it fails', () => {
@@ -121,16 +121,16 @@ describe('functions', () => {
         const iterator = functionsModule.call.call(context, functionName)
 
         expect(iterator.next().value)
-        .toEqual(call(
-          fetch,
-          `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
-          {}
-        ))
+          .toEqual(call(
+            fetch,
+            `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+            {}
+          ))
 
         expect(context.projectId.mock.calls.length).toBe(1)
 
         expect(iterator.next(response).value)
-        .toEqual(response)
+          .toEqual(response)
 
         expect(true).toBe(false)
       } catch (error) {
@@ -143,11 +143,11 @@ describe('functions', () => {
       const iterator = functionsModule.call.call(context, functionName)
 
       expect(iterator.next().value)
-      .toEqual(call(
-        fetch,
-        functionName,
-        {}
-      ))
+        .toEqual(call(
+          fetch,
+          functionName,
+          {}
+        ))
     })
 
     it('calls urls when passed directly (https, with parameters)', () => {
@@ -158,11 +158,11 @@ describe('functions', () => {
       const iterator = functionsModule.call.call(context, functionName, params)
 
       expect(iterator.next().value)
-      .toEqual(call(
-        fetch,
-        `${functionName}?e=f`,
-        {}
-      ))
+        .toEqual(call(
+          fetch,
+          `${functionName}?e=f`,
+          {}
+        ))
     })
   })
 
@@ -172,7 +172,7 @@ describe('functions', () => {
       const result = getFunctionURL.call(context, functionName)
 
       expect(result)
-      .toBe(`https://${region}-${projectId}.cloudfunctions.net/${functionName}`)
+        .toBe(`https://${region}-${projectId}.cloudfunctions.net/${functionName}`)
     })
 
     it('generates correct URLs - with parameters', () => {
@@ -184,7 +184,7 @@ describe('functions', () => {
       const result = getFunctionURL.call(context, functionName, parameters)
 
       expect(result)
-      .toBe(`https://${region}-${projectId}.cloudfunctions.net/${functionName}?a=${parameters.a}&b=${parameters.b}`)
+        .toBe(`https://${region}-${projectId}.cloudfunctions.net/${functionName}?a=${parameters.a}&b=${parameters.b}`)
     })
 
     it('returns url directly (http)', () => {
