@@ -166,9 +166,11 @@ methods:
       import { syncTodos } from '../actionCreators/firestore';
 
       function* todosRootSaga() {
-        yield [
-          rsf.firestore.syncCollection('todos', { successActionCreator: syncTodos }),
-        ];
+        yield fork(
+          rsf.firestore.syncCollection,
+          'todos',
+          { successActionCreator: syncTodos }
+        );
       }
       ```
 
@@ -191,9 +193,11 @@ methods:
       import { syncTodo } from '../actionCreators/firestore';
 
       function* todosRootSaga() {
-        yield [
-          rsf.firestore.syncDocument('todos/1', { successActionCreator: syncTodo }),
-        ];
+        yield fork(
+          rsf.firestore.syncDocument,
+          'todos/1',
+          { successActionCreator: syncTodo }
+        );
       }
       ```
 

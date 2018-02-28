@@ -163,9 +163,11 @@ methods:
       import { syncTodos } from '../actionCreators/todos';
 
       function* todoRootSaga() {
-        yield [
-          rsf.database.sync('todos', { successActionCreator: syncTodos }),
-        ];
+        yield fork(
+          rsf.database.sync,
+          'todos',
+          { successActionCreator: syncTodos }
+        );
       }
       ```
 ---

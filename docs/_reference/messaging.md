@@ -36,9 +36,10 @@ methods:
       import { showMessage } from '../actionCreators/messaging';
 
       function* notificationsRootSaga() {
-        yield [
-          rsf.messaging.syncMessages({ successActionCreator: showMessage }),
-        ];
+        yield fork(
+          rsf.messaging.syncMessages,
+          { successActionCreator: showMessage }
+        );
       }
       ```
 
@@ -57,9 +58,10 @@ methods:
       import { setToken } from '../actionCreators/messaging';
 
       function* notificationsRootSaga() {
-        yield [
-          rsf.messaging.syncToken({ successActionCreator: setToken }),
-        ];
+        yield fork(
+          rsf.messaging.syncToken,
+          { successActionCreator: setToken }
+        );
       }
       ```
 
