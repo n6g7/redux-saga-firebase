@@ -1,2 +1,2 @@
-webpackJsonp([35783957827783],{975:function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}t.__esModule=!0,t.query=void 0;var u=n(1),a=r(u);t.default=function(e){return a.default.createElement("div",{dangerouslySetInnerHTML:{__html:e.data.file.markdown.html}})};t.query="** extracted graphql fragment **"}});
+webpackJsonp([35783957827783],{976:function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}t.__esModule=!0,t.query=void 0;var u=n(1),a=r(u);t.default=function(e){return a.default.createElement("div",{dangerouslySetInnerHTML:{__html:e.data.file.markdown.html}})};t.query="** extracted graphql fragment **"}});
 //# sourceMappingURL=component---src-pages-index-js-87ad9eeb39f582fe054d.js.map
