@@ -3,37 +3,43 @@ import { call, fork } from 'redux-saga/effects'
 
 import { syncChannel } from './utils'
 
+export const getRef = (rsf, pathOrRef) => {
+  return typeof pathOrRef === 'string'
+    ? rsf.app.database().ref(pathOrRef)
+    : pathOrRef
+}
+
 function * read (pathOrRef) {
-  const ref = this._getRef(pathOrRef, 'database')
+  const ref = getRef(this, pathOrRef)
   const result = yield call([ref, ref.once], 'value')
 
   return result.val()
 }
 
 function * create (pathOrRef, data) {
-  const ref = this._getRef(pathOrRef, 'database')
+  const ref = getRef(this, pathOrRef)
   const result = yield call([ref, ref.push], data)
 
   return result.key
 }
 
 function * update (pathOrRef, data) {
-  const ref = this._getRef(pathOrRef, 'database')
+  const ref = getRef(this, pathOrRef)
   yield call([ref, ref.set], data)
 }
 
 function * patch (pathOrRef, data) {
-  const ref = this._getRef(pathOrRef, 'database')
+  const ref = getRef(this, pathOrRef)
   yield call([ref, ref.update], data)
 }
 
 function * _delete (pathOrRef) {
-  const ref = this._getRef(pathOrRef, 'database')
+  const ref = getRef(this, pathOrRef)
   yield call([ref, ref.remove])
 }
 
 function channel (pathOrRef, event = 'value') {
-  const ref = this._getRef(pathOrRef, 'database')
+  const ref = getRef(this, pathOrRef)
 
   const channel = eventChannel(emit => {
     const callback = ref.on(

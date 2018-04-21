@@ -95,12 +95,6 @@ class ReduxSagaFirebase {
 
     return projectId
   }
-
-  _getRef (pathOrRef, service) {
-    return typeof pathOrRef === 'string'
-      ? this.app[service]().ref(pathOrRef)
-      : pathOrRef
-  }
 }
 
 export default ReduxSagaFirebase

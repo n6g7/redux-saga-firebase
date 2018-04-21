@@ -1,10 +1,14 @@
 import { call, fork } from 'redux-saga/effects'
 
-import dbModule from './database'
+import dbModule, { getRef } from './database'
 import { syncChannel } from './utils'
 
 describe('database', () => {
-  let ref, context, subs
+  let app,
+    context,
+    database,
+    ref,
+    subs
 
   beforeEach(() => {
     subs = []
@@ -19,8 +23,14 @@ describe('database', () => {
       set: jest.fn(),
       update: jest.fn()
     }
+    database = {
+      ref: jest.fn(() => ref)
+    }
+    app = {
+      database: jest.fn(() => database)
+    }
     context = {
-      _getRef: jest.fn(() => ref),
+      app,
       database: {
         channel: jest.fn()
       }
@@ -43,8 +53,10 @@ describe('database', () => {
       expect(iterator.next().value)
         .toEqual(call([ref, ref.once], 'value'))
 
-      expect(context._getRef.mock.calls.length).toBe(1)
-      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
+      expect(app.database.mock.calls.length).toBe(1)
+      expect(app.database.mock.calls[0]).toEqual([])
+      expect(database.ref.mock.calls.length).toBe(1)
+      expect(database.ref.mock.calls[0]).toEqual([path])
 
       expect(iterator.next(result)).toEqual({
         done: true,
@@ -56,7 +68,6 @@ describe('database', () => {
     })
 
     it('accepts a firebase.database.Reference argument', () => {
-      context._getRef = jest.fn(ref => ref)
       const val = 'jqdqkld'
       const result = {
         val: jest.fn(() => val)
@@ -66,8 +77,8 @@ describe('database', () => {
       expect(iterator.next().value)
         .toEqual(call([ref, ref.once], 'value'))
 
-      expect(context._getRef.mock.calls.length).toBe(1)
-      expect(context._getRef.mock.calls[0]).toEqual([ref, 'database'])
+      expect(app.database.mock.calls.length).toBe(0)
+      expect(database.ref.mock.calls.length).toBe(0)
 
       expect(iterator.next(result)).toEqual({
         done: true,
@@ -91,8 +102,10 @@ describe('database', () => {
       expect(iterator.next().value)
         .toEqual(call([ref, ref.push], data))
 
-      expect(context._getRef.mock.calls.length).toBe(1)
-      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
+      expect(app.database.mock.calls.length).toBe(1)
+      expect(app.database.mock.calls[0]).toEqual([])
+      expect(database.ref.mock.calls.length).toBe(1)
+      expect(database.ref.mock.calls[0]).toEqual([path])
 
       expect(iterator.next(result)).toEqual({
         done: true,
@@ -110,8 +123,10 @@ describe('database', () => {
       expect(iterator.next().value)
         .toEqual(call([ref, ref.set], data))
 
-      expect(context._getRef.mock.calls.length).toBe(1)
-      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
+      expect(app.database.mock.calls.length).toBe(1)
+      expect(app.database.mock.calls[0]).toEqual([])
+      expect(database.ref.mock.calls.length).toBe(1)
+      expect(database.ref.mock.calls[0]).toEqual([path])
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -129,8 +144,10 @@ describe('database', () => {
       expect(iterator.next().value)
         .toEqual(call([ref, ref.update], data))
 
-      expect(context._getRef.mock.calls.length).toBe(1)
-      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
+      expect(app.database.mock.calls.length).toBe(1)
+      expect(app.database.mock.calls[0]).toEqual([])
+      expect(database.ref.mock.calls.length).toBe(1)
+      expect(database.ref.mock.calls[0]).toEqual([path])
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -147,8 +164,10 @@ describe('database', () => {
       expect(iterator.next().value)
         .toEqual(call([ref, ref.remove]))
 
-      expect(context._getRef.mock.calls.length).toBe(1)
-      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
+      expect(app.database.mock.calls.length).toBe(1)
+      expect(app.database.mock.calls[0]).toEqual([])
+      expect(database.ref.mock.calls.length).toBe(1)
+      expect(database.ref.mock.calls[0]).toEqual([path])
 
       expect(iterator.next()).toEqual({
         done: true,
@@ -163,8 +182,10 @@ describe('database', () => {
       const event = 'okqdkj'
       dbModule.channel.call(context, path, event)
 
-      expect(context._getRef.mock.calls.length).toBe(1)
-      expect(context._getRef.mock.calls[0]).toEqual([path, 'database'])
+      expect(app.database.mock.calls.length).toBe(1)
+      expect(app.database.mock.calls[0]).toEqual([])
+      expect(database.ref.mock.calls.length).toBe(1)
+      expect(database.ref.mock.calls[0]).toEqual([path])
 
       expect(ref.on.mock.calls.length).toBe(1)
       expect(ref.on.mock.calls[0][0]).toBe(event)
@@ -260,11 +281,10 @@ describe('database', () => {
 
     it('accepts a firebase.database.Reference argument', () => {
       const event = 'okqdkj'
-      context._getRef = jest.fn(ref => ref)
       dbModule.channel.call(context, ref, event)
 
-      expect(context._getRef.mock.calls.length).toBe(1)
-      expect(context._getRef.mock.calls[0]).toEqual([ref, 'database'])
+      expect(app.database.mock.calls.length).toBe(0)
+      expect(database.ref.mock.calls.length).toBe(0)
 
       expect(ref.on.mock.calls.length).toBe(1)
       expect(ref.on.mock.calls[0][0]).toBe(event)
@@ -311,7 +331,6 @@ describe('database', () => {
     })
 
     it('accepts a firebase.database.Reference argument', () => {
-      context._getRef = jest.fn(ref => ref)
       const transform = jest.fn()
       const options = { transform }
       const iterator = dbModule.sync.call(context, ref, options)
@@ -334,7 +353,6 @@ describe('database', () => {
     })
 
     it('accepts an optional event type argument', () => {
-      context._getRef = jest.fn(ref => ref)
       const transform = jest.fn()
       const options = { transform }
       const event = 'qosdkqlms'
@@ -355,6 +373,45 @@ describe('database', () => {
           done: true,
           value: undefined
         })
+    })
+  })
+
+  describe('getRef(rsf, pathOrRef)', () => {
+    let databaseRef, database, app, rsf
+
+    beforeEach(() => {
+      databaseRef = {
+        key: 'key'
+      }
+      database = {
+        ref: jest.fn(() => databaseRef)
+      }
+      app = {
+        database: jest.fn(() => database)
+      }
+      rsf = { app }
+    })
+
+    it('returns a database ref from path string', () => {
+      const path = 'path'
+      const ref = getRef(rsf, path)
+
+      expect(app.database.mock.calls.length).toBe(1)
+      expect(app.database.mock.calls[0]).toEqual([])
+
+      expect(database.ref.mock.calls.length).toBe(1)
+      expect(database.ref.mock.calls[0]).toEqual([path])
+
+      expect(ref).toEqual(databaseRef)
+    })
+
+    it('returns the database ref that was passed to it', () => {
+      const ref = getRef(rsf, databaseRef)
+
+      expect(app.database.mock.calls.length).toBe(0)
+      expect(database.ref.mock.calls.length).toBe(0)
+
+      expect(ref).toEqual(databaseRef)
     })
   })
 })
