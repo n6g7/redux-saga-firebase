@@ -1,5 +1,5 @@
 {
-  "presets": ["@babel/es2015", "@babel/stage-3"],
+  "presets": ["@babel/preset-env"],
   "plugins": ["@babel/plugin-transform-runtime"],
   "env": {
     "production": {
