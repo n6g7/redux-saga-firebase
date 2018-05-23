@@ -1,9 +1,16 @@
 {
-  "presets": ["@babel/es2015", "@babel/stage-3"],
-  "plugins": ["@babel/plugin-transform-runtime"],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-stage-3"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ],
   "env": {
     "production": {
-      "ignore": ["src/*.test.js"]
+      "ignore": [
+        "src/*.test.js"
+      ]
     }
   }
 }
