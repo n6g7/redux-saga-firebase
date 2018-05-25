@@ -14,8 +14,8 @@
     "prepublishOnly": "yarn test",
     "pretest": "standard 'src/**/*.js'",
     "test": "NODE_ENV=test jest",
-    "test:coverage": "yarn test -- --coverage",
-    "test:coverage:win": "yarn test:win -- --coverage",
+    "test:coverage": "yarn test --coverage",
+    "test:coverage:win": "yarn test:win --coverage",
     "test:win": "set NODE_ENV=test&&jest"
   },
   "repository": {
