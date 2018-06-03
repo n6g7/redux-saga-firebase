@@ -436,7 +436,27 @@ methods:
           }
         }
       ```
-
+  - signature: auth.updateEmail(email)
+    id: updateEmail
+    generator: true
+    description: Updates the user's email.
+    arguments:
+      - name: email
+        required: true
+        type: String
+        description: The user's email.
+    example: |
+      ```javascript
+      function* updateEmailSaga(email) {
+        try {
+          yield call(rsf.auth.updateEmail, email);
+          yield put(updateEmail());
+        }
+        catch(error) {
+          yield put(updateEmailFailure(error));
+        }
+      }
+      ```
   - signature: auth.updatePassword(password)
     id: updatePassword
     generator: true

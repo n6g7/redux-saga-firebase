@@ -109,6 +109,11 @@ function * unlink (provider) {
   return yield call([auth.currentUser, auth.currentUser.unlink], provider)
 }
 
+function * updateEmail (email) {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.updateEmail], email)
+}
+
 function * updatePassword (password) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.updatePassword], password)
@@ -133,5 +138,6 @@ export default {
   signInWithRedirect,
   signOut,
   unlink,
+  updateEmail,
   updatePassword
 }

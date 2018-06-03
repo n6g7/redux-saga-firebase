@@ -34,6 +34,7 @@ class ReduxSagaFirebase {
       signInWithRedirect: auth.signInWithRedirect.bind(this),
       signOut: auth.signOut.bind(this),
       unlink: auth.unlink.bind(this),
+      updateEmail: auth.updateEmail.bind(this),
       updatePassword: auth.updatePassword.bind(this)
     }
 

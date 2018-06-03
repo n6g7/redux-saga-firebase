@@ -33,6 +33,7 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.auth.signInWithPopup).toBeInstanceOf(Function)
       expect(rsf.auth.signInWithRedirect).toBeInstanceOf(Function)
       expect(rsf.auth.signOut).toBeInstanceOf(Function)
+      expect(rsf.auth.updateEmail).toBeInstanceOf(Function)
       expect(rsf.auth.updatePassword).toBeInstanceOf(Function)
     })
 
