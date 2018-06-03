@@ -74,6 +74,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*auth.signOut()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signOut)
 - [`*auth.unlink(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#unlink)
 - [`*auth.updatePassword(password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#updatePassword)
+- [`*auth.updateEmail(email)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#updateEmail)
 
 **Database**
 
