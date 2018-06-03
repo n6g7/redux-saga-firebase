@@ -249,25 +249,6 @@ describe('auth', () => {
     })
   })
 
-  describe('updatePassword(password)', () => {
-    it('works', () => {
-      const password = 'skqdk'
-      const iterator = authModule.updatePassword.call(
-        context,
-        password
-      )
-
-      expect(iterator.next().value).toEqual(
-        call([auth.currentUser, auth.currentUser.updatePassword], password)
-      )
-
-      expect(iterator.next()).toEqual({
-        done: true,
-        value: undefined
-      })
-    })
-  })
-
   describe('updateEmail(email)', () => {
     it('works', () => {
       const email = 'skqdk'
@@ -278,6 +259,25 @@ describe('auth', () => {
 
       expect(iterator.next().value).toEqual(
         call([auth.currentUser, auth.currentUser.updateEmail], email)
+      )
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('updatePassword(password)', () => {
+    it('works', () => {
+      const password = 'skqdk'
+      const iterator = authModule.updatePassword.call(
+        context,
+        password
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth.currentUser, auth.currentUser.updatePassword], password)
       )
 
       expect(iterator.next()).toEqual({

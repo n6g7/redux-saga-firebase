@@ -436,29 +436,6 @@ methods:
           }
         }
       ```
-
-  - signature: auth.updatePassword(password)
-    id: updatePassword
-    generator: true
-    description: Updates the user's password.
-    arguments:
-      - name: password
-        required: true
-        type: String
-        description: The user's password.
-    example: |
-      ```javascript
-      function* updatePasswordSaga(password) {
-        try {
-          yield call(rsf.auth.updatePassword, password);
-          yield put(updatePasswordSuccess());
-        }
-        catch(error) {
-          yield put(updatePasswordFailure(error));
-        }
-      }
-      ```
-
   - signature: auth.updateEmail(email)
     id: updateEmail
     generator: true
@@ -477,6 +454,27 @@ methods:
         }
         catch(error) {
           yield put(updateEmailFailure(error));
+        }
+      }
+      ```
+  - signature: auth.updatePassword(password)
+    id: updatePassword
+    generator: true
+    description: Updates the user's password.
+    arguments:
+      - name: password
+        required: true
+        type: String
+        description: The user's password.
+    example: |
+      ```javascript
+      function* updatePasswordSaga(password) {
+        try {
+          yield call(rsf.auth.updatePassword, password);
+          yield put(updatePasswordSuccess());
+        }
+        catch(error) {
+          yield put(updatePasswordFailure(error));
         }
       }
       ```
