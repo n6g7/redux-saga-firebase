@@ -119,7 +119,6 @@ function * updatePassword (password) {
   return yield call([auth.currentUser, auth.currentUser.updatePassword], password)
 }
 
-
 export default {
   applyActionCode,
   channel,
