@@ -288,18 +288,19 @@ describe('auth', () => {
     })
   })
 
-  describe('updateProfile(displayName, photoURL)', () => {
+  describe('updateProfile(profile)', () => {
     it('works', () => {
-      const displayName = 'skqdk'
-      const photoURL = 'skqdk'
+      const profile = {
+        displayName: 'skqdk',
+        photoURL: 'skqdk'
+      }
       const iterator = authModule.updateProfile.call(
         context,
-        displayName,
-        photoURL
+        profile
       )
 
       expect(iterator.next().value).toEqual(
-        call([auth.currentUser, auth.currentUser.updateProfile], { displayName, photoURL })
+        call([auth.currentUser, auth.currentUser.updateProfile], profile)
       )
 
       expect(iterator.next()).toEqual({

@@ -119,12 +119,9 @@ function * updatePassword (password) {
   return yield call([auth.currentUser, auth.currentUser.updatePassword], password)
 }
 
-function * updateProfile (displayName, photoURL) {
+function * updateProfile (profile) {
   const auth = this.app.auth()
-  return yield call([auth.currentUser, auth.currentUser.updateProfile], {
-    displayName: displayName || [auth.currentUser, auth.currentUser.displayName],
-    photoURL: photoURL || [auth.currentUser, auth.currentUser.photoURL]
-  })
+  return yield call([auth.currentUser, auth.currentUser.updateProfile], profile)
 }
 
 export default {
