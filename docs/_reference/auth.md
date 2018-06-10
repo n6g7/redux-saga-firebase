@@ -478,4 +478,29 @@ methods:
         }
       }
       ```
+  - signature: auth.updateProfile(displayName, photoURL)
+    id: updateProfile
+    generator: true
+    description: Updates the user's basic profile information—the user's display name and profile photo URL—.
+    arguments:
+      - name: displayName
+        required: false
+        type: String
+        description: The user's display name.
+      - name: photoURL
+        required: false
+        type: String
+        description: The user's photo URL.
+    example: |
+      ```javascript
+      function* updateProfileSaga(displayName, photoURL) {
+        try {
+          yield call(rsf.auth.updateProfile, displayName, photoURL);
+          yield put(updateProfileSuccess());
+        }
+        catch(error) {
+          yield put(updateProfileFailure(error));
+        }
+      }
+      ```
 ---
