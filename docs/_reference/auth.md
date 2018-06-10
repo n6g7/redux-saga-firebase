@@ -489,9 +489,12 @@ methods:
         description: The profile's displayName and photoURL to update.
     example: |
       ```javascript
-      function* updateProfileSaga(profile) {
+      function* updateProfileSaga() {
         try {
-          yield call(rsf.auth.updateProfile, profile);
+          yield call(rsf.auth.updateProfile, {
+            displayName: "blah blah",
+            photoURL: "skldqk"
+          });
           yield put(updateProfileSuccess());
         }
         catch(error) {
