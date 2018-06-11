@@ -119,6 +119,11 @@ function * updatePassword (password) {
   return yield call([auth.currentUser, auth.currentUser.updatePassword], password)
 }
 
+function * updateProfile (profile) {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.updateProfile], profile)
+}
+
 export default {
   applyActionCode,
   channel,
@@ -139,5 +144,6 @@ export default {
   signOut,
   unlink,
   updateEmail,
-  updatePassword
+  updatePassword,
+  updateProfile
 }

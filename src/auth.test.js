@@ -28,8 +28,9 @@ describe('auth', () => {
       linkWithRedirect: jest.fn(),
       sendEmailVerification: jest.fn(),
       unlink: jest.fn(),
+      updateEmail: jest.fn(),
       updatePassword: jest.fn(),
-      updateEmail: jest.fn()
+      updateProfile: jest.fn()
     },
     confirmPasswordReset: jest.fn(),
     signOut: jest.fn()
@@ -278,6 +279,28 @@ describe('auth', () => {
 
       expect(iterator.next().value).toEqual(
         call([auth.currentUser, auth.currentUser.updatePassword], password)
+      )
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('updateProfile(profile)', () => {
+    it('works', () => {
+      const profile = {
+        displayName: 'skqdk',
+        photoURL: 'skqdk'
+      }
+      const iterator = authModule.updateProfile.call(
+        context,
+        profile
+      )
+
+      expect(iterator.next().value).toEqual(
+        call([auth.currentUser, auth.currentUser.updateProfile], profile)
       )
 
       expect(iterator.next()).toEqual({
