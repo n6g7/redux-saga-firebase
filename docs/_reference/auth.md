@@ -485,15 +485,15 @@ methods:
     arguments:
       - name: profile
         required: true
-        type: A {displayName: nullable string, photoURL: nullable string} object
-        description: The profile's displayName and photoURL to update.
+        type: Object
+        description: The profile's displayName and photoURL to update. It can contain a `displayName` and a `photoURL` field, both are nullable strings.
     example: |
       ```javascript
       function* updateProfileSaga() {
         try {
           yield call(rsf.auth.updateProfile, {
-            displayName: "blah blah",
-            photoURL: "skldqk"
+            displayName: "Elon",
+            photoURL: "elon@x.com"
           });
           yield put(updateProfileSuccess());
         }
