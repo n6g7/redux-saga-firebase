@@ -1,4 +1,4 @@
-import { eventChannel } from 'redux-saga'
+import { buffers, eventChannel } from 'redux-saga'
 import { call, fork } from 'redux-saga/effects'
 
 import assert from './assert'
@@ -35,7 +35,7 @@ function * addDocument (collectionRef, data) {
   return yield call([collection, collection.add], data)
 }
 
-function channel (pathOrRef, type = 'collection') {
+function channel (pathOrRef, type = 'collection', buffer = buffers.none()) {
   const ref = type === 'collection'
     ? getCollectionRef(this, pathOrRef)
     : getDocumentRef(this, pathOrRef)
@@ -45,7 +45,7 @@ function channel (pathOrRef, type = 'collection') {
 
     // Returns unsubscribe function
     return unsubscribe
-  })
+  }, buffer)
 
   return channel
 }
