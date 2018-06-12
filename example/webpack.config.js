@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  entry: ['babel-polyfill', './index.js'],
+  entry: ['@babel/polyfill', './index.js'],
   resolve: {
     alias: {
       '@actions': path.resolve(__dirname, 'src/redux/actions'),
@@ -23,7 +23,18 @@ module.exports = {
             use: 'raw-loader'
           },
           {
+            include: path.resolve(__dirname, 'src'),
             use: 'babel-loader'
+          },
+          {
+            include: path.resolve(__dirname, '../src'),
+            use: {
+              loader: 'babel-loader',
+              options: {
+                babelrc: false,
+                extends: path.resolve(__dirname, '../.babelrc')
+              }
+            }
           }
         ]
       },

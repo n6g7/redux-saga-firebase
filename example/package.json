@@ -25,26 +25,22 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.2",
-    "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.51",
+    "@babel/polyfill": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "@babel/preset-stage-3": "^7.0.0-beta.51",
+    "@babel/runtime": "^7.0.0-beta.51",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^8.0.0-beta.3",
     "img-loader": "^2.0.0",
     "raw-loader": "^0.5.1",
     "standard": "^10.0.3",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "react",
-      "stage-2"
-    ]
   },
   "standard": {
     "globals": [
