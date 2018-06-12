@@ -135,7 +135,7 @@ class TodoList extends PureComponent {
               id={todo.id}
               checked={todo.done}
               onChange={() => setTodoStatus(todo.id, !todo.done)}
-              >
+            >
               { todo.label }
             </Checkbox>
           </ChecklistItem>
