@@ -10,8 +10,8 @@
     "test": "standard"
   },
   "dependencies": {
-    "@firebase/firestore": "^0.3.1",
-    "firebase": "^4.9.0",
+    "@firebase/firestore": "^0.5.4",
+    "firebase": "^5.0.4",
     "prismjs": "^1.10.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
