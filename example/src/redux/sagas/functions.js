@@ -1,4 +1,4 @@
-import { call, select, takeEvery } from 'redux-saga/effects'
+import { all, call, select, takeEvery } from 'redux-saga/effects'
 import { types } from '@actions/todos'
 
 import rsf from '../rsf'
@@ -15,7 +15,7 @@ function * ping (action) {
 }
 
 export default function * functionRootSaga () {
-  yield [
+  yield all([
     takeEvery(types.TODOS.NEW.SAVE, ping)
-  ]
+  ])
 }

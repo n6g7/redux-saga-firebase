@@ -1,4 +1,4 @@
-import { call, fork, select, takeEvery } from 'redux-saga/effects'
+import { all, call, fork, select, takeEvery } from 'redux-saga/effects'
 
 import {
   types,
@@ -45,9 +45,9 @@ function * syncTodosSaga () {
 }
 
 export default function * rootSaga () {
-  yield [
+  yield all([
     fork(syncTodosSaga),
     takeEvery(types.TODOS.NEW.SAVE, saveNewTodo),
     takeEvery(types.TODOS.SET_STATUS, setTodoStatus)
-  ]
+  ])
 }

@@ -1,4 +1,4 @@
-import { fork } from 'redux-saga/effects'
+import { all, fork } from 'redux-saga/effects'
 
 import analytics from './analytics'
 import functions from './functions'
@@ -8,12 +8,12 @@ import storage from './storage'
 import todos from './todos'
 
 export default function * rootSaga () {
-  yield [
+  yield all([
     fork(analytics),
     fork(functions),
     fork(login),
     fork(messaging),
     fork(storage),
     fork(todos)
-  ]
+  ])
 }

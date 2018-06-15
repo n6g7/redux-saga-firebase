@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects'
+import { all, put, takeEvery } from 'redux-saga/effects'
 import firebase from 'firebase'
 
 import { setRegistrationToken } from '@actions/messaging'
@@ -28,10 +28,10 @@ function * messageHandlerSaga () {
 export default function * () {
   yield requestPermissionSaga()
 
-  yield [
+  yield all([
     messageHandlerSaga,
     rsf.messaging.syncToken({
       successActionCreator: setRegistrationToken
     })
-  ]
+  ])
 }

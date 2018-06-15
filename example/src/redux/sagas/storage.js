@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects'
+import { all, call, put, select, takeEvery } from 'redux-saga/effects'
 
 import { types, setFileURL } from '@actions/storage'
 
@@ -27,13 +27,13 @@ function * sendFileSaga (action) {
   // Wait for upload to complete
   yield task
 
-  yield syncFileUrl()
+  yield call(syncFileUrl)
 }
 
 export default function * rootSaga () {
-  yield [
+  yield all([
     takeEvery(types.SEND_FILE, sendFileSaga)
-  ]
+  ])
 
-  yield syncFileUrl()
+  yield call(syncFileUrl)
 }
