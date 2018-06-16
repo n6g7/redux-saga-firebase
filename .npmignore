@@ -1,13 +1,14 @@
 .babelrc
 .bithoundrc
+.circleci/config.yml
 .git
 .gitattributes
 .vscode
-circle.yml
 coverage
 docs
 example
 node_modules
 *.test.js
 src
+tsconfig.json
 yarn-error.log
