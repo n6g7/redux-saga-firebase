@@ -12,7 +12,7 @@
     "build:win": "yarn del&&set NODE_ENV=production&&babel src --out-dir dist",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test",
-    "pretest": "standard 'src/**/*.js'",
+    "pretest": "standard 'src/**/*.js' && tsc",
     "test": "NODE_ENV=test jest",
     "test:coverage": "yarn test --coverage",
     "test:coverage:win": "yarn test:win --coverage",
@@ -33,6 +33,8 @@
     "@babel/preset-env": "^7.0.0-beta.49",
     "@babel/preset-stage-3": "^7.0.0-beta.49",
     "@babel/runtime": "^7.0.0-beta.49",
+    "@types/node": "^10.3.3",
+    "@types/redux": "^3.6.0",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.0.1",
     "firebase": "^5.0.4",
@@ -40,6 +42,7 @@
     "redux-saga": "^0.16.0 || ^1.0.0-beta",
     "rimraf": "^2.6.2",
     "standard": "^11.0.1",
+    "typescript": "^2.8.3",
     "whatwg-fetch": "^2.0.3"
   },
   "jest": {

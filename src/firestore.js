@@ -72,6 +72,7 @@ function * setDocument (documentRef, data, options) {
 
 function * updateDocument (documentRef, ...args) {
   const doc = getDocumentRef(this, documentRef)
+  // @ts-ignore
   return yield call([doc, doc.update], ...args)
 }
 
