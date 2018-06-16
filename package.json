@@ -22,11 +22,9 @@
     "url": "git@github.com:n6g7/redux-saga-firebase.git",
     "type": "git"
   },
-  "dependencies": {
-    "redux-saga": "^0.16.0"
-  },
   "peerDependencies": {
-    "firebase": "^4.6.0"
+    "firebase": "^4.6.0",
+    "redux-saga": "^0.16.0 || ^1.0.0-beta"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.49",
