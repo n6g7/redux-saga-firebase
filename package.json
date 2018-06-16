@@ -23,7 +23,7 @@
     "type": "git"
   },
   "peerDependencies": {
-    "firebase": "^4.6.0",
+    "firebase": "^5.0.4",
     "redux-saga": "^0.16.0 || ^1.0.0-beta"
   },
   "devDependencies": {
@@ -35,7 +35,9 @@
     "@babel/runtime": "^7.0.0-beta.49",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.0.1",
+    "firebase": "^5.0.4",
     "jest": "^23.1.0",
+    "redux-saga": "^0.16.0 || ^1.0.0-beta",
     "rimraf": "^2.6.2",
     "standard": "^11.0.1",
     "whatwg-fetch": "^2.0.3"
