@@ -6,6 +6,7 @@
   "homepage": "https://github.com/n6g7/redux-saga-firebase",
   "license": "MIT",
   "main": "dist/index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "del": "rimraf dist",
     "build": "yarn del && NODE_ENV=production babel src --out-dir dist",
