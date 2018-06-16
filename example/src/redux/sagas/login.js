@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import { call, fork, put, take, takeEvery } from 'redux-saga/effects'
+import { all, call, fork, put, take, takeEvery } from 'redux-saga/effects'
 
 import {
   types,
@@ -45,8 +45,8 @@ function * syncUserSaga () {
 
 export default function * loginRootSaga () {
   yield fork(syncUserSaga)
-  yield [
+  yield all([
     takeEvery(types.LOGIN.REQUEST, loginSaga),
     takeEvery(types.LOGOUT.REQUEST, logoutSaga)
-  ]
+  ])
 }

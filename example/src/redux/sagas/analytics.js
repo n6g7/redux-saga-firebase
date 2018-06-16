@@ -1,5 +1,5 @@
 import ReactGA from 'react-ga'
-import { takeEvery } from 'redux-saga/effects'
+import { all, takeEvery } from 'redux-saga/effects'
 import { types as loginTypes } from '@actions/login'
 import { types as storageTypes } from '@actions/storage'
 import { types as todosTypes } from '@actions/todos'
@@ -50,11 +50,11 @@ function sendFileSaga () {
 }
 
 export default function * functionRootSaga () {
-  yield [
+  yield all([
     takeEvery(loginTypes.SYNC_USER, loginSaga),
     takeEvery(todosTypes.TODOS.NEW.SAVE, newTodoSaga),
     takeEvery(todosTypes.TODOS.SET_STATUS, updateTodoSaga),
     takeEvery(todosTypes.TODOS.SET_FIRESTORE, setFirestoreSaga),
     takeEvery(storageTypes.SEND_FILE, sendFileSaga)
-  ]
+  ])
 }
