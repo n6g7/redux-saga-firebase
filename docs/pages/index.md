@@ -1,7 +1,3 @@
----
-layout: default
----
-
 # Getting started
 
 Install with:
