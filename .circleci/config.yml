@@ -168,6 +168,10 @@ jobs:
             - docs-v1-master
 
       - run:
+          name: Set git user config
+          command: git config --global user.email "$GIT_EMAIL" && git config --global user.name "$GIT_NAME"
+
+      - run:
           name: Install dependencies
           command: cd docs && yarn
 
@@ -195,4 +199,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - gastby-docs
