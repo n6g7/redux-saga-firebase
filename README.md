@@ -19,7 +19,7 @@ Install with:
 yarn add redux-saga-firebase
 ```
 
-Initialize a firebase app and instanciate redux-saga-firebase:
+Initialize a firebase app and instantiate redux-saga-firebase:
 
 ```js
 import firebase from 'firebase';
