@@ -8,7 +8,7 @@
     "build": "gatsby build",
     "deploy": "yarn build --prefix-paths && gh-pages -d public",
     "dev": "gatsby develop",
-    "test": "standard \"**/*.js\""
+    "test": "standard"
   },
   "keywords": [
     "documentation",
