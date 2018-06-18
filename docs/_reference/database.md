@@ -125,7 +125,8 @@ methods:
         type: String
         description: Defaults to `value`. A string describing the type of event to listen for. Options includes `value`, `child_added`, `child_removed`, `child_changed` and `child_moved`. See [Reference.on](https://firebase.google.com/docs/reference/js/firebase.database.Reference#on) documentation for more information.
       - name: buffer
-        type: [Buffer](https://redux-saga.js.org/docs/api/#buffer)
+        required: false
+        type: A [Buffer](https://redux-saga.js.org/docs/api/#buffer)
         description: Defaults to `buffers.none()`. Optional Buffer object to buffer messages on this channel. If not provided, messages will not buffered on this channel. See [redux-saga documentation](https://redux-saga.js.org/docs/api/#buffers) for more information for what options are available.
     output: |
       A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every change at the specified path in the database. The emitted value is an object with two keys:
