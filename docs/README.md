@@ -1,5 +1,8 @@
 # RSF Docs
 
-## How to:
-- install? `bundle install`
-- run locally? `bundle exec jekyll serve` and go to http://localhost:4000/redux-saga-firebase/
+## How to
+
+- install: `yarn`
+- run locally: `yarn dev`
+- build: `yarn build`
+- deploy: `yarn deploy`
