@@ -51,9 +51,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 
 ## API
 
-### Index
-
-**Authentication**
+### Authentication
 
 - [`*auth.applyActionCode(code)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#applyActionCode)
 - [`auth.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#channel)
@@ -77,7 +75,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*auth.updatePassword(password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#updatePassword)
 - [`*auth.updateProfile(profile)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#updateProfile)
 
-**Database**
+### Database
 
 - [`*database.read(path)`](https://n6g7.github.io/redux-saga-firebase/reference/database#read)
 - [`*database.create(path, data)`](https://n6g7.github.io/redux-saga-firebase/reference/database#create)
@@ -87,7 +85,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`database.channel(path, event, buffer)`](https://n6g7.github.io/redux-saga-firebase/reference/database#channel)
 - [`*database.sync(path, options, event)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
 
-**Firestore**
+### Firestore
 
 - [`*firestore.addDocument(collectionRef, data)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#addDocument)
 - [`firestore.channel(pathOrRef, type, buffer)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#channel)
@@ -99,18 +97,18 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*firestore.syncDocument(pathOrRef, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncDocument)
 - [`*firestore.updateDocument(docRef, ...args)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#updateDocument)
 
-**Functions**
+### Functions
 
 - [`*functions.call(functionName, queryParams={}, init={})`](https://n6g7.github.io/redux-saga-firebase/reference/functions#call)
 
-**Messaging**
+### Messaging
 
 - [`messaging.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#channel)
 - [`*messaging.syncMessages(options)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncMessages)
 - [`*messaging.syncToken(options)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncToken)
 - [`messaging.tokenRefreshChannel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#tokenRefreshChannel)
 
-**Storage**
+### Storage
 
 - [`storage.uploadFile(path, file, metadata)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#uploadFile)
 - [`storage.uploadString(path, string, format, metadata)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#uploadString)
