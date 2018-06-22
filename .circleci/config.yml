@@ -151,34 +151,6 @@ jobs:
             - ~/redux-saga-firebase/example/node_modules
             - ~/redux-saga-firebase/example/functions/node_modules
 
-  deploy-docs:
-    working_directory: ~/redux-saga-firebase
-
-    docker:
-      - image: node:latest
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - docs-v1-{{ .Branch }}-{{ checksum "docs/package.json" }}
-            - docs-v1-{{ .Branch }}
-            - docs-v1-master-{{ checksum "docs/package.json" }}
-            - docs-v1-master
-
-      - run:
-          name: Set git user config
-          command: git config --global user.email "$GIT_EMAIL" && git config --global user.name "$GIT_NAME"
-
-      - run:
-          name: Install dependencies
-          command: cd docs && yarn
-
-      - run:
-          name: Build and deploy
-          command: cd docs && yarn deploy
-
 workflows:
   version: 2
   stack:
@@ -193,10 +165,4 @@ workflows:
             branches:
               only:
                 - master
-      - deploy-docs:
-          requires:
-            - docs
-          filters:
-            branches:
-              only:
-                - gastby-docs
+

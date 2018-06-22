@@ -6,7 +6,6 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "deploy": "yarn build --prefix-paths && gh-pages -d public",
     "dev": "gatsby develop",
     "test": "standard"
   },
@@ -34,7 +33,6 @@
     "styled-components": "^3.3.2"
   },
   "devDependencies": {
-    "gh-pages": "^1.2.0",
     "standard": "^11.0.1"
   },
   "standard": {
