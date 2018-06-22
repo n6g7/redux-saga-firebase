@@ -9,7 +9,7 @@ A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [fireb
 
 - Try out the [example app](https://redux-saga-firebase.firebaseapp.com/) and browse its [code](https://github.com/n6g7/redux-saga-firebase/blob/master/example/).
 - It also works with React Native 📱! Here's a very simple example: https://github.com/n6g7/cat/tree/master/rn.
-- Browse the docs at [https://n6g7.github.io/redux-saga-firebase/](https://n6g7.github.io/redux-saga-firebase/).
+- Browse the docs at [https://redux-saga-firebase.js.org/](https://redux-saga-firebase.js.org/).
 
 ## Quick start
 
@@ -55,66 +55,66 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 
 **Authentication**
 
-- [`*auth.applyActionCode(code)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#applyActionCode)
-- [`auth.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#channel)
-- [`*auth.confirmPasswordReset(code, newPassword)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#confirmPasswordReset)
-- [`*auth.createUserWithEmailAndPassword(email, password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#createUserWithEmailAndPassword)
-- [`*auth.linkWithPopup(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#linkWithPopup)
-- [`*auth.linkWithRedirect(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#linkWithRedirect)
-- [`*auth.sendEmailVerification(actionCodeSettings)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#sendEmailVerification)
-- [`*auth.sendPasswordResetEmail(email, actionCodeSettings)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#sendPasswordResetEmail)
-- [`*auth.signInAndRetrieveDataWithCredential(credential)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInAndRetrieveDataWithCredential)
-- [`*auth.signInAnonymously()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInAnonymously)
-- [`*auth.signInWithCredential(credential)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithCredential)
-- [`*auth.signInWithCustomToken(token)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithCustomToken)
-- [`*auth.signInWithEmailAndPassword(email, password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithEmailAndPassword)
-- [`*auth.signInWithPhoneNumber(phoneNumber, applicationVerifier)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithPhoneNumber)
-- [`*auth.signInWithPopup(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithPopup)
-- [`*auth.signInWithRedirect(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signInWithRedirect)
-- [`*auth.signOut()`](https://n6g7.github.io/redux-saga-firebase/reference/auth#signOut)
-- [`*auth.unlink(authProvider)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#unlink)
-- [`*auth.updateEmail(email)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#updateEmail)
-- [`*auth.updatePassword(password)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#updatePassword)
-- [`*auth.updateProfile(profile)`](https://n6g7.github.io/redux-saga-firebase/reference/auth#updateProfile)
+- [`*auth.applyActionCode(code)`](https://redux-saga-firebase.js.org/reference/auth#applyActionCode)
+- [`auth.channel()`](https://redux-saga-firebase.js.org/reference/auth#channel)
+- [`*auth.confirmPasswordReset(code, newPassword)`](https://redux-saga-firebase.js.org/reference/auth#confirmPasswordReset)
+- [`*auth.createUserWithEmailAndPassword(email, password)`](https://redux-saga-firebase.js.org/reference/auth#createUserWithEmailAndPassword)
+- [`*auth.linkWithPopup(authProvider)`](https://redux-saga-firebase.js.org/reference/auth#linkWithPopup)
+- [`*auth.linkWithRedirect(authProvider)`](https://redux-saga-firebase.js.org/reference/auth#linkWithRedirect)
+- [`*auth.sendEmailVerification(actionCodeSettings)`](https://redux-saga-firebase.js.org/reference/auth#sendEmailVerification)
+- [`*auth.sendPasswordResetEmail(email, actionCodeSettings)`](https://redux-saga-firebase.js.org/reference/auth#sendPasswordResetEmail)
+- [`*auth.signInAndRetrieveDataWithCredential(credential)`](https://redux-saga-firebase.js.org/reference/auth#signInAndRetrieveDataWithCredential)
+- [`*auth.signInAnonymously()`](https://redux-saga-firebase.js.org/reference/auth#signInAnonymously)
+- [`*auth.signInWithCredential(credential)`](https://redux-saga-firebase.js.org/reference/auth#signInWithCredential)
+- [`*auth.signInWithCustomToken(token)`](https://redux-saga-firebase.js.org/reference/auth#signInWithCustomToken)
+- [`*auth.signInWithEmailAndPassword(email, password)`](https://redux-saga-firebase.js.org/reference/auth#signInWithEmailAndPassword)
+- [`*auth.signInWithPhoneNumber(phoneNumber, applicationVerifier)`](https://redux-saga-firebase.js.org/reference/auth#signInWithPhoneNumber)
+- [`*auth.signInWithPopup(authProvider)`](https://redux-saga-firebase.js.org/reference/auth#signInWithPopup)
+- [`*auth.signInWithRedirect(authProvider)`](https://redux-saga-firebase.js.org/reference/auth#signInWithRedirect)
+- [`*auth.signOut()`](https://redux-saga-firebase.js.org/reference/auth#signOut)
+- [`*auth.unlink(authProvider)`](https://redux-saga-firebase.js.org/reference/auth#unlink)
+- [`*auth.updateEmail(email)`](https://redux-saga-firebase.js.org/reference/auth#updateEmail)
+- [`*auth.updatePassword(password)`](https://redux-saga-firebase.js.org/reference/auth#updatePassword)
+- [`*auth.updateProfile(profile)`](https://redux-saga-firebase.js.org/reference/auth#updateProfile)
 
 **Database**
 
-- [`*database.read(path)`](https://n6g7.github.io/redux-saga-firebase/reference/database#read)
-- [`*database.create(path, data)`](https://n6g7.github.io/redux-saga-firebase/reference/database#create)
-- [`*database.update(path, data)`](https://n6g7.github.io/redux-saga-firebase/reference/database#update)
-- [`*database.patch(path, data)`](https://n6g7.github.io/redux-saga-firebase/reference/database#patch)
-- [`*database.delete(path)`](https://n6g7.github.io/redux-saga-firebase/reference/database#delete)
-- [`database.channel(path, event, buffer)`](https://n6g7.github.io/redux-saga-firebase/reference/database#channel)
-- [`*database.sync(path, options, event)`](https://n6g7.github.io/redux-saga-firebase/reference/database#sync)
+- [`*database.read(path)`](https://redux-saga-firebase.js.org/reference/database#read)
+- [`*database.create(path, data)`](https://redux-saga-firebase.js.org/reference/database#create)
+- [`*database.update(path, data)`](https://redux-saga-firebase.js.org/reference/database#update)
+- [`*database.patch(path, data)`](https://redux-saga-firebase.js.org/reference/database#patch)
+- [`*database.delete(path)`](https://redux-saga-firebase.js.org/reference/database#delete)
+- [`database.channel(path, event, buffer)`](https://redux-saga-firebase.js.org/reference/database#channel)
+- [`*database.sync(path, options, event)`](https://redux-saga-firebase.js.org/reference/database#sync)
 
 **Firestore**
 
-- [`*firestore.addDocument(collectionRef, data)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#addDocument)
-- [`firestore.channel(pathOrRef, type, buffer)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#channel)
-- [`*firestore.deleteDocument(documentRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#deleteDocument)
-- [`*firestore.getCollection(collectionRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getCollection)
-- [`*firestore.getDocument(docRef)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getDocument)
-- [`*firestore.setDocument(docRef, data, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#setDocument)
-- [`*firestore.syncCollection(pathOrRef, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncCollection)
-- [`*firestore.syncDocument(pathOrRef, options)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncDocument)
-- [`*firestore.updateDocument(docRef, ...args)`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#updateDocument)
+- [`*firestore.addDocument(collectionRef, data)`](https://redux-saga-firebase.js.org/reference/firestore#addDocument)
+- [`firestore.channel(pathOrRef, type, buffer)`](https://redux-saga-firebase.js.org/reference/firestore#channel)
+- [`*firestore.deleteDocument(documentRef)`](https://redux-saga-firebase.js.org/reference/firestore#deleteDocument)
+- [`*firestore.getCollection(collectionRef)`](https://redux-saga-firebase.js.org/reference/firestore#getCollection)
+- [`*firestore.getDocument(docRef)`](https://redux-saga-firebase.js.org/reference/firestore#getDocument)
+- [`*firestore.setDocument(docRef, data, options)`](https://redux-saga-firebase.js.org/reference/firestore#setDocument)
+- [`*firestore.syncCollection(pathOrRef, options)`](https://redux-saga-firebase.js.org/reference/firestore#syncCollection)
+- [`*firestore.syncDocument(pathOrRef, options)`](https://redux-saga-firebase.js.org/reference/firestore#syncDocument)
+- [`*firestore.updateDocument(docRef, ...args)`](https://redux-saga-firebase.js.org/reference/firestore#updateDocument)
 
 **Functions**
 
-- [`*functions.call(functionName, queryParams={}, init={})`](https://n6g7.github.io/redux-saga-firebase/reference/functions#call)
+- [`*functions.call(functionName, queryParams={}, init={})`](https://redux-saga-firebase.js.org/reference/functions#call)
 
 **Messaging**
 
-- [`messaging.channel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#channel)
-- [`*messaging.syncMessages(options)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncMessages)
-- [`*messaging.syncToken(options)`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#syncToken)
-- [`messaging.tokenRefreshChannel()`](https://n6g7.github.io/redux-saga-firebase/reference/messaging#tokenRefreshChannel)
+- [`messaging.channel()`](https://redux-saga-firebase.js.org/reference/messaging#channel)
+- [`*messaging.syncMessages(options)`](https://redux-saga-firebase.js.org/reference/messaging#syncMessages)
+- [`*messaging.syncToken(options)`](https://redux-saga-firebase.js.org/reference/messaging#syncToken)
+- [`messaging.tokenRefreshChannel()`](https://redux-saga-firebase.js.org/reference/messaging#tokenRefreshChannel)
 
 **Storage**
 
-- [`storage.uploadFile(path, file, metadata)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#uploadFile)
-- [`storage.uploadString(path, string, format, metadata)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#uploadString)
-- [`*storage.getDownloadURL(path)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#getDownloadURL)
-- [`*storage.getFileMetadata(path)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#getFileMetadata)
-- [`*storage.updateFileMetadata(path, newMetadata)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#updateFileMetadata)
-- [`*storage.deleteFile(path)`](https://n6g7.github.io/redux-saga-firebase/reference/storage#deleteFile)
+- [`storage.uploadFile(path, file, metadata)`](https://redux-saga-firebase.js.org/reference/storage#uploadFile)
+- [`storage.uploadString(path, string, format, metadata)`](https://redux-saga-firebase.js.org/reference/storage#uploadString)
+- [`*storage.getDownloadURL(path)`](https://redux-saga-firebase.js.org/reference/storage#getDownloadURL)
+- [`*storage.getFileMetadata(path)`](https://redux-saga-firebase.js.org/reference/storage#getFileMetadata)
+- [`*storage.updateFileMetadata(path, newMetadata)`](https://redux-saga-firebase.js.org/reference/storage#updateFileMetadata)
+- [`*storage.deleteFile(path)`](https://redux-saga-firebase.js.org/reference/storage#deleteFile)

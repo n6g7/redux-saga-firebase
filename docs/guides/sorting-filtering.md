@@ -5,7 +5,7 @@ layout: guide
 
 ## Using the realtime database
 
-All three read methods ([`database.read`](/redux-saga-firebase/reference/database#read), [`database.channel`](/redux-saga-firebase/reference/database#channel) and [`database.sync`](/redux-saga-firebase/reference/database#sync)) accepts references as strings, [`Reference`](https://firebase.google.com/docs/reference/js/firebase.database.Reference) objects or [`Query`](https://firebase.google.com/docs/reference/js/firebase.database.Query) objects.
+All three read methods ([`database.read`](https://redux-saga-firebase.js.org/reference/database#read), [`database.channel`](https://redux-saga-firebase.js.org/reference/database#channel) and [`database.sync`](https://redux-saga-firebase.js.org/reference/database#sync)) accepts references as strings, [`Reference`](https://firebase.google.com/docs/reference/js/firebase.database.Reference) objects or [`Query`](https://firebase.google.com/docs/reference/js/firebase.database.Query) objects.
 
 Using the last two options we can filter, sort and limit the results using the Firebase API methods ([`orderByChild`](https://firebase.google.com/docs/reference/js/firebase.database.Reference#orderByChild), [`equalTo`](https://firebase.google.com/docs/reference/js/firebase.database.Reference#equalTo), [`limitToLast`](https://firebase.google.com/docs/reference/js/firebase.database.Reference#limitToLast), etc).
 
@@ -42,7 +42,7 @@ yield fork(
 
 ## Using firestore
 
-A similar approch works for firestore methods: [`getCollection`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#getCollection), [`syncCollection`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#syncCollection) and [`channel`](https://n6g7.github.io/redux-saga-firebase/reference/firestore#channel).
+A similar approch works for firestore methods: [`getCollection`](https://redux-saga-firebase.js.org/reference/firestore#getCollection), [`syncCollection`](https://redux-saga-firebase.js.org/reference/firestore#syncCollection) and [`channel`](https://redux-saga-firebase.js.org/reference/firestore#channel).
 
 They also accept [firebase.firestore.CollectionReference](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference) and [firebase.firestore.Query](https://firebase.google.com/docs/reference/js/firebase.firestore.Query) as argument.
 

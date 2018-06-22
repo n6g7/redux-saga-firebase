@@ -9,7 +9,7 @@ export const getCollectionRef = (rsf, pathOrRef) => {
     !!rsf.app.firestore,
     "Firestore isn't installed. " +
     "Did you forget to `import '@firebase/firestore'`? " +
-    'See https://n6g7.github.io/redux-saga-firebase/ for more information.'
+    'See https://redux-saga-firebase.js.org/ for more information.'
   )
 
   return typeof pathOrRef === 'string'
@@ -22,7 +22,7 @@ export const getDocumentRef = (rsf, pathOrRef) => {
     !!rsf.app.firestore,
     "Firestore isn't installed. " +
     "Did you forget to `import '@firebase/firestore'`? " +
-    'See https://n6g7.github.io/redux-saga-firebase/ for more information.'
+    'See https://redux-saga-firebase.js.org/ for more information.'
   )
 
   return typeof pathOrRef === 'string'
