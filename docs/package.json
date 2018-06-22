@@ -1,0 +1,43 @@
+{
+  "name": "redux-saga-firebase-docs",
+  "description": "Redux Saga Firebase documentation",
+  "version": "1.0.0",
+  "author": "Nathan Gaberel <nathan@gnab.fr>",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "dev": "gatsby develop",
+    "test": "standard"
+  },
+  "keywords": [
+    "documentation",
+    "firebase",
+    "redux-saga",
+    "redux-saga-firebase"
+  ],
+  "dependencies": {
+    "gatsby": "^1.9.272",
+    "gatsby-link": "^1.6.44",
+    "gatsby-plugin-google-analytics": "^1.0.31",
+    "gatsby-plugin-react-helmet": "^2.0.11",
+    "gatsby-plugin-react-next": "^1.0.11",
+    "gatsby-plugin-styled-components": "^2.0.11",
+    "gatsby-remark-prismjs": "^2.0.4",
+    "gatsby-source-filesystem": "^1.5.39",
+    "gatsby-transformer-remark": "^1.7.44",
+    "prismjs": "^1.15.0",
+    "react-helmet": "^5.2.0",
+    "remark": "^9.0.0",
+    "remark-react": "^4.0.3",
+    "semantic-ui-react": "^0.81.1",
+    "styled-components": "^3.3.2"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
+  },
+  "standard": {
+    "globals": [
+      "graphql"
+    ]
+  }
+}

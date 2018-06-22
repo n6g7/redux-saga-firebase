@@ -112,7 +112,7 @@ class GitHubButton extends PureComponent {
 
 class DocsButton extends PureComponent {
   render () {
-    return <Button link='https://n6g7.github.io/redux-saga-firebase/' callToAction>
+    return <Button link='https://redux-saga-firebase.js.org/' callToAction>
       <img src={docs} />
       Docs
     </Button>

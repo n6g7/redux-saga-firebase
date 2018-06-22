@@ -77,32 +77,33 @@ jobs:
     working_directory: ~/redux-saga-firebase
 
     docker:
-      - image: circleci/ruby:2.4.3-node
+      - image: node:latest
 
     steps:
       - checkout
 
       - restore_cache:
           keys:
-            - docs-v1-{{ .Branch }}-{{ checksum "docs/Gemfile" }}
+            - docs-v1-{{ .Branch }}-{{ checksum "docs/package.json" }}
             - docs-v1-{{ .Branch }}
-            - docs-v1-master-{{ checksum "docs/Gemfile" }}
+            - docs-v1-master-{{ checksum "docs/package.json" }}
             - docs-v1-master
 
       - run:
           name: Install dependencies
-          command: cd docs && bundle install --path=vendor/bundle
+          command: cd docs && yarn
 
       - run:
           name: Run tests
-          command: cd docs && bundle exec jekyll build
+          command: cd docs && yarn test
 
       - save_cache:
-          key: docs-v1-{{ .Branch }}-{{ checksum "docs/Gemfile" }}
+          key: docs-v1-{{ .Branch }}-{{ checksum "docs/package.json" }}
           paths:
-            - vendor/bundle
+            - ~/.yarn
+            - ~/redux-saga-firebase/docs/node_modules
 
-  deploy:
+  deploy-demo:
     working_directory: ~/redux-saga-firebase
 
     docker:
@@ -157,12 +158,11 @@ workflows:
       - lib
       - demo
       - docs
-      - deploy:
+      - deploy-demo:
           requires:
-            - lib
             - demo
-            - docs
           filters:
             branches:
               only:
                 - master
+
