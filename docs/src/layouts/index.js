@@ -22,7 +22,6 @@ const BaseLayout = ({ children, data, location }) => {
 
     <Grid>
       <Sidebar
-        prefix={data.site.pathPrefix}
         location={location}
         site={data.site.siteMetadata}
         guides={data.guides.edges}
@@ -44,7 +43,6 @@ export default BaseLayout
 export const query = graphql`
   query LayoutQuery {
     site {
-      pathPrefix
       siteMetadata {
         title,
         github {

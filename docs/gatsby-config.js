@@ -1,5 +1,4 @@
 module.exports = {
-  pathPrefix: '/redux-saga-firebase',
   siteMetadata: {
     title: 'Redux Saga Firebase',
     docsDirectory: 'docs',

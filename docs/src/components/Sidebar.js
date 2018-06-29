@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withPrefix } from 'gatsby-link'
 import {
   Grid,
   Header,
@@ -20,8 +19,7 @@ const StyledImage = styled(Image)`
 
 class Sidebar extends PureComponent {
   activeTest (location, path) {
-    return location.pathname.startsWith(path) ||
-      location.pathname.startsWith(withPrefix(path))
+    return location.pathname.startsWith(path)
   }
 
   render () {
@@ -67,7 +65,7 @@ class Sidebar extends PureComponent {
         <Menu fluid vertical pointing>
           <Menu.Item
             color='red'
-            active={this.activeTest(location, '/guides') || location.pathname === withPrefix('/')}
+            active={this.activeTest(location, '/guides') || location.pathname === '/'}
           >
             <Menu.Header>Guides</Menu.Header>
 
