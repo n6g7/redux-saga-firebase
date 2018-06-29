@@ -74,6 +74,7 @@ class Reference extends PureComponent {
       file: {
         base,
         markdown: { frontmatter, html },
+        relativeDirectory,
         sourceInstanceName
       },
       site: { siteMetadata: site }
@@ -98,7 +99,7 @@ class Reference extends PureComponent {
 
       <Footer
         site={site}
-        path={`${site.docsDirectory}/${sourceInstanceName}/${base}`}
+        path={`${site.docsDirectory}/${sourceInstanceName}/${relativeDirectory}/${base}`}
       />
     </div>
   }
@@ -118,6 +119,7 @@ export const pageQuery = graphql`
     }
     file(name: { eq: $fileName }) {
       base
+      relativeDirectory
       sourceInstanceName
       markdown: childMarkdownRemark {
         html

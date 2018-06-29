@@ -12,6 +12,7 @@ const createPagesBuilder = (sourceInstanceName, templatePath) => ({ boundActionC
         edges {
           node {
             name
+            relativeDirectory
           }
         }
       }
@@ -21,7 +22,9 @@ const createPagesBuilder = (sourceInstanceName, templatePath) => ({ boundActionC
 
     result.data.files.edges.forEach(({ node }) => {
       createPage({
-        path: `/${sourceInstanceName}/${node.name}`,
+        path: node.relativeDirectory
+          ? `/${sourceInstanceName}/${node.relativeDirectory}/${node.name}`
+          : `/${sourceInstanceName}/${node.name}`,
         component: template,
         context: {
           fileName: node.name
