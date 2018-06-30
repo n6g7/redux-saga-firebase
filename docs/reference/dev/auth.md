@@ -424,17 +424,17 @@ methods:
     output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User) instance.
     example: |
       ```javascript
-        const authProvider = new firebase.auth.GoogleAuthProvider();
+      const authProvider = new firebase.auth.GoogleAuthProvider();
 
-        function* unlinkSaga() {
-          try {
-            const data = yield call(rsf.auth.unlink, authProvider);
-            yield put(unlinkSuccess(data));
-          }
-          catch(error) {
-            yield put(unlinkFailure(error));
-          }
+      function* unlinkSaga() {
+        try {
+          const data = yield call(rsf.auth.unlink, authProvider);
+          yield put(unlinkSuccess(data));
         }
+        catch(error) {
+          yield put(unlinkFailure(error));
+        }
+      }
       ```
   - signature: auth.updateEmail(email)
     id: updateEmail

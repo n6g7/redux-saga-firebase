@@ -19,7 +19,7 @@ const StyledImage = styled(Image)`
 
 class Sidebar extends PureComponent {
   state = {
-    version: 'latest'
+    version: 'dev'
   }
 
   activeTest (location, path) {

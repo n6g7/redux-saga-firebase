@@ -423,7 +423,7 @@ methods:
         description: The authentication provider to use for the request.
     output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User) instance.
     example: |
-    ```javascript
+      ```javascript
       const authProvider = new firebase.auth.GoogleAuthProvider();
 
       function* unlinkSaga() {
@@ -435,7 +435,7 @@ methods:
           yield put(unlinkFailure(error));
         }
       }
-    ```
+      ```
 
 
 
