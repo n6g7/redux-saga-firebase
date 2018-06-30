@@ -11,6 +11,7 @@
     "del": "rimraf dist",
     "build": "yarn del && NODE_ENV=production babel src --out-dir dist",
     "build:win": "yarn del&&set NODE_ENV=production&&babel src --out-dir dist",
+    "version": "cp -r docs/reference/{dev,v$(jq .version -r package.json)} && git add docs/reference/v$(jq .version -r package.json)",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test",
     "pretest": "standard 'src/**/*.js' && tsc",
