@@ -98,52 +98,6 @@ methods:
       }
       ```
 
-  - signature: auth.linkWithPopup(authProvider)
-    id: linkWithPopup
-    generator: true
-    description: Links the authenticated provider to the user account using a pop-up based OAuth flow.
-    arguments:
-      - name: authProvider
-        required: true
-        type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
-        description: The authentication provider to use for the request.
-    output: A [firebase.auth.UserCredential](https://firebase.google.com/docs/reference/js/firebase.auth#.UserCredential) instance.
-    example: |
-      ```javascript
-      const authProvider = new firebase.auth.GoogleAuthProvider();
-
-      function* linkSaga() {
-        try {
-          const data = yield call(rsf.auth.linkWithPopup, authProvider);
-          yield put(linkSuccess(data));
-        } catch(error) {
-          yield put(loginFailure(error));
-        }
-      }
-      ```
-
-  - signature: auth.linkWithRedirect(authProvider)
-    id: linkWithRedirect
-    generator: true
-    description: Links the authenticated provider to the user account using a full-page redirect flow.
-    arguments:
-      - name: authProvider
-        required: true
-        type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
-        description: The authentication provider to use for the request.
-    example: |
-      ```javascript
-      const authProvider = new firebase.auth.GoogleAuthProvider();
-
-      function* linkSaga() {
-        try {
-          yield call(rsf.auth.linkWithRedirect, authProvider);
-        } catch(error) {
-          yield put(loginFailure(error));
-        }
-      }
-      ```
-
   - signature: auth.sendEmailVerification(actionCodeSettings)
     id: sendEmailVerification
     generator: true
@@ -412,51 +366,6 @@ methods:
       }
       ```
 
-  - signature: auth.unlink(authProvider)
-    id: unlink
-    generator: true
-    description: Unlinks a provider from a user account.
-    arguments:
-      - name: authProvider
-        required: true
-        type: A [firebase.auth.AuthProvider](https://firebase.google.com/docs/reference/js/firebase.auth.AuthProvider) object.
-        description: The authentication provider to use for the request.
-    output: A [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User) instance.
-    example: |
-      ```javascript
-        const authProvider = new firebase.auth.GoogleAuthProvider();
-
-        function* unlinkSaga() {
-          try {
-            const data = yield call(rsf.auth.unlink, authProvider);
-            yield put(unlinkSuccess(data));
-          }
-          catch(error) {
-            yield put(unlinkFailure(error));
-          }
-        }
-      ```
-  - signature: auth.updateEmail(email)
-    id: updateEmail
-    generator: true
-    description: Updates the user's email.
-    arguments:
-      - name: email
-        required: true
-        type: String
-        description: The user's email.
-    example: |
-      ```javascript
-      function* updateEmailSaga(email) {
-        try {
-          yield call(rsf.auth.updateEmail, email);
-          yield put(updateEmail());
-        }
-        catch(error) {
-          yield put(updateEmailFailure(error));
-        }
-      }
-      ```
   - signature: auth.updatePassword(password)
     id: updatePassword
     generator: true
@@ -475,30 +384,6 @@ methods:
         }
         catch(error) {
           yield put(updatePasswordFailure(error));
-        }
-      }
-      ```
-  - signature: auth.updateProfile(profile)
-    id: updateProfile
-    generator: true
-    description: Updates the user's basic profile information.
-    arguments:
-      - name: profile
-        required: true
-        type: Object
-        description: The profile's displayName and photoURL to update. It can contain a `displayName` and a `photoURL` field, both are nullable strings.
-    example: |
-      ```javascript
-      function* updateProfileSaga() {
-        try {
-          yield call(rsf.auth.updateProfile, {
-            displayName: "Elon",
-            photoURL: "elon@x.com"
-          });
-          yield put(updateProfileSuccess());
-        }
-        catch(error) {
-          yield put(updateProfileFailure(error));
         }
       }
       ```

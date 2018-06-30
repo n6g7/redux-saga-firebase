@@ -26,6 +26,7 @@ const BaseLayout = ({ children, data, location }) => {
         site={data.site.siteMetadata}
         guides={data.guides.edges}
         references={data.references.edges}
+        versions={data.versions.edges}
       />
       <Grid.Column width={12}>
         {children()}
@@ -77,6 +78,15 @@ export const query = graphql`
         }
       }
     }
+
+    versions: allVersion(sort: { order: DESC, fields: [num] }) {
+      edges {
+        node {
+          tag
+          version
+        }
+      }
+    }
   }
 
   fragment fileData on MarkdownRemark {
@@ -86,6 +96,7 @@ export const query = graphql`
     parent {
       ... on File {
         name
+        relativeDirectory
       }
     }
   }

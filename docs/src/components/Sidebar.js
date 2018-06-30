@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import {
+  Dropdown,
   Grid,
   Header,
   Icon,
@@ -18,8 +19,16 @@ const StyledImage = styled(Image)`
 `
 
 class Sidebar extends PureComponent {
+  state = {
+    version: 'dev'
+  }
+
   activeTest (location, path) {
     return location.pathname.startsWith(path)
+  }
+
+  changeVersion = (event, { value }) => {
+    this.setState({ version: value })
   }
 
   render () {
@@ -27,8 +36,10 @@ class Sidebar extends PureComponent {
       guides,
       location,
       references,
-      site
+      site,
+      versions
     } = this.props
+    const { version } = this.state
 
     const links = [
       {
@@ -94,8 +105,8 @@ class Sidebar extends PureComponent {
             <Menu.Header>Reference</Menu.Header>
 
             <Menu.Menu>
-              {references.map(({ node: reference }, i) =>
-                <MenuLink to={`/reference/${reference.parent.name}`}>
+              {references.filter(({node}) => node.parent.relativeDirectory === version).map(({ node: reference }, i) =>
+                <MenuLink to={`/reference/${version}/${reference.parent.name}`}>
                   {reference.frontmatter.title}
                 </MenuLink>
               )}
@@ -119,6 +130,20 @@ class Sidebar extends PureComponent {
                 React Native example code
               </Menu.Item>
             </Menu.Menu>
+          </Menu.Item>
+          <Menu.Item>
+            Documentation version:{' '}
+            <Dropdown
+              placeholder='Version'
+              inline
+              options={versions.map(v => ({
+                text: v.node.version,
+                value: v.node.tag
+              }))}
+              value={version}
+              onChange={this.changeVersion}
+              scrolling
+            />
           </Menu.Item>
         </Menu>
 
