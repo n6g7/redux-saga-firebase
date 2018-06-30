@@ -108,7 +108,7 @@ class Reference extends PureComponent {
 export default Reference
 
 export const pageQuery = graphql`
-  query ReferenceByPath($fileName: String!) {
+  query ReferenceByPath($fileName: String!, $version: String) {
     site {
       siteMetadata {
         docsDirectory,
@@ -117,7 +117,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    file(name: { eq: $fileName }) {
+    file(
+      name: { eq: $fileName },
+      relativeDirectory: { eq: $version }
+    ) {
       base
       relativeDirectory
       sourceInstanceName

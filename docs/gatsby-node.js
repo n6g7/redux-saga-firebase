@@ -27,7 +27,8 @@ const createPagesBuilder = (sourceInstanceName, templatePath) => ({ boundActionC
           : `/${sourceInstanceName}/${node.name}`,
         component: template,
         context: {
-          fileName: node.name
+          fileName: node.name,
+          version: node.relativeDirectory
         }
       })
     })
