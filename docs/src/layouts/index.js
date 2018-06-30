@@ -26,6 +26,7 @@ const BaseLayout = ({ children, data, location }) => {
         site={data.site.siteMetadata}
         guides={data.guides.edges}
         references={data.references.edges}
+        versions={data.versions.edges}
       />
       <Grid.Column width={12}>
         {children()}
@@ -74,6 +75,15 @@ export const query = graphql`
       edges {
         node {
           ...fileData
+        }
+      }
+    }
+
+    versions: allVersion(sort: { order: DESC, fields: [num] }) {
+      edges {
+        node {
+          tag
+          version
         }
       }
     }

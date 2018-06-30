@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import {
+  Dropdown,
   Grid,
   Header,
   Icon,
@@ -26,12 +27,17 @@ class Sidebar extends PureComponent {
     return location.pathname.startsWith(path)
   }
 
+  changeVersion = (event, { value }) => {
+    this.setState({ version: value })
+  }
+
   render () {
     const {
       guides,
       location,
       references,
-      site
+      site,
+      versions
     } = this.props
     const { version } = this.state
 
@@ -124,6 +130,20 @@ class Sidebar extends PureComponent {
                 React Native example code
               </Menu.Item>
             </Menu.Menu>
+          </Menu.Item>
+          <Menu.Item>
+            Documentation version:{' '}
+            <Dropdown
+              placeholder='Version'
+              inline
+              options={versions.map(v => ({
+                text: v.node.version,
+                value: v.node.tag
+              }))}
+              value={version}
+              onChange={this.changeVersion}
+              scrolling
+            />
           </Menu.Item>
         </Menu>
 
