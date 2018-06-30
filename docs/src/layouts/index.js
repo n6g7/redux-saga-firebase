@@ -86,6 +86,7 @@ export const query = graphql`
     parent {
       ... on File {
         name
+        relativeDirectory
       }
     }
   }

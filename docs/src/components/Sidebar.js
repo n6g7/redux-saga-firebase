@@ -18,6 +18,10 @@ const StyledImage = styled(Image)`
 `
 
 class Sidebar extends PureComponent {
+  state = {
+    version: 'latest'
+  }
+
   activeTest (location, path) {
     return location.pathname.startsWith(path)
   }
@@ -29,6 +33,7 @@ class Sidebar extends PureComponent {
       references,
       site
     } = this.props
+    const { version } = this.state
 
     const links = [
       {
@@ -94,8 +99,8 @@ class Sidebar extends PureComponent {
             <Menu.Header>Reference</Menu.Header>
 
             <Menu.Menu>
-              {references.map(({ node: reference }, i) =>
-                <MenuLink to={`/reference/${reference.parent.name}`}>
+              {references.filter(({node}) => node.parent.relativeDirectory === version).map(({ node: reference }, i) =>
+                <MenuLink to={`/reference/${version}/${reference.parent.name}`}>
                   {reference.frontmatter.title}
                 </MenuLink>
               )}
