@@ -1,9 +1,9 @@
 # redux-saga-firebase
+
 [![CircleCI](https://circleci.com/gh/n6g7/redux-saga-firebase.svg?style=svg)](https://circleci.com/gh/n6g7/redux-saga-firebase)
 [![npm version](https://badge.fury.io/js/redux-saga-firebase.svg)](https://badge.fury.io/js/redux-saga-firebase)
 [![Coverage Status](https://coveralls.io/repos/github/n6g7/redux-saga-firebase/badge.svg?branch=master)](https://coveralls.io/github/n6g7/redux-saga-firebase?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/n6g7/redux-saga-firebase/badge.svg)](https://snyk.io/test/github/n6g7/redux-saga-firebase)
-
 
 A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [firebase](https://firebase.google.com/).
 
@@ -27,23 +27,21 @@ import '@firebase/firestore'; // 👈 If you're using firestore
 import ReduxSagaFirebase from 'redux-saga-firebase';
 
 const myFirebaseApp = firebase.initializeApp({
-  apiKey: "qosjdqsdkqpdqldkqdkfojqjpfk",
-  authDomain: "my-app.firebaseapp.com",
-  databaseURL: "https://my-app.firebaseio.com",
+  apiKey: 'qosjdqsdkqpdqldkqdkfojqjpfk',
+  authDomain: 'my-app.firebaseapp.com',
+  databaseURL: 'https://my-app.firebaseio.com',
 });
 
-const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp)
+const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp);
 ```
 
 You can now use `reduxSagaFirebase` methods in your sagas:
 
 ```js
 function* syncSaga() {
-  yield fork(
-    reduxSagaFirebase.database.sync,
-    'todos',
-    { successActionCreator: syncTodos }
-  );
+  yield fork(reduxSagaFirebase.database.sync, 'todos', {
+    successActionCreator: syncTodos,
+  });
 }
 ```
 
@@ -73,7 +71,8 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*auth.unlink(authProvider)`](https://redux-saga-firebase.js.org/reference/auth#unlink)
 - [`*auth.updateEmail(email)`](https://redux-saga-firebase.js.org/reference/auth#updateEmail)
 - [`*auth.updatePassword(password)`](https://redux-saga-firebase.js.org/reference/auth#updatePassword)
-- [`*auth.updateProfile(profile)`](https://redux-saga-firebase.js.org/reference/auth#updateProfile)
+- [`*auth.updateProfile(profile)`](https://redux-saga-firebase.js.org/reference/auth#deleteProfile)
+- [`*auth.deleteProfile()`](https://redux-saga-firebase.js.org/reference/auth#deleteProfile)
 
 ### Database
 

@@ -383,8 +383,7 @@ describe('auth', () => {
       const userMock = { uid: 'uid' }
       const iterator = authModule.unlink.call(context, authProvider)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
+      expect(iterator.next().value).toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
 
       expect(iterator.next(userMock))
         .toEqual({
@@ -398,8 +397,7 @@ describe('auth', () => {
     it('works', () => {
       const iterator = authModule.deleteProfile.call(context)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.deleteProfile]))
+      expect(iterator.next().value).toEqual(call([auth.currentUser, auth.currentUser.deleteProfile]))
 
       expect(iterator.next()).toEqual({
         done: true,
