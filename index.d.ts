@@ -65,7 +65,8 @@ interface Auth {
   signInWithRedirect: (authProvider: firebase.auth.AuthProvider) => void,
   signOut: () => void,
   unlink: (provider: string) => firebase.User,
-  updatePassword: (password: string) => void
+  updatePassword: (password: string) => void,
+  deleteProfile: () => void
 }
 
 interface Database {

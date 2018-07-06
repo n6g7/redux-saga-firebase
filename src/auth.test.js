@@ -30,7 +30,8 @@ describe('auth', () => {
       unlink: jest.fn(),
       updateEmail: jest.fn(),
       updatePassword: jest.fn(),
-      updateProfile: jest.fn()
+      updateProfile: jest.fn(),
+      deleteProfile: jest.fn()
     },
     confirmPasswordReset: jest.fn(),
     signOut: jest.fn()
@@ -382,14 +383,26 @@ describe('auth', () => {
       const userMock = { uid: 'uid' }
       const iterator = authModule.unlink.call(context, authProvider)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
+      expect(iterator.next().value).toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
 
       expect(iterator.next(userMock))
         .toEqual({
           done: true,
           value: userMock
         })
+    })
+  })
+
+  describe('deleteProfile()', () => {
+    it('works', () => {
+      const iterator = authModule.deleteProfile.call(context)
+
+      expect(iterator.next().value).toEqual(call([auth.currentUser, auth.currentUser.delete]))
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
     })
   })
 
