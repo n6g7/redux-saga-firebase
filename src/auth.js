@@ -124,6 +124,11 @@ function * updateProfile (profile) {
   return yield call([auth.currentUser, auth.currentUser.updateProfile], profile)
 }
 
+function * deleteProfile () {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.delete])
+}
+
 export default {
   applyActionCode,
   channel,
@@ -145,5 +150,6 @@ export default {
   unlink,
   updateEmail,
   updatePassword,
-  updateProfile
+  updateProfile,
+  deleteProfile
 }
