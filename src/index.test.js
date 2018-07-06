@@ -36,6 +36,7 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.auth.updateEmail).toBeInstanceOf(Function)
       expect(rsf.auth.updatePassword).toBeInstanceOf(Function)
       expect(rsf.auth.updateProfile).toBeInstanceOf(Function)
+      expect(rsf.auth.deleteProfile).toBeInstanceOf(Function)
     })
 
     it('defines database methods', () => {
