@@ -33,6 +33,11 @@ function * createUserWithEmailAndPassword (email, password) {
   return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
 }
 
+function * deleteProfile () {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.delete])
+}
+
 function * linkWithPopup (authProvider) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.linkWithPopup], authProvider)
@@ -122,11 +127,6 @@ function * updatePassword (password) {
 function * updateProfile (profile) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.updateProfile], profile)
-}
-
-function * deleteProfile () {
-  const auth = this.app.auth()
-  return yield call([auth.currentUser, auth.currentUser.delete])
 }
 
 export default {

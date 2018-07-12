@@ -98,6 +98,25 @@ methods:
       }
       ```
 
+  - signature: auth.deleteProfile()
+    id: deleteProfile
+    generator: true
+    description: Deletes and signs out the user.
+    arguments:
+    output:
+    example: |
+      ```javascript
+      function* deleteProfileSaga() {
+        try {
+          yield call(rsf.auth.deleteProfile);
+          yield put(deleteProfileSuccess());
+        }
+        catch(error) {
+          yield put(deleteProfileFailure(error));
+        }
+      }
+      ```
+
   - signature: auth.linkWithPopup(authProvider)
     id: linkWithPopup
     generator: true
@@ -499,24 +518,6 @@ methods:
         }
         catch(error) {
           yield put(updateProfileFailure(error));
-        }
-      }
-      ```
-  - signature: auth.deleteProfile()
-    id: deleteProfile
-    generator: true
-    description: Deletes and signs out the user.
-    arguments:
-    output:
-    example: |
-      ```javascript
-      function* deleteProfileSaga() {
-        try {
-          yield call(rsf.auth.deleteProfile);
-          yield put(deleteProfileSuccess());
-        }
-        catch(error) {
-          yield put(deleteProfileFailure(error));
         }
       }
       ```

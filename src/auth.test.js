@@ -24,14 +24,14 @@ describe('auth', () => {
     sendPasswordResetEmail: jest.fn(),
     applyActionCode: jest.fn(),
     currentUser: {
+      delete: jest.fn(),
       linkWithPopup: jest.fn(),
       linkWithRedirect: jest.fn(),
       sendEmailVerification: jest.fn(),
       unlink: jest.fn(),
       updateEmail: jest.fn(),
       updatePassword: jest.fn(),
-      updateProfile: jest.fn(),
-      deleteProfile: jest.fn()
+      updateProfile: jest.fn()
     },
     confirmPasswordReset: jest.fn(),
     signOut: jest.fn()
