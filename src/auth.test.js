@@ -24,6 +24,7 @@ describe('auth', () => {
     sendPasswordResetEmail: jest.fn(),
     applyActionCode: jest.fn(),
     currentUser: {
+      delete: jest.fn(),
       linkWithPopup: jest.fn(),
       linkWithRedirect: jest.fn(),
       sendEmailVerification: jest.fn(),
@@ -337,6 +338,19 @@ describe('auth', () => {
 
       expect(iterator.next().value)
         .toEqual(call([auth, auth.signOut]))
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
+    })
+  })
+
+  describe('deleteProfile()', () => {
+    it('works', () => {
+      const iterator = authModule.deleteProfile.call(context)
+
+      expect(iterator.next().value).toEqual(call([auth.currentUser, auth.currentUser.delete]))
 
       expect(iterator.next()).toEqual({
         done: true,
