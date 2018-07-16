@@ -33,6 +33,11 @@ function * createUserWithEmailAndPassword (email, password) {
   return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
 }
 
+function * deleteProfile () {
+  const auth = this.app.auth()
+  return yield call([auth.currentUser, auth.currentUser.delete])
+}
+
 function * linkWithPopup (authProvider) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.linkWithPopup], authProvider)
@@ -129,6 +134,7 @@ export default {
   channel,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
+  deleteProfile,
   linkWithPopup,
   linkWithRedirect,
   sendEmailVerification,

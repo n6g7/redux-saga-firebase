@@ -24,6 +24,7 @@ describe('auth', () => {
     sendPasswordResetEmail: jest.fn(),
     applyActionCode: jest.fn(),
     currentUser: {
+      delete: jest.fn(),
       linkWithPopup: jest.fn(),
       linkWithRedirect: jest.fn(),
       sendEmailVerification: jest.fn(),
@@ -382,14 +383,26 @@ describe('auth', () => {
       const userMock = { uid: 'uid' }
       const iterator = authModule.unlink.call(context, authProvider)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
+      expect(iterator.next().value).toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
 
       expect(iterator.next(userMock))
         .toEqual({
           done: true,
           value: userMock
         })
+    })
+  })
+
+  describe('deleteProfile()', () => {
+    it('works', () => {
+      const iterator = authModule.deleteProfile.call(context)
+
+      expect(iterator.next().value).toEqual(call([auth.currentUser, auth.currentUser.delete]))
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined
+      })
     })
   })
 

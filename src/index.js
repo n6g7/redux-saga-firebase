@@ -18,6 +18,7 @@ class ReduxSagaFirebase {
       createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(
         this
       ),
+      deleteProfile: auth.deleteProfile.bind(this),
       linkWithPopup: auth.linkWithPopup.bind(this),
       linkWithRedirect: auth.linkWithRedirect.bind(this),
       sendEmailVerification: auth.sendEmailVerification.bind(this),

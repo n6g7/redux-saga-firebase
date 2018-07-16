@@ -51,6 +51,7 @@ interface Auth {
   channel: () => Channel<ChannelOutput.Auth>,
   confirmPasswordReset: (code: string, newPassword: string) => void,
   createUserWithEmailAndPassword: (email: string, password: string) => firebase.User,
+  deleteProfile: () => void,
   linkWithPopup: (authProvider: firebase.auth.AuthProvider) => firebase.auth.UserCredential,
   linkWithRedirect: (authProvider: firebase.auth.AuthProvider) => void,
   sendEmailVerification: (actionCodeSettings: firebase.auth.ActionCodeSettings) => void,

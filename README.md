@@ -40,9 +40,9 @@ You can now use `reduxSagaFirebase` methods in your sagas:
 ```js
 function* syncSaga() {
   yield fork(
-    reduxSagaFirebase.database.sync,
-    'todos',
-    { successActionCreator: syncTodos }
+  	reduxSagaFirebase.database.sync, 
+  	'todos', 
+  	{ successActionCreator: syncTodos }
   );
 }
 ```
@@ -57,6 +57,7 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`auth.channel()`](https://redux-saga-firebase.js.org/reference/auth#channel)
 - [`*auth.confirmPasswordReset(code, newPassword)`](https://redux-saga-firebase.js.org/reference/auth#confirmPasswordReset)
 - [`*auth.createUserWithEmailAndPassword(email, password)`](https://redux-saga-firebase.js.org/reference/auth#createUserWithEmailAndPassword)
+- [`*auth.deleteProfile()`](https://redux-saga-firebase.js.org/reference/auth#deleteProfile)
 - [`*auth.linkWithPopup(authProvider)`](https://redux-saga-firebase.js.org/reference/auth#linkWithPopup)
 - [`*auth.linkWithRedirect(authProvider)`](https://redux-saga-firebase.js.org/reference/auth#linkWithRedirect)
 - [`*auth.sendEmailVerification(actionCodeSettings)`](https://redux-saga-firebase.js.org/reference/auth#sendEmailVerification)
