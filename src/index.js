@@ -18,6 +18,7 @@ class ReduxSagaFirebase {
       createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(
         this
       ),
+      deleteProfile: auth.deleteProfile.bind(this),
       linkWithPopup: auth.linkWithPopup.bind(this),
       linkWithRedirect: auth.linkWithRedirect.bind(this),
       sendEmailVerification: auth.sendEmailVerification.bind(this),
@@ -36,8 +37,7 @@ class ReduxSagaFirebase {
       unlink: auth.unlink.bind(this),
       updateEmail: auth.updateEmail.bind(this),
       updatePassword: auth.updatePassword.bind(this),
-      updateProfile: auth.updateProfile.bind(this),
-      deleteProfile: auth.deleteProfile.bind(this)
+      updateProfile: auth.updateProfile.bind(this)
     }
 
     // Database methods

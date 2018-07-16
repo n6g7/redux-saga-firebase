@@ -134,6 +134,7 @@ export default {
   channel,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
+  deleteProfile,
   linkWithPopup,
   linkWithRedirect,
   sendEmailVerification,
@@ -150,6 +151,5 @@ export default {
   unlink,
   updateEmail,
   updatePassword,
-  updateProfile,
-  deleteProfile
+  updateProfile
 }

@@ -22,6 +22,7 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.auth.channel).toBeInstanceOf(Function)
       expect(rsf.auth.confirmPasswordReset).toBeInstanceOf(Function)
       expect(rsf.auth.createUserWithEmailAndPassword).toBeInstanceOf(Function)
+      expect(rsf.auth.deleteProfile).toBeInstanceOf(Function)
       expect(rsf.auth.sendEmailVerification).toBeInstanceOf(Function)
       expect(rsf.auth.sendPasswordResetEmail).toBeInstanceOf(Function)
       expect(rsf.auth.signInAndRetrieveDataWithCredential).toBeInstanceOf(Function)
@@ -36,7 +37,6 @@ describe('ReduxSagaFirebase', () => {
       expect(rsf.auth.updateEmail).toBeInstanceOf(Function)
       expect(rsf.auth.updatePassword).toBeInstanceOf(Function)
       expect(rsf.auth.updateProfile).toBeInstanceOf(Function)
-      expect(rsf.auth.deleteProfile).toBeInstanceOf(Function)
     })
 
     it('defines database methods', () => {
