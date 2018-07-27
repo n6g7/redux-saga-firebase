@@ -8,17 +8,16 @@ export const types = {
     REQUEST: 'LOGOUT.REQUEST',
     SUCCESS: 'LOGOUT.SUCCESS',
     FAILURE: 'LOGOUT.FAILURE'
-  },
-  SYNC_USER: 'SYNC_USER'
+  }
 }
 
 export const login = () => ({
   type: types.LOGIN.REQUEST
 })
 
-export const loginSuccess = credential => ({
+export const loginSuccess = user => ({
   type: types.LOGIN.SUCCESS,
-  credential
+  user
 })
 
 export const loginFailure = error => ({
@@ -37,9 +36,4 @@ export const logoutSuccess = () => ({
 export const logoutFailure = error => ({
   type: types.LOGOUT.FAILURE,
   error
-})
-
-export const syncUser = user => ({
-  type: types.SYNC_USER,
-  user
 })

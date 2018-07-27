@@ -18,7 +18,8 @@ export default function loginReducer (state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
-        loggedIn: true
+        loggedIn: true,
+        user: action.user
       }
     case types.LOGIN.FAILURE:
       return {
@@ -26,21 +27,11 @@ export default function loginReducer (state = initialState, action = {}) {
         loading: false
       }
     case types.LOGOUT.SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        loggedIn: false
-      }
+      return initialState
     case types.LOGOUT.FAILURE:
       return {
         ...state,
         loading: false
-      }
-    case types.SYNC_USER:
-      return {
-        ...state,
-        loggedIn: action.user != null,
-        user: action.user
       }
     default:
       return state
