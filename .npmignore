@@ -1,8 +1,10 @@
 .babelrc
 .bithoundrc
 .circleci/config.yml
+.eslintrc.yml
 .git
 .gitattributes
+.prettierrc.yml
 .vscode
 coverage
 docs
