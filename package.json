@@ -14,10 +14,13 @@
     "version": "cp -r docs/reference/{dev,v$(jq .version -r package.json)} && git add docs/reference/v$(jq .version -r package.json)",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test",
-    "pretest": "standard 'src/**/*.js' && tsc",
+    "pretest": "yarn test:lint && yarn test:format && yarn test:ts",
     "test": "NODE_ENV=test jest",
     "test:coverage": "yarn test --coverage",
     "test:coverage:win": "yarn test:win --coverage",
+    "test:format": "prettier -l \"src/**/*.js\"",
+    "test:lint": "eslint src",
+    "test:ts": "tsc",
     "test:win": "set NODE_ENV=test&&jest"
   },
   "repository": {
@@ -38,12 +41,14 @@
     "@types/node": "^10.5.4",
     "@types/redux": "^3.6.0",
     "babel-core": "^7.0.0-0",
+    "babel-eslint": "^8.2.6",
     "babel-jest": "^23.0.1",
+    "eslint": "^5.2.0",
     "firebase": "^5.3.0",
     "jest": "^23.4.2",
+    "prettier": "^1.13.7",
     "redux-saga": "^0.16.0 || ^1.0.0-beta",
     "rimraf": "^2.6.2",
-    "standard": "^11.0.1",
     "typescript": "^2.8.3",
     "whatwg-fetch": "^2.0.3"
   },
@@ -56,18 +61,5 @@
         "statements": 95
       }
     }
-  },
-  "standard": {
-    "globals": [
-      "afterAll",
-      "afterEach",
-      "beforeAll",
-      "beforeEach",
-      "describe",
-      "expect",
-      "fetch",
-      "it",
-      "jest"
-    ]
   }
 }

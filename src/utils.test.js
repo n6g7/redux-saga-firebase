@@ -19,76 +19,71 @@ describe('utils', () => {
       const successActionCreator = jest.fn()
       const iterator = syncChannel.call(context, channel, { successActionCreator })
 
-      expect(iterator.next())
-        .toEqual({
-          done: false,
-          value: take(channel)
-        })
+      expect(iterator.next()).toEqual({
+        done: false,
+        value: take(channel),
+      })
 
       let data = 'abc'
       const action1 = 'psodqp'
       successActionCreator.mockReturnValueOnce(action1)
 
-      expect(iterator.next(data))
-        .toEqual({
-          done: false,
-          value: put(action1)
-        })
+      expect(iterator.next(data)).toEqual({
+        done: false,
+        value: put(action1),
+      })
       expect(successActionCreator.mock.calls.length).toBe(1)
       expect(successActionCreator.mock.calls[0]).toEqual([data])
 
-      expect(iterator.next())
-        .toEqual({
-          done: false,
-          value: take(channel)
-        })
+      expect(iterator.next()).toEqual({
+        done: false,
+        value: take(channel),
+      })
 
       data = 'ghi'
       const action2 = 'djdqsqkp'
       successActionCreator.mockReturnValueOnce(action2)
-      expect(iterator.next(data))
-        .toEqual({
-          done: false,
-          value: put(action2)
-        })
+      expect(iterator.next(data)).toEqual({
+        done: false,
+        value: put(action2),
+      })
       expect(successActionCreator.mock.calls.length).toBe(2)
       expect(successActionCreator.mock.calls[1]).toEqual([data])
 
-      expect(iterator.return())
-        .toEqual({
-          done: false,
-          value: cancelled()
-        })
+      expect(iterator.return()).toEqual({
+        done: false,
+        value: cancelled(),
+      })
 
-      expect(iterator.next(false))
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next(false)).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
 
     it('uses the specified transform function', () => {
       const channel = 'qposdqpsdl'
       const successActionCreator = jest.fn()
       const transform = jest.fn()
-      const iterator = syncChannel.call(context, channel, { successActionCreator, transform })
+      const iterator = syncChannel.call(context, channel, {
+        successActionCreator,
+        transform,
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: false,
-          value: take(channel)
-        })
+      expect(iterator.next()).toEqual({
+        done: false,
+        value: take(channel),
+      })
 
       let value = 'value1'
       const transformed = 'transformed'
       transform.mockReturnValueOnce(transformed)
       const action = 'psodqp'
       successActionCreator.mockReturnValueOnce(action)
-      expect(iterator.next(value))
-        .toEqual({
-          done: false,
-          value: put(action)
-        })
+      expect(iterator.next(value)).toEqual({
+        done: false,
+        value: put(action),
+      })
       expect(transform.mock.calls.length).toBe(1)
       expect(transform.mock.calls[0]).toEqual([value])
       expect(successActionCreator.mock.calls.length).toBe(1)
@@ -104,11 +99,10 @@ describe('utils', () => {
       iterator.next()
 
       // This gets us in the finally block
-      expect(iterator.return())
-        .toEqual({
-          done: false,
-          value: cancelled()
-        })
+      expect(iterator.return()).toEqual({
+        done: false,
+        value: cancelled(),
+      })
 
       chan.close = jest.fn()
       iterator.next(true)
@@ -122,7 +116,11 @@ describe('utils', () => {
       const failureActionCreator = jest.fn()
       const transform = jest.fn()
       const error = 'asdfasdf'
-      const iterator = syncChannel.call(context, chan, { successActionCreator, transform, failureActionCreator })
+      const iterator = syncChannel.call(context, chan, {
+        successActionCreator,
+        transform,
+        failureActionCreator,
+      })
 
       // First take
       iterator.next()
@@ -131,11 +129,10 @@ describe('utils', () => {
       failureActionCreator.mockReturnValueOnce(action)
 
       // This gets us in the catch block
-      expect(iterator.throw(error))
-        .toEqual({
-          done: false,
-          value: put(action)
-        })
+      expect(iterator.throw(error)).toEqual({
+        done: false,
+        value: put(action),
+      })
 
       expect(failureActionCreator.mock.calls.length).toBe(1)
       expect(failureActionCreator.mock.calls[0]).toEqual([error])
@@ -151,11 +148,10 @@ describe('utils', () => {
       iterator.next()
 
       // This gets us in the catch block
-      expect(iterator.throw(error))
-        .toEqual({
-          done: false,
-          value: cancelled()
-        })
+      expect(iterator.throw(error)).toEqual({
+        done: false,
+        value: cancelled(),
+      })
 
       chan.close = jest.fn()
       iterator.next(true)

@@ -3,7 +3,7 @@ import { call, fork } from 'redux-saga/effects'
 
 import { syncChannel } from './utils'
 
-function channel () {
+function channel() {
   if (this._messageChannel) return this._messageChannel
 
   const messaging = this.app.messaging()
@@ -18,12 +18,12 @@ function channel () {
   return channel
 }
 
-function * syncMessages (options) {
+function* syncMessages(options) {
   const channel = yield call(this.messaging.channel)
   yield fork(syncChannel, channel, options)
 }
 
-function tokenRefreshChannel () {
+function tokenRefreshChannel() {
   if (this._tokenRefreshChannel) return this._tokenRefreshChannel
   const messaging = this.app.messaging()
 
@@ -39,7 +39,7 @@ function tokenRefreshChannel () {
   return channel
 }
 
-function * syncToken (options) {
+function* syncToken(options) {
   const channel = yield call(this.messaging.tokenRefreshChannel)
   yield fork(syncChannel, channel, options)
 }
@@ -48,5 +48,5 @@ export default {
   channel,
   syncMessages,
   syncToken,
-  tokenRefreshChannel
+  tokenRefreshChannel,
 }

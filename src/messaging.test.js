@@ -15,19 +15,19 @@ describe('messaging', () => {
     messaging = {
       getToken: jest.fn(() => Promise.resolve(token => token)),
       onMessage: jest.fn(() => unsubscribe),
-      onTokenRefresh: jest.fn((nextOrObserver) => {
+      onTokenRefresh: jest.fn(nextOrObserver => {
         subs.push(nextOrObserver)
         return unsubscribe
-      })
+      }),
     }
     context = {
       app: {
-        messaging: jest.fn(() => messaging)
+        messaging: jest.fn(() => messaging),
       },
       messaging: {
         channel: jest.fn(),
-        tokenRefreshChannel: jest.fn()
-      }
+        tokenRefreshChannel: jest.fn(),
+      },
     }
   })
 
@@ -63,21 +63,18 @@ describe('messaging', () => {
       const options = {}
       const iterator = messagingModule.syncMessages.call(context, options)
 
-      expect(iterator.next().value)
-        .toEqual(call(context.messaging.channel))
+      expect(iterator.next().value).toEqual(call(context.messaging.channel))
 
       const channel = 'jqsdkl'
-      expect(iterator.next(channel))
-        .toEqual({
-          done: false,
-          value: fork(syncChannel, channel, options)
-        })
+      expect(iterator.next(channel)).toEqual({
+        done: false,
+        value: fork(syncChannel, channel, options),
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
   })
 
@@ -106,13 +103,13 @@ describe('messaging', () => {
     it('emits a token', () => {
       const tokenMock = 'token'
       const emit = () => {
-        subs.forEach((nextOrObserver) => {
+        subs.forEach(nextOrObserver => {
           nextOrObserver()
         })
       }
       const channel = messagingModule.tokenRefreshChannel.call(context)
 
-      const spy = (emitter) => {
+      const spy = emitter => {
         expect(emitter(tokenMock)).toEqual(tokenMock)
       }
 
@@ -126,21 +123,18 @@ describe('messaging', () => {
       const options = {}
       const iterator = messagingModule.syncToken.call(context, options)
 
-      expect(iterator.next().value)
-        .toEqual(call(context.messaging.tokenRefreshChannel))
+      expect(iterator.next().value).toEqual(call(context.messaging.tokenRefreshChannel))
 
       const channel = 'jqsdkl'
-      expect(iterator.next(channel))
-        .toEqual({
-          done: false,
-          value: fork(syncChannel, channel, options)
-        })
+      expect(iterator.next(channel)).toEqual({
+        done: false,
+        value: fork(syncChannel, channel, options),
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
   })
 })

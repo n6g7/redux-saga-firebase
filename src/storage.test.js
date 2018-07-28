@@ -3,11 +3,7 @@ import { call } from 'redux-saga/effects'
 import storageModule, { getRef } from './storage'
 
 describe('storage', () => {
-  let app,
-    context,
-    ref,
-    storage,
-    task
+  let app, context, ref, storage, task
 
   task = 'qlsdmlqmd'
 
@@ -18,16 +14,16 @@ describe('storage', () => {
       getMetadata: jest.fn(),
       put: jest.fn(() => task),
       putString: jest.fn(() => task),
-      updateMetadata: jest.fn()
+      updateMetadata: jest.fn(),
     }
     storage = {
-      ref: jest.fn(() => ref)
+      ref: jest.fn(() => ref),
     }
     app = {
-      storage: jest.fn(() => storage)
+      storage: jest.fn(() => storage),
     }
     context = {
-      app
+      app,
     }
   })
 
@@ -62,7 +58,13 @@ describe('storage', () => {
       const format = 'qp^zpq'
       const metadata = 'qpsdksql'
 
-      const result = storageModule.uploadString.call(context, path, string, format, metadata)
+      const result = storageModule.uploadString.call(
+        context,
+        path,
+        string,
+        format,
+        metadata,
+      )
 
       expect(app.storage.mock.calls.length).toBe(1)
       expect(app.storage.mock.calls[0]).toEqual([])
@@ -82,8 +84,7 @@ describe('storage', () => {
       const url = 'nkqkds'
       const iterator = storageModule.getDownloadURL.call(context, path)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.getDownloadURL]))
+      expect(iterator.next().value).toEqual(call([ref, ref.getDownloadURL]))
 
       expect(app.storage.mock.calls.length).toBe(1)
       expect(app.storage.mock.calls[0]).toEqual([])
@@ -92,7 +93,7 @@ describe('storage', () => {
 
       expect(iterator.next(url)).toEqual({
         done: true,
-        value: url
+        value: url,
       })
     })
   })
@@ -103,8 +104,7 @@ describe('storage', () => {
       const metadata = 'nkqkds'
       const iterator = storageModule.getFileMetadata.call(context, path)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.getMetadata]))
+      expect(iterator.next().value).toEqual(call([ref, ref.getMetadata]))
 
       expect(app.storage.mock.calls.length).toBe(1)
       expect(app.storage.mock.calls[0]).toEqual([])
@@ -113,7 +113,7 @@ describe('storage', () => {
 
       expect(iterator.next(metadata)).toEqual({
         done: true,
-        value: metadata
+        value: metadata,
       })
     })
   })
@@ -125,8 +125,7 @@ describe('storage', () => {
       const metadata = 'qsdmqdmql'
       const iterator = storageModule.updateFileMetadata.call(context, path, newMetadata)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.updateMetadata], newMetadata))
+      expect(iterator.next().value).toEqual(call([ref, ref.updateMetadata], newMetadata))
 
       expect(app.storage.mock.calls.length).toBe(1)
       expect(app.storage.mock.calls[0]).toEqual([])
@@ -135,7 +134,7 @@ describe('storage', () => {
 
       expect(iterator.next(metadata)).toEqual({
         done: true,
-        value: metadata
+        value: metadata,
       })
     })
   })
@@ -145,8 +144,7 @@ describe('storage', () => {
       const path = 'skddksl'
       const iterator = storageModule.deleteFile.call(context, path)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.delete]))
+      expect(iterator.next().value).toEqual(call([ref, ref.delete]))
 
       expect(app.storage.mock.calls.length).toBe(1)
       expect(app.storage.mock.calls[0]).toEqual([])
@@ -155,7 +153,7 @@ describe('storage', () => {
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -165,13 +163,13 @@ describe('storage', () => {
 
     beforeEach(() => {
       storageRef = {
-        bucket: 'bucket'
+        bucket: 'bucket',
       }
       storage = {
-        ref: jest.fn(() => storageRef)
+        ref: jest.fn(() => storageRef),
       }
       app = {
-        storage: jest.fn(() => storage)
+        storage: jest.fn(() => storage),
       }
       rsf = { app }
     })
