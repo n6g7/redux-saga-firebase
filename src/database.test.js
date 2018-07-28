@@ -4,11 +4,7 @@ import dbModule, { getRef } from './database'
 import { syncChannel } from './utils'
 
 describe('database', () => {
-  let app,
-    context,
-    database,
-    ref,
-    subs
+  let app, context, database, ref, subs
 
   beforeEach(() => {
     subs = []
@@ -21,19 +17,19 @@ describe('database', () => {
       push: jest.fn(),
       remove: jest.fn(),
       set: jest.fn(),
-      update: jest.fn()
+      update: jest.fn(),
     }
     database = {
-      ref: jest.fn(() => ref)
+      ref: jest.fn(() => ref),
     }
     app = {
-      database: jest.fn(() => database)
+      database: jest.fn(() => database),
     }
     context = {
       app,
       database: {
-        channel: jest.fn()
-      }
+        channel: jest.fn(),
+      },
     }
   })
 
@@ -46,12 +42,11 @@ describe('database', () => {
       const path = 'skddksl'
       const val = 'jqdqkld'
       const result = {
-        val: jest.fn(() => val)
+        val: jest.fn(() => val),
       }
       const iterator = dbModule.read.call(context, path)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.once], 'value'))
+      expect(iterator.next().value).toEqual(call([ref, ref.once], 'value'))
 
       expect(app.database.mock.calls.length).toBe(1)
       expect(app.database.mock.calls[0]).toEqual([])
@@ -60,7 +55,7 @@ describe('database', () => {
 
       expect(iterator.next(result)).toEqual({
         done: true,
-        value: val
+        value: val,
       })
 
       expect(result.val.mock.calls.length).toBe(1)
@@ -70,19 +65,18 @@ describe('database', () => {
     it('accepts a firebase.database.Reference argument', () => {
       const val = 'jqdqkld'
       const result = {
-        val: jest.fn(() => val)
+        val: jest.fn(() => val),
       }
       const iterator = dbModule.read.call(context, ref)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.once], 'value'))
+      expect(iterator.next().value).toEqual(call([ref, ref.once], 'value'))
 
       expect(app.database.mock.calls.length).toBe(0)
       expect(database.ref.mock.calls.length).toBe(0)
 
       expect(iterator.next(result)).toEqual({
         done: true,
-        value: val
+        value: val,
       })
 
       expect(result.val.mock.calls.length).toBe(1)
@@ -95,12 +89,11 @@ describe('database', () => {
       const path = 'skddksl'
       const data = 'okqdkj'
       const result = {
-        key: 'qsdklq'
+        key: 'qsdklq',
       }
       const iterator = dbModule.create.call(context, path, data)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.push], data))
+      expect(iterator.next().value).toEqual(call([ref, ref.push], data))
 
       expect(app.database.mock.calls.length).toBe(1)
       expect(app.database.mock.calls[0]).toEqual([])
@@ -109,7 +102,7 @@ describe('database', () => {
 
       expect(iterator.next(result)).toEqual({
         done: true,
-        value: result.key
+        value: result.key,
       })
     })
   })
@@ -120,8 +113,7 @@ describe('database', () => {
       const data = 'okqdkj'
       const iterator = dbModule.update.call(context, path, data)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.set], data))
+      expect(iterator.next().value).toEqual(call([ref, ref.set], data))
 
       expect(app.database.mock.calls.length).toBe(1)
       expect(app.database.mock.calls[0]).toEqual([])
@@ -130,7 +122,7 @@ describe('database', () => {
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -141,8 +133,7 @@ describe('database', () => {
       const data = 'okqdkj'
       const iterator = dbModule.patch.call(context, path, data)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.update], data))
+      expect(iterator.next().value).toEqual(call([ref, ref.update], data))
 
       expect(app.database.mock.calls.length).toBe(1)
       expect(app.database.mock.calls[0]).toEqual([])
@@ -151,7 +142,7 @@ describe('database', () => {
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -161,8 +152,7 @@ describe('database', () => {
       const path = 'skddksl'
       const iterator = dbModule.delete.call(context, path)
 
-      expect(iterator.next().value)
-        .toEqual(call([ref, ref.remove]))
+      expect(iterator.next().value).toEqual(call([ref, ref.remove]))
 
       expect(app.database.mock.calls.length).toBe(1)
       expect(app.database.mock.calls[0]).toEqual([])
@@ -171,7 +161,7 @@ describe('database', () => {
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -213,7 +203,7 @@ describe('database', () => {
       const dataMock = 'snapshot data'
       const val = jest.fn(() => dataMock)
       const snapshot = { val }
-      const emit = (snapshot) => {
+      const emit = snapshot => {
         subs.forEach(({ callback }) => {
           callback(snapshot)
         })
@@ -222,10 +212,10 @@ describe('database', () => {
       const event = 'event'
       const channel = dbModule.channel.call(context, path, event)
 
-      const spy = (data) => {
+      const spy = data => {
         expect(data).toEqual({
           snapshot: snapshot,
-          value: dataMock
+          value: dataMock,
         })
       }
 
@@ -236,7 +226,7 @@ describe('database', () => {
     it('can emit null values', () => {
       const val = jest.fn(() => null)
       const snapshot = { val }
-      const emit = (snapshot) => {
+      const emit = snapshot => {
         subs.forEach(({ callback }) => {
           callback(snapshot)
         })
@@ -245,10 +235,10 @@ describe('database', () => {
       const event = 'event'
       const channel = dbModule.channel.call(context, path, event)
 
-      const spy = (data) => {
+      const spy = data => {
         expect(data).toEqual({
           snapshot: snapshot,
-          value: null
+          value: null,
         })
       }
 
@@ -259,7 +249,7 @@ describe('database', () => {
     it('can emit undefined values', () => {
       const val = jest.fn(() => undefined)
       const snapshot = { val }
-      const emit = (snapshot) => {
+      const emit = snapshot => {
         subs.forEach(({ callback }) => {
           callback(snapshot)
         })
@@ -268,10 +258,10 @@ describe('database', () => {
       const event = 'event'
       const channel = dbModule.channel.call(context, path, event)
 
-      const spy = (data) => {
+      const spy = data => {
         expect(data).toEqual({
           snapshot: snapshot,
-          value: undefined
+          value: undefined,
         })
       }
 
@@ -298,21 +288,20 @@ describe('database', () => {
       const options = { transform }
       const iterator = dbModule.sync.call(context, path, options)
 
-      expect(iterator.next().value)
-        .toEqual(call(context.database.channel, path, undefined))
+      expect(iterator.next().value).toEqual(
+        call(context.database.channel, path, undefined),
+      )
 
       const chan = 'eeeerqd'
-      expect(iterator.next(chan))
-        .toEqual({
-          done: false,
-          value: fork(syncChannel, chan, options)
-        })
+      expect(iterator.next(chan)).toEqual({
+        done: false,
+        value: fork(syncChannel, chan, options),
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
 
     it('provides a sensible transform default', () => {
@@ -320,8 +309,9 @@ describe('database', () => {
       const successActionCreator = jest.fn()
       const iterator = dbModule.sync.call(context, path, { successActionCreator })
 
-      expect(iterator.next().value)
-        .toEqual(call(context.database.channel, path, undefined))
+      expect(iterator.next().value).toEqual(
+        call(context.database.channel, path, undefined),
+      )
 
       const chan = 'qlsdql'
       const defaultTransform = iterator.next(chan).value.FORK.args[1].transform
@@ -335,21 +325,20 @@ describe('database', () => {
       const options = { transform }
       const iterator = dbModule.sync.call(context, ref, options)
 
-      expect(iterator.next().value)
-        .toEqual(call(context.database.channel, ref, undefined))
+      expect(iterator.next().value).toEqual(
+        call(context.database.channel, ref, undefined),
+      )
 
       const chan = 'eeeerqd'
-      expect(iterator.next(chan))
-        .toEqual({
-          done: false,
-          value: fork(syncChannel, chan, options)
-        })
+      expect(iterator.next(chan)).toEqual({
+        done: false,
+        value: fork(syncChannel, chan, options),
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
 
     it('accepts an optional event type argument', () => {
@@ -358,21 +347,18 @@ describe('database', () => {
       const event = 'qosdkqlms'
       const iterator = dbModule.sync.call(context, ref, options, event)
 
-      expect(iterator.next().value)
-        .toEqual(call(context.database.channel, ref, event))
+      expect(iterator.next().value).toEqual(call(context.database.channel, ref, event))
 
       const chan = 'eeeerqd'
-      expect(iterator.next(chan))
-        .toEqual({
-          done: false,
-          value: fork(syncChannel, chan, options)
-        })
+      expect(iterator.next(chan)).toEqual({
+        done: false,
+        value: fork(syncChannel, chan, options),
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
   })
 
@@ -381,13 +367,13 @@ describe('database', () => {
 
     beforeEach(() => {
       databaseRef = {
-        key: 'key'
+        key: 'key',
       }
       database = {
-        ref: jest.fn(() => databaseRef)
+        ref: jest.fn(() => databaseRef),
       }
       app = {
-        database: jest.fn(() => database)
+        database: jest.fn(() => database),
       }
       rsf = { app }
     })

@@ -9,11 +9,11 @@ describe('assert(condition, message)', () => {
     })
 
     it('throws an error when the condition is false', () => {
-      expect(() => assert(false, message)).toThrowError((message))
+      expect(() => assert(false, message)).toThrowError(message)
     })
 
     it('does not throw an error when the condition is true', () => {
-      expect(() => assert(true, message)).not.toThrowError((message))
+      expect(() => assert(true, message)).not.toThrowError(message)
     })
   })
 
@@ -24,11 +24,11 @@ describe('assert(condition, message)', () => {
     })
 
     it('does not throw an error when the condition is false', () => {
-      expect(() => assert(false, message)).not.toThrowError((message))
+      expect(() => assert(false, message)).not.toThrowError(message)
     })
 
     it('does not throw an error when the condition is true', () => {
-      expect(() => assert(true, message)).not.toThrowError((message))
+      expect(() => assert(true, message)).not.toThrowError(message)
     })
   })
 })

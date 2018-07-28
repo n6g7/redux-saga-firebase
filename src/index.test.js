@@ -87,8 +87,8 @@ describe('ReduxSagaFirebase', () => {
       const projectId = 'jskdqdlqd'
       const app = {
         options: {
-          authDomain: `${projectId}.firebaseapp.com`
-        }
+          authDomain: `${projectId}.firebaseapp.com`,
+        },
       }
       const rsf = new ReduxSagaFirebase(app)
 
@@ -100,8 +100,8 @@ describe('ReduxSagaFirebase', () => {
       const projectId = 'jskdqdlqd-a1b2c'
       const app = {
         options: {
-          authDomain: `${projectId}.firebaseapp.com`
-        }
+          authDomain: `${projectId}.firebaseapp.com`,
+        },
       }
       const rsf = new ReduxSagaFirebase(app)
 

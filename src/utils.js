@@ -1,11 +1,7 @@
 import { cancelled, put, take } from 'redux-saga/effects'
 
-export function * syncChannel (channel, options) {
-  const {
-    successActionCreator,
-    failureActionCreator,
-    transform
-  } = options
+export function* syncChannel(channel, options) {
+  const { successActionCreator, failureActionCreator, transform } = options
 
   try {
     while (true) {

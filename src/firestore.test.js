@@ -4,12 +4,7 @@ import firestoreModule, { getCollectionRef, getDocumentRef } from './firestore'
 import { syncChannel } from './utils'
 
 describe('firestore', () => {
-  let app,
-    collection,
-    context,
-    document,
-    firestore,
-    unsubscribe
+  let app, collection, context, document, firestore, unsubscribe
 
   beforeEach(() => {
     unsubscribe = jest.fn()
@@ -18,26 +13,26 @@ describe('firestore', () => {
       get: jest.fn(),
       onSnapshot: jest.fn(() => unsubscribe),
       set: jest.fn(),
-      update: jest.fn()
+      update: jest.fn(),
     }
     collection = {
       add: jest.fn(),
       doc: jest.fn(() => document),
       get: jest.fn(),
-      onSnapshot: jest.fn(() => unsubscribe)
+      onSnapshot: jest.fn(() => unsubscribe),
     }
     firestore = {
       collection: jest.fn(() => collection),
-      doc: jest.fn(() => document)
+      doc: jest.fn(() => document),
     }
     app = {
-      firestore: jest.fn(() => firestore)
+      firestore: jest.fn(() => firestore),
     }
     context = {
       app,
       firestore: {
-        channel: jest.fn()
-      }
+        channel: jest.fn(),
+      },
     }
   })
 
@@ -53,8 +48,7 @@ describe('firestore', () => {
 
       const iterator = firestoreModule.addDocument.call(context, collectionRef, data)
 
-      expect(iterator.next().value)
-        .toEqual(call([collection, collection.add], data))
+      expect(iterator.next().value).toEqual(call([collection, collection.add], data))
 
       expect(app.firestore.mock.calls.length).toBe(1)
       expect(app.firestore.mock.calls[0]).toEqual([])
@@ -63,7 +57,7 @@ describe('firestore', () => {
 
       expect(iterator.next(result)).toEqual({
         done: true,
-        value: result
+        value: result,
       })
     })
   })
@@ -139,8 +133,7 @@ describe('firestore', () => {
 
       const iterator = firestoreModule.deleteDocument.call(context, documentRef)
 
-      expect(iterator.next().value)
-        .toEqual(call([document, document.delete]))
+      expect(iterator.next().value).toEqual(call([document, document.delete]))
 
       expect(app.firestore.mock.calls.length).toBe(1)
       expect(app.firestore.mock.calls[0]).toEqual([])
@@ -149,7 +142,7 @@ describe('firestore', () => {
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -160,14 +153,13 @@ describe('firestore', () => {
       const val = 'asd'
       const result = {
         data: jest.fn(() => val),
-        id: val
+        id: val,
       }
       const response = [result, result]
 
       const iterator = firestoreModule.getCollection.call(context, collectionRef)
 
-      expect(iterator.next().value)
-        .toEqual(call([collection, collection.get]))
+      expect(iterator.next().value).toEqual(call([collection, collection.get]))
 
       expect(app.firestore.mock.calls.length).toBe(1)
       expect(app.firestore.mock.calls[0]).toEqual([])
@@ -176,7 +168,7 @@ describe('firestore', () => {
 
       expect(iterator.next(response)).toEqual({
         done: true,
-        value: response
+        value: response,
       })
     })
 
@@ -184,21 +176,20 @@ describe('firestore', () => {
       const val = 'asd'
       const result = {
         data: jest.fn(() => val),
-        id: val
+        id: val,
       }
       const response = [result, result]
 
       const iterator = firestoreModule.getCollection.call(context, collection)
 
-      expect(iterator.next().value)
-        .toEqual(call([collection, collection.get]))
+      expect(iterator.next().value).toEqual(call([collection, collection.get]))
 
       expect(app.firestore.mock.calls.length).toBe(0)
       expect(firestore.collection.mock.calls.length).toBe(0)
 
       expect(iterator.next(response)).toEqual({
         done: true,
-        value: response
+        value: response,
       })
     })
   })
@@ -209,12 +200,11 @@ describe('firestore', () => {
       const val = 'jqdqkld'
       const result = {
         data: jest.fn(() => val),
-        id: 0
+        id: 0,
       }
       const iterator = firestoreModule.getDocument.call(context, documentRef)
 
-      expect(iterator.next().value)
-        .toEqual(call([document, document.get]))
+      expect(iterator.next().value).toEqual(call([document, document.get]))
 
       expect(app.firestore.mock.calls.length).toBe(1)
       expect(app.firestore.mock.calls[0]).toEqual([])
@@ -223,7 +213,7 @@ describe('firestore', () => {
 
       expect(iterator.next(result)).toEqual({
         done: true,
-        value: result
+        value: result,
       })
     })
   })
@@ -238,11 +228,10 @@ describe('firestore', () => {
         context,
         documentRef,
         data,
-        options
+        options,
       )
 
-      expect(iterator.next().value)
-        .toEqual(call([document, document.set], data, options))
+      expect(iterator.next().value).toEqual(call([document, document.set], data, options))
 
       expect(app.firestore.mock.calls.length).toBe(1)
       expect(app.firestore.mock.calls[0]).toEqual([])
@@ -251,7 +240,7 @@ describe('firestore', () => {
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -262,42 +251,40 @@ describe('firestore', () => {
       const options = {}
       const iterator = firestoreModule.syncCollection.call(context, path, options)
 
-      expect(iterator.next().value)
-        .toEqual(call(context.firestore.channel, path, 'collection'))
+      expect(iterator.next().value).toEqual(
+        call(context.firestore.channel, path, 'collection'),
+      )
 
       const chan = 'eeeerqd'
-      expect(iterator.next(chan))
-        .toEqual({
-          done: false,
-          value: fork(syncChannel, chan, options)
-        })
+      expect(iterator.next(chan)).toEqual({
+        done: false,
+        value: fork(syncChannel, chan, options),
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
 
     it('accepts a firebase.firestore.CollectionReference', () => {
       const options = {}
       const iterator = firestoreModule.syncCollection.call(context, collection, options)
 
-      expect(iterator.next().value)
-        .toEqual(call(context.firestore.channel, collection, 'collection'))
+      expect(iterator.next().value).toEqual(
+        call(context.firestore.channel, collection, 'collection'),
+      )
 
       const chan = 'eeeerqd'
-      expect(iterator.next(chan))
-        .toEqual({
-          done: false,
-          value: fork(syncChannel, chan, options)
-        })
+      expect(iterator.next(chan)).toEqual({
+        done: false,
+        value: fork(syncChannel, chan, options),
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
   })
 
@@ -307,21 +294,20 @@ describe('firestore', () => {
       const options = {}
       const iterator = firestoreModule.syncDocument.call(context, path, options)
 
-      expect(iterator.next().value)
-        .toEqual(call(context.firestore.channel, path, 'document'))
+      expect(iterator.next().value).toEqual(
+        call(context.firestore.channel, path, 'document'),
+      )
 
       const chan = 'eeeerqd'
-      expect(iterator.next(chan))
-        .toEqual({
-          done: false,
-          value: fork(syncChannel, chan, options)
-        })
+      expect(iterator.next(chan)).toEqual({
+        done: false,
+        value: fork(syncChannel, chan, options),
+      })
 
-      expect(iterator.next())
-        .toEqual({
-          done: true,
-          value: undefined
-        })
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
     })
   })
 
@@ -330,14 +316,9 @@ describe('firestore', () => {
       const documentRef = 'skddksld'
       const args = ['qlsdl', 'pkqosdqk^']
 
-      const iterator = firestoreModule.updateDocument.call(
-        context,
-        documentRef,
-        ...args
-      )
+      const iterator = firestoreModule.updateDocument.call(context, documentRef, ...args)
 
-      expect(iterator.next().value)
-        .toEqual(call([document, document.update], ...args))
+      expect(iterator.next().value).toEqual(call([document, document.update], ...args))
 
       expect(app.firestore.mock.calls.length).toBe(1)
       expect(app.firestore.mock.calls[0]).toEqual([])
@@ -346,7 +327,7 @@ describe('firestore', () => {
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -356,13 +337,13 @@ describe('firestore', () => {
 
     beforeEach(() => {
       collectionRef = {
-        key: 'key'
+        key: 'key',
       }
       firestore = {
-        collection: jest.fn(() => collectionRef)
+        collection: jest.fn(() => collectionRef),
       }
       app = {
-        firestore: jest.fn(() => firestore)
+        firestore: jest.fn(() => firestore),
       }
       rsf = { app }
     })
@@ -393,13 +374,13 @@ describe('firestore', () => {
 
     beforeEach(() => {
       documentRef = {
-        key: 'key'
+        key: 'key',
       }
       firestore = {
-        doc: jest.fn(() => documentRef)
+        doc: jest.fn(() => documentRef),
       }
       app = {
-        firestore: jest.fn(() => firestore)
+        firestore: jest.fn(() => firestore),
       }
       rsf = { app }
     })

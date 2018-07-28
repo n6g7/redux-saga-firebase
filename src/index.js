@@ -6,7 +6,7 @@ import messaging from './messaging'
 import storage from './storage'
 
 class ReduxSagaFirebase {
-  constructor (firebaseApp) {
+  constructor(firebaseApp) {
     this.app = firebaseApp
     this.region = 'us-central1'
 
@@ -15,16 +15,14 @@ class ReduxSagaFirebase {
       applyActionCode: auth.applyActionCode.bind(this),
       channel: auth.channel.bind(this),
       confirmPasswordReset: auth.confirmPasswordReset.bind(this),
-      createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(
-        this
-      ),
+      createUserWithEmailAndPassword: auth.createUserWithEmailAndPassword.bind(this),
       deleteProfile: auth.deleteProfile.bind(this),
       linkWithPopup: auth.linkWithPopup.bind(this),
       linkWithRedirect: auth.linkWithRedirect.bind(this),
       sendEmailVerification: auth.sendEmailVerification.bind(this),
       sendPasswordResetEmail: auth.sendPasswordResetEmail.bind(this),
       signInAndRetrieveDataWithCredential: auth.signInAndRetrieveDataWithCredential.bind(
-        this
+        this,
       ),
       signInAnonymously: auth.signInAnonymously.bind(this),
       signInWithCredential: auth.signInWithCredential.bind(this),
@@ -37,7 +35,7 @@ class ReduxSagaFirebase {
       unlink: auth.unlink.bind(this),
       updateEmail: auth.updateEmail.bind(this),
       updatePassword: auth.updatePassword.bind(this),
-      updateProfile: auth.updateProfile.bind(this)
+      updateProfile: auth.updateProfile.bind(this),
     }
 
     // Database methods
@@ -48,7 +46,7 @@ class ReduxSagaFirebase {
       patch: database.patch.bind(this),
       delete: database.delete.bind(this),
       channel: database.channel.bind(this),
-      sync: database.sync.bind(this)
+      sync: database.sync.bind(this),
     }
 
     // Firestore methods
@@ -61,12 +59,12 @@ class ReduxSagaFirebase {
       setDocument: firestore.setDocument.bind(this),
       syncCollection: firestore.syncCollection.bind(this),
       syncDocument: firestore.syncDocument.bind(this),
-      updateDocument: firestore.updateDocument.bind(this)
+      updateDocument: firestore.updateDocument.bind(this),
     }
 
     // Functions methods
     this.functions = {
-      call: functions.call.bind(this)
+      call: functions.call.bind(this),
     }
 
     // Messaging methods
@@ -74,7 +72,7 @@ class ReduxSagaFirebase {
       channel: messaging.channel.bind(this),
       syncMessages: messaging.syncMessages.bind(this),
       syncToken: messaging.syncToken.bind(this),
-      tokenRefreshChannel: messaging.tokenRefreshChannel.bind(this)
+      tokenRefreshChannel: messaging.tokenRefreshChannel.bind(this),
     }
 
     // Storage methods
@@ -84,11 +82,11 @@ class ReduxSagaFirebase {
       getDownloadURL: storage.getDownloadURL.bind(this),
       getFileMetadata: storage.getFileMetadata.bind(this),
       updateFileMetadata: storage.updateFileMetadata.bind(this),
-      deleteFile: storage.deleteFile.bind(this)
+      deleteFile: storage.deleteFile.bind(this),
     }
   }
 
-  projectId () {
+  projectId() {
     if (this._projectId) return this._projectId
 
     const regex = /^([a-z0-9-]+)\.firebaseapp\.com$/

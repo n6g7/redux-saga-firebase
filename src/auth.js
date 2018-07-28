@@ -1,19 +1,19 @@
 import { eventChannel } from 'redux-saga'
 import { call } from 'redux-saga/effects'
 
-function * applyActionCode (code) {
+function* applyActionCode(code) {
   const auth = this.app.auth()
   return yield call([auth, auth.applyActionCode], code)
 }
 
-function channel () {
+function channel() {
   if (this._authChannel) return this._authChannel
 
   const auth = this.app.auth()
   const channel = eventChannel(emit => {
     const unsubscribe = auth.onAuthStateChanged(
       user => emit({ user }),
-      error => emit({ error })
+      error => emit({ error }),
     )
 
     return unsubscribe
@@ -23,108 +23,107 @@ function channel () {
   return channel
 }
 
-function * confirmPasswordReset (code, newPassword) {
+function* confirmPasswordReset(code, newPassword) {
   const auth = this.app.auth()
   return yield call([auth, auth.confirmPasswordReset], code, newPassword)
 }
 
-function * createUserWithEmailAndPassword (email, password) {
+function* createUserWithEmailAndPassword(email, password) {
   const auth = this.app.auth()
   return yield call([auth, auth.createUserWithEmailAndPassword], email, password)
 }
 
-function * deleteProfile () {
+function* deleteProfile() {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.delete])
 }
 
-function * linkWithPopup (authProvider) {
+function* linkWithPopup(authProvider) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.linkWithPopup], authProvider)
 }
 
-function * linkWithRedirect (authProvider) {
+function* linkWithRedirect(authProvider) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.linkWithRedirect], authProvider)
 }
 
-function * sendEmailVerification (actionCodeSettings) {
+function* sendEmailVerification(actionCodeSettings) {
   const auth = this.app.auth()
-  return yield call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings)
+  return yield call(
+    [auth.currentUser, auth.currentUser.sendEmailVerification],
+    actionCodeSettings,
+  )
 }
 
-function * sendPasswordResetEmail (email, actionCodeSettings) {
+function* sendPasswordResetEmail(email, actionCodeSettings) {
   const auth = this.app.auth()
   return yield call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
 }
 
-function * signInAndRetrieveDataWithCredential (credential) {
+function* signInAndRetrieveDataWithCredential(credential) {
   const auth = this.app.auth()
   return yield call([auth, auth.signInAndRetrieveDataWithCredential], credential)
 }
 
-function * signInAnonymously () {
+function* signInAnonymously() {
   const auth = this.app.auth()
   return yield call([auth, auth.signInAnonymously])
 }
 
-function * signInWithCredential (credential) {
+function* signInWithCredential(credential) {
   const auth = this.app.auth()
   return yield call([auth, auth.signInWithCredential], credential)
 }
 
-function * signInWithCustomToken (token) {
+function* signInWithCustomToken(token) {
   const auth = this.app.auth()
   return yield call([auth, auth.signInWithCustomToken], token)
 }
 
-function * signInWithEmailAndPassword (email, password) {
+function* signInWithEmailAndPassword(email, password) {
   const auth = this.app.auth()
   return yield call([auth, auth.signInWithEmailAndPassword], email, password)
 }
 
-function * signInWithPhoneNumber (phoneNumber, applicationVerifier) {
+function* signInWithPhoneNumber(phoneNumber, applicationVerifier) {
   const auth = this.app.auth()
-  return yield call(
-    [auth, auth.signInWithPhoneNumber],
-    phoneNumber,
-    applicationVerifier
-  )
+  return yield call([auth, auth.signInWithPhoneNumber], phoneNumber, applicationVerifier)
 }
 
-function * signInWithPopup (authProvider) {
+function* signInWithPopup(authProvider) {
   const auth = this.app.auth()
   const { credential } = yield call([auth, auth.signInWithPopup], authProvider)
 
   return credential
 }
 
-function * signInWithRedirect (authProvider) {
+function* signInWithRedirect(authProvider) {
   const auth = this.app.auth()
   yield call([auth, auth.signInWithRedirect], authProvider)
 }
 
-function * signOut () {
+function* signOut() {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
 }
 
-function * unlink (provider) {
+function* unlink(provider) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.unlink], provider)
 }
 
-function * updateEmail (email) {
+function* updateEmail(email) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.updateEmail], email)
 }
 
-function * updatePassword (password) {
+function* updatePassword(password) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.updatePassword], password)
 }
 
-function * updateProfile (profile) {
+function* updateProfile(profile) {
   const auth = this.app.auth()
   return yield call([auth.currentUser, auth.currentUser.updateProfile], profile)
 }
@@ -151,5 +150,5 @@ export default {
   unlink,
   updateEmail,
   updatePassword,
-  updateProfile
+  updateProfile,
 }

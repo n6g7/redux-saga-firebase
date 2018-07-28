@@ -31,16 +31,16 @@ describe('auth', () => {
       unlink: jest.fn(),
       updateEmail: jest.fn(),
       updatePassword: jest.fn(),
-      updateProfile: jest.fn()
+      updateProfile: jest.fn(),
     },
     confirmPasswordReset: jest.fn(),
-    signOut: jest.fn()
+    signOut: jest.fn(),
   }
 
   const context = {
     app: {
-      auth: jest.fn(() => auth)
-    }
+      auth: jest.fn(() => auth),
+    },
   }
 
   afterEach(() => {
@@ -51,14 +51,18 @@ describe('auth', () => {
     it('returns user credentials', () => {
       const credential = 'pqdiqjsdk'
       const userCredentials = 'qosdqkds'
-      const iterator = authModule.signInAndRetrieveDataWithCredential.call(context, credential)
+      const iterator = authModule.signInAndRetrieveDataWithCredential.call(
+        context,
+        credential,
+      )
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signInAndRetrieveDataWithCredential], credential))
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.signInAndRetrieveDataWithCredential], credential),
+      )
 
       expect(iterator.next(userCredentials)).toEqual({
         done: true,
-        value: userCredentials
+        value: userCredentials,
       })
     })
   })
@@ -68,12 +72,11 @@ describe('auth', () => {
       const user = 'qosdqkds'
       const iterator = authModule.signInAnonymously.call(context)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signInAnonymously]))
+      expect(iterator.next().value).toEqual(call([auth, auth.signInAnonymously]))
 
       expect(iterator.next(user)).toEqual({
         done: true,
-        value: user
+        value: user,
       })
     })
   })
@@ -84,12 +87,13 @@ describe('auth', () => {
       const credential = 'qpsdkqdsql'
       const iterator = authModule.signInWithCredential.call(context, credential)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signInWithCredential], credential))
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.signInWithCredential], credential),
+      )
 
       expect(iterator.next(user)).toEqual({
         done: true,
-        value: user
+        value: user,
       })
     })
   })
@@ -100,12 +104,13 @@ describe('auth', () => {
       const token = 'qpsdkqdsql'
       const iterator = authModule.signInWithCustomToken.call(context, token)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signInWithCustomToken], token))
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.signInWithCustomToken], token),
+      )
 
       expect(iterator.next(user)).toEqual({
         done: true,
-        value: user
+        value: user,
       })
     })
   })
@@ -115,14 +120,19 @@ describe('auth', () => {
       const email = 'skqdk'
       const password = 'skqdk'
       const user = 'qosdqkds'
-      const iterator = authModule.signInWithEmailAndPassword.call(context, email, password)
+      const iterator = authModule.signInWithEmailAndPassword.call(
+        context,
+        email,
+        password,
+      )
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signInWithEmailAndPassword], email, password))
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.signInWithEmailAndPassword], email, password),
+      )
 
       expect(iterator.next(user)).toEqual({
         done: true,
-        value: user
+        value: user,
       })
     })
   })
@@ -131,15 +141,20 @@ describe('auth', () => {
     it('returns a confirmation result', () => {
       const phoneNumber = 'skqdk'
       const applicationVerifier = 'lqksdqkd'
-      const iterator = authModule.signInWithPhoneNumber.call(context, phoneNumber, applicationVerifier)
+      const iterator = authModule.signInWithPhoneNumber.call(
+        context,
+        phoneNumber,
+        applicationVerifier,
+      )
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signInWithPhoneNumber], phoneNumber, applicationVerifier))
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.signInWithPhoneNumber], phoneNumber, applicationVerifier),
+      )
 
       const confirmationResult = 'oqsdoqpdl'
       expect(iterator.next(confirmationResult)).toEqual({
         done: true,
-        value: confirmationResult
+        value: confirmationResult,
       })
     })
   })
@@ -150,12 +165,13 @@ describe('auth', () => {
       const credential = 'qosdqkds'
       const iterator = authModule.signInWithPopup.call(context, authProvider)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signInWithPopup], authProvider))
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.signInWithPopup], authProvider),
+      )
 
       expect(iterator.next({ credential })).toEqual({
         done: true,
-        value: credential
+        value: credential,
       })
     })
   })
@@ -165,12 +181,13 @@ describe('auth', () => {
       const authProvider = 'skqdk'
       const iterator = authModule.signInWithRedirect.call(context, authProvider)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signInWithRedirect], authProvider))
+      expect(iterator.next().value).toEqual(
+        call([auth, auth.signInWithRedirect], authProvider),
+      )
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -183,16 +200,16 @@ describe('auth', () => {
       const iterator = authModule.createUserWithEmailAndPassword.call(
         context,
         email,
-        password
+        password,
       )
 
       expect(iterator.next().value).toEqual(
-        call([auth, auth.createUserWithEmailAndPassword], email, password)
+        call([auth, auth.createUserWithEmailAndPassword], email, password),
       )
 
       expect(iterator.next(user)).toEqual({
         done: true,
-        value: user
+        value: user,
       })
     })
   })
@@ -201,16 +218,16 @@ describe('auth', () => {
     it('works', () => {
       const email = 'skqdk'
       const actionCodeSettings = {
-        url: 'bolket42'
+        url: 'bolket42',
       }
       const iterator = authModule.sendPasswordResetEmail.call(
         context,
         email,
-        actionCodeSettings
+        actionCodeSettings,
       )
 
       expect(iterator.next().value).toEqual(
-        call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings)
+        call([auth, auth.sendPasswordResetEmail], email, actionCodeSettings),
       )
     })
   })
@@ -218,18 +235,13 @@ describe('auth', () => {
   describe('applyActionCode(code)', () => {
     it('returns a user', () => {
       const code = 'skqdk'
-      const iterator = authModule.applyActionCode.call(
-        context,
-        code
-      )
+      const iterator = authModule.applyActionCode.call(context, code)
 
-      expect(iterator.next().value).toEqual(
-        call([auth, auth.applyActionCode], code)
-      )
+      expect(iterator.next().value).toEqual(call([auth, auth.applyActionCode], code))
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -237,16 +249,20 @@ describe('auth', () => {
   describe('sendEmailVerification(actionCodeSettings)', () => {
     it('works', () => {
       const actionCodeSettings = {
-        url: 'bolket42'
+        url: 'bolket42',
       }
       const iterator = authModule.sendEmailVerification.call(context, actionCodeSettings)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.sendEmailVerification], actionCodeSettings))
+      expect(iterator.next().value).toEqual(
+        call(
+          [auth.currentUser, auth.currentUser.sendEmailVerification],
+          actionCodeSettings,
+        ),
+      )
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -254,18 +270,15 @@ describe('auth', () => {
   describe('updateEmail(email)', () => {
     it('works', () => {
       const email = 'skqdk'
-      const iterator = authModule.updateEmail.call(
-        context,
-        email
-      )
+      const iterator = authModule.updateEmail.call(context, email)
 
       expect(iterator.next().value).toEqual(
-        call([auth.currentUser, auth.currentUser.updateEmail], email)
+        call([auth.currentUser, auth.currentUser.updateEmail], email),
       )
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -273,18 +286,15 @@ describe('auth', () => {
   describe('updatePassword(password)', () => {
     it('works', () => {
       const password = 'skqdk'
-      const iterator = authModule.updatePassword.call(
-        context,
-        password
-      )
+      const iterator = authModule.updatePassword.call(context, password)
 
       expect(iterator.next().value).toEqual(
-        call([auth.currentUser, auth.currentUser.updatePassword], password)
+        call([auth.currentUser, auth.currentUser.updatePassword], password),
       )
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -293,20 +303,17 @@ describe('auth', () => {
     it('works', () => {
       const profile = {
         displayName: 'skqdk',
-        photoURL: 'skqdk'
+        photoURL: 'skqdk',
       }
-      const iterator = authModule.updateProfile.call(
-        context,
-        profile
-      )
+      const iterator = authModule.updateProfile.call(context, profile)
 
       expect(iterator.next().value).toEqual(
-        call([auth.currentUser, auth.currentUser.updateProfile], profile)
+        call([auth.currentUser, auth.currentUser.updateProfile], profile),
       )
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -315,19 +322,15 @@ describe('auth', () => {
     it('works', () => {
       const code = 'skqdk'
       const password = 'skqdk'
-      const iterator = authModule.confirmPasswordReset.call(
-        context,
-        code,
-        password
-      )
+      const iterator = authModule.confirmPasswordReset.call(context, code, password)
 
       expect(iterator.next().value).toEqual(
-        call([auth, auth.confirmPasswordReset], code, password)
+        call([auth, auth.confirmPasswordReset], code, password),
       )
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -336,12 +339,11 @@ describe('auth', () => {
     it('works', () => {
       const iterator = authModule.signOut.call(context)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth, auth.signOut]))
+      expect(iterator.next().value).toEqual(call([auth, auth.signOut]))
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -350,11 +352,13 @@ describe('auth', () => {
     it('works', () => {
       const iterator = authModule.deleteProfile.call(context)
 
-      expect(iterator.next().value).toEqual(call([auth.currentUser, auth.currentUser.delete]))
+      expect(iterator.next().value).toEqual(
+        call([auth.currentUser, auth.currentUser.delete]),
+      )
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -365,12 +369,13 @@ describe('auth', () => {
       const credential = 'qosdqkds'
       const iterator = authModule.linkWithPopup.call(context, authProvider)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.linkWithPopup], authProvider))
+      expect(iterator.next().value).toEqual(
+        call([auth.currentUser, auth.currentUser.linkWithPopup], authProvider),
+      )
 
       expect(iterator.next({ credential })).toEqual({
         done: true,
-        value: { credential }
+        value: { credential },
       })
     })
   })
@@ -380,12 +385,13 @@ describe('auth', () => {
       const authProvider = 'skqdk'
       const iterator = authModule.linkWithRedirect.call(context, authProvider)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.linkWithRedirect], authProvider))
+      expect(iterator.next().value).toEqual(
+        call([auth.currentUser, auth.currentUser.linkWithRedirect], authProvider),
+      )
 
       expect(iterator.next()).toEqual({
         done: true,
-        value: undefined
+        value: undefined,
       })
     })
   })
@@ -396,14 +402,14 @@ describe('auth', () => {
       const userMock = { uid: 'uid' }
       const iterator = authModule.unlink.call(context, authProvider)
 
-      expect(iterator.next().value)
-        .toEqual(call([auth.currentUser, auth.currentUser.unlink], authProvider))
+      expect(iterator.next().value).toEqual(
+        call([auth.currentUser, auth.currentUser.unlink], authProvider),
+      )
 
-      expect(iterator.next(userMock))
-        .toEqual({
-          done: true,
-          value: userMock
-        })
+      expect(iterator.next(userMock)).toEqual({
+        done: true,
+        value: userMock,
+      })
     })
   })
 
@@ -419,7 +425,7 @@ describe('auth', () => {
       const cachedAuthChannel = 'smldklqd'
       const result = authModule.channel.call({
         ...context,
-        _authChannel: cachedAuthChannel
+        _authChannel: cachedAuthChannel,
       })
 
       expect(auth.onAuthStateChanged.mock.calls.length).toBe(1)
@@ -434,8 +440,8 @@ describe('auth', () => {
     })
 
     it('emits user or error', () => {
-      const userMock = {uid: 'uid'}
-      const errorMock = {code: 'auth/error-code'}
+      const userMock = { uid: 'uid' }
+      const errorMock = { code: 'auth/error-code' }
       const emit = (user, authError) => {
         subs.forEach(({ nextOrObserver, error }) => {
           if (user) {
@@ -449,7 +455,7 @@ describe('auth', () => {
       const channel = authModule.channel.call({
         ...context,
         // reset memoized channel
-        _authChannel: null
+        _authChannel: null,
       })
 
       const userSpy = ({ user }) => {

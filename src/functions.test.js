@@ -11,7 +11,7 @@ describe('functions', () => {
   beforeEach(() => {
     context = {
       projectId: jest.fn(() => projectId),
-      region
+      region,
     }
   })
 
@@ -25,34 +25,32 @@ describe('functions', () => {
       const contentType = 'qlmdkd'
       const response = {
         headers: {
-          get: jest.fn(() => contentType)
+          get: jest.fn(() => contentType),
         },
         ok: true,
-        text: jest.fn()
+        text: jest.fn(),
       }
       const data = 'qlkdmsq'
       const iterator = functionsModule.call.call(context, functionName)
 
-      expect(iterator.next().value)
-        .toEqual(call(
+      expect(iterator.next().value).toEqual(
+        call(
           fetch,
           `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
-          {}
-        ))
+          {},
+        ),
+      )
 
       expect(context.projectId.mock.calls.length).toBe(1)
 
-      expect(iterator.next(response).value)
-        .toEqual(call([response, response.text]))
+      expect(iterator.next(response).value).toEqual(call([response, response.text]))
 
       expect(response.headers.get.mock.calls.length).toBe(1)
-      expect(response.headers.get.mock.calls[0]).toEqual([
-        'Content-Type'
-      ])
+      expect(response.headers.get.mock.calls[0]).toEqual(['Content-Type'])
 
       expect(iterator.next(data)).toEqual({
         done: true,
-        value: data
+        value: data,
       })
     })
 
@@ -61,34 +59,32 @@ describe('functions', () => {
       const contentType = 'application/json'
       const response = {
         headers: {
-          get: jest.fn(() => contentType)
+          get: jest.fn(() => contentType),
         },
         ok: true,
-        json: jest.fn()
+        json: jest.fn(),
       }
       const data = 'qlkdmsq'
       const iterator = functionsModule.call.call(context, functionName)
 
-      expect(iterator.next().value)
-        .toEqual(call(
+      expect(iterator.next().value).toEqual(
+        call(
           fetch,
           `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
-          {}
-        ))
+          {},
+        ),
+      )
 
       expect(context.projectId.mock.calls.length).toBe(1)
 
-      expect(iterator.next(response).value)
-        .toEqual(call([response, response.json]))
+      expect(iterator.next(response).value).toEqual(call([response, response.json]))
 
       expect(response.headers.get.mock.calls.length).toBe(1)
-      expect(response.headers.get.mock.calls[0]).toEqual([
-        'Content-Type'
-      ])
+      expect(response.headers.get.mock.calls[0]).toEqual(['Content-Type'])
 
       expect(iterator.next(data)).toEqual({
         done: true,
-        value: data
+        value: data,
       })
     })
 
@@ -96,41 +92,42 @@ describe('functions', () => {
       const functionName = 'postEndpoint'
       const init = {
         headers: {
-          'Authorization': 'Bearer abc123'
+          Authorization: 'Bearer abc123',
         },
-        method: 'POST'
+        method: 'POST',
       }
 
       const iterator = functionsModule.call.call(context, functionName, {}, init)
 
-      expect(iterator.next().value)
-        .toEqual(call(
+      expect(iterator.next().value).toEqual(
+        call(
           fetch,
           `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
-          init
-        ))
+          init,
+        ),
+      )
     })
 
     it('throws when it fails', () => {
       const functionName = 'qsdsqldlq'
       const response = {
-        ok: false
+        ok: false,
       }
 
       try {
         const iterator = functionsModule.call.call(context, functionName)
 
-        expect(iterator.next().value)
-          .toEqual(call(
+        expect(iterator.next().value).toEqual(
+          call(
             fetch,
             `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
-            {}
-          ))
+            {},
+          ),
+        )
 
         expect(context.projectId.mock.calls.length).toBe(1)
 
-        expect(iterator.next(response).value)
-          .toEqual(response)
+        expect(iterator.next(response).value).toEqual(response)
 
         expect(true).toBe(false)
       } catch (error) {
@@ -142,27 +139,17 @@ describe('functions', () => {
       const functionName = 'http://a.b.c/d'
       const iterator = functionsModule.call.call(context, functionName)
 
-      expect(iterator.next().value)
-        .toEqual(call(
-          fetch,
-          functionName,
-          {}
-        ))
+      expect(iterator.next().value).toEqual(call(fetch, functionName, {}))
     })
 
     it('calls urls when passed directly (https, with parameters)', () => {
       const functionName = 'http://a.b.c/d'
       const params = {
-        e: 'f'
+        e: 'f',
       }
       const iterator = functionsModule.call.call(context, functionName, params)
 
-      expect(iterator.next().value)
-        .toEqual(call(
-          fetch,
-          `${functionName}?e=f`,
-          {}
-        ))
+      expect(iterator.next().value).toEqual(call(fetch, `${functionName}?e=f`, {}))
     })
   })
 
@@ -171,20 +158,24 @@ describe('functions', () => {
       const functionName = 'qsdsqldlq'
       const result = getFunctionURL.call(context, functionName)
 
-      expect(result)
-        .toBe(`https://${region}-${projectId}.cloudfunctions.net/${functionName}`)
+      expect(result).toBe(
+        `https://${region}-${projectId}.cloudfunctions.net/${functionName}`,
+      )
     })
 
     it('generates correct URLs - with parameters', () => {
       const functionName = 'qsdsqldlq'
       const parameters = {
         a: 'qpdkq',
-        b: 'qdlmlqdms'
+        b: 'qdlmlqdms',
       }
       const result = getFunctionURL.call(context, functionName, parameters)
 
-      expect(result)
-        .toBe(`https://${region}-${projectId}.cloudfunctions.net/${functionName}?a=${parameters.a}&b=${parameters.b}`)
+      expect(result).toBe(
+        `https://${region}-${projectId}.cloudfunctions.net/${functionName}?a=${
+          parameters.a
+        }&b=${parameters.b}`,
+      )
     })
 
     it('returns url directly (http)', () => {
