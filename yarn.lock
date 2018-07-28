@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@babel/cli@^7.0.0-beta.49":
+"@babel/cli@^7.0.0-beta.54":
   version "7.0.0-beta.54"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.0.0-beta.54.tgz#c3b9766ad3218988f120e4058509adff0b72b183"
   dependencies:
@@ -30,7 +30,7 @@
   dependencies:
     "@babel/highlight" "7.0.0-beta.49"
 
-"@babel/core@^7.0.0-beta.49":
+"@babel/core@^7.0.0-beta.54":
   version "7.0.0-beta.54"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.0.0-beta.54.tgz#253c54d0095403a5cfa764e7d9b458194692d02b"
   dependencies:
@@ -463,7 +463,7 @@
   dependencies:
     regenerator-transform "^0.13.3"
 
-"@babel/plugin-transform-runtime@^7.0.0-beta.49":
+"@babel/plugin-transform-runtime@^7.0.0-beta.54":
   version "7.0.0-beta.54"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-runtime/-/plugin-transform-runtime-7.0.0-beta.54.tgz#ad45d1e84a9d0cfc48df148dda609ff09c121fd2"
   dependencies:
@@ -510,7 +510,7 @@
     "@babel/helper-regex" "7.0.0-beta.54"
     regexpu-core "^4.1.3"
 
-"@babel/preset-env@^7.0.0-beta.49":
+"@babel/preset-env@^7.0.0-beta.54":
   version "7.0.0-beta.54"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.0.0-beta.54.tgz#4b05c4e3aaed64a509098e4e854dfc0e02edf053"
   dependencies:
@@ -555,7 +555,7 @@
     js-levenshtein "^1.1.3"
     semver "^5.3.0"
 
-"@babel/preset-stage-3@^7.0.0-beta.49":
+"@babel/preset-stage-3@^7.0.0-beta.54":
   version "7.0.0-beta.54"
   resolved "https://registry.yarnpkg.com/@babel/preset-stage-3/-/preset-stage-3-7.0.0-beta.54.tgz#9275b4ea908011a2dae54d59154a380673668cc6"
   dependencies:
@@ -569,7 +569,7 @@
     "@babel/plugin-syntax-dynamic-import" "7.0.0-beta.54"
     "@babel/plugin-syntax-import-meta" "7.0.0-beta.54"
 
-"@babel/runtime@^7.0.0-beta.49":
+"@babel/runtime@^7.0.0-beta.54":
   version "7.0.0-beta.54"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.54.tgz#39ebb42723fe7ca4b3e1b00e967e80138d47cadf"
   dependencies:
