@@ -29,12 +29,12 @@
     "redux-saga": "^0.16.0 || ^1.0.0-beta"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.49",
-    "@babel/core": "^7.0.0-beta.49",
-    "@babel/plugin-transform-runtime": "^7.0.0-beta.49",
-    "@babel/preset-env": "^7.0.0-beta.49",
-    "@babel/preset-stage-3": "^7.0.0-beta.49",
-    "@babel/runtime": "^7.0.0-beta.49",
+    "@babel/cli": "^7.0.0-beta.54",
+    "@babel/core": "^7.0.0-beta.54",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.54",
+    "@babel/preset-env": "^7.0.0-beta.54",
+    "@babel/preset-stage-3": "^7.0.0-beta.54",
+    "@babel/runtime": "^7.0.0-beta.54",
     "@types/node": "^10.3.3",
     "@types/redux": "^3.6.0",
     "babel-core": "^7.0.0-0",
