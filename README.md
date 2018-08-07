@@ -1,9 +1,9 @@
 # redux-saga-firebase
+
 [![CircleCI](https://circleci.com/gh/n6g7/redux-saga-firebase.svg?style=svg)](https://circleci.com/gh/n6g7/redux-saga-firebase)
 [![npm version](https://badge.fury.io/js/redux-saga-firebase.svg)](https://badge.fury.io/js/redux-saga-firebase)
 [![Coverage Status](https://coveralls.io/repos/github/n6g7/redux-saga-firebase/badge.svg?branch=master)](https://coveralls.io/github/n6g7/redux-saga-firebase?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/n6g7/redux-saga-firebase/badge.svg)](https://snyk.io/test/github/n6g7/redux-saga-firebase)
-
 
 A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [firebase](https://firebase.google.com/).
 
@@ -22,15 +22,15 @@ yarn add redux-saga-firebase
 Initialize a firebase app and instantiate redux-saga-firebase:
 
 ```js
-import firebase from 'firebase';
-import '@firebase/firestore'; // 👈 If you're using firestore
-import ReduxSagaFirebase from 'redux-saga-firebase';
+import firebase from 'firebase'
+import '@firebase/firestore' // 👈 If you're using firestore
+import ReduxSagaFirebase from 'redux-saga-firebase'
 
 const myFirebaseApp = firebase.initializeApp({
-  apiKey: "qosjdqsdkqpdqldkqdkfojqjpfk",
-  authDomain: "my-app.firebaseapp.com",
-  databaseURL: "https://my-app.firebaseio.com",
-});
+  apiKey: 'qosjdqsdkqpdqldkqdkfojqjpfk',
+  authDomain: 'my-app.firebaseapp.com',
+  databaseURL: 'https://my-app.firebaseio.com',
+})
 
 const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp)
 ```
@@ -39,11 +39,9 @@ You can now use `reduxSagaFirebase` methods in your sagas:
 
 ```js
 function* syncSaga() {
-  yield fork(
-    reduxSagaFirebase.database.sync,
-    'todos',
-    { successActionCreator: syncTodos }
-  );
+  yield fork(reduxSagaFirebase.database.sync, 'todos', {
+    successActionCreator: syncTodos,
+  })
 }
 ```
 
@@ -117,3 +115,11 @@ Make sure your client provides a implementation of [`fetch`](https://developer.m
 - [`*storage.getFileMetadata(path)`](https://redux-saga-firebase.js.org/reference/dev/storage#getFileMetadata)
 - [`*storage.updateFileMetadata(path, newMetadata)`](https://redux-saga-firebase.js.org/reference/dev/storage#updateFileMetadata)
 - [`*storage.deleteFile(path)`](https://redux-saga-firebase.js.org/reference/dev/storage#deleteFile)
+
+## Contributing
+
+- Clone
+- Link lib to example site:
+  - `yarn link` in root directory
+  - `yarn link redux-saga-firebase` in `example` directory
+- Run tests: `yarn test`
