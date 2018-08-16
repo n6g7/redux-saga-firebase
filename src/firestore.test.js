@@ -125,6 +125,24 @@ describe('firestore', () => {
 
       expect(document.onSnapshot.mock.calls.length).toBe(1)
     })
+
+    it('respects snapshot listen options for collections', () => {
+      const type = 'collection'
+      const options = { includeMetadataChanges: true }
+      firestoreModule.channel.call(context, 'foo', type, undefined, options)
+
+      expect(collection.onSnapshot.mock.calls.length).toBe(1)
+      expect(collection.onSnapshot.mock.calls[0][0]).toBe(options)
+    })
+
+    it('respects snapshot listen options for documents', () => {
+      const type = 'document'
+      const options = { includeMetadataChanges: true }
+      firestoreModule.channel.call(context, 'foo', type, undefined, options)
+
+      expect(document.onSnapshot.mock.calls.length).toBe(1)
+      expect(document.onSnapshot.mock.calls[0][0]).toBe(options)
+    })
   })
 
   describe('deleteDocument(documentRef)', () => {
@@ -252,7 +270,7 @@ describe('firestore', () => {
       const iterator = firestoreModule.syncCollection.call(context, path, options)
 
       expect(iterator.next().value).toEqual(
-        call(context.firestore.channel, path, 'collection'),
+        call(context.firestore.channel, path, 'collection', undefined, undefined)
       )
 
       const chan = 'eeeerqd'
@@ -272,7 +290,34 @@ describe('firestore', () => {
       const iterator = firestoreModule.syncCollection.call(context, collection, options)
 
       expect(iterator.next().value).toEqual(
-        call(context.firestore.channel, collection, 'collection'),
+        call(context.firestore.channel, collection, 'collection', undefined, undefined)
+      )
+
+      const chan = 'eeeerqd'
+      expect(iterator.next(chan)).toEqual({
+        done: false,
+        value: fork(syncChannel, chan, options),
+      })
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
+    })
+
+    it('respects snapshot listen options', () => {
+      const path = 'skddksl'
+      const options = { snapshotListenOptions: { includeMetadataChanges: true } }
+      const iterator = firestoreModule.syncCollection.call(context, path, options)
+
+      expect(iterator.next().value).toEqual(
+        call(
+          context.firestore.channel,
+          path,
+          'collection',
+          undefined,
+          options.snapshotListenOptions
+        ),
       )
 
       const chan = 'eeeerqd'
@@ -295,7 +340,34 @@ describe('firestore', () => {
       const iterator = firestoreModule.syncDocument.call(context, path, options)
 
       expect(iterator.next().value).toEqual(
-        call(context.firestore.channel, path, 'document'),
+        call(context.firestore.channel, path, 'document', undefined, undefined)
+      )
+
+      const chan = 'eeeerqd'
+      expect(iterator.next(chan)).toEqual({
+        done: false,
+        value: fork(syncChannel, chan, options),
+      })
+
+      expect(iterator.next()).toEqual({
+        done: true,
+        value: undefined,
+      })
+    })
+
+    it('respects snapshot listen options', () => {
+      const path = 'skddksl'
+      const options = { snapshotListenOptions: { includeMetadataChanges: true } }
+      const iterator = firestoreModule.syncDocument.call(context, path, options)
+
+      expect(iterator.next().value).toEqual(
+        call(
+          context.firestore.channel,
+          path,
+          'document',
+          undefined,
+          options.snapshotListenOptions
+        ),
       )
 
       const chan = 'eeeerqd'

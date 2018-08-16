@@ -33,14 +33,21 @@ function* addDocument(collectionRef, data) {
   return yield call([collection, collection.add], data)
 }
 
-function channel(pathOrRef, type = 'collection', buffer = buffers.none()) {
+function channel(
+  pathOrRef,
+  type = 'collection',
+  buffer = buffers.none(),
+  snapshotListenOptions,
+) {
   const ref =
     type === 'collection'
       ? getCollectionRef(this, pathOrRef)
       : getDocumentRef(this, pathOrRef)
 
   const channel = eventChannel(emit => {
-    const unsubscribe = ref.onSnapshot(emit)
+    const unsubscribe = snapshotListenOptions
+      ? ref.onSnapshot(snapshotListenOptions, emit)
+      : ref.onSnapshot(emit)
 
     // Returns unsubscribe function
     return unsubscribe
@@ -76,14 +83,27 @@ function* updateDocument(documentRef, ...args) {
 }
 
 function* syncCollection(pathOrRef, options) {
-  const channel = yield call(this.firestore.channel, pathOrRef, 'collection')
+  const channel = yield call(
+    this.firestore.channel,
+    pathOrRef,
+    'collection',
+    undefined,
+    options.snapshotListenOptions,
+  )
   yield fork(syncChannel, channel, options)
 }
 
 function* syncDocument(pathOrRef, options) {
-  const channel = yield call(this.firestore.channel, pathOrRef, 'document')
+  const channel = yield call(
+    this.firestore.channel,
+    pathOrRef,
+    'document',
+    undefined,
+    options.snapshotListenOptions,
+  )
   yield fork(syncChannel, channel, options)
 }
+
 
 export default {
   addDocument,
