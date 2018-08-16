@@ -104,7 +104,6 @@ function* syncDocument(pathOrRef, options) {
   yield fork(syncChannel, channel, options)
 }
 
-
 export default {
   addDocument,
   channel,

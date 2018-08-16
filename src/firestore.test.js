@@ -270,7 +270,7 @@ describe('firestore', () => {
       const iterator = firestoreModule.syncCollection.call(context, path, options)
 
       expect(iterator.next().value).toEqual(
-        call(context.firestore.channel, path, 'collection', undefined, undefined)
+        call(context.firestore.channel, path, 'collection', undefined, undefined),
       )
 
       const chan = 'eeeerqd'
@@ -290,7 +290,7 @@ describe('firestore', () => {
       const iterator = firestoreModule.syncCollection.call(context, collection, options)
 
       expect(iterator.next().value).toEqual(
-        call(context.firestore.channel, collection, 'collection', undefined, undefined)
+        call(context.firestore.channel, collection, 'collection', undefined, undefined),
       )
 
       const chan = 'eeeerqd'
@@ -316,7 +316,7 @@ describe('firestore', () => {
           path,
           'collection',
           undefined,
-          options.snapshotListenOptions
+          options.snapshotListenOptions,
         ),
       )
 
@@ -340,7 +340,7 @@ describe('firestore', () => {
       const iterator = firestoreModule.syncDocument.call(context, path, options)
 
       expect(iterator.next().value).toEqual(
-        call(context.firestore.channel, path, 'document', undefined, undefined)
+        call(context.firestore.channel, path, 'document', undefined, undefined),
       )
 
       const chan = 'eeeerqd'
@@ -366,7 +366,7 @@ describe('firestore', () => {
           path,
           'document',
           undefined,
-          options.snapshotListenOptions
+          options.snapshotListenOptions,
         ),
       )
 
