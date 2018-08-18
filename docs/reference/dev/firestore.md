@@ -50,7 +50,7 @@ methods:
         description: Defaults to `buffers.none()`. Optional Buffer object to buffer messages on this channel. If not provided, messages will not buffered on this channel. See [redux-saga documentation](https://redux-saga.js.org/docs/api/#buffers) for more information for what options are available.
       - name: snapshotListenOptions
         required: false
-        type: [SnapshotListenOptions](https://firebase.google.com/docs/reference/js/firebase.firestore.SnapshotListenOptions)
+        type: A [SnapshotListenOptions](https://firebase.google.com/docs/reference/js/firebase.firestore.SnapshotListenOptions) object
         description: Options to control the circumstances when the channel will emit events.
     output: A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every time the data at `pathOrRef` in firestore changes.
     example: |
