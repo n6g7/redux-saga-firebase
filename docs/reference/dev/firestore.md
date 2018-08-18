@@ -48,6 +48,10 @@ methods:
         required: false
         type: A [Buffer](https://redux-saga.js.org/docs/api/#buffer) object
         description: Defaults to `buffers.none()`. Optional Buffer object to buffer messages on this channel. If not provided, messages will not buffered on this channel. See [redux-saga documentation](https://redux-saga.js.org/docs/api/#buffers) for more information for what options are available.
+      - name: snapshotListenOptions
+        required: false
+        type: A [SnapshotListenOptions](https://firebase.google.com/docs/reference/js/firebase.firestore.SnapshotListenOptions) object
+        description: Options to control the circumstances when the channel will emit events.
     output: A redux-saga [Channel](https://redux-saga.github.io/redux-saga/docs/advanced/Channels.html) which emits every time the data at `pathOrRef` in firestore changes.
     example: |
       ```js
@@ -163,7 +167,7 @@ methods:
       - name: options
         required: true
         type: Object
-        description: "An object to configure how the collection should be synchronised. It must contain at least the `successActionCreator` which must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
+        description: "An object to configure how the collection should be synchronised. It must contain at least the `successActionCreator` which must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument. The other possible options are `failureActionCreator` which is called on channel errors, `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator(default to the identity function (`x => x`).) and `snapshotListenOptions` which is an [SnapshotListenOptions](https://firebase.google.com/docs/reference/js/firebase.firestore.SnapshotListenOptions) object to opt into updates when only metadata changes."
     output:
     example: |
       ```js
@@ -190,7 +194,7 @@ methods:
       - name: options
         required: true
         type: Object
-        description: "An object to configure how the document should be synchronised. It must contain at least the `successActionCreator` which must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
+        description: "An object to configure how the document should be synchronised. It must contain at least the `successActionCreator` which must take either a [DocumentSnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentSnapshot) or a [QuerySnapshot](https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot) as argument. The other possible options are `failureActionCreator` which is called on channel errors, `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator(default to the identity function (`x => x`).) and `snapshotListenOptions` which is an [SnapshotListenOptions](https://firebase.google.com/docs/reference/js/firebase.firestore.SnapshotListenOptions) object to opt into updates when only metadata changes."
     output:
     example: |
       ```js
