@@ -28,7 +28,7 @@
     "type": "git"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.56"
+    "@babel/runtime": "^7.1.5"
   },
   "peerDependencies": {
     "firebase": "^5.0.4",
