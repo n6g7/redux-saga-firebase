@@ -35,7 +35,7 @@
     "redux-saga": "^0.16.0 || ^1.0.0-beta"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.56",
+    "@babel/cli": "^7.1.5",
     "@babel/core": "^7.0.0-beta.56",
     "@babel/plugin-transform-runtime": "^7.0.0-beta.56",
     "@babel/preset-env": "^7.0.0-beta.56",
