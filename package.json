@@ -42,16 +42,16 @@
     "@types/node": "^10.12.5",
     "@types/redux": "^3.6.0",
     "babel-core": "^7.0.0-0",
-    "babel-eslint": "^8.2.6",
-    "babel-jest": "^23.0.1",
-    "eslint": "^5.2.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.9.0",
     "firebase": "^5.5.8",
-    "jest": "^23.4.2",
+    "jest": "^23.6.0",
     "prettier": "^1.15.2",
-    "redux-saga": "^0.16.0 || ^1.0.0-beta",
+    "redux-saga": "^0.16.2 || ^1.0.0-beta",
     "rimraf": "^2.6.2",
-    "typescript": "^2.8.3",
-    "whatwg-fetch": "^2.0.3"
+    "typescript": "^3.1.6",
+    "whatwg-fetch": "^3.0.0"
   },
   "jest": {
     "coverageThreshold": {
