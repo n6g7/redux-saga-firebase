@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import * as firebase from 'firebase'
 import { Action } from 'redux'
 import { Channel } from 'redux-saga'
 
