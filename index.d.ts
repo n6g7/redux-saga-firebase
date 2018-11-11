@@ -135,8 +135,8 @@ interface Messaging {
 interface Storage {
   uploadFile: (
     pathOrRef: PathOrRef.Storage,
-    file,
-    metadata,
+    file: Blob | Uint8Array | ArrayBuffer,
+    metadata?: firebase.storage.UploadMetadata,
   ) => firebase.storage.UploadTask
   uploadString: (
     pathOrRef: PathOrRef.Storage,
