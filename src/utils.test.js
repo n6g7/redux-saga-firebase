@@ -139,10 +139,12 @@ describe('utils', () => {
     })
 
     it('do not dispatch on error if no failureActionCreator', () => {
+      /* eslint-disable no-console */
       const chan = channel()
       const successActionCreator = jest.fn()
       const error = 'asdfasdf'
       const iterator = syncChannel.call(context, chan, { successActionCreator })
+      console.error = jest.fn()
 
       // First take
       iterator.next()
@@ -152,6 +154,9 @@ describe('utils', () => {
         done: false,
         value: cancelled(),
       })
+
+      expect(console.error).toHaveBeenCalledTimes(1)
+      expect(console.error.mock.calls[0][1]).toBe(error)
 
       chan.close = jest.fn()
       iterator.next(true)
