@@ -10,7 +10,13 @@ export function* syncChannel(channel, options) {
       yield put(successActionCreator(transformedData))
     }
   } catch (err) {
+    /* eslint-disable no-console */
     if (failureActionCreator) yield put(failureActionCreator(err))
+    else
+      console.error(
+        'The following error has been ignored because no `failureActionCreator` has been set:',
+        err,
+      )
   } finally {
     if (yield cancelled()) channel.close()
   }
