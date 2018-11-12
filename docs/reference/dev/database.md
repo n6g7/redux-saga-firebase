@@ -156,7 +156,7 @@ methods:
       - name: options
         required: true
         type: Object
-        description: "An object to configure how the database should be synchronised. It must contain at least the `successActionCreator` which must take a single argument being the value read from the firebase reference. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. Default to the identity function (`x => x`)."
+        description: "An object to configure how the database should be synchronised. It must contain at least the `successActionCreator` which must take a single argument being the value read from the firebase reference. The other possible options are `failureActionCreator` which is called on channel errors and `transform` which is an optional transformer function to be applied to the value before it's passed to the action creator. When `failureActionCreator` is *not* specified, errors are printed to the console. `transform` defaults to the identity function (`x => x`)."
       - name: event
         required: false
         type: String
