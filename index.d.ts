@@ -1,6 +1,6 @@
-import firebase from 'firebase'
+import * as firebase from 'firebase'
 import { Action } from 'redux'
-import { Channel } from 'redux-saga'
+import { Channel, SagaIterator } from 'redux-saga'
 
 interface SyncOptions<S, T> {
   successActionCreator: (data: S | T) => Action
@@ -10,7 +10,7 @@ interface SyncOptions<S, T> {
 
 declare enum FirestoreType {
   Collection = 'collection',
-  Document = 'document'
+  Document = 'document',
 }
 
 declare namespace PathOrRef {
@@ -47,48 +47,76 @@ declare namespace ChannelOutput {
 }
 
 interface Auth {
-  applyActionCode: (code: string) => void,
-  channel: () => Channel<ChannelOutput.Auth>,
-  confirmPasswordReset: (code: string, newPassword: string) => void,
-  createUserWithEmailAndPassword: (email: string, password: string) => firebase.User,
-  deleteProfile: () => void,
-  linkWithPopup: (authProvider: firebase.auth.AuthProvider) => firebase.auth.UserCredential,
-  linkWithRedirect: (authProvider: firebase.auth.AuthProvider) => void,
-  sendEmailVerification: (actionCodeSettings: firebase.auth.ActionCodeSettings) => void,
-  sendPasswordResetEmail: (email: string, actionCodeSettings: firebase.auth.ActionCodeSettings) => void,
-  signInAndRetrieveDataWithCredential: (credential: firebase.auth.AuthCredential) => firebase.auth.UserCredential,
-  signInAnonymously: () => firebase.User,
-  signInWithCredential: (credential: firebase.auth.AuthCredential) => firebase.User,
-  signInWithCustomToken: (token: string) => firebase.User,
-  signInWithEmailAndPassword: (email: string, password: string) => firebase.User,
-  signInWithPhoneNumber: (phoneNumber: string, applicationVerifier: firebase.auth.ApplicationVerifier) => firebase.auth.ConfirmationResult,
-  signInWithPopup: (authProvider: firebase.auth.AuthProvider) => firebase.auth.AuthCredential,
-  signInWithRedirect: (authProvider: firebase.auth.AuthProvider) => void,
-  signOut: () => void,
-  unlink: (provider: string) => firebase.User,
-  updatePassword: (password: string) => void
+  applyActionCode: (code: string) => SagaIterator
+  channel: () => Channel<ChannelOutput.Auth>
+  confirmPasswordReset: (code: string, newPassword: string) => SagaIterator
+  createUserWithEmailAndPassword: (email: string, password: string) => firebase.User
+  deleteProfile: () => SagaIterator
+  linkWithPopup: (authProvider: firebase.auth.AuthProvider) => SagaIterator
+  linkWithRedirect: (authProvider: firebase.auth.AuthProvider) => SagaIterator
+  sendEmailVerification: (
+    actionCodeSettings: firebase.auth.ActionCodeSettings,
+  ) => SagaIterator
+  sendPasswordResetEmail: (
+    email: string,
+    actionCodeSettings: firebase.auth.ActionCodeSettings,
+  ) => SagaIterator
+  signInAndRetrieveDataWithCredential: (
+    credential: firebase.auth.AuthCredential,
+  ) => SagaIterator
+  signInAnonymously: () => SagaIterator
+  signInWithCredential: (credential: firebase.auth.AuthCredential) => SagaIterator
+  signInWithCustomToken: (token: string) => SagaIterator
+  signInWithEmailAndPassword: (email: string, password: string) => SagaIterator
+  signInWithPhoneNumber: (
+    phoneNumber: string,
+    applicationVerifier: firebase.auth.ApplicationVerifier,
+  ) => SagaIterator
+  signInWithPopup: (authProvider: firebase.auth.AuthProvider) => SagaIterator
+  signInWithRedirect: (authProvider: firebase.auth.AuthProvider) => SagaIterator
+  signOut: () => SagaIterator
+  unlink: (provider: string) => SagaIterator
+  updateEmail: (email: string) => SagaIterator
+  updatePassword: (password: string) => SagaIterator
+  updateProfile: (profile: object) => SagaIterator
 }
 
 interface Database {
-  read: (pathOrRef: PathOrRef.Database) => any,
-  create: (pathOrRef: PathOrRef.Database, data: any) => string,
-  update: (pathOrRef: PathOrRef.Database, data: any) => void,
-  patch: (pathOrRef: PathOrRef.Database, data: any) => void,
-  delete: (pathOrRef: PathOrRef.Database) => void,
-  channel: (pathOrRef: PathOrRef.Database, event: string) => Channel<ChannelOutput.Database>,
-  sync: (pathOrRef: PathOrRef.Database, options: object, event: string) => void
+  read: (pathOrRef: PathOrRef.Database) => SagaIterator
+  create: (pathOrRef: PathOrRef.Database, data: any) => SagaIterator
+  update: (pathOrRef: PathOrRef.Database, data: any) => SagaIterator
+  patch: (pathOrRef: PathOrRef.Database, data: any) => SagaIterator
+  delete: (pathOrRef: PathOrRef.Database) => SagaIterator
+  channel: (
+    pathOrRef: PathOrRef.Database,
+    event: string,
+  ) => Channel<ChannelOutput.Database>
+  sync: (pathOrRef: PathOrRef.Database, options: object, event: string) => SagaIterator
 }
 
 interface Firestore {
-  addDocument: (collectionRef: PathOrRef.Collection, data: object) => firebase.firestore.DocumentReference,
-  channel: (pathOrRef: PathOrRef.Firestore, type: FirestoreType) => Channel<ChannelOutput.Firestore>,
-  deleteDocument: (documentRef: PathOrRef.Document) => void,
-  getCollection: (collectionRef: PathOrRef.Collection) => firebase.firestore.QuerySnapshot,
-  getDocument: (documentRef: PathOrRef.Document) => firebase.firestore.DocumentSnapshot,
-  setDocument: (documentRef: PathOrRef.Document, data: object, options: firebase.firestore.SetOptions) => void,
-  syncCollection: <T>(collectionRef: PathOrRef.Collection, options: SyncOptions<ChannelOutput.Firestore, T>) => void,
-  syncDocument: <T>(documentRef: PathOrRef.Document, options: SyncOptions<ChannelOutput.Firestore, T>) => void,
-  updateDocument: (documentRef: PathOrRef.Document, ...args: any[]) => void
+  addDocument: (collectionRef: PathOrRef.Collection, data: object) => SagaIterator
+  channel: (
+    pathOrRef: PathOrRef.Firestore,
+    type: FirestoreType,
+  ) => Channel<ChannelOutput.Firestore>
+  deleteDocument: (documentRef: PathOrRef.Document) => SagaIterator
+  getCollection: (collectionRef: PathOrRef.Collection) => SagaIterator
+  getDocument: (documentRef: PathOrRef.Document) => SagaIterator
+  setDocument: (
+    documentRef: PathOrRef.Document,
+    data: object,
+    options: firebase.firestore.SetOptions,
+  ) => SagaIterator
+  syncCollection: <T>(
+    collectionRef: PathOrRef.Collection,
+    options: SyncOptions<ChannelOutput.Firestore, T>,
+  ) => SagaIterator
+  syncDocument: <T>(
+    documentRef: PathOrRef.Document,
+    options: SyncOptions<ChannelOutput.Firestore, T>,
+  ) => SagaIterator
+  updateDocument: (documentRef: PathOrRef.Document, ...args: any[]) => SagaIterator
 }
 
 interface Functions {
@@ -96,19 +124,33 @@ interface Functions {
 }
 
 interface Messaging {
-  channel: () => Channel<ChannelOutput.Messaging.Message>,
-  syncMessages: <T>(options: SyncOptions<ChannelOutput.Messaging.Message, T>) => void,
-  syncToken: <T>(options: SyncOptions<ChannelOutput.Messaging.Token, T>) => void,
+  channel: () => Channel<ChannelOutput.Messaging.Message>
+  syncMessages: <T>(
+    options: SyncOptions<ChannelOutput.Messaging.Message, T>,
+  ) => SagaIterator
+  syncToken: <T>(options: SyncOptions<ChannelOutput.Messaging.Token, T>) => SagaIterator
   tokenRefreshChannel: () => Channel<ChannelOutput.Messaging.Token>
 }
 
 interface Storage {
-  uploadFile: (pathOrRef: PathOrRef.Storage, file, metadata) => firebase.storage.UploadTask,
-  uploadString: (pathOrRef: PathOrRef.Storage, string: string, format: firebase.storage.StringFormat, metadata: firebase.storage.UploadMetadata) => firebase.storage.UploadTask,
-  getDownloadURL: (pathOrRef: PathOrRef.Storage) => string,
-  getFileMetadata: (pathOrRef: PathOrRef.Storage) => firebase.storage.FullMetadata,
-  updateFileMetadata: (pathOrRef: PathOrRef.Storage, newMetadata: firebase.storage.SettableMetadata) => firebase.storage.FullMetadata,
-  deleteFile: (pathOrRef: PathOrRef.Storage) => void
+  uploadFile: (
+    pathOrRef: PathOrRef.Storage,
+    file: Blob | Uint8Array | ArrayBuffer,
+    metadata?: firebase.storage.UploadMetadata,
+  ) => firebase.storage.UploadTask
+  uploadString: (
+    pathOrRef: PathOrRef.Storage,
+    string: string,
+    format: firebase.storage.StringFormat,
+    metadata: firebase.storage.UploadMetadata,
+  ) => firebase.storage.UploadTask
+  getDownloadURL: (pathOrRef: PathOrRef.Storage) => SagaIterator
+  getFileMetadata: (pathOrRef: PathOrRef.Storage) => SagaIterator
+  updateFileMetadata: (
+    pathOrRef: PathOrRef.Storage,
+    newMetadata: firebase.storage.SettableMetadata,
+  ) => SagaIterator
+  deleteFile: (pathOrRef: PathOrRef.Storage) => SagaIterator
 }
 
 declare class ReduxSagaFirebase {
@@ -124,7 +166,7 @@ declare class ReduxSagaFirebase {
   messaging: Messaging
   storage: Storage
 
-  constructor (firebaseApp: firebase.app.App)
+  constructor(firebaseApp: firebase.app.App)
 
   projectId(): string
 }

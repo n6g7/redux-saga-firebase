@@ -4,10 +4,6 @@
     "checkJs": true,
     "noEmit": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "src/**/*.test.js"
-  ]
+  "include": ["index.d.ts", "src/**/*"],
+  "exclude": ["src/**/*.test.js"]
 }
