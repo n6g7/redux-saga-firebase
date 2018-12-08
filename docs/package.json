@@ -16,7 +16,7 @@
     "redux-saga-firebase"
   ],
   "dependencies": {
-    "gatsby": "^1.9.273",
+    "gatsby": "^1.9.275",
     "gatsby-link": "^1.6.45",
     "gatsby-plugin-google-analytics": "^1.0.31",
     "gatsby-plugin-react-helmet": "^2.0.11",
