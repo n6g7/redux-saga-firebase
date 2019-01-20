@@ -28,29 +28,29 @@
     "type": "git"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.5"
+    "@babel/runtime": "^7.2.0"
   },
   "peerDependencies": {
     "firebase": "^5.0.4",
     "redux-saga": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.5",
-    "@babel/plugin-transform-runtime": "^7.1.0",
-    "@babel/preset-env": "^7.1.5",
-    "@types/node": "^10.12.5",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@types/node": "^10.12.18",
     "@types/redux": "^3.6.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
-    "eslint": "^5.9.0",
-    "firebase": "^5.5.8",
+    "eslint": "^5.12.1",
+    "firebase": "^5.8.0",
     "jest": "^23.6.0",
-    "prettier": "^1.15.2",
+    "prettier": "^1.16.0",
     "redux-saga": "^1.0.0",
-    "rimraf": "^2.6.2",
-    "typescript": "^3.1.6",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.2.4",
     "whatwg-fetch": "^3.0.0"
   },
   "jest": {
