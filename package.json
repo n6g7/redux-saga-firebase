@@ -32,7 +32,7 @@
   },
   "peerDependencies": {
     "firebase": "^5.0.4",
-    "redux-saga": "^0.16.0 || ^1.0.0-beta"
+    "redux-saga": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
@@ -48,7 +48,7 @@
     "firebase": "^5.5.8",
     "jest": "^23.6.0",
     "prettier": "^1.15.2",
-    "redux-saga": "^0.16.2 || ^1.0.0-beta",
+    "redux-saga": "^1.0.0",
     "rimraf": "^2.6.2",
     "typescript": "^3.1.6",
     "whatwg-fetch": "^3.0.0"
