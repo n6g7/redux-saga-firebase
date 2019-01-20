@@ -314,7 +314,7 @@ describe('database', () => {
       )
 
       const chan = 'qlsdql'
-      const defaultTransform = iterator.next(chan).value.FORK.args[1].transform
+      const defaultTransform = iterator.next(chan).value.payload.args[1].transform
 
       const value = 'qosdksm'
       expect(defaultTransform({ value })).toEqual(value)
