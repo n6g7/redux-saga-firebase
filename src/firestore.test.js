@@ -4,7 +4,7 @@ import firestoreModule, { getCollectionRef, getDocumentRef } from './firestore'
 import { syncChannel } from './utils'
 
 describe('firestore', () => {
-  let app, collection, context, document, firestore, unsubscribe
+  let app, collection, context, document, firestore, query, unsubscribe
 
   beforeEach(() => {
     unsubscribe = jest.fn()
@@ -20,6 +20,13 @@ describe('firestore', () => {
       doc: jest.fn(() => document),
       get: jest.fn(),
       onSnapshot: jest.fn(() => unsubscribe),
+    }
+    query = {
+      get: jest.fn(),
+      limit: jest.fn(),
+      onSnapshot: jest.fn(() => unsubscribe),
+      orderBy: jest.fn(),
+      where: jest.fn(),
     }
     firestore = {
       collection: jest.fn(() => collection),
@@ -201,6 +208,27 @@ describe('firestore', () => {
       const iterator = firestoreModule.getCollection.call(context, collection)
 
       expect(iterator.next().value).toEqual(call([collection, collection.get]))
+
+      expect(app.firestore.mock.calls.length).toBe(0)
+      expect(firestore.collection.mock.calls.length).toBe(0)
+
+      expect(iterator.next(response)).toEqual({
+        done: true,
+        value: response,
+      })
+    })
+
+    it('accepts a firebase.firestore.Query', () => {
+      const val = 'asd'
+      const result = {
+        data: jest.fn(() => val),
+        id: val,
+      }
+      const response = [result, result]
+
+      const iterator = firestoreModule.getCollection.call(context, query)
+
+      expect(iterator.next().value).toEqual(call([query, query.get]))
 
       expect(app.firestore.mock.calls.length).toBe(0)
       expect(firestore.collection.mock.calls.length).toBe(0)

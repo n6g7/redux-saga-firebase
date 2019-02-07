@@ -15,7 +15,9 @@ declare enum FirestoreType {
 
 declare namespace PathOrRef {
   type Base<R> = string | R
-  type Collection = Base<firebase.firestore.CollectionReference>
+  type Collection = Base<
+    firebase.firestore.CollectionReference | firebase.firestore.Query
+  >
   type Database = Base<firebase.database.Reference>
   type Document = Base<firebase.firestore.DocumentReference>
   type Storage = Base<firebase.storage.Reference>
