@@ -16,14 +16,14 @@
     "redux-saga-firebase"
   ],
   "dependencies": {
-    "gatsby": "^1.9.273",
+    "gatsby": "^2.0.0",
     "gatsby-link": "^1.6.45",
     "gatsby-plugin-google-analytics": "^1.0.31",
     "gatsby-plugin-react-helmet": "^2.0.11",
     "gatsby-plugin-react-next": "^1.0.11",
     "gatsby-plugin-styled-components": "^2.0.11",
     "gatsby-remark-prismjs": "^2.0.4",
-    "gatsby-source-filesystem": "^1.5.39",
+    "gatsby-source-filesystem": "^2.0.22",
     "gatsby-transformer-remark": "^1.7.44",
     "prismjs": "^1.15.0",
     "react-helmet": "^5.2.0",
