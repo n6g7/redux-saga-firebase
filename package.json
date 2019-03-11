@@ -28,7 +28,7 @@
     "type": "git"
   },
   "dependencies": {
-    "@babel/runtime": "^7.2.0"
+    "@babel/runtime": "^7.3.4"
   },
   "peerDependencies": {
     "firebase": "^5.0.4",
@@ -36,21 +36,21 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "@types/node": "^11.11.0",
     "@types/redux": "^3.6.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
-    "eslint": "^5.12.1",
-    "firebase": "^5.8.0",
-    "jest": "^23.6.0",
-    "prettier": "^1.16.0",
-    "redux-saga": "^1.0.0",
+    "babel-jest": "^24.3.1",
+    "eslint": "^5.15.1",
+    "firebase": "^5.8.6",
+    "jest": "^24.3.1",
+    "prettier": "^1.16.4",
+    "redux-saga": "^1.0.2",
     "rimraf": "^2.6.3",
-    "typescript": "^3.2.4",
+    "typescript": "^3.3.3333",
     "whatwg-fetch": "^3.0.0"
   },
   "jest": {
