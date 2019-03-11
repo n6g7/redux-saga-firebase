@@ -41,7 +41,7 @@ class Snippet extends PureComponent {
     return <Pre {...props}>
       <Code
         className={`language-${language}`}
-        dangerouslySetInnerHTML={{__html: html}}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
     </Pre>
   }
