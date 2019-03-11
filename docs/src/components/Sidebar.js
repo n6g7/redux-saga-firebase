@@ -105,7 +105,7 @@ class Sidebar extends PureComponent {
             <Menu.Header>Reference</Menu.Header>
 
             <Menu.Menu>
-              {references.filter(({node}) => node.parent.relativeDirectory === version).map(({ node: reference }, i) =>
+              {references.filter(({ node }) => node.parent.relativeDirectory === version).map(({ node: reference }, i) =>
                 <MenuLink to={`/reference/${version}/${reference.parent.name}`}>
                   {reference.frontmatter.title}
                 </MenuLink>
