@@ -4,6 +4,7 @@
 [![npm version](https://badge.fury.io/js/redux-saga-firebase.svg)](https://badge.fury.io/js/redux-saga-firebase)
 [![Coverage Status](https://coveralls.io/repos/github/n6g7/redux-saga-firebase/badge.svg?branch=master)](https://coveralls.io/github/n6g7/redux-saga-firebase?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/n6g7/redux-saga-firebase/badge.svg)](https://snyk.io/test/github/n6g7/redux-saga-firebase)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1e1b6331-8f0f-47b0-ab43-3a1c6c438f18/deploy-status)](https://app.netlify.com/sites/redux-saga-firebase/deploys)
 
 A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [firebase](https://firebase.google.com/).
 
