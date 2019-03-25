@@ -2,11 +2,16 @@
 title: Storage
 layout: docs
 methods:
-
   - signature: storage.uploadFile(pathOrRef, file, metadata)
     id: uploadFile
     generator: false
-    description: Uploads a file to cloud storage.
+    description: |
+      Uploads a file to cloud storage.
+
+      When executed within a `call` effect, redux-saga will "resolve" the returned `UploadTask` into an [`UploadTaskSnapshot`](https://firebase.google.com/docs/reference/js/firebase.storage.UploadTaskSnapshot) and directly return that instead.
+      You might want to consider *not* using the `call` effect creator when using this method.
+
+      More information in [issue \#177](https://github.com/n6g7/redux-saga-firebase/issues/177).
     arguments:
       - name: pathOrRef
         required: true
@@ -24,7 +29,7 @@ methods:
     example: |
       ```js
       function* uploadFile(action) {
-        const task = yield call(rsf.storage.uploadFile, action.path, action.file);
+        const task = rsf.storage.uploadFile(action.path, action.file);
 
         const channel = eventChannel(emit => task.on('state_changed', emit));
 
