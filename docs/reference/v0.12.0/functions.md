@@ -2,7 +2,6 @@
 title: Functions
 layout: docs
 methods:
-
   - signature: functions.call(functionName, queryParams, init)
     id: call
     generator: true
@@ -36,7 +35,7 @@ methods:
     output: A javascript object (`application/json`) or a string (anything else) depending on the Content-Type of the response.
     example: |
       ```js
-      function* callFunction() {
+      function* callFunctionA() {
         // Will make a POST request to https://us-central1-project-id.firebaseapp.com/sayHello?name=Elon
         // with custom headers
         const result = yield call(
@@ -55,9 +54,8 @@ methods:
 
         // `result` is either an object or a string (depends on response's Content-Type)
       }
-      ```
-      ```js
-      function* callFunction() {
+
+      function* callFunctionB() {
         // Will make a GET request to https://my.host/sayHello?name=Elon
         const result = yield call(
           rsf.functions.call,
