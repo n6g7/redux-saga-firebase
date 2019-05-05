@@ -7,7 +7,7 @@
   "scripts": {
     "build": "gatsby build",
     "dev": "gatsby develop",
-    "test": "standard"
+    "test": "prettier -l \"src/**/*.js\""
   },
   "keywords": [
     "documentation",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "standard": "^12.0.1"
+    "prettier": "^1.17.0"
   },
   "standard": {
     "globals": [

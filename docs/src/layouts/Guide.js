@@ -8,21 +8,20 @@ const Guide = ({ data }) => {
     file: {
       base,
       markdown: { frontmatter, html },
-      sourceInstanceName
+      sourceInstanceName,
     },
-    site: { siteMetadata: site }
+    site: { siteMetadata: site },
   } = data
 
-  return <div>
-    <Header as='h1'>{ frontmatter.title }</Header>
+  return (
+    <div>
+      <Header as="h1">{frontmatter.title}</Header>
 
-    <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
 
-    <Footer
-      site={site}
-      path={`${site.docsDirectory}/${sourceInstanceName}/${base}`}
-    />
-  </div>
+      <Footer site={site} path={`${site.docsDirectory}/${sourceInstanceName}/${base}`} />
+    </div>
+  )
 }
 
 export default Guide
@@ -31,7 +30,7 @@ export const pageQuery = graphql`
   query GuideByPath($fileName: String!) {
     site {
       siteMetadata {
-        docsDirectory,
+        docsDirectory
         github {
           url
         }
