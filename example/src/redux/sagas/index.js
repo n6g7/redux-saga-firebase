@@ -7,13 +7,13 @@ import messaging from './messaging'
 import storage from './storage'
 import todos from './todos'
 
-export default function * rootSaga () {
+export default function* rootSaga() {
   yield all([
     fork(analytics),
     fork(functions),
     fork(login),
     fork(messaging),
     fork(storage),
-    fork(todos)
+    fork(todos),
   ])
 }

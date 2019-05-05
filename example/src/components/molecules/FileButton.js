@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Button } from '@atoms'
 
 const Input = styled.input.attrs({
-  type: 'file'
+  type: 'file',
 })`
   display: none;
 `
@@ -13,35 +13,35 @@ const Input = styled.input.attrs({
 class FileButton extends PureComponent {
   static propTypes = {
     children: PropTypes.any.isRequired,
-    onChange: PropTypes.func
-  };
+    onChange: PropTypes.func,
+  }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.onClick = this.onClick.bind(this)
   }
 
-  onClick () {
+  onClick() {
     this.input.click()
   }
 
-  render () {
-    const {
-      children,
-      onChange,
-      ...props
-    } = this.props
+  render() {
+    const { children, onChange, ...props } = this.props
 
-    return <div>
-      <Input
-        onChange={onChange}
-        innerRef={ref => { this.input = ref }}
-      />
-      <Button onClick={this.onClick} {...props}>
-        { children }
-      </Button>
-    </div>
+    return (
+      <div>
+        <Input
+          onChange={onChange}
+          ref={ref => {
+            this.input = ref
+          }}
+        />
+        <Button onClick={this.onClick} {...props}>
+          {children}
+        </Button>
+      </div>
+    )
   }
 }
 

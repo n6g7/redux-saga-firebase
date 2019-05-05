@@ -23,7 +23,7 @@ const StyledButton = styled.button`
   padding: 0 ${p => 2 * p.theme.spacing}px;
   position: relative;
   text-decoration: none;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover {
     color: white;
@@ -34,12 +34,16 @@ const StyledButton = styled.button`
     margin-right: ${p => p.theme.spacing}px;
   }
 
-  ${p => p.disabled && `
+  ${p =>
+    p.disabled &&
+    `
     background: ${p.theme.colour.disabled};
     cursor: default;
   `}
 
-  ${p => p.callToAction && `
+  ${p =>
+    p.callToAction &&
+    `
     font-size: 20px;
     height: ${8 * p.theme.spacing}px;
     line-height: ${8 * p.theme.spacing}px;
@@ -55,7 +59,9 @@ const StyledButton = styled.button`
     transform: translateY(${p => p.theme.spacing / 2}px);
   }
 
-  ${p => p.loading && `
+  ${p =>
+    p.loading &&
+    `
     padding-right: ${6 * p.theme.spacing}px;
 
     &::after {
@@ -77,45 +83,49 @@ class Button extends PureComponent {
     callToAction: PropTypes.bool.isRequired,
     children: PropTypes.any.isRequired,
     link: PropTypes.string,
-    loading: PropTypes.bool.isRequired
-  };
+    loading: PropTypes.bool.isRequired,
+  }
 
   static defaultProps = {
     callToAction: false,
     className: '',
-    loading: false
-  };
+    loading: false,
+  }
 
-  render () {
-    const {
-      children,
-      link,
-      ...props
-    } = this.props
+  render() {
+    const { children, link, ...props } = this.props
 
-    return link
-      ? <StyledLink {...props} href={link} target='blank'>{ children }</StyledLink>
-      : <StyledButton {...props}>{ children }</StyledButton>
+    return link ? (
+      <StyledLink {...props} href={link} target="blank">
+        {children}
+      </StyledLink>
+    ) : (
+      <StyledButton {...props}>{children}</StyledButton>
+    )
   }
 }
 
 export default Button
 
 class GitHubButton extends PureComponent {
-  render () {
-    return <Button link='https://github.com/n6g7/redux-saga-firebase' callToAction>
-      <img src={github} />
-      Source on GitHub
-    </Button>
+  render() {
+    return (
+      <Button link="https://github.com/n6g7/redux-saga-firebase" callToAction>
+        <img src={github} />
+        Source on GitHub
+      </Button>
+    )
   }
 }
 
 class DocsButton extends PureComponent {
-  render () {
-    return <Button link='https://redux-saga-firebase.js.org/' callToAction>
-      <img src={docs} />
-      Docs
-    </Button>
+  render() {
+    return (
+      <Button link="https://redux-saga-firebase.js.org/" callToAction>
+        <img src={docs} />
+        Docs
+      </Button>
+    )
   }
 }
 

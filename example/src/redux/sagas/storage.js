@@ -6,7 +6,7 @@ import rsf from '../rsf'
 
 const filePath = 'test.png'
 
-function * syncFileUrl () {
+function* syncFileUrl() {
   try {
     const url = yield call(rsf.storage.getDownloadURL, filePath)
     yield put(setFileURL(url))
@@ -15,12 +15,12 @@ function * syncFileUrl () {
   }
 }
 
-function * sendFileSaga (action) {
+function* sendFileSaga(action) {
   const file = yield select(state => state.storage.file)
   const task = rsf.storage.uploadFile(filePath, file)
 
   task.on('state_changed', snapshot => {
-    const pct = snapshot.bytesTransferred * 100 / snapshot.totalBytes
+    const pct = (snapshot.bytesTransferred * 100) / snapshot.totalBytes
     console.log(`${pct}%`)
   })
 
@@ -30,10 +30,8 @@ function * sendFileSaga (action) {
   yield call(syncFileUrl)
 }
 
-export default function * rootSaga () {
-  yield all([
-    takeEvery(types.SEND_FILE, sendFileSaga)
-  ])
+export default function* rootSaga() {
+  yield all([takeEvery(types.SEND_FILE, sendFileSaga)])
 
   yield call(syncFileUrl)
 }

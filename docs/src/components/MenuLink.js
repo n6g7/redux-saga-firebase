@@ -4,29 +4,31 @@ import Link from 'gatsby-link'
 import { Menu } from 'semantic-ui-react'
 
 class MenuLink extends Component {
-  render () {
+  render() {
     const { children, strict, to, ...rest } = this.props
 
-    return <Menu.Item
-      color='red'
-      as={Link}
-      to={to}
-      activeClassName='active'
-      isActive={MenuLink.isActive(to, strict)}
-      {...rest}
-    >
-      {children}
-    </Menu.Item>
+    return (
+      <Menu.Item
+        color="red"
+        as={Link}
+        to={to}
+        activeClassName="active"
+        isActive={MenuLink.isActive(to, strict)}
+        {...rest}
+      >
+        {children}
+      </Menu.Item>
+    )
   }
 }
 
 MenuLink.propTypes = {
   strict: PropTypes.bool.isRequired,
-  to: PropTypes.string.isRequired
+  to: PropTypes.string.isRequired,
 }
 
 MenuLink.defaultProps = {
-  strict: false
+  strict: false,
 }
 
 MenuLink.isActive = (path, strict = false) => {

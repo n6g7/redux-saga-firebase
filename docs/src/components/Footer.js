@@ -7,16 +7,13 @@ const StyledContainer = styled(Container)`
 `
 
 const Footer = ({ path, site }) => {
-  return <StyledContainer as='footer' textAlign='center'>
-    <Button
-      basic
-      as='a'
-      href={`${site.github.url}/tree/master/${path}`}
-      target='blank'
-    >
-      Edit on GitHub
-    </Button>
-  </StyledContainer>
+  return (
+    <StyledContainer as="footer" textAlign="center">
+      <Button basic as="a" href={`${site.github.url}/tree/master/${path}`} target="blank">
+        Edit on GitHub
+      </Button>
+    </StyledContainer>
+  )
 }
 
 export default Footer

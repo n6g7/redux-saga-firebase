@@ -13,15 +13,17 @@ const Disclaimer = styled.p`
 class Footer extends PureComponent {
   static propTypes = {}
 
-  render () {
-    return <StyledFooter>
-      <nav>
-        <Button.GitHub />
-        <Button.Docs />
-      </nav>
+  render() {
+    return (
+      <StyledFooter>
+        <nav>
+          <Button.GitHub />
+          <Button.Docs />
+        </nav>
 
-      <Disclaimer>The content of this site is reset every 3 hours.</Disclaimer>
-    </StyledFooter>
+        <Disclaimer>The content of this site is reset every 3 hours.</Disclaimer>
+      </StyledFooter>
+    )
   }
 }
 

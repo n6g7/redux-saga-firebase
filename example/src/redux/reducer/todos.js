@@ -3,25 +3,25 @@ import { types } from '@actions/todos'
 const initialState = {
   list: [],
   new: '',
-  useFirestore: false
+  useFirestore: false,
 }
 
-export default function reducer (state = initialState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case types.TODOS.SYNC:
       return {
         ...state,
-        list: action.todos
+        list: action.todos,
       }
     case types.TODOS.NEW.CHANGE:
       return {
         ...state,
-        new: action.todo
+        new: action.todo,
       }
     case types.TODOS.SET_FIRESTORE:
       return {
         ...state,
-        useFirestore: action.useFirestore
+        useFirestore: action.useFirestore,
       }
     default:
       return state

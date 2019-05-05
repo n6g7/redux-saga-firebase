@@ -8,7 +8,7 @@ const firebaseApp = firebase.initializeApp({
   databaseURL: 'https://redux-saga-firebase.firebaseio.com',
   projectId: 'redux-saga-firebase',
   storageBucket: 'redux-saga-firebase.appspot.com',
-  messagingSenderId: '231632772443'
+  messagingSenderId: '231632772443',
 })
 
 const rsf = new ReduxSagaFirebase(firebaseApp)

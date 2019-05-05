@@ -32,36 +32,31 @@ class Example extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     snippets: PropTypes.arrayOf(PropTypes.string).isRequired,
-    title: PropTypes.string.isRequired
-  };
+    title: PropTypes.string.isRequired,
+  }
 
   static defaultProps = {
-    snippets: []
-  };
+    snippets: [],
+  }
 
-  render () {
-    const {
-      children,
-      snippets,
-      title,
-      ...props
-    } = this.props
+  render() {
+    const { children, snippets, title, ...props } = this.props
 
-    return <StyledExample {...props}>
-      <Title>{ title }</Title>
+    return (
+      <StyledExample {...props}>
+        <Title>{title}</Title>
 
-      { children }
+        {children}
 
-      { snippets.length > 0 &&
-        <Snippets>
-          {snippets.map((snippet, index) =>
-            <StyledSnippet key={index}>
-              {snippet}
-            </StyledSnippet>
-          )}
-        </Snippets>
-      }
-    </StyledExample>
+        {snippets.length > 0 && (
+          <Snippets>
+            {snippets.map((snippet, index) => (
+              <StyledSnippet key={index}>{snippet}</StyledSnippet>
+            ))}
+          </Snippets>
+        )}
+      </StyledExample>
+    )
   }
 }
 

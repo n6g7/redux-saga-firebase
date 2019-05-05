@@ -5,7 +5,7 @@ import { setRegistrationToken } from '@actions/messaging'
 
 import rsf from '../rsf'
 
-function * requestPermissionSaga () {
+function* requestPermissionSaga() {
   const messaging = firebase.messaging()
 
   try {
@@ -17,21 +17,21 @@ function * requestPermissionSaga () {
   }
 }
 
-function * messageHandlerSaga () {
+function* messageHandlerSaga() {
   const messageChannel = rsf.messaging.channel()
 
-  yield takeEvery(messageChannel, function * (message) {
-    console.log('You\'ve got mail!', message)
+  yield takeEvery(messageChannel, function*(message) {
+    console.log("You've got mail!", message)
   })
 }
 
-export default function * () {
+export default function*() {
   yield requestPermissionSaga()
 
   yield all([
     messageHandlerSaga,
     rsf.messaging.syncToken({
-      successActionCreator: setRegistrationToken
-    })
+      successActionCreator: setRegistrationToken,
+    }),
   ])
 }

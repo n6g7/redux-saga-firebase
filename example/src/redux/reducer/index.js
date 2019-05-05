@@ -9,5 +9,5 @@ export default combineReducers({
   login,
   messaging,
   storage,
-  todos
+  todos,
 })

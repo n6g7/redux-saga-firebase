@@ -7,7 +7,7 @@
     "build": "webpack -p --mode=production",
     "deploy": "firebase deploy",
     "dev": "webpack-dev-server --mode=development",
-    "test": "standard"
+    "test": "prettier -l \"src/**/*.js\""
   },
   "dependencies": {
     "@firebase/firestore": "^1.2.2",
@@ -40,8 +40,8 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "img-loader": "^3.0.1",
+    "prettier": "^1.17.0",
     "raw-loader": "^2.0.0",
-    "standard": "^12.0.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.2",
