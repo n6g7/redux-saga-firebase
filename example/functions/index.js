@@ -4,6 +4,9 @@ const cors = require('cors')({ origin: true })
 
 admin.initializeApp(functions.config().firebase)
 
+const settings = { timestampsInSnapshots: true }
+admin.firestore().settings(settings)
+
 exports.ping = functions.https.onRequest((request, response) => {
   admin
     .messaging()
