@@ -6,14 +6,14 @@ import {
   loginSuccess,
   loginFailure,
   logoutSuccess,
-  logoutFailure
+  logoutFailure,
 } from '@actions/login'
 
 import rsf from '../rsf'
 
 const authProvider = new firebase.auth.GoogleAuthProvider()
 
-function * loginSaga () {
+function* loginSaga() {
   try {
     yield call(rsf.auth.signInWithPopup, authProvider)
     // successful login will trigger the loginStatusWatcher, which will update the state
@@ -22,7 +22,7 @@ function * loginSaga () {
   }
 }
 
-function * logoutSaga () {
+function* logoutSaga() {
   try {
     yield call(rsf.auth.signOut)
     // successful logout will trigger the loginStatusWatcher, which will update the state
@@ -31,7 +31,7 @@ function * logoutSaga () {
   }
 }
 
-function * loginStatusWatcher () {
+function* loginStatusWatcher() {
   // events on this channel fire when the user logs in or logs out
   const channel = yield call(rsf.auth.channel)
 
@@ -43,10 +43,10 @@ function * loginStatusWatcher () {
   }
 }
 
-export default function * loginRootSaga () {
+export default function* loginRootSaga() {
   yield fork(loginStatusWatcher)
   yield all([
     takeEvery(types.LOGIN.REQUEST, loginSaga),
-    takeEvery(types.LOGOUT.REQUEST, logoutSaga)
+    takeEvery(types.LOGOUT.REQUEST, logoutSaga),
   ])
 }

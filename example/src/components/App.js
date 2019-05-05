@@ -6,7 +6,7 @@ import {
   Footer,
   Header,
   StorageExample,
-  TodoListExample
+  TodoListExample,
 } from '@organisms'
 
 const Container = styled.main`
@@ -19,16 +19,18 @@ const Container = styled.main`
 class App extends PureComponent {
   static propTypes = {}
 
-  render () {
-    return <Container>
-      <Header />
+  render() {
+    return (
+      <Container>
+        <Header />
 
-      <AuthenticationExample />
-      <TodoListExample />
-      <StorageExample />
+        <AuthenticationExample />
+        <TodoListExample />
+        <StorageExample />
 
-      <Footer />
-    </Container>
+        <Footer />
+      </Container>
+    )
   }
 }
 

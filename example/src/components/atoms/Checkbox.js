@@ -13,7 +13,7 @@ const Container = styled.p`
 `
 
 const StyledCheckbox = styled.input.attrs({
-  type: 'checkbox'
+  type: 'checkbox',
 })`
   left: -9999px;
   position: absolute;
@@ -47,25 +47,18 @@ class Checkbox extends PureComponent {
     checked: PropTypes.bool.isRequired,
     children: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
-    onChange: PropTypes.func
-  };
+    onChange: PropTypes.func,
+  }
 
-  render () {
-    const {
-      checked,
-      children,
-      id,
-      onChange
-    } = this.props
+  render() {
+    const { checked, children, id, onChange } = this.props
 
-    return <Container>
-      <StyledCheckbox
-        id={id}
-        checked={checked}
-        onChange={onChange}
-      />
-      <label htmlFor={id}>{children}</label>
-    </Container>
+    return (
+      <Container>
+        <StyledCheckbox id={id} checked={checked} onChange={onChange} />
+        <label htmlFor={id}>{children}</label>
+      </Container>
+    )
   }
 }
 

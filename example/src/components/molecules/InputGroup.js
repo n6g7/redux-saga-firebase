@@ -10,8 +10,8 @@ const Container = styled.div`
   flex-flow: row nowrap;
 `
 
-const StyledInput = Input.extend.attrs({
-  type: 'text'
+const StyledInput = styled(Input).attrs({
+  type: 'text',
 })`
   border-right: 0;
   border-bottom-right-radius: 0;
@@ -34,34 +34,23 @@ class InputGroup extends PureComponent {
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
     placeholder: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired
-  };
+    value: PropTypes.string.isRequired,
+  }
 
   static defaultProps = {
     placeholder: '',
-    value: ''
-  };
+    value: '',
+  }
 
-  render () {
-    const {
-      children,
-      onChange,
-      onSubmit,
-      placeholder,
-      value,
-      ...props
-    } = this.props
+  render() {
+    const { children, onChange, onSubmit, placeholder, value, ...props } = this.props
 
-    return <Container {...props}>
-      <StyledInput
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-      />
-      <StyledButton onClick={onSubmit}>
-        { children }
-      </StyledButton>
-    </Container>
+    return (
+      <Container {...props}>
+        <StyledInput value={value} onChange={onChange} placeholder={placeholder} />
+        <StyledButton onClick={onSubmit}>{children}</StyledButton>
+      </Container>
+    )
   }
 }
 

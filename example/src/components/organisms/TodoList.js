@@ -4,12 +4,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { Checkbox as SemanticCheckbox, Label } from 'semantic-ui-react'
 
-import {
-  changeNewTodo,
-  saveNewTodo,
-  setFirestore,
-  setTodoStatus
-} from '@actions/todos'
+import { changeNewTodo, saveNewTodo, setFirestore, setTodoStatus } from '@actions/todos'
 
 import { Checkbox, Link } from '@atoms'
 import { Example, InputGroup } from '@molecules'
@@ -26,7 +21,7 @@ const StyledSemanticCheckbox = styled(SemanticCheckbox)`
       color: white !important;
 
       &::before {
-        background: rgba(255,255,255,0.15) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
       }
     }
 
@@ -71,14 +66,8 @@ const ChecklistItem = styled.li`
 const firestoreDoc = extractLines(firestoreSaga)
 const realtimeDoc = extractLines(realtimeSaga)
 
-const firestoreSnippets = [
-  firestoreDoc(10, 19),
-  firestoreDoc(36, 45)
-]
-const realtimeSnippets = [
-  realtimeDoc(10, 20),
-  realtimeDoc(32, 41)
-]
+const firestoreSnippets = [firestoreDoc(10, 19), firestoreDoc(36, 45)]
+const realtimeSnippets = [realtimeDoc(10, 20), realtimeDoc(32, 41)]
 
 class TodoList extends PureComponent {
   static propTypes = {
@@ -87,77 +76,85 @@ class TodoList extends PureComponent {
     saveNewTodo: PropTypes.func.isRequired,
     setTodoStatus: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
-    useFirestore: PropTypes.bool.isRequired
+    useFirestore: PropTypes.bool.isRequired,
   }
 
   toggleFirestore = (event, { checked }) => this.props.setFirestore(checked)
 
-  render () {
+  render() {
     const {
       changeNewTodo,
       newTodo,
       saveNewTodo,
       setTodoStatus,
       todos,
-      useFirestore
+      useFirestore,
     } = this.props
 
-    return <Example
-      title='Todo list'
-      className='todo-list'
-      snippets={useFirestore ? firestoreSnippets : realtimeSnippets}
-    >
-      <StyledSemanticCheckbox
-        label='Use firestore'
-        checked={useFirestore}
-        onChange={this.toggleFirestore}
-        toggle
-      />
-      <Label pointing='left' color='yellow' size='tiny' horizontal>Beta</Label>
-
-      <p>
-        Open this page in <Link href='#' target='blank'>another tab or window</Link> to see the realtime database in action!
-      </p>
-
-      <StyledInputGroup
-        value={newTodo}
-        onChange={e => changeNewTodo(e.target.value)}
-        placeholder='New todo'
-        onSubmit={saveNewTodo}
+    return (
+      <Example
+        title="Todo list"
+        className="todo-list"
+        snippets={useFirestore ? firestoreSnippets : realtimeSnippets}
       >
-        Add item
-      </StyledInputGroup>
+        <StyledSemanticCheckbox
+          label="Use firestore"
+          checked={useFirestore}
+          onChange={this.toggleFirestore}
+          toggle
+        />
+        <Label pointing="left" color="yellow" size="tiny" horizontal>
+          Beta
+        </Label>
 
-      <Checklist>
-        { todos.map(todo =>
-          <ChecklistItem key={todo.id}>
-            <Checkbox
-              id={todo.id}
-              checked={todo.done}
-              onChange={() => setTodoStatus(todo.id, !todo.done)}
-            >
-              { todo.label }
-            </Checkbox>
-          </ChecklistItem>
-        )}
-      </Checklist>
-    </Example>
+        <p>
+          Open this page in{' '}
+          <Link href="#" target="blank">
+            another tab or window
+          </Link>{' '}
+          to see the realtime database in action!
+        </p>
+
+        <StyledInputGroup
+          value={newTodo}
+          onChange={e => changeNewTodo(e.target.value)}
+          placeholder="New todo"
+          onSubmit={saveNewTodo}
+        >
+          Add item
+        </StyledInputGroup>
+
+        <Checklist>
+          {todos.map(todo => (
+            <ChecklistItem key={todo.id}>
+              <Checkbox
+                id={todo.id}
+                checked={todo.done}
+                onChange={() => setTodoStatus(todo.id, !todo.done)}
+              >
+                {todo.label}
+              </Checkbox>
+            </ChecklistItem>
+          ))}
+        </Checklist>
+      </Example>
+    )
   }
 }
 
 const mapStateToProps = state => ({
   newTodo: state.todos.new,
   todos: state.todos.list,
-  useFirestore: state.todos.useFirestore
+  useFirestore: state.todos.useFirestore,
 })
 const mapDispatchToProps = {
   changeNewTodo,
   saveNewTodo,
   setTodoStatus,
-  setFirestore
+  setFirestore,
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TodoList)

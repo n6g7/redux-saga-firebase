@@ -23,7 +23,8 @@ export const Container = styled.header`
     flex-flow: row nowrap;
     margin-top: ${p => 3 * p.theme.spacing}px;
 
-    a, button {
+    a,
+    button {
       &:not(:last-child) {
         margin-right: ${p => 2 * p.theme.spacing}px;
       }
@@ -47,28 +48,51 @@ const Abbr = styled.abbr`
 class Header extends PureComponent {
   static propTypes = {}
 
-  render () {
-    return <Container>
-      <Title>redux-saga-firebase</Title>
+  render() {
+    return (
+      <Container>
+        <Title>redux-saga-firebase</Title>
 
-      <p>
-        <Abbr title='redux-saga-firebase'>RSF</Abbr> is a <Link href='https://redux-saga.github.io/redux-saga/' target='blank'>redux-saga</Link> implementation of the <Link href='https://firebase.google.com/docs/reference/js/' target='blank'>Firebase API</Link>.
-      </p>
+        <p>
+          <Abbr title="redux-saga-firebase">RSF</Abbr> is a{' '}
+          <Link href="https://redux-saga.github.io/redux-saga/" target="blank">
+            redux-saga
+          </Link>{' '}
+          implementation of the{' '}
+          <Link href="https://firebase.google.com/docs/reference/js/" target="blank">
+            Firebase API
+          </Link>
+          .
+        </p>
 
-      <p>
-        Its aims to make every interaction with Firebase as simple as possible by exposing <Link href='https://redux-saga.github.io/redux-saga/docs/api/index.html#callfn-args' target='blank'><code>call</code></Link>-able methods and <Link href='https://redux-saga.github.io/redux-saga/docs/api/index.html#channel' target='blank'>channels</Link>.
-        It supports authentication, database operations, file storage, messaging and functions calls.
-      </p>
+        <p>
+          Its aims to make every interaction with Firebase as simple as possible by
+          exposing{' '}
+          <Link
+            href="https://redux-saga.github.io/redux-saga/docs/api/index.html#callfn-args"
+            target="blank"
+          >
+            <code>call</code>
+          </Link>
+          -able methods and{' '}
+          <Link
+            href="https://redux-saga.github.io/redux-saga/docs/api/index.html#channel"
+            target="blank"
+          >
+            channels
+          </Link>
+          . It supports authentication, database operations, file storage, messaging and
+          functions calls.
+        </p>
 
-      <p>
-        Below is a collection of examples.
-      </p>
+        <p>Below is a collection of examples.</p>
 
-      <nav>
-        <Button.GitHub />
-        <Button.Docs />
-      </nav>
-    </Container>
+        <nav>
+          <Button.GitHub />
+          <Button.Docs />
+        </nav>
+      </Container>
+    )
   }
 }
 

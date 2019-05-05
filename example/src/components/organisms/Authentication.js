@@ -3,10 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import {
-  login,
-  logout
-} from '@actions/login'
+import { login, logout } from '@actions/login'
 
 import { Button } from '@atoms'
 import { Example } from '@molecules'
@@ -27,45 +24,35 @@ class Authentication extends PureComponent {
     loggedIn: PropTypes.bool.isRequired,
     login: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
-    user: PropTypes.object
-  };
+    user: PropTypes.object,
+  }
 
-  render () {
-    return <Container
-      title='Authentication'
-      snippets={[
-        doc(17, 25),
-        doc(35, 45)
-      ]}
-    >
-      <Button
-        onClick={this.props.login}
-        disabled={this.props.loggedIn}
-      >
-        Login
-      </Button>
-      <Button
-        onClick={this.props.logout}
-        disabled={!this.props.loggedIn}
-      >
-        Logout
-      </Button>
+  render() {
+    return (
+      <Container title="Authentication" snippets={[doc(17, 25), doc(35, 45)]}>
+        <Button onClick={this.props.login} disabled={this.props.loggedIn}>
+          Login
+        </Button>
+        <Button onClick={this.props.logout} disabled={!this.props.loggedIn}>
+          Logout
+        </Button>
 
-      <p>User: {this.props.user ? this.props.user.displayName : 'none'}</p>
-    </Container>
+        <p>User: {this.props.user ? this.props.user.displayName : 'none'}</p>
+      </Container>
+    )
   }
 }
 
 const mapStateToProps = state => ({
   loggedIn: state.login.loggedIn,
-  user: state.login.user
+  user: state.login.user,
 })
 const mapDispatchToProps = {
   login,
-  logout
+  logout,
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Authentication)

@@ -4,33 +4,33 @@ export const types = {
     SET_STATUS: 'TODOS.SET_STATUS',
     NEW: {
       CHANGE: 'TODOS.NEW.CHANGE',
-      SAVE: 'TODOS.NEW.SAVE'
+      SAVE: 'TODOS.NEW.SAVE',
     },
-    SET_FIRESTORE: 'TODOS.SET_FIRESTORE'
-  }
+    SET_FIRESTORE: 'TODOS.SET_FIRESTORE',
+  },
 }
 
 export const syncTodos = todos => ({
   type: types.TODOS.SYNC,
-  todos
+  todos,
 })
 
 export const changeNewTodo = todo => ({
   type: types.TODOS.NEW.CHANGE,
-  todo
+  todo,
 })
 
 export const saveNewTodo = () => ({
-  type: types.TODOS.NEW.SAVE
+  type: types.TODOS.NEW.SAVE,
 })
 
 export const setTodoStatus = (todoId, done) => ({
   type: types.TODOS.SET_STATUS,
   todoId,
-  done
+  done,
 })
 
 export const setFirestore = useFirestore => ({
   type: types.TODOS.SET_FIRESTORE,
-  useFirestore
+  useFirestore,
 })

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import ReactGA from 'react-ga'
-import { injectGlobal, ThemeProvider } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import App from './components/App'
 import store from './redux/store'
@@ -14,7 +14,7 @@ ReactGA.initialize('UA-62266834-2')
 ReactGA.set({ page: window.location.pathname + window.location.search })
 ReactGA.pageview(window.location.pathname + window.location.search)
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -29,8 +29,11 @@ injectGlobal`
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <>
+        <GlobalStyle />
+        <App />
+      </>
     </ThemeProvider>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 )
