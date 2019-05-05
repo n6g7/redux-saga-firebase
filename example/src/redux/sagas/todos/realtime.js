@@ -28,6 +28,10 @@ const todosTransformer = ({ value }) =>
   }))
 
 function* syncTodosSaga() {
+  rsf.app
+    .database()
+    .ref('todos')
+    .once('value', snap => console.log(snap.val()))
   yield fork(rsf.database.sync, 'todos', {
     successActionCreator: syncTodos,
     transform: todosTransformer,
