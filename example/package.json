@@ -38,7 +38,7 @@
     "@babel/runtime": "^7.4.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.0.6",
     "img-loader": "^3.0.1",
     "prettier": "^1.17.0",
     "raw-loader": "^3.0.0",
