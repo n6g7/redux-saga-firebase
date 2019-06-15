@@ -1,6 +1,6 @@
 import * as firebase from 'firebase'
 import { Action } from 'redux'
-import { Channel, SagaIterator } from 'redux-saga'
+import { Buffer, Channel, SagaIterator } from 'redux-saga'
 
 interface SyncOptions<S, T> {
   successActionCreator: (data: S | T) => Action
@@ -91,7 +91,8 @@ interface Database {
   delete: (pathOrRef: PathOrRef.Database) => SagaIterator
   channel: (
     pathOrRef: PathOrRef.Database,
-    event: string,
+    event?: string,
+    buffer?: Buffer<any>,
   ) => Channel<ChannelOutput.Database>
   sync: (pathOrRef: PathOrRef.Database, options: object, event: string) => SagaIterator
 }
@@ -100,7 +101,8 @@ interface Firestore {
   addDocument: (collectionRef: PathOrRef.Collection, data: object) => SagaIterator
   channel: (
     pathOrRef: PathOrRef.Firestore,
-    type: FirestoreType,
+    type?: FirestoreType,
+    buffer?: Buffer<any>,
   ) => Channel<ChannelOutput.Firestore>
   deleteDocument: (documentRef: PathOrRef.Document) => SagaIterator
   getCollection: (collectionRef: PathOrRef.Collection) => SagaIterator
