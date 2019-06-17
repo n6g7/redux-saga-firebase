@@ -172,9 +172,7 @@ describe('functions', () => {
       const result = getFunctionURL.call(context, functionName, parameters)
 
       expect(result).toBe(
-        `https://${region}-${projectId}.cloudfunctions.net/${functionName}?a=${
-          parameters.a
-        }&b=${parameters.b}`,
+        `https://${region}-${projectId}.cloudfunctions.net/${functionName}?a=${parameters.a}&b=${parameters.b}`,
       )
     })
 
