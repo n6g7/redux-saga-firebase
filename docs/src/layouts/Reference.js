@@ -96,9 +96,7 @@ class Reference extends PureComponent {
 
         <Footer
           site={site}
-          path={`${
-            site.docsDirectory
-          }/${sourceInstanceName}/${relativeDirectory}/${base}`}
+          path={`${site.docsDirectory}/${sourceInstanceName}/${relativeDirectory}/${base}`}
         />
       </div>
     )
