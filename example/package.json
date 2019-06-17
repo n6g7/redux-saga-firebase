@@ -19,7 +19,7 @@
     "react-ga": "^2.5.7",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",
-    "redux-saga": "^1.0.2",
+    "redux-saga": "^1.0.3",
     "redux-saga-firebase": "file:..",
     "semantic-ui-react": "^0.87.2",
     "styled-components": "^4.2.0",
