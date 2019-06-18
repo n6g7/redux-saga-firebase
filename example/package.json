@@ -17,7 +17,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-ga": "^2.5.7",
-    "react-redux": "^7.0.3",
+    "react-redux": "^7.1.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.3",
     "redux-saga-firebase": "file:..",
