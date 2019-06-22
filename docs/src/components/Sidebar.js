@@ -187,14 +187,6 @@ class Sidebar extends PureComponent {
               src="https://coveralls.io/repos/github/n6g7/redux-saga-firebase/badge.svg?branch=master"
               alt="Coverage Status"
             />
-            <br />
-            <Image
-              as="a"
-              href="https://snyk.io/test/github/n6g7/redux-saga-firebase"
-              src="https://snyk.io/test/github/n6g7/redux-saga-firebase/badge.svg"
-              alt="Known Vulnerabilities"
-              data-canonical-src="https://snyk.io/test/github/n6g7/redux-saga-firebase"
-            />
           </p>
         </div>
       </Grid.Column>
