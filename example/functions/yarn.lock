@@ -693,10 +693,10 @@ firebase-admin@^8.2.0:
     "@google-cloud/firestore" "^2.0.0"
     "@google-cloud/storage" "^2.5.0"
 
-firebase-functions@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/firebase-functions/-/firebase-functions-3.0.1.tgz#40aaa528d7ca092596ac63f802c2d3dd17db15d8"
-  integrity sha512-ByVuJXQcV6dvOlbNWdPq9JfIuAiwJgQwevFkuRf1OepUqH1eIMtu16bXl5s/gTODvUSHyiYEIMYeCG4hekOmtg==
+firebase-functions@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/firebase-functions/-/firebase-functions-3.0.2.tgz#e0bbf973a053a89739e2a6038171ee5e5546b1c5"
+  integrity sha512-FEC2UVNGuMTj4buq4z3zjzClaMR/h5vTnb1sSwNEaoPOP6Dr3IOxoyVNlC/qHY5qj9lVPL/YwnV8tPQ6xGmbaA==
   dependencies:
     "@types/cors" "^2.8.5"
     "@types/express" "^4.11.1"
