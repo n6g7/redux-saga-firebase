@@ -4316,9 +4316,9 @@ realpath-native@^1.1.0:
     util.promisify "^1.0.0"
 
 redux-saga@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-1.0.3.tgz#23e1c71fca6752ce52db3aaba4ecca657d7a9a1f"
-  integrity sha512-ORo16st4cvrS+tpthMi6mJz1mMIuM//0EKFPAZjKTvDglRDebc7vTOJa0oeqT0iAZeYupusAstprFb0+3YDw/w==
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-1.0.4.tgz#ddeb13683d0decb04e49adb6dee785b67a219191"
+  integrity sha512-KrT7jg1TKf4raTwH2L4d6WMEqHTuScTHOkbLL25e9Az0DQC4Y5ciCOK8rh3NSRDiJ8DZUBwc784CXNRbGyU9qQ==
   dependencies:
     "@redux-saga/core" "^1.0.3"
 
