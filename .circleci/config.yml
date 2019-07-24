@@ -54,10 +54,10 @@ jobs:
 
       - restore_cache:
           keys:
-            - demo-{{ .Branch }}-{{ checksum "example/package.json" }}
-            - demo-{{ .Branch }}
-            - demo-master-{{ checksum "example/package.json" }}
-            - demo-master
+            - demo-v1-{{ .Branch }}-{{ checksum "example/package.json" }}
+            - demo-v1-{{ .Branch }}
+            - demo-v1-master-{{ checksum "example/package.json" }}
+            - demo-v1-master
 
       - run:
           name: Install dependencies
@@ -68,7 +68,7 @@ jobs:
           command: cd example && yarn test
 
       - save_cache:
-          key: demo-{{ .Branch }}-{{ checksum "example/package.json" }}
+          key: demo-v1-{{ .Branch }}-{{ checksum "example/package.json" }}
           paths:
             - ~/.yarn
             - ~/redux-saga-firebase/example/node_modules
