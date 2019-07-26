@@ -878,10 +878,10 @@
   resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-1.2.1.tgz#ac09c2e1b6324991cd05c1ce1f74e63771237fb8"
   integrity sha512-/Klu3uVLoTjW3ckYqFTV3lr9HzEKM7pMpPHao1Sy+YwIUmTjFMI1LE2WcXMx6HN2jipFjjD/Xjg0hY0+0dnPCg==
 
-"@firebase/firestore-types@1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-1.4.3.tgz#d1742a99c23f0f8e75c2e63be7ed2edcf7a4b874"
-  integrity sha512-jvxMshH5g2eZpF8pd5bIN6cb0jyUwCdZCpE4BQVugYM3+2aaAMdrRXqPqfd31ibMAdY97YXKgwH7z3dFK4WFeg==
+"@firebase/firestore-types@1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-1.4.4.tgz#3051a9c163b4b76ae04544629ff5e0777e452548"
+  integrity sha512-kFpmzkUKfzrXkcMad+TQlMs55dWNY0q1UxGICW82EneX3Yg6HN3Nx36kYfqH+SLBFUN1ZTikN07alMp0MA9p9g==
 
 "@firebase/firestore@1.2.2":
   version "1.2.2"
@@ -894,15 +894,15 @@
     grpc "1.20.0"
     tslib "1.9.3"
 
-"@firebase/firestore@^1.4.5":
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-1.4.5.tgz#09f2cb08ce55ae5e5a4925ac05d87e6b95f3547f"
-  integrity sha512-pQeNXRxQB3sufYmDl9LAeavLKuzpBz7L0Yp7zJi6PI9uQnTD5cZxS3GU5B23F6jG60+2vNsMOwSiXA36M5jF7g==
+"@firebase/firestore@^1.4.6":
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-1.4.6.tgz#96f06018ef7b7d1feb0b8bb5062b21b0bc397569"
+  integrity sha512-aU/NbgUF9w1yPnjlHgQbt4Jxr6SFiq/bjWt34TLlDeOT3MpaXkjIVoxtZCmpLlklj8AR93WJO+kPXizAvyINzQ==
   dependencies:
-    "@firebase/firestore-types" "1.4.3"
-    "@firebase/logger" "0.1.19"
-    "@firebase/util" "0.2.22"
-    "@firebase/webchannel-wrapper" "0.2.22"
+    "@firebase/firestore-types" "1.4.4"
+    "@firebase/logger" "0.1.20"
+    "@firebase/util" "0.2.23"
+    "@firebase/webchannel-wrapper" "0.2.23"
     "@grpc/proto-loader" "^0.5.0"
     grpc "1.22.2"
     tslib "1.10.0"
@@ -941,10 +941,10 @@
   resolved "https://registry.yarnpkg.com/@firebase/logger/-/logger-0.1.13.tgz#8e4847a0d5b77cedd8dcf4c6a8e4b98de7297e6b"
   integrity sha512-wIbLwQ2oJCkvHIE7J3FDxpScKY84fSctEEjOi0PB+Yn2dN8AwqtM7YF8rtcY8cxntv8dyR+i7GNg1Nd89cGxkA==
 
-"@firebase/logger@0.1.19":
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/@firebase/logger/-/logger-0.1.19.tgz#edb7fbf7ed6f32fdfe1769c22b4b2232695a9391"
-  integrity sha512-MoznIjuCE5ynUqHhqr8RYSA//EW8o+7oC1+x9p4gvMLZq/BpnvCR8uZ+FrGCiz9BWS+RFhYrhp0kMJY5P3ztww==
+"@firebase/logger@0.1.20":
+  version "0.1.20"
+  resolved "https://registry.yarnpkg.com/@firebase/logger/-/logger-0.1.20.tgz#b04cc13ddd4ec58e41efd335e98ad477f57202aa"
+  integrity sha512-ahGXFhqow5RjrhwnYZNHluZt6UVdFt1iRrGzhYEJVGlkyBy0vXELn1P6ajIi8BKGQhu5sBQm8I1n6bVDlHQkUA==
 
 "@firebase/messaging-types@0.2.11":
   version "0.2.11"
@@ -1005,10 +1005,10 @@
   dependencies:
     tslib "1.9.3"
 
-"@firebase/util@0.2.22":
-  version "0.2.22"
-  resolved "https://registry.yarnpkg.com/@firebase/util/-/util-0.2.22.tgz#adf9773778b475e016048c7d5a527c2984e58474"
-  integrity sha512-Wyo1BY6KQK3DOGmk4s0KMaCMj6L9Ndhj0tLVBfVfG6NWsPEL5ixZHhG942Lzm3hNNZo2ThITMIcP1pXszew3Fw==
+"@firebase/util@0.2.23":
+  version "0.2.23"
+  resolved "https://registry.yarnpkg.com/@firebase/util/-/util-0.2.23.tgz#3e4090be9e2b8e720d72730724f026ce83f71736"
+  integrity sha512-Zfc9Oo656ad/a51pow3zJvc2kGJR/KvacaL8MgHAWxYzOsiN6RofcgRlanWO2zLy76KCVI4ZRDrvcmGRnD7e+w==
   dependencies:
     tslib "1.10.0"
 
@@ -1017,10 +1017,10 @@
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.19.tgz#991df31d892a51414e0e544b5cff4216cfb04915"
   integrity sha512-U9e2dCB38mD2AvV/zAjghauwa0UX15Wt98iBgm8IOw8spluDxysx8UZFUhj38fu0iFXORVRBqseyK2wCxZIl5w==
 
-"@firebase/webchannel-wrapper@0.2.22":
-  version "0.2.22"
-  resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.22.tgz#38b3fbc013c67db9d633f2b029babed48489306e"
-  integrity sha512-TB3ZwE+DWZW7P7CMAV/gSA2DLGtUBsJl8CsRf/3KSxEko/cD1wTub0Fmk7g5ht94ywFzBjCbAnWWJN1U+KcNYQ==
+"@firebase/webchannel-wrapper@0.2.23":
+  version "0.2.23"
+  resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.23.tgz#a0df05b210ff03c65ecb3589390095631b95e1f8"
+  integrity sha512-BJqOF51sPQjmRoX+WFMbZ5mhuy53JrFN0t1KY+HffcvDRb+82+vkFatKnwG3wTCKV183vJW5tGQIytb4T8pUBg==
 
 "@grpc/proto-loader@^0.5.0":
   version "0.5.1"
