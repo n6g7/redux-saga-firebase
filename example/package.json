@@ -43,7 +43,7 @@
     "prettier": "^1.18.2",
     "raw-loader": "^3.1.0",
     "url-loader": "^2.0.1",
-    "webpack": "^4.35.3",
+    "webpack": "^4.38.0",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
   },
