@@ -27,7 +27,7 @@
     "gatsby-transformer-remark": "^1.7.44",
     "prismjs": "^1.17.1",
     "react-helmet": "^5.2.1",
-    "remark": "^11.0.0",
+    "remark": "^11.0.1",
     "remark-react": "^6.0.0",
     "semantic-ui-react": "^0.87.3",
     "styled-components": "^4.3.2"
