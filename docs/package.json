@@ -29,7 +29,7 @@
     "react-helmet": "^5.2.1",
     "remark": "^11.0.0",
     "remark-react": "^6.0.0",
-    "semantic-ui-react": "^0.87.3",
+    "semantic-ui-react": "^0.88.0",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
