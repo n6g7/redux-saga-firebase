@@ -21,7 +21,7 @@
     "redux": "^4.0.4",
     "redux-saga": "^1.0.5",
     "redux-saga-firebase": "file:..",
-    "semantic-ui-react": "^0.87.3",
+    "semantic-ui-react": "^0.88.1",
     "styled-components": "^4.3.2",
     "whatwg-fetch": "^3.0.0"
   },
