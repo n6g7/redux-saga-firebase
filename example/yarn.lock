@@ -839,10 +839,10 @@
   resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-1.2.1.tgz#ac09c2e1b6324991cd05c1ce1f74e63771237fb8"
   integrity sha512-/Klu3uVLoTjW3ckYqFTV3lr9HzEKM7pMpPHao1Sy+YwIUmTjFMI1LE2WcXMx6HN2jipFjjD/Xjg0hY0+0dnPCg==
 
-"@firebase/firestore-types@1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-1.5.0.tgz#f05700220f882773ca01e818bf10b1dc456ee5be"
-  integrity sha512-VhRHNbEbak+R2iK8e1ir2Lec7eaHMZpGTRy6LMtzATYthlkwNHF9tO8JU8l6d1/kYkI4+DWzX++i3HhTziHEWA==
+"@firebase/firestore-types@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-1.6.0.tgz#dcd3cde987e505dd48ca6c21ba2b6d3d3b93b502"
+  integrity sha512-goBuSzXUbnAuJr7qwdVzjVgTsQzN7rGbQdDjgXcMBY5omoxhUr9/GD0ONDWHahqXusctuoH1MdVp2r+DJ942OA==
 
 "@firebase/firestore@1.2.2":
   version "1.2.2"
@@ -855,12 +855,12 @@
     grpc "1.20.0"
     tslib "1.9.3"
 
-"@firebase/firestore@^1.5.3":
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-1.5.3.tgz#657bae6b83e17c2eb8f1d0ebe431896a5313b79b"
-  integrity sha512-O/yAbXpitOA6g627cUl0/FHYlkTy1EiEKMKOlnlMOJF2fH+nLVZREXjsrCC7N2tIvTn7yYwfpZ4zpSNvrhwiTA==
+"@firebase/firestore@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-1.6.0.tgz#941fbae48e501ec700861193b7ea2c03ddcef898"
+  integrity sha512-SR4Z6cU+6rikueW+B9QCohH7qw0Q575PaQwNXbMbbvbkkb+rRh6tG32kzAs2AuHL8VN8LNoG3rhPw2kiiIjETg==
   dependencies:
-    "@firebase/firestore-types" "1.5.0"
+    "@firebase/firestore-types" "1.6.0"
     "@firebase/logger" "0.1.25"
     "@firebase/util" "0.2.28"
     "@firebase/webchannel-wrapper" "0.2.26"
