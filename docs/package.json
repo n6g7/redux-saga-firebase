@@ -30,7 +30,7 @@
     "remark": "^11.0.1",
     "remark-react": "^6.0.0",
     "semantic-ui-react": "^0.88.1",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
