@@ -10,7 +10,7 @@
     "test": "prettier -l \"src/**/*.js\""
   },
   "dependencies": {
-    "@firebase/firestore": "^1.6.3",
+    "@firebase/firestore": "^1.9.1",
     "firebase": "^5.11.1",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
