@@ -658,10 +658,10 @@
     "@babel/helper-regex" "^7.4.4"
     regexpu-core "^4.6.0"
 
-"@babel/polyfill@^7.6.0":
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.6.0.tgz#6d89203f8b6cd323e8d946e47774ea35dc0619cc"
-  integrity sha512-q5BZJI0n/B10VaQQvln1IlDK3BTBJFbADx7tv+oXDPIDZuTo37H5Adb9jhlXm/fEN4Y7/64qD9mnrJJG7rmaTw==
+"@babel/polyfill@^7.8.0":
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.8.0.tgz#5f222443c9e3ffa2eb54bfbcd89d72ed30c1eda8"
+  integrity sha512-0zTwRCrSUaP4hOt2dEHxGl80ZkxpRlhJv44fRRmbOj27pMR6n0Jti+Ti9OlbbD4ErKC5jKn89aLFqZ3r+JgWxg==
   dependencies:
     core-js "^2.6.5"
     regenerator-runtime "^0.13.2"
