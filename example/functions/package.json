@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "firebase-admin": "^8.6.0",
+    "firebase-admin": "^8.9.1",
     "firebase-functions": "^3.3.0"
   },
   "private": true
