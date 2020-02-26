@@ -33,7 +33,7 @@
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
+    "babel-eslint": "^10.1.0",
     "prettier": "^1.18.2"
   },
   "standard": {
