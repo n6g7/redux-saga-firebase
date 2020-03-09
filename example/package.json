@@ -42,7 +42,7 @@
     "img-loader": "^3.0.1",
     "prettier": "^1.18.2",
     "raw-loader": "^4.0.0",
-    "url-loader": "^2.2.0",
+    "url-loader": "^3.0.0",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.8.2"
