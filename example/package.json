@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@firebase/firestore": "^1.12.0",
-    "firebase": "^5.11.1",
+    "firebase": "^7.10.0",
     "prismjs": "^1.19.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
