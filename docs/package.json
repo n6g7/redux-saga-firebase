@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "prettier": "^1.19.1"
+    "prettier": "^2.0.4"
   },
   "standard": {
     "globals": [
