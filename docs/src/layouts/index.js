@@ -1,43 +1,113 @@
 import React from 'react'
+import { graphql, StaticQuery } from 'gatsby'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Container, Grid } from 'semantic-ui-react'
+import { useLocation } from '@reach/router'
 
 import { Sidebar } from '../components'
 import './index.css'
 
-const BaseLayout = ({ children, data, location }) => {
-  return (
-    <Container>
-      <Helmet
-        title={data.site.siteMetadata.title}
-        meta={[
-          { name: 'description', content: 'Sample' },
-          { name: 'keywords', content: 'sample, something' },
-        ]}
-      >
-        <link
-          rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.11.0/themes/prism.css"
-        />
-        <script async defer src="https://buttons.github.io/buttons.js" />
-      </Helmet>
+const BaseLayout = ({ children }) => {
+  const location = useLocation()
 
-      <Grid>
-        <Sidebar
-          location={location}
-          site={data.site.siteMetadata}
-          guides={data.guides.edges}
-          references={data.references.edges}
-          versions={data.versions.edges}
-        />
-        <Grid.Column width={12}>{children()}</Grid.Column>
-      </Grid>
-    </Container>
+  return (
+    <StaticQuery
+      query={graphql`
+        query {
+          site {
+            siteMetadata {
+              title
+              github {
+                package
+                url
+              }
+              npm {
+                package
+                url
+              }
+            }
+          }
+
+          guides: allMarkdownRemark(
+            filter: { frontmatter: { layout: { eq: "guide" } } }
+            sort: { order: ASC, fields: [frontmatter___title] }
+          ) {
+            edges {
+              node {
+                ...fileData
+              }
+            }
+          }
+
+          references: allMarkdownRemark(
+            filter: { frontmatter: { layout: { eq: "docs" } } }
+            sort: { order: ASC, fields: [frontmatter___title] }
+          ) {
+            edges {
+              node {
+                ...fileData
+              }
+            }
+          }
+
+          versions: allVersion(sort: { order: DESC, fields: [num] }) {
+            edges {
+              node {
+                tag
+                version
+              }
+            }
+          }
+        }
+
+        fragment fileData on MarkdownRemark {
+          frontmatter {
+            title
+          }
+          parent {
+            ... on File {
+              name
+              relativeDirectory
+            }
+          }
+        }
+      `}
+      render={(data) => {
+        return (
+          <Container>
+            <Helmet
+              title={data.site.siteMetadata.title}
+              meta={[
+                { name: 'description', content: 'Sample' },
+                { name: 'keywords', content: 'sample, something' },
+              ]}
+            >
+              <link
+                rel="stylesheet"
+                href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
+              />
+              <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.11.0/themes/prism.css"
+              />
+              <script async defer src="https://buttons.github.io/buttons.js" />
+            </Helmet>
+
+            <Grid>
+              <Sidebar
+                location={location}
+                site={data.site.siteMetadata}
+                guides={data.guides.edges}
+                references={data.references.edges}
+                versions={data.versions.edges}
+              />
+              <Grid.Column width={12}>{children}</Grid.Column>
+            </Grid>
+          </Container>
+        )
+      }}
+    />
   )
 }
 
@@ -46,64 +116,3 @@ BaseLayout.propTypes = {
 }
 
 export default BaseLayout
-
-export const query = graphql`
-  query LayoutQuery {
-    site {
-      siteMetadata {
-        title
-        github {
-          package
-          url
-        }
-        npm {
-          package
-          url
-        }
-      }
-    }
-
-    guides: allMarkdownRemark(
-      filter: { frontmatter: { layout: { eq: "guide" } } }
-      sort: { order: ASC, fields: [frontmatter___title] }
-    ) {
-      edges {
-        node {
-          ...fileData
-        }
-      }
-    }
-
-    references: allMarkdownRemark(
-      filter: { frontmatter: { layout: { eq: "docs" } } }
-      sort: { order: ASC, fields: [frontmatter___title] }
-    ) {
-      edges {
-        node {
-          ...fileData
-        }
-      }
-    }
-
-    versions: allVersion(sort: { order: DESC, fields: [num] }) {
-      edges {
-        node {
-          tag
-          version
-        }
-      }
-    }
-  }
-
-  fragment fileData on MarkdownRemark {
-    frontmatter {
-      title
-    }
-    parent {
-      ... on File {
-        name
-        relativeDirectory
-      }
-    }
-  }
-`

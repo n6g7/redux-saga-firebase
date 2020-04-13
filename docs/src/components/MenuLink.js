@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import { Menu } from 'semantic-ui-react'
 
 class MenuLink extends Component {
@@ -33,8 +33,8 @@ MenuLink.defaultProps = {
 
 MenuLink.isActive = (path, strict = false) => {
   const check = strict
-    ? pathname => pathname === path
-    : pathname => pathname.startsWith(path)
+    ? (pathname) => pathname === path
+    : (pathname) => pathname.startsWith(path)
 
   return (match, { pathname }) => check(pathname)
 }

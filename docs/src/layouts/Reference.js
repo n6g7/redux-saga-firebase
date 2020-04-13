@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
+import { graphql } from 'gatsby'
 import { Divider, Header, Label, Table } from 'semantic-ui-react'
 
 import { Footer, Markdown } from '../components'
+import Layout from './index'
 
 class Reference extends PureComponent {
   renderMethod(method) {
@@ -28,7 +30,7 @@ class Reference extends PureComponent {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {method.arguments.map(argument => (
+            {method.arguments.map((argument) => (
               <Table.Row>
                 <Table.Cell>
                   <code>{argument.name}</code>
@@ -75,12 +77,12 @@ class Reference extends PureComponent {
     } = this.props.data
 
     return (
-      <div>
+      <Layout>
         <Header as="h1">{frontmatter.title}</Header>
 
         <nav>
           <ul>
-            {frontmatter.methods.map(method => (
+            {frontmatter.methods.map((method) => (
               <li key={method.id}>
                 <a href={`#${method.id}`}>
                   <code>{method.signature}</code>
@@ -98,15 +100,15 @@ class Reference extends PureComponent {
           site={site}
           path={`${site.docsDirectory}/${sourceInstanceName}/${relativeDirectory}/${base}`}
         />
-      </div>
+      </Layout>
     )
   }
 }
 
 export default Reference
 
-export const pageQuery = graphql`
-  query ReferenceByPath($fileName: String!, $version: String) {
+export const query = graphql`
+  query($fileName: String!, $version: String) {
     site {
       siteMetadata {
         docsDirectory

@@ -1,6 +1,8 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import { Header } from 'semantic-ui-react'
 
+import Layout from './index'
 import { Footer } from '../components'
 
 const Guide = ({ data }) => {
@@ -14,20 +16,20 @@ const Guide = ({ data }) => {
   } = data
 
   return (
-    <div>
+    <Layout>
       <Header as="h1">{frontmatter.title}</Header>
 
       <div dangerouslySetInnerHTML={{ __html: html }} />
 
       <Footer site={site} path={`${site.docsDirectory}/${sourceInstanceName}/${base}`} />
-    </div>
+    </Layout>
   )
 }
 
 export default Guide
 
-export const pageQuery = graphql`
-  query GuideByPath($fileName: String!) {
+export const query = graphql`
+  query($fileName: String!) {
     site {
       siteMetadata {
         docsDirectory

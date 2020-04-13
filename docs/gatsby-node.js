@@ -1,8 +1,11 @@
 const crypto = require('crypto')
 const path = require('path')
 
-const createPagesBuilder = (sourceInstanceName, templatePath) => ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators
+const createPagesBuilder = (sourceInstanceName, templatePath) => ({
+  actions,
+  graphql,
+}) => {
+  const { createPage } = actions
   const template = path.resolve(templatePath)
 
   return graphql(`
@@ -18,7 +21,7 @@ const createPagesBuilder = (sourceInstanceName, templatePath) => ({ boundActionC
         }
       }
     }
-  `).then(result => {
+  `).then((result) => {
     if (result.errors) return Promise.reject(result.errors)
 
     result.data.files.edges.forEach(({ node }) => {
@@ -29,23 +32,23 @@ const createPagesBuilder = (sourceInstanceName, templatePath) => ({ boundActionC
         component: template,
         context: {
           fileName: node.name,
-          version: node.relativeDirectory
-        }
+          version: node.relativeDirectory,
+        },
       })
     })
   })
 }
 
-exports.createPages = args => {
-  createPagesBuilder('guides', 'src/layouts/Guide.js')(args)
-  createPagesBuilder('reference', 'src/layouts/Reference.js')(args)
+exports.createPages = async (args) => {
+  await createPagesBuilder('guides', 'src/layouts/guide.js')(args)
+  await createPagesBuilder('reference', 'src/layouts/reference.js')(args)
 }
 
 const versions = []
 const base = 1e3
 
-exports.onCreateNode = ({ node, boundActionCreators }) => {
-  const { createNode } = boundActionCreators
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNode } = actions
 
   if (
     node.internal.type === 'File' &&
@@ -55,7 +58,9 @@ exports.onCreateNode = ({ node, boundActionCreators }) => {
     const tag = node.relativeDirectory
     const match = /^v((\d+)\.(\d+)\.(\d+))$/.exec(tag)
     const version = match ? match[1] : tag
-    const num = match ? parseInt(match[2]) * base ** 2 + parseInt(match[3]) * base + parseInt(match[4]) : Infinity
+    const num = match
+      ? parseInt(match[2]) * base ** 2 + parseInt(match[3]) * base + parseInt(match[4])
+      : Infinity
 
     versions.push(tag)
 
@@ -64,15 +69,12 @@ exports.onCreateNode = ({ node, boundActionCreators }) => {
       parent: node.id,
       internal: {
         type: 'version',
-        contentDigest: crypto
-          .createHash('md5')
-          .update(JSON.stringify(tag))
-          .digest('hex')
+        contentDigest: crypto.createHash('md5').update(JSON.stringify(tag)).digest('hex'),
       },
       children: [],
       tag,
       version,
-      num
+      num,
     })
   }
 }

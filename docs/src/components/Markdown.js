@@ -5,7 +5,7 @@ import remarkReact from 'remark-react'
 import Prism from 'prismjs'
 
 const parser = remark().use(remarkReact)
-const md = str => parser.processSync(str).contents
+const md = (str) => parser.processSync(str).contents
 
 class Markdown extends PureComponent {
   componentDidMount() {
@@ -21,7 +21,7 @@ class Markdown extends PureComponent {
 
     return React.cloneElement(markdownElement, {
       className: 'language-javascript',
-      ref: ref => {
+      ref: (ref) => {
         this.codeElement = ref ? ref.querySelector('code') : ref
       },
     })
