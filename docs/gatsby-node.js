@@ -6,7 +6,7 @@ const createPagesBuilder = (sourceInstanceName, templatePath) => ({
   graphql,
 }) => {
   const { createPage } = actions
-  const template = path.resolve(templatePath)
+  const template = path.resolve(__dirname, templatePath)
 
   return graphql(`
     {
@@ -40,8 +40,8 @@ const createPagesBuilder = (sourceInstanceName, templatePath) => ({
 }
 
 exports.createPages = async (args) => {
-  await createPagesBuilder('guides', 'src/layouts/guide.js')(args)
-  await createPagesBuilder('reference', 'src/layouts/reference.js')(args)
+  await createPagesBuilder('guides', 'src/layouts/Guide.js')(args)
+  await createPagesBuilder('reference', 'src/layouts/Reference.js')(args)
 }
 
 const versions = []
