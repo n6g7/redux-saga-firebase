@@ -1,11 +1,16 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 
-export default props => (
-  <div dangerouslySetInnerHTML={{ __html: props.data.file.markdown.html }} />
+import Layout from '../layouts'
+
+export default (props) => (
+  <Layout>
+    <div dangerouslySetInnerHTML={{ __html: props.data.file.markdown.html }} />
+  </Layout>
 )
 
 export const query = graphql`
-  query IndexQuery {
+  query {
     file(name: { eq: "index" }, sourceInstanceName: { eq: "pages" }) {
       markdown: childMarkdownRemark {
         html

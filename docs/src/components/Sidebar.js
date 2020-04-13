@@ -145,7 +145,7 @@ class Sidebar extends PureComponent {
               <Dropdown
                 placeholder="Version"
                 inline
-                options={versions.map(v => ({
+                options={versions.map((v) => ({
                   text: v.node.version,
                   value: v.node.tag,
                 }))}
