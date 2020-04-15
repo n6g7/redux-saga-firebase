@@ -8,7 +8,7 @@ A [redux-saga](https://github.com/redux-saga/redux-saga/) integration for [fireb
 
 - Try out the [example app](https://redux-saga-firebase.firebaseapp.com/) and browse its [code](https://github.com/n6g7/redux-saga-firebase/blob/master/example/).
 - It also works with React Native 📱! Here's a very simple example: https://github.com/n6g7/cat/tree/master/rn.
-- Browse the docs at [https://redux-saga-firebase.js.org/](https://redux-saga-firebase.js.org/) (and temporarily at [https://redux-saga-firebase.now.sh/](https://redux-saga-firebase.now.sh/)).
+- Browse the docs at [https://redux-saga-firebase.js.org/](https://redux-saga-firebase.js.org/).
 
 ## Quick start
 
