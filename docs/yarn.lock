@@ -857,7 +857,7 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.4.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.4.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -2503,6 +2503,21 @@ chokidar@3.3.1:
     is-glob "~4.0.1"
     normalize-path "~3.0.0"
     readdirp "~3.3.0"
+  optionalDependencies:
+    fsevents "~2.1.2"
+
+chokidar@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.4.0.tgz#b30611423ce376357c765b9b8f904b9fba3c0be8"
+  integrity sha512-aXAaho2VJtisB/1fg1+3nlLJqGOuewTzQpd/Tz0yTg2R0e4IGtshYvtjowyEumcBv2z+y4+kc75Mz7j5xJskcQ==
+  dependencies:
+    anymatch "~3.1.1"
+    braces "~3.0.2"
+    glob-parent "~5.1.0"
+    is-binary-path "~2.1.0"
+    is-glob "~4.0.1"
+    normalize-path "~3.0.0"
+    readdirp "~3.4.0"
   optionalDependencies:
     fsevents "~2.1.2"
 
@@ -4726,10 +4741,10 @@ gatsby-cli@^2.11.8:
     ink "^2.7.1"
     ink-spinner "^3.0.1"
 
-gatsby-core-utils@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.1.1.tgz#3ebe4c6fe277ef8d91e1b708bd65ef4f7dc0928b"
-  integrity sha512-EboPcBx37YQVUKN9JH753S54nDxjRmOefbR0i08KTmaVgQ1lZnDXJr8JfrImmMqupZlOkPQX1mWlXfp+r1jGhA==
+gatsby-core-utils@^1.1.1, gatsby-core-utils@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.2.0.tgz#3289b2183d3b0172356cf403bfc2bbf99adae670"
+  integrity sha512-JBsVbniXObn26Hms8Je1vJdhMW04GesochBVLcaTraZC5dfqZDExPix65jrye/voC0YfFtXIngm59yspYZm1OQ==
   dependencies:
     ci-info "2.0.0"
     configstore "^5.0.1"
@@ -4818,18 +4833,18 @@ gatsby-remark-prismjs@^3.4.1:
     parse-numeric-range "^0.0.2"
     unist-util-visit "^1.4.1"
 
-gatsby-source-filesystem@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.2.2.tgz#9ecbc9e64fedd1c30b4d21f7e148016353b2dc17"
-  integrity sha512-uHHCiTp8/q9JF0Yr14Q5aJZ07jUJSV6HJSnrSVnEIF4PfRQkVJG5FHQULmxJUXWQhIoy17EGuzqVjxMsFY69QA==
+gatsby-source-filesystem@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.3.0.tgz#2c308b7e023b6cb37814156da9b681a3deb7b4c3"
+  integrity sha512-SUJbbl4hYyvudGImU86amxIfqYoYpkITlY0lHV7azeAQj3199ZUqO0hGwbl4MZ5fNwwQEbANEUbsoPkyc/QUZQ==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.9.2"
     better-queue "^3.8.10"
     bluebird "^3.7.2"
-    chokidar "3.3.1"
+    chokidar "3.4.0"
     file-type "^12.4.2"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^1.1.1"
+    gatsby-core-utils "^1.2.0"
     got "^9.6.0"
     md5-file "^3.2.3"
     mime "^2.4.4"
@@ -4837,7 +4852,7 @@ gatsby-source-filesystem@^2.2.2:
     progress "^2.0.3"
     read-chunk "^3.2.0"
     valid-url "^1.0.9"
-    xstate "^4.8.0"
+    xstate "^4.9.1"
 
 gatsby-telemetry@^1.2.3:
   version "1.2.3"
@@ -9160,6 +9175,13 @@ readdirp@~3.3.0:
   dependencies:
     picomatch "^2.0.7"
 
+readdirp@~3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/readdirp/-/readdirp-3.4.0.tgz#9fdccdf9e9155805449221ac645e8303ab5b9ada"
+  integrity sha512-0xe001vZBnJEK+uKcj8qOhyAKPzIT+gStxWr3LCB0DwcXR5NZJ3IaC+yGnHCYzB/S7ov3m3EEbZI2zeNvX+hGQ==
+  dependencies:
+    picomatch "^2.2.1"
+
 recursive-readdir@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/recursive-readdir/-/recursive-readdir-2.2.1.tgz#90ef231d0778c5ce093c9a48d74e5c5422d13a99"
@@ -11569,10 +11591,10 @@ xregexp@^4.3.0:
   dependencies:
     "@babel/runtime-corejs3" "^7.8.3"
 
-xstate@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.8.0.tgz#1aefa1f7828f84f61c356785615ffc0824ebf5a2"
-  integrity sha512-xHSYQtCHLkcrFRxa5lK4Lp1rnKt00a80jcKFMQiMBuE+6MvTYv7twwqYpzjsJoKFjGZB3GGEpZAuY1dmlPTh/g==
+xstate@^4.8.0, xstate@^4.9.1:
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.9.1.tgz#da883ae0993b129ba0b54592c59b069963b0fe0a"
+  integrity sha512-cfNnRaBebnr1tvs0nHBUTyomfJx36+8MWwXceyNTZfjyELMM8nIoiBDcUzfKmpNlnAvs2ZPREos19cw6Zl4nng==
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.2"
