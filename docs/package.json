@@ -31,7 +31,7 @@
     "react-helmet": "^5.2.1",
     "remark-react": "^7.0.1",
     "semantic-ui-react": "^0.88.2",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "prettier": "^2.0.4"
