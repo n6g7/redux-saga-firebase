@@ -18,7 +18,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.21.33",
-    "gatsby-plugin-google-analytics": "^2.2.2",
+    "gatsby-plugin-google-analytics": "^2.3.6",
     "gatsby-plugin-react-helmet": "^3.3.1",
     "gatsby-plugin-styled-components": "^3.2.1",
     "gatsby-remark-prismjs": "^3.4.1",
