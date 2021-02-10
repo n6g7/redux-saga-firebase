@@ -50,7 +50,7 @@
     "prettier": "^1.17.0",
     "redux-saga": "^1.0.2",
     "rimraf": "^3.0.0",
-    "typescript": "^3.4.5",
+    "typescript": "^4.1.4",
     "whatwg-fetch": "^3.0.0"
   },
   "jest": {
