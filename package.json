@@ -45,7 +45,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^25.1.0",
     "eslint": "^7.0.0",
-    "firebase": "^7.2.0",
+    "firebase": "^8.2.10",
     "jest": "^26.0.1",
     "prettier": "^1.17.0",
     "redux-saga": "^1.0.2",
