@@ -1,3 +1,10 @@
+# ⚠️ This project isn't maintained
+
+I unfortunately don't have time to maintain this project anymore.
+I'd be happy to share commit access with anyone interested in taking over the project, get in touch if you'd like to revive rsf!
+
+--------
+
 # redux-saga-firebase
 
 [![CircleCI](https://circleci.com/gh/n6g7/redux-saga-firebase.svg?style=svg)](https://circleci.com/gh/n6g7/redux-saga-firebase)
